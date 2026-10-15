@@ -14,7 +14,7 @@
 | **Pages** | 15 public pages, plus private invitation pages and a privacy page |
 | **Performance (phone)** | Lighthouse 91–96 for speed, 96–100 for accessibility, 100 for best practices, 100 for SEO |
 | **Quality checks** | 39 automated browser tests on desktop and phone. They run automatically on every change and are currently passing. |
-| **Code** | GitHub `Ejsav/Chef`, branch `claude/dreamy-cerf-62w2id` |
+| **Code** | GitHub `Ejsav/ChefEric`, branch `main` (the main repo; `Ejsav/Chef` is the original copy) |
 | **Hosting** | Vercel, project `chef-ray-gennaro` |
 
 ---
