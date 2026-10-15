@@ -1,0 +1,1083 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ray Gennaro Photography Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>/* Layout: a single editorial column that opens to screenshot | brief on wide screens.
+   Palette and type are the website's own: linen, ink, aged brass; Bodoni + Instrument Sans.
+   The yellow "marker" matches the outline drawn on every screenshot. */
+:root {
+  --bg: #f2ece1;
+  --surface: #fbf8f2;
+  --ink: #1a130e;
+  --muted: #5f5245;
+  --line: rgba(26, 19, 14, 0.14);
+  --brass: #7a5e34;
+  --marker: #f5c542;
+  --marker-ink: #1a1208;
+  --p1: #7a2a26;
+  --p2: #7a5e34;
+  --p3: #5f6b5a;
+  --shot-bg: #110c09;
+  --display: "Bodoni Moda", Didot, "Bodoni 72", Georgia, serif;
+  --body: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #110c09; --surface: #1b140f; --ink: #ede5d6; --muted: #a89b8c; --line: rgba(237, 229, 214, 0.14);
+    --brass: #be9c68; --p1: #d98c88; --p2: #be9c68; --p3: #a9b6a2; --shot-bg: #080605; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #110c09; --surface: #1b140f; --ink: #ede5d6; --muted: #a89b8c; --line: rgba(237, 229, 214, 0.14);
+  --brass: #be9c68; --p1: #d98c88; --p2: #be9c68; --p3: #a9b6a2; --shot-bg: #080605; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { background: var(--bg); color: var(--ink); font: 400 16px/1.6 var(--body); }
+.wrap { max-width: 76rem; margin: 0 auto; padding: 2.5rem clamp(16px, 4vw, 48px) 4rem; }
+img { max-width: 100%; display: block; }
+a { color: var(--brass); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible, input:focus-visible, .overview-scroll:focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; }
+code { font: 500 0.92em var(--mono); }
+h1, h2, h3 { font-family: var(--display); font-weight: 400; text-wrap: balance; margin: 0; }
+p { margin: 0; }
+.eyebrow { font: 600 0.72rem/1.4 var(--body); letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); }
+.lede { font-size: 1.125rem; color: var(--ink); max-width: 40rem; }
+.lede.small { font-size: 1rem; color: var(--muted); }
+.sec-h { font-size: clamp(1.7rem, 3.4vw, 2.4rem); letter-spacing: -0.01em; }
+.sub-h { font: 600 0.72rem var(--body); letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-top: 2rem; }
+
+/* Masthead */
+.masthead { display: grid; gap: 1.1rem; padding-block: 1rem 2.5rem; border-bottom: 1px solid var(--line); }
+.masthead h1 { font-size: clamp(2.4rem, 6.4vw, 4.6rem); line-height: 1.02; letter-spacing: -0.02em; max-width: 14ch; }
+.masthead h1 em { font-style: italic; color: var(--brass); }
+.live { font-size: 0.95rem; color: var(--muted); }
+
+/* Status */
+.status, .rules, .first, .checklist { padding-block: 3rem; border-bottom: 1px solid var(--line); display: grid; gap: 1.5rem; }
+.status-grid { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); }
+.meter { background: var(--surface); border: 1px solid var(--line); padding: 1.4rem; display: grid; gap: 0.9rem; }
+.meter-row { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; font-weight: 500; }
+.meter-row b { font: 400 1.6rem var(--display); font-variant-numeric: tabular-nums; }
+.bar { height: 8px; background: var(--line); position: relative; overflow: hidden; }
+.bar span { position: absolute; inset: 0 auto 0 0; background: var(--brass); transition: width 600ms ease; }
+.bar-photo span { background: var(--marker); }
+.built { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0.35rem 1rem; font-size: 0.92rem; }
+.built li::before { content: "✓"; color: var(--brass); margin-right: 0.5rem; font-weight: 600; }
+.pri-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; font-size: 0.92rem; color: var(--muted); }
+.pill { display: inline-block; font: 600 0.66rem/1 var(--body); letter-spacing: 0.12em; text-transform: uppercase; padding: 0.38rem 0.55rem; border: 1px solid currentColor; margin-right: 0.4rem; white-space: nowrap; }
+.pill-1 { color: var(--p1); } .pill-2 { color: var(--p2); } .pill-3 { color: var(--p3); }
+.today { display: grid; gap: 1rem; grid-template-columns: 2.6fr 1fr 1fr 1fr; align-items: end; }
+.today figure { margin: 0; display: grid; gap: 0.5rem; }
+.today img { border: 1px solid var(--line); background: var(--shot-bg); }
+.today figcaption, .shot figcaption, .overview figcaption, .frame-wrap figcaption { font-size: 0.78rem; color: var(--muted); }
+.note { font-size: 0.95rem; color: var(--muted); max-width: 46rem; }
+
+/* Rules */
+.rule-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); }
+.rule-grid li { background: var(--bg); padding: 1.1rem 1.2rem; font-size: 0.95rem; color: var(--muted); }
+.rule-grid b { display: block; color: var(--ink); font: 400 1.15rem/1.3 var(--display); margin-bottom: 0.35rem; }
+.delivery { background: var(--surface); border: 1px solid var(--line); padding: 1.4rem; }
+.delivery h3 { font-size: 1.35rem; margin-bottom: 0.8rem; }
+.delivery dl { margin: 0; display: grid; gap: 0.6rem; }
+.delivery dl > div { display: grid; grid-template-columns: 10rem 1fr; gap: 1rem; border-top: 1px solid var(--line); padding-top: 0.6rem; }
+.delivery dt { font-weight: 600; font-size: 0.9rem; }
+.delivery dd { margin: 0; color: var(--muted); font-size: 0.95rem; min-width: 0; }
+
+/* Shoot first */
+.chips { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.chip { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.55rem 0.9rem 0.55rem 0.55rem; border: 1px solid var(--line); background: var(--surface); color: var(--ink); text-decoration: none; font-size: 0.92rem; }
+.chip:hover { border-color: var(--brass); }
+.chip b { background: var(--marker); color: var(--marker-ink); font: 700 0.8rem var(--body); padding: 0.3rem 0.45rem; font-variant-numeric: tabular-nums; }
+.sessions { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.sessions li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0.4rem 1.5rem; align-items: center; padding-block: 0.85rem; border-bottom: 1px solid var(--line); }
+.sess-h { display: grid; gap: 0.1rem; min-width: 0; }
+.sess-h b { font: 400 1.15rem var(--display); }
+.sess-h span { font-size: 0.88rem; color: var(--muted); }
+.sess-n { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.tag { font: 700 0.8rem var(--body); text-decoration: none; padding: 0.3rem 0.5rem; border: 1px solid currentColor; font-variant-numeric: tabular-nums; }
+.tag-1 { color: var(--p1); } .tag-2 { color: var(--p2); } .tag-3 { color: var(--p3); }
+
+/* Toolbar */
+.toolbar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.6rem 1rem; padding: 0.7rem 0; background: var(--bg); border-bottom: 1px solid var(--line); }
+.jump { display: flex; flex-wrap: wrap; gap: 0.3rem 1.2rem; font-size: 0.9rem; }
+.jump a { color: var(--ink); text-decoration: none; }
+.jump a:hover { color: var(--brass); }
+.filter { display: flex; border: 1px solid var(--line); }
+.filter button { font: 500 0.82rem var(--body); color: var(--muted); background: transparent; border: 0; padding: 0.45rem 0.8rem; cursor: pointer; }
+.filter button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+
+/* Page sections */
+.page-sec { padding-top: 3.5rem; display: grid; gap: 2.5rem; scroll-margin-top: 4rem; }
+.page-intro { display: grid; gap: 2rem; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); align-items: start; }
+.page-intro h2 { font-size: clamp(2.4rem, 5.5vw, 3.8rem); line-height: 1; margin: 0.6rem 0 1rem; }
+.count { margin-top: 1rem; font-weight: 600; font-size: 0.9rem; }
+.reuse { margin-top: 0.4rem; font-size: 0.9rem; color: var(--muted); }
+.overview { margin: 0; display: grid; gap: 0.5rem; justify-self: end; width: min(100%, 17rem); }
+.overview-scroll { height: 26rem; overflow-y: auto; border: 1px solid var(--line); background: var(--shot-bg); }
+
+/* Photo cards */
+.card { background: var(--surface); border: 1px solid var(--line); scroll-margin-top: 4.5rem; }
+.card[hidden] { display: none; }
+.card-head { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 1rem 1.25rem; align-items: start; padding: 1.25rem 1.4rem; border-bottom: 1px solid var(--line); }
+.num { background: var(--marker); color: var(--marker-ink); font: 700 1.5rem/1 var(--body); padding: 0.55rem 0.6rem; font-variant-numeric: tabular-nums; }
+.head-text { display: grid; gap: 0.45rem; min-width: 0; }
+.kicker { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem 0.6rem; font-size: 0.82rem; color: var(--muted); }
+.card h3 { font-size: clamp(1.5rem, 3vw, 2rem); line-height: 1.1; }
+.file { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem 0.8rem; }
+.file code { font-size: 1rem; background: var(--bg); border: 1px solid var(--line); padding: 0.2rem 0.45rem; overflow-wrap: anywhere; }
+.file .path { font: 0.78rem var(--mono); color: var(--muted); overflow-wrap: anywhere; }
+.copy { font: 500 0.75rem var(--body); color: var(--brass); background: none; border: 1px solid var(--line); padding: 0.25rem 0.55rem; cursor: pointer; }
+.done { display: flex; align-items: center; gap: 0.45rem; font-size: 0.85rem; color: var(--muted); cursor: pointer; white-space: nowrap; }
+.done input { width: 1.15rem; height: 1.15rem; accent-color: var(--brass); }
+.card.is-done .num { background: var(--brass); color: var(--bg); }
+.card-body { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 1.75rem; padding: 1.4rem; }
+.shot { margin: 0; display: grid; gap: 0.5rem; align-content: start; }
+.shot img { border: 1px solid var(--line); background: var(--shot-bg); }
+.brief { display: grid; gap: 0.75rem; align-content: start; min-width: 0; }
+.brief h4 { font: 600 0.7rem var(--body); letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); margin: 0.4rem 0 0; }
+.brief p, .brief li { font-size: 0.97rem; }
+.brief .why { font-family: var(--display); font-style: italic; font-size: 1.12rem; line-height: 1.45; color: var(--ink); }
+.brief ul { margin: 0; padding-left: 1.1rem; display: grid; gap: 0.3rem; }
+.brief ul li::marker { color: var(--brass); }
+.facts { display: grid; gap: 0.6rem; }
+.facts p { color: var(--muted); }
+
+/* Framing guide */
+.frame-wrap { margin: 0.6rem 0 0; display: grid; gap: 0.45rem; width: min(100%, 15rem); }
+.frame { position: relative; width: 100%; max-width: 100%; background: var(--bg); border: 1.5px solid var(--ink); overflow: hidden; }
+.z { position: absolute; display: flex; align-items: center; justify-content: center; text-align: center; padding: 2px; }
+.z i { font: 600 0.62rem/1.15 var(--body); font-style: normal; color: var(--ink); }
+.z-subject { background: rgba(245, 197, 66, 0.55); border: 1.5px solid var(--marker-ink); }
+.z-light { border: 1.5px dashed var(--brass); background: rgba(190, 156, 104, 0.12); }
+.z-quiet { background: repeating-linear-gradient(135deg, transparent 0 5px, rgba(127, 110, 95, 0.22) 5px 6px); border: 1px solid var(--line); }
+.z-quiet i, .z-light i { color: var(--muted); }
+
+/* Checklist */
+.table-scroll { overflow-x: auto; border: 1px solid var(--line); }
+table { border-collapse: collapse; width: 100%; min-width: 40rem; font-size: 0.9rem; background: var(--surface); }
+th, td { text-align: left; padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--line); }
+th { font: 600 0.68rem var(--body); letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+td.tn { font-weight: 700; font-variant-numeric: tabular-nums; }
+td.box::after { content: ""; display: inline-block; width: 1rem; height: 1rem; border: 1.5px solid var(--ink); }
+.foot { padding-top: 2.5rem; font-size: 0.82rem; color: var(--muted); }
+
+/* Narrow screens */
+@media (max-width: 860px) {
+  .page-intro, .card-body { grid-template-columns: 1fr; }
+  .overview { justify-self: start; width: min(100%, 15rem); }
+  .today { grid-template-columns: repeat(3, 1fr); }
+  .today-desk { grid-column: 1 / -1; }
+}
+@media (max-width: 520px) {
+  .card-head { grid-template-columns: auto minmax(0, 1fr); }
+  .done { grid-column: 1 / -1; }
+  .built { grid-template-columns: 1fr; }
+  .delivery dl > div { grid-template-columns: 1fr; gap: 0.2rem; }
+  .sessions li { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) { .bar span { transition: none; } }
+
+/* Print: light, one photograph per page, no interactive controls */
+@media print {
+  @page { size: letter; margin: 0.45in; }
+  :root { --bg: #ffffff; --surface: #ffffff; --ink: #14100c; --muted: #4d4339; --line: rgba(0,0,0,0.18); --brass: #6b5230; color-scheme: light; }
+  body { background: #fff; font-size: 10pt; }
+  .wrap { max-width: none; padding: 0; }
+  .toolbar, .copy, .done input, .filter, .file .path { display: none !important; }
+  .card[hidden] { display: block !important; }
+  .done::before { content: ""; width: 0.85rem; height: 0.85rem; border: 1.5px solid #14100c; display: inline-block; }
+  .masthead { padding-top: 0; padding-bottom: 1.2rem; }
+  .masthead h1 { font-size: 34pt; }
+  .status { padding-block: 1.2rem; gap: 1rem; }
+  .today img { max-height: 2.6in; width: auto; }
+  .rules, .first, .checklist { break-before: page; padding-block: 0 1rem; }
+  .rule-grid li { padding: 0.7rem 0.8rem; font-size: 9pt; }
+  .page-sec { break-before: page; padding-top: 0; gap: 0; }
+  .page-intro { grid-template-columns: 1fr 2.3in; }
+  .overview { width: 2.3in; }
+  .overview-scroll { height: auto; max-height: 8.4in; overflow: hidden; border: 1px solid var(--line); }
+  .overview-scroll img { max-height: 8.4in; width: auto; margin: 0 auto; }
+  .card { break-before: page; break-inside: avoid; border: 0; }
+  .card-head { padding: 0 0 0.5rem; gap: 0.6rem 1rem; }
+  .card h3 { font-size: 18pt; }
+  .num { font-size: 16pt; }
+  .card-body { display: block; padding: 0.6rem 0 0; }
+  .shot { margin-bottom: 0.7rem; }
+  .shot img { max-height: 3.7in; width: auto; max-width: 100%; margin: 0 auto; }
+  .shot figcaption { text-align: center; }
+  .brief { display: block; columns: 2; column-gap: 0.35in; }
+  .brief > * { break-inside: avoid; }
+  .brief h4 { margin-top: 0.5rem; break-after: avoid; }
+  .brief p, .brief li { font-size: 9pt; line-height: 1.45; }
+  .brief .why { font-size: 10.5pt; margin-bottom: 0.3rem; }
+  .brief ul { gap: 0.15rem; }
+  .facts { gap: 0.2rem; }
+  .frame-wrap { width: 1.7in; margin-top: 0.5rem; }
+  .num, .chip b, .z-subject, .z-quiet, .z-light, .bar span, .pill { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  a { color: inherit; text-decoration: none; }
+  .table-scroll { overflow: visible; border: 0; }
+  table { min-width: 0; font-size: 9pt; }
+  th, td { padding: 0.35rem 0.5rem; }
+}
+</style>
+<div class="wrap">
+<header class="masthead">
+  <p class="eyebrow">Chef Ray Gennaro · Website photography</p>
+  <h1>The photographs that <em>finish the website.</em></h1>
+  <p class="lede">The website is designed and built. Every page works today, on phones and computers. What it is missing is real photography: 19 spots currently hold a placeholder. This guide shows each one exactly where it sits on the website and describes the photograph that replaces it.</p>
+  <p class="live">See the live website: <a href="https://chef-ray-gennaro.vercel.app" target="_blank" rel="noopener">chef-ray-gennaro.vercel.app</a></p>
+</header>
+
+<section class="status" aria-labelledby="status-h">
+  <h2 id="status-h" class="sec-h">Where the website stands</h2>
+  <div class="status-grid">
+    <div class="meter">
+      <div class="meter-row"><span>Design &amp; build</span><b>Complete</b></div>
+      <div class="bar"><span style="width:100%"></span></div>
+      <ul class="built">
+        <li>Home page</li><li>Experiences</li><li>The Chef, with his story</li><li>Request an evening</li><li>Private invitations</li><li>Phone and computer layouts</li>
+      </ul>
+    </div>
+    <div class="meter">
+      <div class="meter-row"><span>Photography</span><b><span data-count>0</span> of 19</b></div>
+      <div class="bar bar-photo"><span data-bar style="width:0%"></span></div>
+      <ul class="pri-list">
+        <li><span class="pill pill-1">Essential</span> 7 photos needed before launch</li>
+        <li><span class="pill pill-2">Important</span> 5 strongly recommended</li>
+        <li><span class="pill pill-3">Completes the set</span> 7 can follow after launch</li>
+      </ul>
+    </div>
+  </div>
+  <div class="today">
+    <figure class="today-desk"><img src="img/home-hero.jpg" alt="The home page opening on a computer"><figcaption>The home page today on a computer</figcaption></figure>
+    <figure class="today-phone"><img src="img/phone-hero.jpg" alt="The home page opening on a phone"><figcaption>On a phone</figcaption></figure>
+    <figure class="today-phone"><img src="img/phone-portrait.jpg" alt="Photo 09 placeholder on a phone"><figcaption>Photo 09, on a phone</figcaption></figure>
+    <figure class="today-phone"><img src="img/phone-experience.jpg" alt="Photo 10 placeholder on a phone"><figcaption>Photo 10, on a phone</figcaption></figure>
+  </div>
+  <p class="note">The placeholders are not empty boxes on purpose: each one is a sketch of the light and color the real photograph should have. Use them as a guide to mood. The photograph replaces them exactly, at the same size and shape.</p>
+</section>
+
+<section class="rules" aria-labelledby="rules-h">
+  <h2 id="rules-h" class="sec-h">For every photograph</h2>
+  <ul class="rule-grid">
+    <li><b>Real light only.</b> Candles, windows, lamps, sunset. No flash, no bright overhead light.</li>
+    <li><b>Warm and dark.</b> Deep brown shadows, amber candlelight, ivory linen, aged brass. Like a still from a film.</li>
+    <li><b>Shallow focus.</b> Fast lens, f/1.4–2.8. Background lights melt into soft circles.</li>
+    <li><b>No guest faces.</b> Hands, shoulders, backs and silhouettes only. Discretion is part of the brand.</li>
+    <li><b>Chef Ray is always real.</b> Any photo of him, his family or his past must be a real photograph. Never a stand-in or an imitation.</li>
+    <li><b>Nothing branded.</b> No logos, wine labels, boat names or recognizable homes.</li>
+    <li><b>Leave room at the edges.</b> The website trims about 5% from each edge and adds a caption along the bottom.</li>
+    <li><b>One look throughout.</b> Edit all photos with the same warm, slightly muted grade.</li>
+  </ul>
+  <div class="delivery">
+    <h3>Delivery</h3>
+    <dl>
+      <div><dt>Format</dt><dd>JPEG, sRGB, highest quality. Keep the RAW files.</dd></div>
+      <div><dt>Portrait (4:5)</dt><dd>At least 2400 × 3000 px. Photos 09–19.</dd></div>
+      <div><dt>Landscape (16:11)</dt><dd>At least 2400 × 1650 px. Photos 01–08.</dd></div>
+      <div><dt>File names</dt><dd>Exactly as written on each card, lower case.</dd></div>
+      <div><dt>Alternates</dt><dd>Two or three strong variations of each, named <code>-alt1</code>, <code>-alt2</code>.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="first" aria-labelledby="first-h">
+  <h2 id="first-h" class="sec-h">Shoot these first</h2>
+  <p class="lede small">These seven make the website ready to launch. Four of them need Chef Ray in person.</p>
+  <nav class="chips" aria-label="Essential photographs"><a class="chip" href="#p01"><b>01</b><span>A home in Connecticut</span></a><a class="chip" href="#p09"><b>09</b><span>Chef Ray in his kitchen</span></a><a class="chip" href="#p10"><b>10</b><span>I. The Private Table</span></a><a class="chip" href="#p11"><b>11</b><span>II. The Island &amp; The Water</span></a><a class="chip" href="#p12"><b>12</b><span>III. The Kitchen Lessons</span></a><a class="chip" href="#p13"><b>13</b><span>IV. The Occasion</span></a><a class="chip" href="#p19"><b>19</b><span>VI. Wherever the table is</span></a></nav>
+  <h3 class="sub-h">Suggested sessions</h3>
+  <ul class="sessions"><li><div class="sess-h"><b>With Chef Ray</b><span>Half day in a kitchen with good window light</span></div>
+      <p class="sess-n"><a href="#p09" class="tag tag-1">09</a> <a href="#p12" class="tag tag-1">12</a> <a href="#p18" class="tag tag-3">18</a> <a href="#p19" class="tag tag-1">19</a></p></li><li><div class="sess-h"><b>The dining room</b><span>One evening in a Connecticut home</span></div>
+      <p class="sess-n"><a href="#p01" class="tag tag-1">01</a> <a href="#p10" class="tag tag-1">10</a> <a href="#p13" class="tag tag-1">13</a> <a href="#p16" class="tag tag-2">16</a></p></li><li><div class="sess-h"><b>Water and travel</b><span>Dusk shoots by the water; some can wait for a trip</span></div>
+      <p class="sess-n"><a href="#p05" class="tag tag-2">05</a> <a href="#p06" class="tag tag-2">06</a> <a href="#p11" class="tag tag-1">11</a> <a href="#p17" class="tag tag-3">17</a> <a href="#p04" class="tag tag-3">04</a> <a href="#p08" class="tag tag-3">08</a></p></li><li><div class="sess-h"><b>Special locations</b><span>Scheduled as access allows</span></div>
+      <p class="sess-n"><a href="#p02" class="tag tag-2">02</a> <a href="#p03" class="tag tag-3">03</a> <a href="#p07" class="tag tag-3">07</a> <a href="#p15" class="tag tag-2">15</a></p></li><li><div class="sess-h"><b>From the family archive</b><span>Scanning, no photographer needed</span></div>
+      <p class="sess-n"><a href="#p14" class="tag tag-3">14</a></p></li></ul>
+</section>
+
+<nav class="toolbar" aria-label="Guide">
+  <div class="jump"><a href="#home">Home</a><a href="#experiences">Experiences</a><a href="#chef">The Chef</a><a href="#checklist">Checklist</a></div>
+  <div class="filter" role="group" aria-label="Show">
+    <button type="button" data-filter="all" aria-pressed="true">All 19</button>
+    <button type="button" data-filter="1" aria-pressed="false">Essential 7</button>
+  </div>
+</nav>
+
+
+<section class="page-sec" id="home" aria-labelledby="home-h">
+  <div class="page-intro">
+    <div>
+      <p class="eyebrow">Page · chef-ray-gennaro.vercel.app</p>
+      <h2 id="home-h">Home</h2>
+      <p class="lede">Two places on the home page need photographs: the room shown in “Compose an evening” (it changes as visitors choose, so there are eight), and the portrait introducing Chef Ray.</p>
+      <p class="count">Photographs 01–09 · 9 shots</p>
+      
+    </div>
+    <figure class="overview">
+      <div class="overview-scroll" tabindex="0" aria-label="Full page view of Home, scrollable">
+        <img src="img/overview-home.jpg" alt="The full Home page with each photo spot numbered in yellow">
+      </div>
+      <figcaption>The whole page, top to bottom. Numbers mark each photo.</figcaption>
+    </figure>
+  </div>
+  
+  <article class="card" id="p01" data-priority="1">
+    <header class="card-head">
+      <span class="num">01</span>
+      <div class="head-text">
+        <p class="kicker"><span class="pill pill-1">Essential</span><span>Caption on site: “Your dining room, after dark”</span></p>
+        <h3>A home in Connecticut</h3>
+        <p class="file"><code>setting-residence.jpg</code><span class="path">public/images/possibilities/setting-residence.jpg</span>
+          <button type="button" class="copy" data-copy="setting-residence.jpg" aria-label="Copy file name setting-residence.jpg">Copy</button></p>
+      </div>
+      <label class="done"><input type="checkbox" id="done-01" data-done="01"><span>Captured</span></label>
+    </header>
+    <div class="card-body">
+      <figure class="shot">
+        <img src="img/p01.jpg" alt="Current website section with the placeholder for photo 01 outlined in yellow">
+        <figcaption>On the website today. The yellow outline is the placeholder this photograph replaces.</figcaption>
+      </figure>
+      <div class="brief">
+        <p class="why">The first room a visitor sees in “Compose an evening”. It is the default view, so it shows up on the home page before anyone clicks.</p>
+        <h4>What to capture</h4>
+        <p>A real Connecticut dining room at night, set for a private dinner, photographed from the doorway at standing height. It should feel like a home, not a hotel.</p>
+        <h4>In the frame</h4>
+        <ul><li>Polished wood table for about eight, dressed in ivory linen.</li><li>Lit candles in aged-brass holders down the middle; wine already poured.</li><li>Classic New England room: painted wood paneling, a dark window, a brass chandelier dimmed low.</li><li>Through an open door on the right: a slice of warm kitchen light with a figure working at the stove, out of focus.</li><li>Lived-in details in shadow: books on a sideboard, a framed painting.</li></ul>
+        <div class="facts">
+          <div><h4>Light &amp; color</h4><p>Candles and the dimmed chandelier only. Warm amber on the table, deep brown shadow in the corners.</p></div>
+          <div><h4>Avoid</h4><p>Bright overhead light, flash, guests&#x27; faces, anything that identifies the homeowner.</p></div>
+          <div><h4>What's needed</h4><p>A real dining room in Connecticut; table linen, candles, glassware. Chef Ray optional (as the blurred figure in the kitchen).</p></div>
+        </div>
+        <figure class="frame-wrap">
+      <div class="frame" style="aspect-ratio:16 / 11"><span class="z z-subject" style="left:8%;top:22%;width:60%;height:50%"><i>Table + candles</i></span><span class="z z-light" style="left:72%;top:20%;width:24%;height:50%"><i>Kitchen glow</i></span><span class="z z-quiet" style="left:2%;top:84%;width:96%;height:14%"><i>Caption: keep simple</i></span></div>
+      <figcaption>Framing guide · 16:11 landscape · 2400 × 1650 px or larger</figcaption>
+    </figure>
+      </div>
+    </div>
+  </article>
+  <article class="card" id="p02" data-priority="2">
+    <header class="card-head">
+      <span class="num">02</span>
+      <div class="head-text">
+        <p class="kicker"><span class="pill pill-2">Important</span><span>Caption on site: “Above the avenue”</span></p>
+        <h3>A Manhattan penthouse</h3>
+        <p class="file"><code>setting-penthouse.jpg</code><span class="path">public/images/possibilities/setting-penthouse.jpg</span>
+          <button type="button" class="copy" data-copy="setting-penthouse.jpg" aria-label="Copy file name setting-penthouse.jpg">Copy</button></p>
+      </div>
+      <label class="done"><input type="checkbox" id="done-02" data-done="02"><span>Captured</span></label>
+    </header>
+    <div class="card-body">
+      <figure class="shot">
+        <img src="img/p02.jpg" alt="Current website section with the placeholder for photo 02 outlined in yellow">
+        <figcaption>On the website today. The yellow outline is the placeholder this photograph replaces.</figcaption>
+      </figure>
+      <div class="brief">
+        <p class="why">Shown when a visitor picks “A Manhattan penthouse”.</p>
+        <h4>What to capture</h4>
+        <p>A dinner table for six in front of floor-to-ceiling windows in a high-floor New York apartment at night, with the city glowing out of focus beyond the glass.</p>
+        <h4>In the frame</h4>
+        <ul><li>Table in the lower half of the frame: ivory linen, low candles, crystal glasses.</li><li>City lights through the window fill the upper half: thousands of soft points of light.</li><li>Minimal, expensive interior: dark wood floor, one sculptural lamp, an artwork in shadow.</li></ul>
+        <div class="facts">
+          <div><h4>Light &amp; color</h4><p>Candlelight on the table, cool city glow on the glass. Warm inside, cool outside.</p></div>
+          <div><h4>Avoid</h4><p>Recognizable landmarks or skyline, reflections of the photographer in the glass, guests&#x27; faces.</p></div>
+          <div><h4>What's needed</h4><p>A high-floor apartment with big windows (a rental or client&#x27;s home with permission).</p></div>
+        </div>
+        <figure class="frame-wrap">
+      <div class="frame" style="aspect-ratio:16 / 11"><span class="z z-subject" style="left:4%;top:50%;width:92%;height:32%"><i>Table + candles</i></span><span class="z z-light" style="left:4%;top:4%;width:92%;height:42%"><i>City bokeh</i></span><span class="z z-quiet" style="left:2%;top:84%;width:96%;height:14%"><i>Caption: keep simple</i></span></div>
+      <figcaption>Framing guide · 16:11 landscape · 2400 × 1650 px or larger</figcaption>
+    </figure>
+      </div>
+    </div>
+  </article>
+  <article class="card" id="p03" data-priority="3">
+    <header class="card-head">
+      <span class="num">03</span>
+      <div class="head-text">
+        <p class="kicker"><span class="pill pill-3">Completes the set</span><span>Caption on site: “Long table, late August”</span></p>
+        <h3>A Hamptons estate</h3>
+        <p class="file"><code>setting-estate.jpg</code><span class="path">public/images/possibilities/setting-estate.jpg</span>
+          <button type="button" class="copy" data-copy="setting-estate.jpg" aria-label="Copy file name setting-estate.jpg">Copy</button></p>
+      </div>
+      <label class="done"><input type="checkbox" id="done-03" data-done="03"><span>Captured</span></label>
+    </header>
+    <div class="card-body">
+      <figure class="shot">
+        <img src="img/p03.jpg" alt="Current website section with the placeholder for photo 03 outlined in yellow">
+        <figcaption>On the website today. The yellow outline is the placeholder this photograph replaces.</figcaption>
+      </figure>
+      <div class="brief">
+        <p class="why">Shown when a visitor picks “A Hamptons estate”.</p>
+        <h4>What to capture</h4>
+        <p>A long outdoor table for twenty on the lawn of a shingled summer estate, about 20 minutes before sunset, shot from one end so the table runs diagonally into the frame.</p>
+        <h4>In the frame</h4>
+        <ul><li>Natural linen, low garden flowers and herbs, glass hurricane lanterns.</li><li>Tall privet hedges and a shingled house with white trim softly in the background.</li><li>Optional: two distant staff silhouettes carrying platters.</li></ul>
+        <div class="facts">
+          <div><h4>Light &amp; color</h4><p>Low golden sun from behind the table so glasses glow and edges catch gold. Sky warm gold fading to peach.</p></div>
+          <div><h4>Avoid</h4><p>Harsh midday sun, recognizable houses, guests&#x27; faces.</p></div>
+          <div><h4>What's needed</h4><p>A large lawn or garden; a long table setup. Golden hour only.</p></div>
+        </div>
+        <figure class="frame-wrap">
+      <div class="frame" style="aspect-ratio:16 / 11"><span class="z z-subject" style="left:4%;top:30%;width:70%;height:50%"><i>Table, running diagonally</i></span><span class="z z-light" style="left:60%;top:4%;width:36%;height:30%"><i>Low sun</i></span><span class="z z-quiet" style="left:2%;top:84%;width:96%;height:14%"><i>Caption: keep simple</i></span></div>
+      <figcaption>Framing guide · 16:11 landscape · 2400 × 1650 px or larger</figcaption>
+    </figure>
+      </div>
+    </div>
+  </article>
+  <article class="card" id="p04" data-priority="3">
+    <header class="card-head">
+      <span class="num">04</span>
+      <div class="head-text">
+        <p class="kicker"><span class="pill pill-3">Completes the set</span><span>Caption on site: “Doors open to the bay”</span></p>
+        <h3>A waterfront home in Florida</h3>
+        <p class="file"><code>setting-waterfront.jpg</code><span class="path">public/images/possibilities/setting-waterfront.jpg</span>
+          <button type="button" class="copy" data-copy="setting-waterfront.jpg" aria-label="Copy file name setting-waterfront.jpg">Copy</button></p>
+      </div>
+      <label class="done"><input type="checkbox" id="done-04" data-done="04"><span>Captured</span></label>
+    </header>
+    <div class="card-body">
+      <figure class="shot">
+        <img src="img/p04.jpg" alt="Current website section with the placeholder for photo 04 outlined in yellow">
+        <figcaption>On the website today. The yellow outline is the placeholder this photograph replaces.</figcaption>
+      </figure>
+      <div class="brief">
+        <p class="why">Shown when a visitor picks “A waterfront home in Florida”.</p>
+        <h4>What to capture</h4>
+        <p>Looking out from inside a waterfront home at blue hour: tall glass doors folded open, a table set on the terrace, calm water beyond.</p>
+        <h4>In the frame</h4>
+        <ul><li>Pale stone floor, white curtains moving slightly.</li><li>Terrace table for eight: white linen, low candles, bowls of citrus, a whole roasted fish on a platter.</li><li>Calm bay in deep indigo, palm fronds in silhouette at the edges, a few warm dock lights.</li></ul>
+        <div class="facts">
+          <div><h4>Light &amp; color</h4><p>Blue hour (just after sunset): indigo sky and water, warm candles on the table.</p></div>
+          <div><h4>Avoid</h4><p>Bright daytime sun, visible neighbors&#x27; houses, guests&#x27; faces.</p></div>
+          <div><h4>What's needed</h4><p>A waterfront home (Florida or any warm coast).</p></div>
+        </div>
+        <figure class="frame-wrap">
+      <div class="frame" style="aspect-ratio:16 / 11"><span class="z z-subject" style="left:20%;top:40%;width:60%;height:40%"><i>Terrace table</i></span><span class="z z-light" style="left:10%;top:6%;width:80%;height:32%"><i>Water + sky</i></span><span class="z z-quiet" style="left:2%;top:84%;width:96%;height:14%"><i>Caption: keep simple</i></span></div>
+      <figcaption>Framing guide · 16:11 landscape · 2400 × 1650 px or larger</figcaption>
+    </figure>
+      </div>
+    </div>
+  </article>
+  <article class="card" id="p05" data-priority="2">
+    <header class="card-head">
+      <span class="num">05</span>
+      <div class="head-text">
+        <p class="kicker"><span class="pill pill-2">Important</span><span>Caption on site: “Anchored, second course”</span></p>
+        <h3>Aboard a yacht</h3>
+        <p class="file"><code>setting-yacht.jpg</code><span class="path">public/images/possibilities/setting-yacht.jpg</span>
+          <button type="button" class="copy" data-copy="setting-yacht.jpg" aria-label="Copy file name setting-yacht.jpg">Copy</button></p>
+      </div>
+      <label class="done"><input type="checkbox" id="done-05" data-done="05"><span>Captured</span></label>
+    </header>
+    <div class="card-body">
+      <figure class="shot">
+        <img src="img/p05.jpg" alt="Current website section with the placeholder for photo 05 outlined in yellow">
+        <figcaption>On the website today. The yellow outline is the placeholder this photograph replaces.</figcaption>
+      </figure>
+      <div class="brief">
+        <p class="why">Shown when a visitor picks “Aboard a yacht”.</p>
+        <h4>What to capture</h4>
+        <p>The back deck of a large yacht at anchor just after sunset, table set for ten, open water filling the background. Shot at seated height so the table edge is the foreground.</p>
+        <h4>In the frame</h4>
+        <ul><li>Teak table, ivory linen, candles in glass (they stay lit in the breeze), crystal stemware.</li><li>Polished rail and a coiled rope for a sense of place.</li><li>Horizon of fading orange and deep blue; a far-off coastline with a few lights.</li><li>Optional: a crew member&#x27;s white-sleeved hand placing a plate.</li></ul>
+        <div class="facts">
+          <div><h4>Light &amp; color</h4><p>Last light of sunset plus candles.</p></div>
+          <div><h4>Avoid</h4><p>Boat name, flags, registration numbers, guests&#x27; faces.</p></div>
+          <div><h4>What's needed</h4><p>A yacht (charter or client, with permission). Calm evening.</p></div>
+        </div>
+        <figure class="frame-wrap">
+      <div class="frame" style="aspect-ratio:16 / 11"><span class="z z-subject" style="left:4%;top:45%;width:70%;height:40%"><i>Table edge</i></span><span class="z z-light" style="left:4%;top:6%;width:92%;height:36%"><i>Open water + horizon</i></span><span class="z z-quiet" style="left:2%;top:84%;width:96%;height:14%"><i>Caption: keep simple</i></span></div>
+      <figcaption>Framing guide · 16:11 landscape · 2400 × 1650 px or larger</figcaption>
+    </figure>
+      </div>
+    </div>
+  </article>
+  <article class="card" id="p06" data-priority="2">
+    <header class="card-head">
+      <span class="num">06</span>
+      <div class="head-text">
+        <p class="kicker"><span class="pill pill-2">Important</span><span>Caption on site: “Lanterns along the dock”</span></p>
+        <h3>On a private island</h3>
+        <p class="file"><code>setting-island.jpg</code><span class="path">public/images/possibilities/setting-island.jpg</span>
+          <button type="button" class="copy" data-copy="setting-island.jpg" aria-label="Copy file name setting-island.jpg">Copy</button></p>
+      </div>
+      <label class="done"><input type="checkbox" id="done-06" data-done="06"><span>Captured</span></label>
+    </header>
+    <div class="card-body">
+      <figure class="shot">
+        <img src="img/p06.jpg" alt="Current website section with the placeholder for photo 06 outlined in yellow">
+        <figcaption>On the website today. The yellow outline is the placeholder this photograph replaces.</figcaption>
+      </figure>
+      <div class="brief">
+        <p class="why">Shown when a visitor picks “On a private island”. This is one of Chef Ray&#x27;s signature stories.</p>
+        <h4>What to capture</h4>
+        <p>From the end of a long wooden dock at dusk, looking back toward the shore: lanterns line both sides of the dock and lead the eye to a single lit table under a simple canopy.</p>
+        <h4>In the frame</h4>
+        <ul><li>Weathered silver-grey planks, glowing lanterns on both sides.</li><li>At the far end: a table for six under an open canopy among tropical trees.</li><li>Clear dark water reflecting the lantern light in long streaks.</li><li>No other buildings or boats in sight.</li></ul>
+        <div class="facts">
+          <div><h4>Light &amp; color</h4><p>Dusk: violet sky with a thin orange horizon, warm lanterns.</p></div>
+          <div><h4>Avoid</h4><p>Resort signage, other guests, anything that identifies the island or client.</p></div>
+          <div><h4>What's needed</h4><p>Ideally a real photo from one of Chef Ray&#x27;s island engagements (client details removed). Otherwise a private dock at dusk.</p></div>
+        </div>
+        <figure class="frame-wrap">
+      <div class="frame" style="aspect-ratio:16 / 11"><span class="z z-subject" style="left:30%;top:20%;width:40%;height:64%"><i>Dock leading to table</i></span><span class="z z-quiet" style="left:2%;top:84%;width:96%;height:14%"><i>Caption: keep simple</i></span></div>
+      <figcaption>Framing guide · 16:11 landscape · 2400 × 1650 px or larger</figcaption>
+    </figure>
+      </div>
+    </div>
+  </article>
+  <article class="card" id="p07" data-priority="3">
+    <header class="card-head">
+      <span class="num">07</span>
+      <div class="head-text">
+        <p class="kicker"><span class="pill pill-3">Completes the set</span><span>Caption on site: “Wheels down, table set”</span></p>
+        <h3>In a private hangar</h3>
+        <p class="file"><code>setting-hangar.jpg</code><span class="path">public/images/possibilities/setting-hangar.jpg</span>
+          <button type="button" class="copy" data-copy="setting-hangar.jpg" aria-label="Copy file name setting-hangar.jpg">Copy</button></p>
+      </div>
+      <label class="done"><input type="checkbox" id="done-07" data-done="07"><span>Captured</span></label>
+    </header>
+    <div class="card-body">
+      <figure class="shot">
+        <img src="img/p07.jpg" alt="Current website section with the placeholder for photo 07 outlined in yellow">
+        <figcaption>On the website today. The yellow outline is the placeholder this photograph replaces.</figcaption>
+      </figure>
+      <div class="brief">
+        <p class="why">Shown when a visitor picks “In a private hangar”.</p>
+        <h4>What to capture</h4>
+        <p>Inside a spotless private-jet hangar at night, turned into a dining room: a long candlelit table with the nose and wing of a white jet softly out of focus behind it.</p>
+        <h4>In the frame</h4>
+        <ul><li>Long table for sixteen, ivory linen, tall candelabras.</li><li>Warm uplights and hanging bulbs against the vast dark ceiling.</li><li>Glossy floor faintly reflecting the candles.</li></ul>
+        <div class="facts">
+          <div><h4>Light &amp; color</h4><p>Warm table light against a cool, dark, cavernous space.</p></div>
+          <div><h4>Avoid</h4><p>Airline logos, tail numbers, guests&#x27; faces.</p></div>
+          <div><h4>What's needed</h4><p>Access to a private aviation hangar or FBO. Can be scheduled later.</p></div>
+        </div>
+        <figure class="frame-wrap">
+      <div class="frame" style="aspect-ratio:16 / 11"><span class="z z-subject" style="left:4%;top:45%;width:64%;height:40%"><i>Table</i></span><span class="z z-light" style="left:55%;top:10%;width:41%;height:40%"><i>Jet, out of focus</i></span><span class="z z-quiet" style="left:2%;top:84%;width:96%;height:14%"><i>Caption: keep simple</i></span></div>
+      <figcaption>Framing guide · 16:11 landscape · 2400 × 1650 px or larger</figcaption>
+    </figure>
+      </div>
+    </div>
+  </article>
+  <article class="card" id="p08" data-priority="3">
+    <header class="card-head">
+      <span class="num">08</span>
+      <div class="head-text">
+        <p class="kicker"><span class="pill pill-3">Completes the set</span><span>Caption on site: “A terrace, elsewhere”</span></p>
+        <h3>Somewhere abroad</h3>
+        <p class="file"><code>setting-abroad.jpg</code><span class="path">public/images/possibilities/setting-abroad.jpg</span>
+          <button type="button" class="copy" data-copy="setting-abroad.jpg" aria-label="Copy file name setting-abroad.jpg">Copy</button></p>
+      </div>
+      <label class="done"><input type="checkbox" id="done-08" data-done="08"><span>Captured</span></label>
+    </header>
+    <div class="card-body">
+      <figure class="shot">
+        <img src="img/p08.jpg" alt="Current website section with the placeholder for photo 08 outlined in yellow">
+        <figcaption>On the website today. The yellow outline is the placeholder this photograph replaces.</figcaption>
+      </figure>
+      <div class="brief">
+        <p class="why">Shown when a visitor picks “Somewhere abroad”. It connects quietly to his Italian roots.</p>
+        <h4>What to capture</h4>
+        <p>A stone terrace of a villa in Italy or on a Mediterranean lake at the end of a summer day, table set for eight, hills or water in soft haze beyond.</p>
+        <h4>In the frame</h4>
+        <ul><li>Weathered stone balustrade, pots of lemon trees, vines on a pergola overhead.</li><li>Rustic white linen, carafes of wine, bowls of figs and lemons, low candles.</li><li>Distant hills or lake in blue-gold haze.</li></ul>
+        <div class="facts">
+          <div><h4>Light &amp; color</h4><p>Warm late sun from the side, long shadows across stone.</p></div>
+          <div><h4>Avoid</h4><p>Famous landmarks, hotel branding, guests&#x27; faces.</p></div>
+          <div><h4>What's needed</h4><p>Can come from a future trip; a European terrace at sunset.</p></div>
+        </div>
+        <figure class="frame-wrap">
+      <div class="frame" style="aspect-ratio:16 / 11"><span class="z z-subject" style="left:6%;top:38%;width:62%;height:46%"><i>Terrace table</i></span><span class="z z-light" style="left:50%;top:6%;width:46%;height:30%"><i>Hills / lake in haze</i></span><span class="z z-quiet" style="left:2%;top:84%;width:96%;height:14%"><i>Caption: keep simple</i></span></div>
+      <figcaption>Framing guide · 16:11 landscape · 2400 × 1650 px or larger</figcaption>
+    </figure>
+      </div>
+    </div>
+  </article>
+  <article class="card" id="p09" data-priority="1">
+    <header class="card-head">
+      <span class="num">09</span>
+      <div class="head-text">
+        <p class="kicker"><span class="pill pill-1">Essential</span><span>Caption on site: “The Chef”</span></p>
+        <h3>Chef Ray in his kitchen</h3>
+        <p class="file"><code>chef-portrait.jpg</code><span class="path">public/images/home/chef-portrait.jpg</span>
+          <button type="button" class="copy" data-copy="chef-portrait.jpg" aria-label="Copy file name chef-portrait.jpg">Copy</button></p>
+      </div>
+      <label class="done"><input type="checkbox" id="done-09" data-done="09"><span>Captured</span></label>
+    </header>
+    <div class="card-body">
+      <figure class="shot">
+        <img src="img/p09.jpg" alt="Current website section with the placeholder for photo 09 outlined in yellow">
+        <figcaption>On the website today. The yellow outline is the placeholder this photograph replaces.</figcaption>
+      </figure>
+      <div class="brief">
+        <p class="why">The most important photograph on the website. It introduces Chef Ray on the home page next to “Raised on Sunday gravy. Made on the line.”</p>
+        <h4>What to capture</h4>
+        <p>A real, natural portrait of Chef Ray standing in a kitchen, framed from mid-thigh up, one hand resting on a worn wooden counter. He looks just past the lens, as if listening to someone: confident, warm, unposed.</p>
+        <h4>In the frame</h4>
+        <ul><li>Wardrobe: charcoal or black chef&#x27;s jacket with sleeves pushed up, or a dark tailored shirt with a long dark apron. A towel tucked at the hip.</li><li>Background softly out of focus: hanging copper pots, a shelf of glass jars, the blue-orange glow of a burner.</li><li>His body turned slightly to camera right, face toward the window light.</li></ul>
+        <div class="facts">
+          <div><h4>Light &amp; color</h4><p>One soft window light from camera left lighting one side of his face. The right side of the frame falls into warm shadow.</p></div>
+          <div><h4>Avoid</h4><p>Studio backdrop, flash, big smile at camera, arms crossed, heavy retouching.</p></div>
+          <div><h4>What's needed</h4><p>Chef Ray. A kitchen with a window and some character (his own kitchen is ideal).</p></div>
+        </div>
+        <figure class="frame-wrap">
+      <div class="frame" style="aspect-ratio:4 / 5"><span class="z z-subject" style="left:14%;top:6%;width:60%;height:78%"><i>Chef Ray, mid-thigh up</i></span><span class="z z-light" style="left:0%;top:0%;width:14%;height:84%"><i>Window light</i></span><span class="z z-quiet" style="left:2%;top:84%;width:96%;height:14%"><i>Caption: keep simple</i></span></div>
+      <figcaption>Framing guide · 4:5 portrait · 2400 × 3000 px or larger</figcaption>
+    </figure>
+      </div>
+    </div>
+  </article>
+</section>
+<section class="page-sec" id="experiences" aria-labelledby="experiences-h">
+  <div class="page-intro">
+    <div>
+      <p class="eyebrow">Page · chef-ray-gennaro.vercel.app/experiences</p>
+      <h2 id="experiences-h">Experiences</h2>
+      <p class="lede">The Experiences page repeats “Compose an evening” (Photos 01–08, no extra shots needed) and then needs one photograph for each of the four ways to book Chef Ray.</p>
+      <p class="count">Photographs 10–13 · 4 shots</p>
+      
+    </div>
+    <figure class="overview">
+      <div class="overview-scroll" tabindex="0" aria-label="Full page view of Experiences, scrollable">
+        <img src="img/overview-experiences.jpg" alt="The full Experiences page with each photo spot numbered in yellow">
+      </div>
+      <figcaption>The whole page, top to bottom. Numbers mark each photo.</figcaption>
+    </figure>
+  </div>
+  
+  <article class="card" id="p10" data-priority="1">
+    <header class="card-head">
+      <span class="num">10</span>
+      <div class="head-text">
+        <p class="kicker"><span class="pill pill-1">Essential</span><span>Caption on site: “The table, before the guests”</span></p>
+        <h3>I. The Private Table</h3>
+        <p class="file"><code>private-table.jpg</code><span class="path">public/images/experiences/private-table.jpg</span>
+          <button type="button" class="copy" data-copy="private-table.jpg" aria-label="Copy file name private-table.jpg">Copy</button></p>
+      </div>
+      <label class="done"><input type="checkbox" id="done-10" data-done="10"><span>Captured</span></label>
+    </header>
+    <div class="card-body">
+      <figure class="shot">
+        <img src="img/p10.jpg" alt="Current website section with the placeholder for photo 10 outlined in yellow">
+        <figcaption>On the website today. The yellow outline is the placeholder this photograph replaces.</figcaption>
+      </figure>
+      <div class="brief">
+        <p class="why">Beside “The Private Table”, his core private-dinner service.</p>
+        <h4>What to capture</h4>
+        <p>A candlelit dinner table in a private home, photographed from a seated guest&#x27;s eye level looking across the table. The minute before guests sit down.</p>
+        <h4>In the frame</h4>
+        <ul><li>Foreground: table edge in ivory linen, white plate with a fine brass rim, folded napkin with a printed menu card tucked in, heavy silver cutlery.</li><li>Middle: three lit candles in aged-brass holders, crystal glasses with red wine.</li><li>Background: two empty upholstered chairs across the table, waiting, in warm darkness.</li></ul>
+        <div class="facts">
+          <div><h4>Light &amp; color</h4><p>Candles only.</p></div>
+          <div><h4>Avoid</h4><p>People, bright room lights, logos on bottles.</p></div>
+          <div><h4>What's needed</h4><p>Same dining room as Photo 01 works well. Menu card prop.</p></div>
+        </div>
+        <figure class="frame-wrap">
+      <div class="frame" style="aspect-ratio:4 / 5"><span class="z z-subject" style="left:4%;top:50%;width:92%;height:32%"><i>Place setting + menu card</i></span><span class="z z-light" style="left:20%;top:18%;width:60%;height:30%"><i>Candles + glasses</i></span><span class="z z-quiet" style="left:2%;top:84%;width:96%;height:14%"><i>Caption: keep simple</i></span></div>
+      <figcaption>Framing guide · 4:5 portrait · 2400 × 3000 px or larger</figcaption>
+    </figure>
+      </div>
+    </div>
+  </article>
+  <article class="card" id="p11" data-priority="1">
+    <header class="card-head">
+      <span class="num">11</span>
+      <div class="head-text">
+        <p class="kicker"><span class="pill pill-1">Essential</span><span>Caption on site: “Late service, open water”</span></p>
+        <h3>II. The Island &amp; The Water</h3>
+        <p class="file"><code>island-water.jpg</code><span class="path">public/images/experiences/island-water.jpg</span>
+          <button type="button" class="copy" data-copy="island-water.jpg" aria-label="Copy file name island-water.jpg">Copy</button></p>
+      </div>
+      <label class="done"><input type="checkbox" id="done-11" data-done="11"><span>Captured</span></label>
+    </header>
+    <div class="card-body">
+      <figure class="shot">
+        <img src="img/p11.jpg" alt="Current website section with the placeholder for photo 11 outlined in yellow">
+        <figcaption>On the website today. The yellow outline is the placeholder this photograph replaces.</figcaption>
+      </figure>
+      <div class="brief">
+        <p class="why">Beside “The Island &amp; The Water”: yachts, islands and destinations.</p>
+        <h4>What to capture</h4>
+        <p>A dinner table on a stone terrace above open water at the very end of dusk, shot from behind and slightly above one chair.</p>
+        <h4>In the frame</h4>
+        <ul><li>Table for four: ivory linen held by brass weights, candles in glass hurricanes, a platter of grilled whole fish with lemons and herbs.</li><li>Beyond the balustrade: dark open sea; horizon a thin cold blue-grey band with a trace of orange; one distant light of an anchored boat.</li><li>Top of the frame: night sky.</li></ul>
+        <div class="facts">
+          <div><h4>Light &amp; color</h4><p>Candlelight against the cool last light over the water.</p></div>
+          <div><h4>Avoid</h4><p>Other buildings, beach crowds, guests&#x27; faces.</p></div>
+          <div><h4>What's needed</h4><p>A waterside terrace (coast, lake or island). Shoot at dusk.</p></div>
+        </div>
+        <figure class="frame-wrap">
+      <div class="frame" style="aspect-ratio:4 / 5"><span class="z z-subject" style="left:6%;top:48%;width:88%;height:34%"><i>Table + fish</i></span><span class="z z-light" style="left:4%;top:14%;width:92%;height:30%"><i>Sea + horizon</i></span><span class="z z-quiet" style="left:2%;top:84%;width:96%;height:14%"><i>Caption: keep simple</i></span></div>
+      <figcaption>Framing guide · 4:5 portrait · 2400 × 3000 px or larger</figcaption>
+    </figure>
+      </div>
+    </div>
+  </article>
+  <article class="card" id="p12" data-priority="1">
+    <header class="card-head">
+      <span class="num">12</span>
+      <div class="head-text">
+        <p class="kicker"><span class="pill pill-1">Essential</span><span>Caption on site: “Flour, eggs, hands”</span></p>
+        <h3>III. The Kitchen Lessons</h3>
+        <p class="file"><code>kitchen-lessons.jpg</code><span class="path">public/images/experiences/kitchen-lessons.jpg</span>
+          <button type="button" class="copy" data-copy="kitchen-lessons.jpg" aria-label="Copy file name kitchen-lessons.jpg">Copy</button></p>
+      </div>
+      <label class="done"><input type="checkbox" id="done-12" data-done="12"><span>Captured</span></label>
+    </header>
+    <div class="card-body">
+      <figure class="shot">
+        <img src="img/p12.jpg" alt="Current website section with the placeholder for photo 12 outlined in yellow">
+        <figcaption>On the website today. The yellow outline is the placeholder this photograph replaces.</figcaption>
+      </figure>
+      <div class="brief">
+        <p class="why">Beside “The Kitchen Lessons”, his private cooking classes.</p>
+        <h4>What to capture</h4>
+        <p>Close on two pairs of hands at a floured wooden counter: Chef Ray&#x27;s hands guiding a guest&#x27;s hands as they fold eggs into a well of flour to make pasta dough.</p>
+        <h4>In the frame</h4>
+        <ul><li>Chef Ray: rolled sleeves, dark apron just visible. Guest: cream knit sleeve.</li><li>Around them: wooden rolling pin, bench scraper, a bowl of brown eggs, a mound of finished dough under a cloth.</li><li>Flour dust floating in a shaft of window light.</li></ul>
+        <div class="facts">
+          <div><h4>Light &amp; color</h4><p>Soft daylight from a window on the left. Brighter and warmer than the evening photos.</p></div>
+          <div><h4>Avoid</h4><p>Faces, messy counters, plastic or branded tools.</p></div>
+          <div><h4>What's needed</h4><p>Chef Ray plus one person as the &#x27;guest&#x27; (hands only). Flour, eggs, a wooden board.</p></div>
+        </div>
+        <figure class="frame-wrap">
+      <div class="frame" style="aspect-ratio:4 / 5"><span class="z z-subject" style="left:10%;top:24%;width:80%;height:56%"><i>Two pairs of hands + dough</i></span><span class="z z-light" style="left:0%;top:0%;width:30%;height:40%"><i>Window light</i></span><span class="z z-quiet" style="left:2%;top:84%;width:96%;height:14%"><i>Caption: keep simple</i></span></div>
+      <figcaption>Framing guide · 4:5 portrait · 2400 × 3000 px or larger</figcaption>
+    </figure>
+      </div>
+    </div>
+  </article>
+  <article class="card" id="p13" data-priority="1">
+    <header class="card-head">
+      <span class="num">13</span>
+      <div class="head-text">
+        <p class="kicker"><span class="pill pill-1">Essential</span><span>Caption on site: “Toasts, third course”</span></p>
+        <h3>IV. The Occasion</h3>
+        <p class="file"><code>occasion.jpg</code><span class="path">public/images/experiences/occasion.jpg</span>
+          <button type="button" class="copy" data-copy="occasion.jpg" aria-label="Copy file name occasion.jpg">Copy</button></p>
+      </div>
+      <label class="done"><input type="checkbox" id="done-13" data-done="13"><span>Captured</span></label>
+    </header>
+    <div class="card-body">
+      <figure class="shot">
+        <img src="img/p13.jpg" alt="Current website section with the placeholder for photo 13 outlined in yellow">
+        <figcaption>On the website today. The yellow outline is the placeholder this photograph replaces.</figcaption>
+      </figure>
+      <div class="brief">
+        <p class="why">Beside “The Occasion”: celebrations and hosted events.</p>
+        <h4>What to capture</h4>
+        <p>The moment of a toast at a long celebration table in low warm light. A dozen hands raise glasses above the table; nobody&#x27;s face is shown.</p>
+        <h4>In the frame</h4>
+        <ul><li>Hands, sleeves and shoulders only: dark jackets, a silk dress strap, a bracelet catching light.</li><li>Slight motion blur on the raised glasses.</li><li>Table: candles, half-finished plates, loose garden roses in burgundy and ivory.</li><li>Background: a warm, softly lit room with an arched window.</li></ul>
+        <div class="facts">
+          <div><h4>Light &amp; color</h4><p>Low, warm, candlelit. A little haze is welcome.</p></div>
+          <div><h4>Avoid</h4><p>Recognizable faces, phones, branded bottles.</p></div>
+          <div><h4>What's needed</h4><p>8–12 people as guests (faces turned away or out of frame). Can be staged with friends.</p></div>
+        </div>
+        <figure class="frame-wrap">
+      <div class="frame" style="aspect-ratio:4 / 5"><span class="z z-subject" style="left:6%;top:8%;width:88%;height:44%"><i>Raised glasses</i></span><span class="z z-light" style="left:6%;top:54%;width:88%;height:28%"><i>Table</i></span><span class="z z-quiet" style="left:2%;top:84%;width:96%;height:14%"><i>Caption: keep simple</i></span></div>
+      <figcaption>Framing guide · 4:5 portrait · 2400 × 3000 px or larger</figcaption>
+    </figure>
+      </div>
+    </div>
+  </article>
+</section>
+<section class="page-sec" id="chef" aria-labelledby="chef-h">
+  <div class="page-intro">
+    <div>
+      <p class="eyebrow">Page · chef-ray-gennaro.vercel.app/chef</p>
+      <h2 id="chef-h">The Chef</h2>
+      <p class="lede">Chef Ray&#x27;s story is told in six eras called The Archive. Each era needs one photograph. Where real photos from his past exist, they are better than anything new.</p>
+      <p class="count">Photographs 14–19 · 6 shots</p>
+      
+    </div>
+    <figure class="overview">
+      <div class="overview-scroll" tabindex="0" aria-label="Full page view of The Chef, scrollable">
+        <img src="img/overview-chef.jpg" alt="The full The Chef page with each photo spot numbered in yellow">
+      </div>
+      <figcaption>The whole page, top to bottom. Numbers mark each photo.</figcaption>
+    </figure>
+  </div>
+  
+  <article class="card" id="p14" data-priority="3">
+    <header class="card-head">
+      <span class="num">14</span>
+      <div class="head-text">
+        <p class="kicker"><span class="pill pill-3">Completes the set</span><span>Caption on site: “Sunday, before noon”</span></p>
+        <h3>I. The family table</h3>
+        <p class="file"><code>01-family-table.jpg</code><span class="path">public/images/archive/01-family-table.jpg</span>
+          <button type="button" class="copy" data-copy="01-family-table.jpg" aria-label="Copy file name 01-family-table.jpg">Copy</button></p>
+      </div>
+      <label class="done"><input type="checkbox" id="done-14" data-done="14"><span>Captured</span></label>
+    </header>
+    <div class="card-body">
+      <figure class="shot">
+        <img src="img/p14.jpg" alt="Current website section with the placeholder for photo 14 outlined in yellow">
+        <figcaption>On the website today. The yellow outline is the placeholder this photograph replaces.</figcaption>
+      </figure>
+      <div class="brief">
+        <p class="why">The first era of his story, New Haven. Real history: this should be a real family photograph if one exists.</p>
+        <h4>What to capture</h4>
+        <p>First choice: a real photo from Chef Ray&#x27;s childhood or youth in New Haven (a crowded Sunday table, a grandparent at the stove), scanned in high resolution. If none exists, shoot a present-day still life instead, never an imitation of an old photo.</p>
+        <h4>In the frame</h4>
+        <ul><li>Still-life option: a heavy enamel pot of red sauce simmering on an old white stove, a long wooden spoon across the top, steam rising.</li><li>Around it: crusty Italian bread on a cloth, a jar of dried oregano, a handwritten recipe card, a glass of red wine.</li></ul>
+        <div class="facts">
+          <div><h4>Light &amp; color</h4><p>Soft morning window light. Cream, tomato red, warm wood.</p></div>
+          <div><h4>Avoid</h4><p>Fake &#x27;vintage&#x27; filters on new photos.</p></div>
+          <div><h4>What's needed</h4><p>Family photo albums (scan at 1200 dpi) or the still-life props.</p></div>
+        </div>
+        <figure class="frame-wrap">
+      <div class="frame" style="aspect-ratio:4 / 5"><span class="z z-subject" style="left:14%;top:14%;width:72%;height:60%"><i>Pot / family scene</i></span><span class="z z-quiet" style="left:2%;top:84%;width:96%;height:14%"><i>Caption: keep simple</i></span><span class="z z-quiet" style="left:66%;top:70%;width:32%;height:28%"><i>Era numeral: keep dark</i></span></div>
+      <figcaption>Framing guide · 4:5 portrait · 2400 × 3000 px or larger</figcaption>
+    </figure>
+      </div>
+    </div>
+  </article>
+  <article class="card" id="p15" data-priority="2">
+    <header class="card-head">
+      <span class="num">15</span>
+      <div class="head-text">
+        <p class="kicker"><span class="pill pill-2">Important</span><span>Caption on site: “Service, nine o&#x27;clock”</span></p>
+        <h3>II. The line</h3>
+        <p class="file"><code>02-the-line.jpg</code><span class="path">public/images/archive/02-the-line.jpg</span>
+          <button type="button" class="copy" data-copy="02-the-line.jpg" aria-label="Copy file name 02-the-line.jpg">Copy</button></p>
+      </div>
+      <label class="done"><input type="checkbox" id="done-15" data-done="15"><span>Captured</span></label>
+    </header>
+    <div class="card-body">
+      <figure class="shot">
+        <img src="img/p15.jpg" alt="Current website section with the placeholder for photo 15 outlined in yellow">
+        <figcaption>On the website today. The yellow outline is the placeholder this photograph replaces.</figcaption>
+      </figure>
+      <div class="brief">
+        <p class="why">Era II of his story: decades in restaurant kitchens.</p>
+        <h4>What to capture</h4>
+        <p>First choice: a real photo of Chef Ray on a restaurant line. Otherwise: a professional kitchen mid-service, shot from the end of the line at hip height, with flame in the foreground pan.</p>
+        <h4>In the frame</h4>
+        <ul><li>Stainless steel, a row of burners with tall flames under steel pans, steam.</li><li>Order tickets hanging on a rail above.</li><li>A cook in whites with his back to camera, out of focus.</li></ul>
+        <div class="facts">
+          <div><h4>Light &amp; color</h4><p>Hot orange flame light mixed with cool kitchen fluorescents.</p></div>
+          <div><h4>Avoid</h4><p>Restaurant names, health-code violations, cooks&#x27; faces (unless it&#x27;s Chef Ray).</p></div>
+          <div><h4>What's needed</h4><p>Access to a working restaurant kitchen during or staged as service.</p></div>
+        </div>
+        <figure class="frame-wrap">
+      <div class="frame" style="aspect-ratio:4 / 5"><span class="z z-subject" style="left:10%;top:40%;width:60%;height:40%"><i>Flame + pans</i></span><span class="z z-light" style="left:10%;top:4%;width:80%;height:20%"><i>Ticket rail</i></span><span class="z z-quiet" style="left:2%;top:84%;width:96%;height:14%"><i>Caption: keep simple</i></span><span class="z z-quiet" style="left:66%;top:70%;width:32%;height:28%"><i>Era numeral: keep dark</i></span></div>
+      <figcaption>Framing guide · 4:5 portrait · 2400 × 3000 px or larger</figcaption>
+    </figure>
+      </div>
+    </div>
+  </article>
+  <article class="card" id="p16" data-priority="2">
+    <header class="card-head">
+      <span class="num">16</span>
+      <div class="head-text">
+        <p class="kicker"><span class="pill pill-2">Important</span><span>Caption on site: “A private room”</span></p>
+        <h3>III. The private rooms</h3>
+        <p class="file"><code>03-private-rooms.jpg</code><span class="path">public/images/archive/03-private-rooms.jpg</span>
+          <button type="button" class="copy" data-copy="03-private-rooms.jpg" aria-label="Copy file name 03-private-rooms.jpg">Copy</button></p>
+      </div>
+      <label class="done"><input type="checkbox" id="done-16" data-done="16"><span>Captured</span></label>
+    </header>
+    <div class="card-body">
+      <figure class="shot">
+        <img src="img/p16.jpg" alt="Current website section with the placeholder for photo 16 outlined in yellow">
+        <figcaption>On the website today. The yellow outline is the placeholder this photograph replaces.</figcaption>
+      </figure>
+      <div class="brief">
+        <p class="why">Era III: private households, estates and luxury dining.</p>
+        <h4>What to capture</h4>
+        <p>A low-lit private dining room in a grand home: one round table for eight dressed and lit by candles, a slightly open service door spilling warm kitchen light across the floor.</p>
+        <h4>In the frame</h4>
+        <ul><li>Dark green silk or deep red lacquered walls; a large oil painting in a gilded frame, in shadow.</li><li>Crystal chandelier dimmed low.</li><li>Service door in the left third of the frame.</li><li>No people.</li></ul>
+        <div class="facts">
+          <div><h4>Light &amp; color</h4><p>Candles plus the warm spill from the door.</p></div>
+          <div><h4>Avoid</h4><p>Identifiable artwork or homeowner details.</p></div>
+          <div><h4>What's needed</h4><p>An elegant private dining room (estate, club or historic home).</p></div>
+        </div>
+        <figure class="frame-wrap">
+      <div class="frame" style="aspect-ratio:4 / 5"><span class="z z-subject" style="left:26%;top:34%;width:64%;height:40%"><i>Round table</i></span><span class="z z-light" style="left:2%;top:20%;width:24%;height:60%"><i>Door light spill</i></span><span class="z z-quiet" style="left:2%;top:84%;width:96%;height:14%"><i>Caption: keep simple</i></span><span class="z z-quiet" style="left:66%;top:70%;width:32%;height:28%"><i>Era numeral: keep dark</i></span></div>
+      <figcaption>Framing guide · 4:5 portrait · 2400 × 3000 px or larger</figcaption>
+    </figure>
+      </div>
+    </div>
+  </article>
+  <article class="card" id="p17" data-priority="3">
+    <header class="card-head">
+      <span class="num">17</span>
+      <div class="head-text">
+        <p class="kicker"><span class="pill pill-3">Completes the set</span><span>Caption on site: “Open water”</span></p>
+        <h3>IV. The islands</h3>
+        <p class="file"><code>04-the-islands.jpg</code><span class="path">public/images/archive/04-the-islands.jpg</span>
+          <button type="button" class="copy" data-copy="04-the-islands.jpg" aria-label="Copy file name 04-the-islands.jpg">Copy</button></p>
+      </div>
+      <label class="done"><input type="checkbox" id="done-17" data-done="17"><span>Captured</span></label>
+    </header>
+    <div class="card-body">
+      <figure class="shot">
+        <img src="img/p17.jpg" alt="Current website section with the placeholder for photo 17 outlined in yellow">
+        <figcaption>On the website today. The yellow outline is the placeholder this photograph replaces.</figcaption>
+      </figure>
+      <div class="brief">
+        <p class="why">Era IV: private-island dining. Real history: use a real photo from his work if one exists.</p>
+        <h4>What to capture</h4>
+        <p>First choice: a real photograph from one of Chef Ray&#x27;s island engagements, with any client details removed. Otherwise: a wooden dock on an island at dusk, lanterns lit, crates of provisions stacked at the near end.</p>
+        <h4>In the frame</h4>
+        <ul><li>Weathered dock leading to shore, lanterns on both sides.</li><li>Wooden crates of lemons, herbs and bottles in the foreground.</li><li>Calm blue-black water reflecting the lanterns.</li></ul>
+        <div class="facts">
+          <div><h4>Light &amp; color</h4><p>Dusk: violet sky, thin orange horizon.</p></div>
+          <div><h4>Avoid</h4><p>Anything identifying the client or island.</p></div>
+          <div><h4>What's needed</h4><p>Chef Ray&#x27;s own photos from past engagements, or the dock from Photo 06 (different angle).</p></div>
+        </div>
+        <figure class="frame-wrap">
+      <div class="frame" style="aspect-ratio:4 / 5"><span class="z z-subject" style="left:20%;top:26%;width:60%;height:50%"><i>Dock + crates</i></span><span class="z z-quiet" style="left:2%;top:84%;width:96%;height:14%"><i>Caption: keep simple</i></span><span class="z z-quiet" style="left:66%;top:70%;width:32%;height:28%"><i>Era numeral: keep dark</i></span></div>
+      <figcaption>Framing guide · 4:5 portrait · 2400 × 3000 px or larger</figcaption>
+    </figure>
+      </div>
+    </div>
+  </article>
+  <article class="card" id="p18" data-priority="3">
+    <header class="card-head">
+      <span class="num">18</span>
+      <div class="head-text">
+        <p class="kicker"><span class="pill pill-3">Completes the set</span><span>Caption on site: “Hands in the dough”</span></p>
+        <h3>V. The lessons</h3>
+        <p class="file"><code>05-the-lessons.jpg</code><span class="path">public/images/archive/05-the-lessons.jpg</span>
+          <button type="button" class="copy" data-copy="05-the-lessons.jpg" aria-label="Copy file name 05-the-lessons.jpg">Copy</button></p>
+      </div>
+      <label class="done"><input type="checkbox" id="done-18" data-done="18"><span>Captured</span></label>
+    </header>
+    <div class="card-body">
+      <figure class="shot">
+        <img src="img/p18.jpg" alt="Current website section with the placeholder for photo 18 outlined in yellow">
+        <figcaption>On the website today. The yellow outline is the placeholder this photograph replaces.</figcaption>
+      </figure>
+      <div class="brief">
+        <p class="why">Era V: teaching. Pairs with Photo 12 but is a different, closer moment.</p>
+        <h4>What to capture</h4>
+        <p>Very close on Chef Ray&#x27;s flour-dusted hands placing a guest&#x27;s fingers to show how to pinch and shape orecchiette pasta on a wooden board.</p>
+        <h4>In the frame</h4>
+        <ul><li>Only hands and forearms: his with rolled dark sleeves, the guest&#x27;s in a cream knit sleeve.</li><li>Rows of finished pasta, a bench scraper, a small bowl of semolina.</li><li>Flour in the air.</li></ul>
+        <div class="facts">
+          <div><h4>Light &amp; color</h4><p>Window daylight from the side.</p></div>
+          <div><h4>Avoid</h4><p>Faces; making it look identical to Photo 12 (shoot closer, different shape of pasta).</p></div>
+          <div><h4>What's needed</h4><p>Chef Ray plus one &#x27;guest&#x27;. Same session as Photo 12.</p></div>
+        </div>
+        <figure class="frame-wrap">
+      <div class="frame" style="aspect-ratio:4 / 5"><span class="z z-subject" style="left:16%;top:26%;width:68%;height:50%"><i>Hands shaping pasta</i></span><span class="z z-quiet" style="left:2%;top:84%;width:96%;height:14%"><i>Caption: keep simple</i></span><span class="z z-quiet" style="left:66%;top:70%;width:32%;height:28%"><i>Era numeral: keep dark</i></span></div>
+      <figcaption>Framing guide · 4:5 portrait · 2400 × 3000 px or larger</figcaption>
+    </figure>
+      </div>
+    </div>
+  </article>
+  <article class="card" id="p19" data-priority="1">
+    <header class="card-head">
+      <span class="num">19</span>
+      <div class="head-text">
+        <p class="kicker"><span class="pill pill-1">Essential</span><span>Caption on site: “The table, tonight”</span></p>
+        <h3>VI. Wherever the table is</h3>
+        <p class="file"><code>06-now.jpg</code><span class="path">public/images/archive/06-now.jpg</span>
+          <button type="button" class="copy" data-copy="06-now.jpg" aria-label="Copy file name 06-now.jpg">Copy</button></p>
+      </div>
+      <label class="done"><input type="checkbox" id="done-19" data-done="19"><span>Captured</span></label>
+    </header>
+    <div class="card-body">
+      <figure class="shot">
+        <img src="img/p19.jpg" alt="Current website section with the placeholder for photo 19 outlined in yellow">
+        <figcaption>On the website today. The yellow outline is the placeholder this photograph replaces.</figcaption>
+      </figure>
+      <div class="brief">
+        <p class="why">The final era: Chef Ray today. This closes his story, so it must be a real photo of him.</p>
+        <h4>What to capture</h4>
+        <p>Chef Ray at the head of a fully set, candlelit table in a client&#x27;s dining room, minutes before guests arrive, making one last adjustment to a wine glass. He looks down at it; his face in three-quarter profile, lit by the candles.</p>
+        <h4>In the frame</h4>
+        <ul><li>Dark chef&#x27;s jacket or dark tailored shirt.</li><li>Long table glowing in ivory and brass, everything perfect.</li><li>Room elegant and dim around him.</li></ul>
+        <div class="facts">
+          <div><h4>Light &amp; color</h4><p>Candlelight on his face and hands; the room falls into shadow.</p></div>
+          <div><h4>Avoid</h4><p>Looking at the camera, guests in frame, flash.</p></div>
+          <div><h4>What's needed</h4><p>Chef Ray. Can be shot in the same dining room as Photos 01 and 10.</p></div>
+        </div>
+        <figure class="frame-wrap">
+      <div class="frame" style="aspect-ratio:4 / 5"><span class="z z-subject" style="left:36%;top:6%;width:50%;height:60%"><i>Chef Ray</i></span><span class="z z-light" style="left:4%;top:56%;width:70%;height:26%"><i>Candlelit table</i></span><span class="z z-quiet" style="left:2%;top:84%;width:96%;height:14%"><i>Caption: keep simple</i></span><span class="z z-quiet" style="left:66%;top:70%;width:32%;height:28%"><i>Era numeral: keep dark</i></span></div>
+      <figcaption>Framing guide · 4:5 portrait · 2400 × 3000 px or larger</figcaption>
+    </figure>
+      </div>
+    </div>
+  </article>
+</section>
+
+<section class="checklist" id="checklist" aria-labelledby="check-h">
+  <h2 id="check-h" class="sec-h">Shot checklist</h2>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>#</th><th>Photograph</th><th>File name</th><th>Priority</th><th>Shape</th><th>Done</th></tr></thead>
+    <tbody><tr><td class="tn">01</td><td>A home in Connecticut</td><td><code>setting-residence.jpg</code></td><td>Essential</td><td>16:11</td><td class="box" aria-label="Captured"></td></tr><tr><td class="tn">02</td><td>A Manhattan penthouse</td><td><code>setting-penthouse.jpg</code></td><td>Important</td><td>16:11</td><td class="box" aria-label="Captured"></td></tr><tr><td class="tn">03</td><td>A Hamptons estate</td><td><code>setting-estate.jpg</code></td><td>Completes the set</td><td>16:11</td><td class="box" aria-label="Captured"></td></tr><tr><td class="tn">04</td><td>A waterfront home in Florida</td><td><code>setting-waterfront.jpg</code></td><td>Completes the set</td><td>16:11</td><td class="box" aria-label="Captured"></td></tr><tr><td class="tn">05</td><td>Aboard a yacht</td><td><code>setting-yacht.jpg</code></td><td>Important</td><td>16:11</td><td class="box" aria-label="Captured"></td></tr><tr><td class="tn">06</td><td>On a private island</td><td><code>setting-island.jpg</code></td><td>Important</td><td>16:11</td><td class="box" aria-label="Captured"></td></tr><tr><td class="tn">07</td><td>In a private hangar</td><td><code>setting-hangar.jpg</code></td><td>Completes the set</td><td>16:11</td><td class="box" aria-label="Captured"></td></tr><tr><td class="tn">08</td><td>Somewhere abroad</td><td><code>setting-abroad.jpg</code></td><td>Completes the set</td><td>16:11</td><td class="box" aria-label="Captured"></td></tr><tr><td class="tn">09</td><td>Chef Ray in his kitchen</td><td><code>chef-portrait.jpg</code></td><td>Essential</td><td>4:5</td><td class="box" aria-label="Captured"></td></tr><tr><td class="tn">10</td><td>I. The Private Table</td><td><code>private-table.jpg</code></td><td>Essential</td><td>4:5</td><td class="box" aria-label="Captured"></td></tr><tr><td class="tn">11</td><td>II. The Island &amp; The Water</td><td><code>island-water.jpg</code></td><td>Essential</td><td>4:5</td><td class="box" aria-label="Captured"></td></tr><tr><td class="tn">12</td><td>III. The Kitchen Lessons</td><td><code>kitchen-lessons.jpg</code></td><td>Essential</td><td>4:5</td><td class="box" aria-label="Captured"></td></tr><tr><td class="tn">13</td><td>IV. The Occasion</td><td><code>occasion.jpg</code></td><td>Essential</td><td>4:5</td><td class="box" aria-label="Captured"></td></tr><tr><td class="tn">14</td><td>I. The family table</td><td><code>01-family-table.jpg</code></td><td>Completes the set</td><td>4:5</td><td class="box" aria-label="Captured"></td></tr><tr><td class="tn">15</td><td>II. The line</td><td><code>02-the-line.jpg</code></td><td>Important</td><td>4:5</td><td class="box" aria-label="Captured"></td></tr><tr><td class="tn">16</td><td>III. The private rooms</td><td><code>03-private-rooms.jpg</code></td><td>Important</td><td>4:5</td><td class="box" aria-label="Captured"></td></tr><tr><td class="tn">17</td><td>IV. The islands</td><td><code>04-the-islands.jpg</code></td><td>Completes the set</td><td>4:5</td><td class="box" aria-label="Captured"></td></tr><tr><td class="tn">18</td><td>V. The lessons</td><td><code>05-the-lessons.jpg</code></td><td>Completes the set</td><td>4:5</td><td class="box" aria-label="Captured"></td></tr><tr><td class="tn">19</td><td>VI. Wherever the table is</td><td><code>06-now.jpg</code></td><td>Essential</td><td>4:5</td><td class="box" aria-label="Captured"></td></tr></tbody>
+  </table>
+  </div>
+</section>
+
+<footer class="foot">
+  <p>Chef Ray Gennaro · Photography guide for the website · Screenshots taken from the current build. A printable PDF of this guide is shared alongside it.</p>
+</footer>
+</div>
+<script>(function () {
+  var KEY = "rg-photo-guide-done";
+  var done = {};
+  try { done = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { done = {}; }
+  var boxes = document.querySelectorAll("[data-done]");
+  var total = boxes.length;
+
+  function render() {
+    var count = 0;
+    boxes.forEach(function (b) {
+      var n = b.getAttribute("data-done");
+      b.checked = !!done[n];
+      var card = document.getElementById("p" + n);
+      if (card) card.classList.toggle("is-done", b.checked);
+      if (b.checked) count++;
+    });
+    var c = document.querySelector("[data-count]");
+    var bar = document.querySelector("[data-bar]");
+    if (c) c.textContent = String(count);
+    if (bar) bar.style.width = (total ? (count / total) * 100 : 0) + "%";
+  }
+  boxes.forEach(function (b) {
+    b.addEventListener("change", function () {
+      done[b.getAttribute("data-done")] = b.checked;
+      try { localStorage.setItem(KEY, JSON.stringify(done)); } catch (e) {}
+      render();
+    });
+  });
+  render();
+
+  // Filter: all photographs, or only the essential ones.
+  var buttons = document.querySelectorAll("[data-filter]");
+  buttons.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var f = btn.getAttribute("data-filter");
+      buttons.forEach(function (b) { b.setAttribute("aria-pressed", String(b === btn)); });
+      document.querySelectorAll(".card").forEach(function (card) {
+        card.hidden = f !== "all" && card.getAttribute("data-priority") !== f;
+      });
+    });
+  });
+
+  // Copy a file name.
+  document.querySelectorAll("[data-copy]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var text = btn.getAttribute("data-copy");
+      var ok = function () { btn.textContent = "Copied"; setTimeout(function () { btn.textContent = "Copy"; }, 1400); };
+      var fallback = function () {
+        var code = btn.parentNode.querySelector("code");
+        var r = document.createRange(); r.selectNodeContents(code);
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        btn.textContent = "Selected";
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(ok, fallback);
+      else fallback();
+    });
+  });
+})();
+</script>
+</body></html>
