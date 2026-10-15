@@ -46,4 +46,5 @@ export const footerNav = [
   { href: "/private-dining", label: "Where evenings travel" },
   { href: "/questions", label: "Questions" },
   { href: "/inquire", label: "Request an evening" },
+  { href: "/your-site", label: "Get this site" },
 ] as const;

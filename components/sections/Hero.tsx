@@ -1,5 +1,6 @@
 import { Cta } from "@/components/ui/Cta";
 import { HeroLight } from "@/components/system/HeroLight";
+import Image from "next/image";
 import { HeroMedia } from "@/components/system/HeroMedia";
 import { mediaImage } from "@/lib/media";
 import { cn } from "@/lib/utils";
@@ -13,7 +14,8 @@ const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
 export function Hero() {
   // With Eric's figure standing on the right, the actions move under the
   // lead so they never sit on top of him.
-  const figure = !!mediaImage("hero-figure");
+  const figureSrc = mediaImage("hero-figure");
+  const figure = !!figureSrc;
   return (
     <section id="hero" aria-labelledby="hero-title" className="tone-dark grain relative isolate flex min-h-[max(100svh,640px)] flex-col overflow-hidden">
       {/* Photograph or film, when present */}
@@ -27,7 +29,20 @@ export function Hero() {
         <div className="absolute inset-0 bg-[radial-gradient(120%_90%_at_50%_40%,transparent_40%,rgba(8,6,4,0.85)_100%)]" />
       </div>
 
-      <div className="container-x relative flex flex-1 flex-col justify-end pb-10 pt-[calc(var(--header-h)+3rem)] md:pb-14">
+      <div className={cn("container-x relative flex flex-1 flex-col justify-end pb-10 md:pb-14 md:pt-[calc(var(--header-h)+3rem)]", figureSrc ? "pt-[calc(var(--header-h)+0.5rem)]" : "pt-[calc(var(--header-h)+3rem)]")}>
+        {/* Phones: Eric stands above the name, fading into the room. */}
+        {figureSrc ? (
+          <div aria-hidden className="hero-fade relative -mb-6 h-[min(46svh,26rem)] md:hidden" style={d(150)}>
+            <Image
+              src={figureSrc}
+              alt=""
+              fill
+              priority
+              sizes="100vw"
+              className="object-contain object-bottom [filter:brightness(0.8)_contrast(1.06)_saturate(0.9)_sepia(0.12)] [mask-image:linear-gradient(to_top,transparent_0%,black_30%)]"
+            />
+          </div>
+        ) : null}
         <p className="hero-fade text-eyebrow flex items-center gap-4" style={d(300)}>
           <span aria-hidden className="hero-draw inline-block h-px w-10 bg-accent" style={d(200)} />
           <span>Private Evenings<span className="hidden sm:inline"> · By Arrangement</span></span>

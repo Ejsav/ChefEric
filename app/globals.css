@@ -37,7 +37,10 @@
   --section-y: clamp(6rem, 13vw, 12rem);
   --container: 88rem;
   --gutter: clamp(1.25rem, 4.5vw, 3.5rem);
-  --header-h: 5rem;
+  /* The header is the template notice bar plus the navigation row. */
+  --notice-h: 2.25rem;
+  --nav-h: 5rem;
+  --header-h: calc(var(--nav-h) + var(--notice-h));
 
   --text-display: clamp(3.4rem, 11.5vw, 11rem);
   --text-h1: clamp(2.6rem, 6.2vw, 5.75rem);

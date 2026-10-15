@@ -109,6 +109,7 @@ export function Concierge() {
     if (Object.keys(pre).length) {
       setAnswers(pre);
       setComposed(!!(pre.setting || pre.occasion || pre.guests));
+      if (pre.project) setStepId("project"); // arriving from /your-site
       return;
     }
     try {

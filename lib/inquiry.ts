@@ -219,6 +219,12 @@ export function prefillFromParams(q: URLSearchParams): Partial<Answers> {
   const occasion = q.get("occasion");
   if (occasion === "salon") out.form = "salon";
   else if (occasion && occasionOptions.some((o) => o.id === occasion)) out.occasion = occasion as Answers["occasion"];
+  // From /your-site: a request for this website, not for an evening.
+  if (q.get("about") === "website") {
+    out.role = "brand";
+    out.form = "collaboration";
+    out.project = "I'd like a website like this one, customized to me and my business.";
+  }
   const scale = q.get("scale");
   const guestsByScale: Record<string, Answers["guests"]> = { intimate: "2-8", gathering: "10-24", grand: "25-60" };
   if (scale && guestsByScale[scale]) out.guests = guestsByScale[scale];

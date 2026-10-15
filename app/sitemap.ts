@@ -18,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/private-dining", 0.8),
     ...places.map((p) => page(`/private-dining/${p.slug}`, 0.8)),
     page("/questions", 0.7),
+    page("/your-site", 0.9),
     page("/inquire", 0.9, "yearly"),
     page("/privacy", 0.2, "yearly"),
   ];

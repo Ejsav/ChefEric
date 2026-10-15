@@ -7,6 +7,7 @@ import { HeroFilm } from "@/components/system/HeroFilm";
 //    only plays on full-tier devices (see HeroFilm).
 //  - hero-figure: a transparent cutout of Eric standing in the room, right of
 //    the name, graded into the candlelight and fading into the floor.
+// On phones the figure is rendered in the hero's flow instead (see Hero).
 // Scrims keep the name legible over any frame. Renders nothing while every
 // slot is empty, leaving the original type-and-light hero.
 export function HeroMedia() {
@@ -29,13 +30,13 @@ export function HeroMedia() {
       ) : null}
 
       {figure ? (
-        <div aria-hidden className="hero-figure pointer-events-none absolute bottom-0 right-[-14%] top-[calc(var(--header-h)+2rem)] -z-[5] w-[78%] opacity-[0.28] sm:right-[-6%] sm:w-[60%] md:right-[2%] md:top-[calc(var(--header-h)-0.5rem)] md:w-[42%] md:opacity-100 lg:right-[5%] lg:w-[36%]">
+        <div aria-hidden className="hero-figure pointer-events-none absolute bottom-0 right-[2%] top-[calc(var(--header-h)-0.5rem)] -z-[5] hidden w-[42%] md:block lg:right-[5%] lg:w-[36%]">
           <Image
             src={figure}
             alt=""
             fill
             priority
-            sizes="(min-width: 1024px) 36vw, (min-width: 768px) 42vw, 78vw"
+            sizes="(min-width: 1024px) 36vw, 42vw"
             className="object-contain object-bottom [filter:brightness(0.8)_contrast(1.06)_saturate(0.9)_sepia(0.12)] [mask-image:linear-gradient(to_top,transparent_0%,black_26%)]"
           />
         </div>

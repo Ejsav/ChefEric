@@ -7,6 +7,7 @@ import { getLenis } from "@/lib/lenis";
 import { cn } from "@/lib/utils";
 import { Monogram } from "@/components/ui/Monogram";
 import { Ambience } from "@/components/system/Ambience";
+import { TemplateNotice } from "@/components/layout/TemplateNotice";
 
 // The header behaves like good front-of-house staff: present when you need
 // it, gone when you are reading. Transparent over the hero, a smoked-glass
@@ -74,7 +75,8 @@ export function Header() {
             : "border-b border-transparent",
         )}
       >
-        <div className="container-x flex h-[var(--header-h)] items-center justify-between text-[rgb(var(--ivory))]">
+        <TemplateNotice />
+        <div className="container-x flex h-[var(--nav-h)] items-center justify-between text-[rgb(var(--ivory))]">
           <Link href="/" className="group flex items-center gap-3">
             <Monogram className="h-10 w-10 text-[rgb(var(--brass))] transition-transform duration-1000 ease-out-expo group-hover:rotate-[-8deg]" title="" />
             <span className="sr-only font-display text-[1.15rem] tracking-[0.02em] sm:not-sr-only">

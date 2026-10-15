@@ -4,7 +4,7 @@ const ROUTES = [
   "/", "/experiences", "/menus", "/eric", "/private-dining",
   "/private-dining/connecticut", "/private-dining/new-york-city", "/private-dining/the-hamptons",
   "/private-dining/florida", "/private-dining/yachts", "/private-dining/private-islands",
-  "/questions", "/inquire", "/privacy",
+  "/questions", "/inquire", "/privacy", "/your-site",
 ];
 
 for (const route of ROUTES) {
