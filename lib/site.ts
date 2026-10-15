@@ -1,5 +1,6 @@
 // Single source of truth for brand facts used in UI, metadata and JSON-LD.
-// Anything marked CONFIRM must be confirmed by Eric before launch.
+// This site is a template shown under a demo persona, "Chef Eric Jokl". Every
+// customer version replaces these facts with their own.
 
 // The canonical origin. Explicit env wins; on Vercel we fall back to the
 // project's live production address so canonical URLs, the sitemap and
@@ -12,19 +13,21 @@ const origin =
 export const site = {
   name: "Eric Jokl",
   shortName: "Eric Jokl",
-  house: "Private Evenings",
+  house: "Private Chef",
   url: origin.replace(/\/$/, ""),
   // CONFIRM: set NEXT_PUBLIC_CONTACT_EMAIL once the inbox exists. Until then
   // no address is shown anywhere; every "write to us" becomes a request link.
   email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || null,
-  region: "By arrangement",
+  region: "New York",
   serviceArea: ["New York", "Connecticut", "The Hamptons", "Florida", "Yachts and private islands, by arrangement"],
-  responseNote: "Every inquiry is read by Eric Jokl's office and answered personally.",
+  responseNote: "Every inquiry is read by Chef Jokl's office and answered personally.",
   description:
-    "Eric Jokl — private evenings designed, directed and hosted by a builder of experiences. The room, the light, the sound and the story are his; the kitchen belongs to a chef chosen for each table. In residences, aboard yachts and on private islands, by arrangement.",
-  // Shown in the footer. The photography on this site is AI-generated with
-  // Eric's own likeness; saying so plainly is part of the standard.
-  imageryNote: "Imagery created with AI, from Eric Jokl's likeness",
+    "Chef Eric Jokl — private chef based in New York. Private dinners written for one table, yacht and private-island dining, cooking classes and celebrations, by arrangement.",
+  // The template offer (see /your-site and the notice bar).
+  offer: { monthly: 50 },
+  // Shown in the footer. This is a demo, and its photography is AI-generated
+  // from Eric's likeness; saying so plainly is part of the standard.
+  imageryNote: "Demo site · imagery created with AI",
   social: {
     instagram: process.env.NEXT_PUBLIC_INSTAGRAM || "", // CONFIRM: handle without @; hidden while empty
   },
@@ -33,7 +36,8 @@ export const site = {
 export const nav = [
   { href: "/experiences", label: "Experiences" },
   { href: "/menus", label: "Menus" },
-  { href: "/eric", label: "Eric" },
+  { href: "/chef", label: "The Chef" },
+  { href: "/gallery", label: "Gallery" },
   { href: "/inquire", label: "Inquire" },
 ] as const;
 
@@ -42,8 +46,9 @@ export const nav = [
 export const footerNav = [
   { href: "/experiences", label: "Experiences" },
   { href: "/menus", label: "Sample menus" },
-  { href: "/eric", label: "Eric Jokl" },
-  { href: "/private-dining", label: "Where evenings travel" },
+  { href: "/chef", label: "The Chef" },
+  { href: "/gallery", label: "Gallery" },
+  { href: "/private-dining", label: "Where he cooks" },
   { href: "/questions", label: "Questions" },
   { href: "/inquire", label: "Request an evening" },
   { href: "/your-site", label: "Get this site" },

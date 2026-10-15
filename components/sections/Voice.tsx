@@ -4,7 +4,7 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 // Three sections that exist only when real content does. Each renders
 // nothing while its array in content/voice.ts is empty.
 
-/** Eric's own words, set large: the closest thing to meeting him. */
+/** The chef's own words, set large: the closest thing to meeting him. */
 export function PullQuote({ index = 0 }: { index?: number }) {
   const q = quotes[index];
   if (!q) return null;
@@ -19,19 +19,25 @@ export function PullQuote({ index = 0 }: { index?: number }) {
   );
 }
 
-/** Words from past hosts, anonymous by design. */
+/** Words from past hosts, anonymous by design. Samples are labelled. */
 export function Testimonials() {
   if (!testimonials.length) return null;
   return (
     <section aria-labelledby="hosts-title" className="tone-linen section">
       <div className="container-x">
         <Eyebrow>From past hosts</Eyebrow>
-        <h2 id="hosts-title" className="sr-only">From past hosts</h2>
-        <div className="mt-14 grid gap-px overflow-hidden border border-line bg-[rgb(var(--fg)/0.12)] md:grid-cols-2 lg:grid-cols-3">
+        <h2 id="hosts-title" className="text-h2 mt-8 max-w-[18ch]" data-reveal>In <span className="italic text-accent">their words.</span></h2>
+        <div className="mt-14 grid gap-px overflow-hidden border border-line bg-[rgb(var(--fg)/0.12)] md:grid-cols-3">
           {testimonials.map((t, i) => (
-            <figure key={i} className="flex flex-col justify-between gap-8 bg-bg p-8 md:p-10" data-reveal style={{ "--reveal-delay": `${i * 80}ms` } as React.CSSProperties}>
-              <blockquote className="font-display text-[1.35rem] italic leading-snug">&ldquo;{t.quote}&rdquo;</blockquote>
-              <figcaption className="text-eyebrow">{t.attribution}</figcaption>
+            <figure key={i} className="flex flex-col justify-between gap-10 bg-bg p-8 md:p-10" data-reveal style={{ "--reveal-delay": `${i * 80}ms` } as React.CSSProperties}>
+              <div>
+                <span aria-hidden className="font-display text-[3.5rem] leading-none text-accent">&ldquo;</span>
+                <blockquote className="-mt-4 font-display text-[1.4rem] italic leading-snug">{t.quote}</blockquote>
+              </div>
+              <figcaption className="flex items-start justify-between gap-4 border-t border-line pt-5">
+                <span className="text-[0.66rem] uppercase leading-relaxed tracking-[0.2em] text-fg-muted">{t.attribution}</span>
+                {t.sample ? <span className="rounded-full border border-line px-2.5 py-1 text-[0.58rem] uppercase tracking-[0.22em] text-fg-muted">Sample</span> : null}
+              </figcaption>
             </figure>
           ))}
         </div>
@@ -40,7 +46,7 @@ export function Testimonials() {
   );
 }
 
-/** Verified figures, shown above the host ledger. */
+/** Verified figures, shown above the chef ledger. */
 export function Credentials() {
   if (!credentials.length) return null;
   return (

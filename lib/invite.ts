@@ -10,7 +10,7 @@ import { createHmac, timingSafeEqual } from "node:crypto";
 
 export type InvitePayload = {
   n: string;   // name as it should be addressed
-  m?: string;  // optional note from Eric's office
+  m?: string;  // optional note from the chef's office
   s?: string;  // optional setting id to pre-select
   x: number;   // expiry, ms since epoch
 };

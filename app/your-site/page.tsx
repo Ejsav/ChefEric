@@ -1,64 +1,83 @@
 import type { Metadata } from "next";
 import { site } from "@/lib/site";
 import { PageIntro } from "@/components/sections/PageIntro";
+import { NamePreview } from "@/components/sections/NamePreview";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Cta } from "@/components/ui/Cta";
+import { Faq } from "@/components/ui/Faq";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
+import { FaqJsonLd } from "@/components/seo/FaqJsonLd";
 
 // The offer behind the template. Everything listed under "Built in" is what
-// this codebase actually does. CONFIRM: whether customization is included in
-// the monthly price or quoted separately, and what hosting covers.
+// this codebase actually does. The monthly price lives in lib/site.ts.
 export const metadata: Metadata = {
-  title: "Get This Site — Customized to You",
-  description:
-    "This site is a template shown under an example name. Get it rebuilt around your name, your story and your photography, hosted for $50 a month.",
+  title: "Get This Website — Customized to You",
+  description: `A luxury private-chef website, rebuilt around your name, your story and your photography. Hosting is $${site.offer.monthly} a month.`,
   alternates: { canonical: "/your-site" },
-  openGraph: { title: "Get this site, customized to you", url: "/your-site" },
+  openGraph: { title: "Get this website, customized to you", url: "/your-site" },
 };
 
 const customized = [
   ["Your name and mark", "The name, the monogram, the opening sequence and the share card, set for you."],
   ["Your story", "Every page rewritten in your voice, about your work — nothing invented, nothing borrowed."],
   ["Your photography", "Your own photographs, or editorial imagery created from your likeness, placed in every slot."],
-  ["Your offer", "Your services in place of the evenings, your locations in place of the destinations, your questions in the inquiry."],
+  ["Your offer", "Your services, menus, locations, prices and questions — and an inquiry that asks what you need to know."],
 ] as const;
 
 const builtIn = [
   "A cinematic opening, page transitions and a responsive cursor on desktop",
-  "Phone-first layouts and a thumb-reach action bar",
+  "Phone-first layouts and a thumb-reach request button",
   "A conversational inquiry that asks one question at a time and reads the request back",
-  "Private, signed invitation links for the people you want to reach",
+  "Sample menus as interactive printed cards, with a dish photograph for each",
+  "A gallery, location pages and a full questions page",
+  "Private, signed invitation links for the clients you want to reach",
   "Search-ready pages with structured data, a sitemap and share cards",
   "Adapts to slow connections and reduced-motion settings automatically",
 ] as const;
 
 const steps = [
-  ["01", "Tell us about you", "Who you are, what you offer and who you want to reach."],
-  ["02", "We make it yours", "Name, words, imagery and offer, customized on this foundation."],
-  ["03", "You go live", "Your site on the web, hosted and fast, with your inquiries coming to you."],
+  ["01", "Tell us about you", "Who you are, what you cook, where, and who you want to reach."],
+  ["02", "We make it yours", "Name, words, photographs, menus and prices, customized on this foundation."],
+  ["03", "You go live", "Your site on your domain, hosted and fast, with requests coming to your inbox."],
 ] as const;
+
+const faqs = [
+  { q: "Is Eric Jokl a real chef?", a: "No. “Chef Eric Jokl” is a demo persona used to show the template. Every customer version carries its owner's real name, story, photographs and prices." },
+  { q: "Who is it for?", a: "Private chefs first. The same foundation suits caterers, supper clubs, chef-led restaurants and hospitality brands — the sections and the inquiry adapt to what you offer." },
+  { q: "What do I need to provide?", a: "Your name, your story, your services and prices, and your photographs. No photographs yet? Editorial imagery can be created from a set of reference photos of you." },
+  { q: "What does hosting include?", a: `Your site kept online, fast and secure on a global network, with HTTPS as standard — $${site.offer.monthly} a month.` },
+];
 
 export default function YourSitePage() {
   return (
     <>
       <Breadcrumbs items={[{ name: "Get this site", path: "/your-site" }]} />
+      <FaqJsonLd faqs={faqs} />
       <PageIntro
         id="your-site-title"
         eyebrow="Template example"
         lines={["Your name", "here."]}
         lead={
           <p>
-            What you have been looking at is a template. Eric Jokl is the example — he isn&rsquo;t a
-            chef, and these evenings are a demonstration. Every part of it can be rebuilt around
-            you: your name, your story, your photographs, your offer.
+            What you have been looking at is a template. &ldquo;Chef Eric Jokl&rdquo; is a demo
+            persona — the dinners, menus and prices are examples. Every part of it can be rebuilt
+            around you: your name, your story, your photographs, your offer.
           </p>
         }
       />
 
+      <section aria-labelledby="preview-title" className="tone-walnut section">
+        <div className="container-x">
+          <Eyebrow index="I">See it yours</Eyebrow>
+          <h2 id="preview-title" className="text-h2 mb-14 mt-8">Your name, <span className="italic text-accent">set in type.</span></h2>
+          <NamePreview />
+        </div>
+      </section>
+
       <section aria-labelledby="customized-title" className="tone-linen section">
         <div className="container-x grid gap-14 md:grid-cols-12">
           <div className="md:col-span-4">
-            <Eyebrow index="I">Made yours</Eyebrow>
+            <Eyebrow index="II">Made yours</Eyebrow>
             <h2 id="customized-title" className="text-h2 mt-8">Customized <span className="italic text-accent">to you.</span></h2>
           </div>
           <dl className="md:col-span-7 md:col-start-6">
@@ -76,14 +95,15 @@ export default function YourSitePage() {
         <div aria-hidden className="candle absolute inset-x-[-20%] bottom-[-60%] -z-10 h-[120%] bg-[radial-gradient(50%_50%_at_50%_50%,rgba(205,140,70,0.22),transparent_70%)]" />
         <div className="container-x grid gap-14 md:grid-cols-12">
           <div className="md:col-span-5">
-            <Eyebrow index="II">Hosting</Eyebrow>
+            <Eyebrow index="III">Hosting</Eyebrow>
             <h2 id="price-title" className="mt-8 font-display leading-none" data-reveal>
-              <span className="block text-[clamp(4.5rem,12vw,9rem)] tracking-[-0.03em]">$50</span>
+              <span className="block text-[clamp(4.5rem,12vw,9rem)] tracking-[-0.03em]">${site.offer.monthly}</span>
               <span className="mt-3 block text-[1.4rem] italic text-accent">a month, for hosting.</span>
             </h2>
             <p className="mt-8 max-w-sm text-fg-muted" data-reveal>
               Your site kept online, fast and secure on a global network, with HTTPS as standard.
             </p>
+            <div className="mt-10" data-reveal><Cta href="/inquire?about=website" track="cta:your-site-price">Start your site</Cta></div>
           </div>
           <div className="md:col-span-6 md:col-start-7">
             <h3 className="text-eyebrow">Built in, on every site</h3>
@@ -101,7 +121,7 @@ export default function YourSitePage() {
 
       <section aria-labelledby="how-title" className="tone-walnut section">
         <div className="container-x">
-          <Eyebrow index="III">How it works</Eyebrow>
+          <Eyebrow index="IV">How it works</Eyebrow>
           <h2 id="how-title" className="text-h2 mt-8">Three steps <span className="italic text-accent">to live.</span></h2>
           <ol className="mt-14 grid gap-px overflow-hidden border border-line bg-[rgb(var(--fg)/0.12)] md:grid-cols-3">
             {steps.map(([n, t, b], i) => (
@@ -115,7 +135,18 @@ export default function YourSitePage() {
         </div>
       </section>
 
+      <section aria-labelledby="offer-faq" className="tone-linen section">
+        <div className="container-x grid gap-12 md:grid-cols-12">
+          <div className="md:col-span-4">
+            <Eyebrow index="V">Questions</Eyebrow>
+            <h2 id="offer-faq" className="text-h2 mt-8">Before <span className="italic text-accent">you ask.</span></h2>
+          </div>
+          <Faq faqs={faqs} className="md:col-span-7 md:col-start-6" />
+        </div>
+      </section>
+
       <section aria-labelledby="start-title" className="tone-dark grain relative isolate overflow-hidden">
+        <div aria-hidden className="candle absolute inset-x-[-20%] bottom-[-60%] -z-10 h-[120%] bg-[radial-gradient(50%_50%_at_50%_50%,rgba(205,140,70,0.26),transparent_70%)]" />
         <div className="container-x py-[clamp(7rem,16vw,12rem)] text-center">
           <p className="text-eyebrow" data-reveal>Your turn</p>
           <h2 id="start-title" className="text-display mx-auto mt-10 max-w-[14ch]" data-reveal-group>

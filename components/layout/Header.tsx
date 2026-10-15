@@ -79,19 +79,19 @@ export function Header() {
         <div className="container-x flex h-[var(--nav-h)] items-center justify-between text-[rgb(var(--ivory))]">
           <Link href="/" className="group flex items-center gap-3">
             <Monogram className="h-10 w-10 text-[rgb(var(--brass))] transition-transform duration-1000 ease-out-expo group-hover:rotate-[-8deg]" title="" />
-            <span className="sr-only font-display text-[1.15rem] tracking-[0.02em] sm:not-sr-only">
+            <span className="sr-only whitespace-nowrap font-display text-[1.15rem] tracking-[0.02em] sm:not-sr-only lg:sr-only xl:not-sr-only">
               Eric Jokl
             </span>
           </Link>
 
-          <nav aria-label="Primary" className="hidden items-center gap-10 md:flex">
+          <nav aria-label="Primary" className="hidden items-center gap-7 lg:flex xl:gap-10">
             {nav.filter((i) => i.href !== "/inquire").map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 aria-current={pathname.startsWith(item.href) ? "page" : undefined}
                 className={cn(
-                  "link-underline pb-1 text-[0.7rem] font-medium uppercase tracking-[0.28em] transition-opacity duration-500",
+                  "link-underline whitespace-nowrap pb-1 text-[0.7rem] font-medium uppercase tracking-[0.28em] transition-opacity duration-500",
                   pathname.startsWith(item.href) ? "opacity-100" : "opacity-70 hover:opacity-100",
                 )}
               >
@@ -103,18 +103,18 @@ export function Header() {
               href="/inquire"
               data-magnetic="0.18"
               data-track="cta:header"
-              className="border border-[rgba(190,156,104,0.6)] px-5 py-2.5 text-[0.7rem] font-medium uppercase tracking-[0.28em] transition-colors duration-700 ease-out-expo hover:border-[rgb(var(--brass))] hover:bg-[rgb(var(--brass))] hover:text-[rgb(var(--ink))]"
+              className="whitespace-nowrap border border-[rgba(190,156,104,0.6)] px-5 py-2.5 text-[0.7rem] font-medium uppercase tracking-[0.28em] transition-colors duration-700 ease-out-expo hover:border-[rgb(var(--brass))] hover:bg-[rgb(var(--brass))] hover:text-[rgb(var(--ink))]"
             >
               Request an evening
             </Link>
           </nav>
 
-          <div className="flex items-center gap-2 md:hidden">
+          <div className="flex items-center gap-2 lg:hidden">
           <Ambience />
           <button
             ref={toggleRef}
             type="button"
-            className="relative -mr-2 flex h-11 w-11 items-center justify-center md:hidden"
+            className="relative -mr-2 flex h-11 w-11 items-center justify-center lg:hidden"
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -136,7 +136,7 @@ export function Header() {
         aria-label="Menu"
         hidden={!open}
         className={cn(
-          "tone-dark grain fixed inset-0 z-40 flex-col justify-between overflow-hidden pt-[var(--header-h)] md:hidden",
+          "tone-dark grain fixed inset-0 z-40 flex-col justify-between overflow-hidden pt-[var(--header-h)] lg:hidden",
           open ? "flex" : "hidden",
         )}
       >
@@ -152,7 +152,7 @@ export function Header() {
             </Link>
           ))}
         </nav>
-        <div className="container-x pb-10 text-eyebrow">Private Evenings · By arrangement</div>
+        <div className="container-x pb-10 text-eyebrow">Private Chef · New York · By arrangement</div>
         <style>{`@keyframes menu-in{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}`}</style>
       </div>
     </>

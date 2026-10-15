@@ -1,12 +1,10 @@
-# Eric Jokl — Private Evenings
+# Chef Eric Jokl — private chef website template
 
-A luxury hospitality concept under Eric Jokl's name: private evenings designed, directed and hosted by a builder of digital systems and experiences. The room, the light, the sound, the pace and the story are his; the kitchen belongs to a chef chosen for each table.
+A luxury private-chef website, shown under a demo persona: **“Chef Eric Jokl”**. It is built to be sold and customized: every customer version carries its own name, story, photography, menus and prices. A notice bar on every page says it is a template and links to the offer at `/your-site`.
 
-It is also a creative showcase. Every photograph and film slot is prepared for AI-generated imagery made from Eric's own likeness (`docs/AI_IMAGERY.md`), and the footer says so.
+The benchmark is luxury hospitality (Aman, Casa Cipriani, private members' clubs), not other chef websites. That means restraint, negative space, editorial typography, and discretion as the trust signal.
 
-The benchmark is luxury hospitality (Aman, Casa Cipriani, private members' clubs), not event-company websites. That means restraint, negative space, editorial typography, and discretion as the trust signal. No logo walls, no star ratings, no stock photography, no invented proof.
-
-> **Separate from the original.** This site lives on the branch `claude/eric-jokl-rebrand-a4wmzc` and deploys as its own Vercel project. The original site on `main` and its live deployment are untouched by this branch.
+> **Separate from the original.** This site lives on the branch `claude/eric-jokl-rebrand-a4wmzc` and deploys as its own Vercel project (`eric-jokl`). The original site on `main` and its live deployment are untouched.
 
 ## Art direction
 
@@ -20,16 +18,13 @@ The benchmark is luxury hospitality (Aman, Casa Cipriani, private members' clubs
 | **Rhythm** | Sections alternate dark / linen like the pages of a menu card. Tones are CSS-variable scopes (`.tone-dark`, `.tone-walnut`, `.tone-linen`), so every component works on all of them. |
 | **Motion** | Slow, weighted, cinematic easing (`expo.out`, 1.4–1.8s). Lines rise from masks, hairlines draw, the candle glow breathes. Everything respects `prefers-reduced-motion`. |
 
-## The concept, honestly
+## The demo, honestly
 
-- Eric **designs, directs and hosts**. He never claims to cook. Every page that touches food says the kitchen is led by a chef chosen for the table.
-- His story (`/eric`, *The Making*) is told through what he actually does: code, brands, conversion and experience design. No dates, employers, clients or numbers are claimed.
-- Quotes, testimonials, credentials and press (`content/voice.ts`) start empty and appear only once real.
-- Sample menus are labelled as samples.
-- Guests are never shown or named. Eric builds in public; client evenings are never part of it without written consent.
-- The imagery is disclosed in the footer (`site.imageryNote`).
-
-Everything marked `CONFIRM` in the code, and every promise listed in `docs/ERIC_VOICE.md`, must be true before taking a booking.
+- The notice bar on every page and the footer say this is a template and that “Chef Eric Jokl” is a demo persona; `/your-site` repeats it in its first line.
+- The chef's story (`/chef`) is deliberately free of dates, employers, awards and press.
+- Testimonials are labelled **Sample** on the page (`content/voice.ts`, `sample: true`). A customer version replaces them with real, approved words or empties the array to hide the section.
+- Prices (`content/experiences.ts` → `from`, and the pricing FAQ) are demo guides.
+- The photography is AI-generated from Eric's likeness and the footer says so.
 
 ## The system
 
@@ -50,17 +45,17 @@ The site is built as layers, so new ideas plug into the system instead of being 
 
 ### 2. Possibilities, not packages
 
-**Compose an evening** (`components/sections/Composer.tsx`, `content/possibilities.ts`). The visitor sets the room (a private home, a Manhattan penthouse, a Hamptons estate, a Florida waterfront, a yacht, a private island, a hangar, abroad), the reason (including *a founders' table*) and the scale, then reads the evening written in front of them. The composition carries straight into the inquiry.
+**Compose an evening** (`components/sections/Composer.tsx`, `content/possibilities.ts`). The visitor sets the room (a private home, a Manhattan penthouse, a Hamptons estate, a Florida waterfront, a yacht, a private island, a hangar, abroad), the reason (including *a class*) and the scale, then reads the evening written in front of them. The composition carries straight into the inquiry.
 
-### 3. The man
+### 3. The chef
 
-- **The Host** on the home page (`components/sections/HostIntro.tsx`): the portrait, a ledger of what he does, and the line that the kitchen belongs to a chef.
-- **The Making** (`components/sections/Archive.tsx`, `content/archive.ts`): six chapters — the screen, the pressure, the attention, the room, the table, now — each with *what it taught him*. Pinned horizontal travel on desktop; vertical on phones.
+- **The Chef** on the home page (`components/sections/ChefIntro.tsx`): the portrait beside the story and a ledger (cuisine, service, base, table size, the rule).
+- **The Story** (`components/sections/Archive.tsx`, `content/archive.ts`): six chapters — the family table, the line, the private rooms, the water, the lessons, now — each with *what it taught him*. Pinned horizontal travel on desktop; vertical on phones.
 - **The Standards** (`components/sections/Standards.tsx`): how he works, in five sentences.
 
 ### 4. The four forms
 
-`content/experiences.ts`: **The Private Table** · **The Island & The Water** · **The Founders' Table** (a dinner designed around a conversation, closest to Eric's own world) · **The Occasion**.
+`content/experiences.ts`: **The Private Table** · **The Island & The Water** · **The Kitchen Lessons** (private cooking classes) · **The Occasion**.
 
 ### 5. The inquiry
 
@@ -83,10 +78,12 @@ On the server (`app/api/inquire/route.ts`, `lib/inquiry-schema.ts`) every reques
 
 | Route | Purpose |
 |---|---|
-| `/` | Hero, premise, Compose an evening, The Table (sample menus), The Host, the Evening, Discretion, close |
-| `/experiences` | Composer plus the four forms |
-| `/menus` | Four sample menus as printed cards |
-| `/eric` | The Making (six chapters) and The Standards |
+| `/` | Hero → premise → the four experiences (cards with price guides) → the menus with signature dishes → the chef → gallery → how an evening is made → testimonials → discretion → plan your evening → close |
+| `/experiences` | The four experiences in full (guide, scale, notice, included), then the planner |
+| `/menus` | Four sample menus as printed cards with a dish photograph each, then market → pass → served |
+| `/chef` | The story (six chapters), the standards, discretion |
+| `/gallery` | Twelve photographs in an editorial masonry |
+| `/your-site` | The template offer: type-your-name preview, what is customized, hosting price, how it works, questions |
 | `/private-dining` and `/private-dining/[place]` | Connecticut, New York City, the Hamptons, Florida, yachts and private islands, each with unique copy, FAQ data and a pre-filled inquiry |
 | `/questions` | Booking, the chef, the evening, travel, salons, discretion |
 | `/inquire` | The conversational request, including the gift path |
@@ -98,7 +95,7 @@ On the server (`app/api/inquire/route.ts`, `lib/inquiry-schema.ts`) every reques
 Every image slot is a `Plate` with a `slot` id. To place an asset, export it as `public/media/<slot>.jpg` (or `.avif`/`.webp`/`.png`; films `.webm` + `.mp4`). `next.config.ts` lists that folder at build time, so a filled slot renders the asset through `next/image` and an empty one keeps its lit, grained tonal study. No code changes.
 
 ```bash
-npm run media   # which of the 36 slots are filled
+npm run media   # which of the 40 slots are filled
 ```
 
 Slots, briefs and prompts: `content/media.ts`. Method, identity lock, quality gate and export specs: `docs/AI_IMAGERY.md`.
@@ -135,10 +132,10 @@ The original project keeps `main` as its production branch, so its live site nev
 
 ## Launch checklist
 
-See `docs/ERIC_VOICE.md`. The essentials:
+The essentials:
 
-- [ ] Chef partners in place for every form the site offers
-- [ ] Every `CONFIRM` in `lib/site.ts`, `content/*.ts` and `app/privacy/page.tsx`
-- [ ] Priority-1 imagery: `hero-still`, `portrait`, and the four `exp-*` frames
+- [ ] Monthly price confirmed in `lib/site.ts` → `offer.monthly`
+- [ ] Inquiry email delivery (Resend) set, so `/your-site` requests reach you
+- [ ] Priority-1 imagery: `portrait`, the four `exp-*` and the four `menu-*` frames
 - [ ] Domain, inbox, Resend and `INVITE_SECRET` set in the new Vercel project
 - [ ] Re-run Lighthouse on the deployed URL once the imagery is in

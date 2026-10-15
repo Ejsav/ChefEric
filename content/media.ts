@@ -3,14 +3,14 @@
 // finished asset as public/media/<id>.(avif|webp|jpg|png) — or .webm/.mp4
 // for films — and it replaces the tonal study on its own.
 //
-// The site is a creative showcase: its photography is AI-generated from
-// Eric's own likeness. The rules that make that read as photography, not
-// as AI, live in docs/AI_IMAGERY.md. The short version:
-//   · one identity: the same face, hairline, build and grooming in every frame
+// The demo's photography is AI-generated from Eric's own likeness, playing
+// the demo persona "Chef Eric Jokl". The rules that make it read as
+// photography live in docs/AI_IMAGERY.md. The short version:
+//   · one identity: the same face, hair and build as hero-figure, every frame
 //   · one light: a single warm practical key, deep falloff, never flash
 //   · one wardrobe system (A–D below), so the series reads as one shoot
 //   · guests are never identifiable: backs, hands, out-of-focus shoulders only
-//   · nothing that implies Eric cooks: he hosts, directs, lights, pours, welcomes
+//   · food at table height, never overhead flat-lay
 
 export type Likeness = "eric" | "hands" | "none";
 
@@ -21,166 +21,105 @@ export type MediaSlot = {
   ratio: string;
   likeness: Likeness;
   wardrobe?: "A" | "B" | "C" | "D";
+  priority: 1 | 2 | 3; // 1 = launch-critical
   brief: string;
   prompt: string;
-  priority?: 1 | 2 | 3; // 1 = launch-critical
 };
 
 export const wardrobe = {
-  A: "black tailored two-button suit, black shirt open at the collar, no tie, black leather shoes; a slim steel watch",
-  B: "fine-gauge black merino knit, charcoal tailored trousers; a slim steel watch",
-  C: "crisp white shirt with sleeves rolled twice, black tailored trousers, black belt",
-  D: "long black wool overcoat over wardrobe A, collar up",
+  A: "black double-breasted chef jacket with black buttons, sleeves turned back once, black trousers",
+  B: "white double-breasted chef jacket with cloth buttons (as in hero-figure), black trousers",
+  C: "dark charcoal tailored suit, black shirt open at the collar — for greeting guests",
+  D: "white shirt with sleeves rolled, long dark linen apron — for classes",
 } as const;
 
 // Prepended to every prompt that contains Eric. Use with the reference set
-// (face, three-quarter left, three-quarter right, profile, full body).
+// (hero-figure plus face, three-quarter left/right, profile, hands).
 export const identityLock =
-  "Photorealistic editorial photograph of Eric Jokl, exactly matching the reference images: identical facial structure, eye shape and colour, brows, nose, lips, jawline, hairline and hair texture, skin tone with natural pores and fine texture; same age; no beautification, no smoothing, no symmetry correction.";
+  "Photorealistic editorial photograph of Eric Jokl, exactly matching the reference images: identical facial structure, eye shape and colour, brows, nose, lips, jawline, wavy shoulder-length brown hair and hairline, skin tone with natural pores; same age; no beautification, no smoothing.";
 
 export const look =
-  "Cinematic low-key lighting from a single warm practical source (candle, pendant or window at blue hour), deep shadow falloff, shallow depth of field, 50mm lens at f/1.4 on a full-frame cinema camera, subtle Kodak Vision3 500T grain, true-to-life colour, espresso, walnut, ivory linen and aged brass palette.";
+  "Cinematic low-key lighting from a single warm practical source (candle, pendant, fire or window at blue hour), deep shadow falloff, shallow depth of field, 50mm lens at f/1.8, subtle Kodak Vision3 500T grain, true-to-life colour; espresso, walnut, ivory linen and aged brass palette.";
 
 export const negative =
-  "no extra or fused fingers, no warped hands, no distorted cutlery or glassware, no plastic or waxy skin, no over-sharpening, no HDR, no lens flare stars, no text, no logos, no watermarks, no identifiable guest faces, no chef whites, no cooking at a stove, no flat-lay food photography, no stock-photo smiles.";
+  "no extra or fused fingers, no warped hands, no distorted cutlery, glassware or plates, no plastic or waxy skin, no glossy CGI food, no over-sharpening, no HDR, no text, no logos, no watermarks, no identifiable guest faces, no overhead flat-lay, no stock-photo smiles.";
 
 export const mediaSlots: MediaSlot[] = [
-  // ── Home ───────────────────────────────────────────────────────────────
-  {
-    id: "hero-still", kind: "image", where: "Home hero (behind the name)", ratio: "16:9, 3840×2160, subject in the right third", likeness: "eric", wardrobe: "A", priority: 1,
-    brief: "The opening frame. Eric at the head of a candlelit table, the room around him in darkness. Negative space on the left for the name.",
-    prompt: "Eric stands at the far end of a long candlelit dinner table set for twelve in a dark private dining room, one hand resting on the back of a chair, looking just past camera; ivory linen, brass candlesticks, crystal in soft focus; the left two thirds of the frame fall into near-black shadow.",
-  },
-  {
-    id: "hero-figure", kind: "image", where: "Home hero (Eric standing right of the name)", ratio: "2:3 transparent cutout (PNG/WebP with alpha), 1024×1536 or larger, cut at the waist or below", likeness: "eric", priority: 1,
-    brief: "Eric as a cutout figure standing in the candlelit hero. Supplied by Eric: the first image on the site. Graded warm and faded into the floor by the hero itself.",
-    prompt: "Supplied asset. For a regenerated version: Eric standing, three-quarter length, hands in pockets, looking into camera, on a transparent background.",
-  },
-  {
-    id: "hero-film", kind: "film", where: "Home hero (replaces the still on capable devices)", ratio: "16:9, 1920×1080, 10–15s seamless loop, silent, under 2 MB WebM + MP4", likeness: "eric", wardrobe: "A", priority: 2,
-    brief: "A breathing photograph: candle flames move, Eric's head turns slightly toward the table, smoke from a snuffed match drifts. No cuts, no camera move beyond a slow 2% push.",
-    prompt: "Image-to-video from hero-still: almost still; candle flames flicker naturally, Eric slowly turns his head a few degrees toward the table and back, a thin ribbon of smoke rises from a just-lit candle; camera pushes in 2% over 12 seconds; loopable.",
-  },
-  {
-    id: "hero-film-poster", kind: "image", where: "First frame of the hero film", ratio: "16:9, same as hero-film", likeness: "eric", wardrobe: "A", priority: 2,
-    brief: "Export the first frame of hero-film so the loop starts without a jump.",
-    prompt: "First frame of hero-film, exported at full resolution.",
-  },
-  {
-    id: "portrait", kind: "image", where: "Home — The Host section; right half of the share card", ratio: "4:5, 2400×3000", likeness: "eric", wardrobe: "A", priority: 1,
-    brief: "The most important image on the site. A portrait with presence: one key light from the left, looking just off camera, controlled intensity.",
-    prompt: "Waist-up portrait of Eric seated in a dark walnut-panelled private dining room, body angled three-quarters, face turned toward a single warm key light from camera left, eyes just off camera, calm and intense, a glass of red wine untouched on the table edge; background falls to black with two out-of-focus candle highlights.",
-  },
+  // ── Home: hero ─────────────────────────────────────────────────────────
+  { id: "hero-figure", kind: "image", where: "Home hero — Eric standing right of the name (on phones, above it)", ratio: "2:3 transparent cutout, 1024×1536+", likeness: "eric", wardrobe: "B", priority: 1,
+    brief: "Supplied by Eric and live. Three-quarter length, hands in pockets, looking into camera, transparent background.",
+    prompt: "Supplied asset." },
+  { id: "hero-film", kind: "film", where: "Home hero, behind the figure (optional)", ratio: "16:9, 1920×1080, 10–15s silent loop, under 2 MB WebM + MP4", likeness: "none", priority: 3,
+    brief: "Pure atmosphere behind the figure: candle flames and steam in a dark kitchen, out of focus. No people.",
+    prompt: "Locked-off shot of a dark private kitchen at night, out of focus: candle flames flicker, steam drifts up from a pan under a single brass pendant, warm glow; seamless loop." },
 
-  // ── Experiences ────────────────────────────────────────────────────────
-  {
-    id: "exp-private-table", kind: "image", where: "Experiences I · The Private Table", ratio: "4:5", likeness: "eric", wardrobe: "C", priority: 1,
-    brief: "Before the guests: Eric lighting the last candle on a fully set table in a private home.",
-    prompt: "Eric leans over a set dinner table in a private residence lighting the last taper candle with a long match, face lit from below by the flame; ivory linen, brass, crystal, printed menu cards at each place; the dining room beyond is dark and elegant.",
-  },
-  {
-    id: "exp-island-water", kind: "image", where: "Experiences II · The Island & The Water", ratio: "4:5", likeness: "eric", wardrobe: "B", priority: 1,
-    brief: "Late service on open water: Eric walking a lantern-lit dock toward a table at the water's edge at dusk.",
-    prompt: "Eric walks along a wooden dock lined with glass lanterns toward a small dinner table set at the water's edge on a private island at blue hour, seen from behind at three-quarters so his profile reads; calm dark water, a yacht's lights far off.",
-  },
-  {
-    id: "exp-founders-table", kind: "image", where: "Experiences III · The Founders' Table", ratio: "4:5", likeness: "eric", wardrobe: "B", priority: 1,
-    brief: "A long table mid-conversation. Eric at the head, listening; guests only as shoulders, hands and backs, out of focus.",
-    prompt: "Eric sits at the head of a long candlelit table mid-conversation, leaning forward, listening with intent; foreground guests are out-of-focus shoulders and hands around wine glasses with no faces visible; notebooks and printed cards on the linen, warm pendant light above.",
-  },
-  {
-    id: "exp-occasion", kind: "image", where: "Experiences IV · The Occasion", ratio: "4:5", likeness: "eric", wardrobe: "A", priority: 2,
-    brief: "Toasts, third course. Glasses raised over a long table; Eric standing, mid-toast; motion blur allowed on the glasses.",
-    prompt: "Eric stands mid-toast at a long celebration table, glass raised, warm low light; a dozen raised glasses in the foreground with slight motion blur, guests seen only as blurred arms and backs; confetti of candle bokeh behind.",
-  },
+  // ── Home: the chef ─────────────────────────────────────────────────────
+  { id: "portrait", kind: "image", where: "Home — The Chef section (beside the story); right half of the share card", ratio: "4:5, 2400×3000", likeness: "eric", wardrobe: "A", priority: 1,
+    brief: "The most important image after the hero. Waist-up in a black chef jacket, arms folded, in a dark kitchen; one warm key light from the left.",
+    prompt: "Waist-up portrait of Eric in a black double-breasted chef jacket, arms loosely folded, standing in a dark professional kitchen, a single warm key light from camera left, copper pans and a brass pendant glowing out of focus behind, eyes just off camera, calm, confident." },
 
-  // ── Food ───────────────────────────────────────────────────────────────
-  // Shot at table height (never overhead flat-lay), one warm light, shallow
-  // depth of field, ivory china on linen or dark wood. Hands, when present,
-  // belong to the chef or a guest — never Eric, never a face.
-  {
-    id: "menu-after-midnight", kind: "image", where: "Home + /menus · beside the menu card “After midnight”", ratio: "4:5 (also shown 16:11 on phones; keep the dish centred)", likeness: "none", priority: 1,
+  // ── The four experiences (home cards + /experiences) ───────────────────
+  { id: "exp-private-table", kind: "image", where: "Home experience card I + /experiences · The Private Table", ratio: "4:5", likeness: "eric", wardrobe: "B", priority: 1,
+    brief: "Eric plating the first course in a private home kitchen, the candlelit dining room glowing through the doorway behind.",
+    prompt: "Eric in a white chef jacket leans over a marble island in a private home kitchen, placing the final element on a row of plated first courses, focused; through an open doorway behind, a candlelit dining table waits; warm pendant light." },
+  { id: "exp-island-water", kind: "image", where: "Home experience card II + /experiences · The Island & The Water", ratio: "4:5", likeness: "eric", wardrobe: "A", priority: 1,
+    brief: "Eric at a live-fire grill on a private island beach at dusk; lanterns line the dock, a table set at the water's edge.",
+    prompt: "Eric in a black chef jacket turns a whole fish on a wood-fired grill on a private island beach at blue hour, sparks rising, glass lanterns along a wooden dock behind, a dinner table set at the water's edge, calm dark sea." },
+  { id: "exp-kitchen-lessons", kind: "image", where: "Home experience card III + /experiences · The Kitchen Lessons", ratio: "4:5", likeness: "eric", wardrobe: "D", priority: 1,
+    brief: "Eric guiding a guest's hands as they shape fresh pasta at a marble counter. Guest's face out of frame.",
+    prompt: "Eric in a white shirt and dark linen apron stands beside a guest (face out of frame, only forearms and hands) at a floured marble counter, guiding them as they shape fresh pasta; nests of tagliatelle, eggs and a wooden board; soft window light from the left." },
+  { id: "exp-occasion", kind: "image", where: "Home experience card IV + /experiences · The Occasion", ratio: "4:5", likeness: "eric", wardrobe: "A", priority: 1,
+    brief: "A long celebration table mid-toast, glasses raised and blurred in the foreground; Eric at the pass in the background.",
+    prompt: "A long candlelit celebration table, a dozen glasses raised in the foreground with slight motion blur, guests seen only as arms and backs; deep in the background, Eric in a black chef jacket at a kitchen pass, sending out the next course." },
+
+  // ── Signature dishes (home menus + /menus) ─────────────────────────────
+  { id: "menu-after-midnight", kind: "image", where: "Beside the menu card “After midnight”", ratio: "4:5 (phones crop to 16:11 — keep the dish centred)", likeness: "none", priority: 1,
     brief: "The late pasta: one perfect bowl at one in the morning.",
-    prompt: "Spaghetti with butter, black pepper and aged pecorino twirled high in a shallow ivory bowl on dark marble, a fork resting on the rim, a coupe of champagne and a candle soft behind, steam rising, single warm light from the left, shot at table height.",
-  },
-  {
-    id: "menu-late-summer-outdoors", kind: "image", where: "Home + /menus · beside “Late summer, outdoors”", ratio: "4:5 (dish centred)", likeness: "none", priority: 1,
+    prompt: "Spaghetti with butter, black pepper and aged pecorino twirled high in a shallow ivory bowl on dark marble, a fork resting on the rim, a coupe of champagne and a candle soft behind, a wisp of steam, warm light from the left, shot at table height." },
+  { id: "menu-late-summer-outdoors", kind: "image", where: "Beside the menu card “Late summer, outdoors”", ratio: "4:5 (dish centred)", likeness: "none", priority: 1,
     brief: "Heirloom tomatoes and burrata outdoors at golden hour.",
-    prompt: "Sliced heirloom tomatoes in red, yellow and green with a torn burrata, basil and olive oil on an ivory plate, on a linen-covered table outdoors at golden hour, a lawn and hedges out of focus behind, low warm sun from the side.",
-  },
-  {
-    id: "menu-a-night-aboard", kind: "image", where: "Home + /menus · beside “A night aboard”", ratio: "4:5 (dish centred)", likeness: "none", priority: 1,
+    prompt: "Sliced heirloom tomatoes in red, yellow and green with a torn burrata, basil and olive oil on an ivory plate, on a linen-covered table outdoors at golden hour, lawn and hedges out of focus, low sun from the side." },
+  { id: "menu-a-night-aboard", kind: "image", where: "Beside the menu card “A night aboard”", ratio: "4:5 (dish centred)", likeness: "none", priority: 1,
     brief: "Oysters on deck at sunset.",
-    prompt: "A dozen oysters on crushed ice in a pewter tray with lemon and mignonette on a yacht's teak table at sunset, two flutes of sparkling wine soft behind, calm sea and horizon out of focus.",
-  },
-  {
-    id: "menu-a-winter-table", kind: "image", where: "Home + /menus · beside “A winter table”", ratio: "4:5 (dish centred)", likeness: "none", priority: 1,
+    prompt: "A dozen oysters on crushed ice in a pewter tray with lemon and mignonette on a yacht's teak table at sunset, two flutes of sparkling wine soft behind, calm sea and horizon out of focus." },
+  { id: "menu-a-winter-table", kind: "image", where: "Beside the menu card “A winter table”", ratio: "4:5 (dish centred)", likeness: "none", priority: 1,
     brief: "Osso buco by firelight.",
-    prompt: "Osso buco on saffron risotto with bright gremolata in a wide ivory bowl on a dark walnut table, a glass of Barolo beside it, fireplace glow behind, candlelight from the left.",
-  },
-  {
-    id: "food-market", kind: "image", where: "/menus · How your menu is made (1 of 3)", ratio: "4:5", likeness: "none", priority: 2,
-    brief: "The market, that morning: the chef's hands choosing produce. Hands and forearms only.",
-    prompt: "Close-up of a chef's hands and forearms (not Eric) choosing a whole day-boat fish on ice beside heirloom tomatoes at an early-morning market stall, soft cool daylight, shallow depth of field, no faces.",
-  },
-  {
-    id: "food-pass", kind: "image", where: "/menus · How your menu is made (2 of 3)", ratio: "4:5", likeness: "none", priority: 2,
-    brief: "The pass: the chef's hands finishing a plate. Hands only, not Eric.",
-    prompt: "Close-up of a chef's hands in white sleeves (not Eric) placing a final herb leaf on a plated course with tweezers at a kitchen pass, warm heat lamp light, steam, very shallow depth of field, no face.",
-  },
-  {
-    id: "food-table", kind: "image", where: "/menus · How your menu is made (3 of 3)", ratio: "4:5", likeness: "none", priority: 2,
-    brief: "Served: the plate arriving at the table, a guest's hand on a glass.",
-    prompt: "A plated course just set down on an ivory linen place setting with a printed menu card, a guest's hand (no face) lifting a wine glass, candles and glassware soft behind, warm low light.",
-  },
+    prompt: "Osso buco on saffron risotto with bright gremolata in a wide ivory bowl on a dark walnut table, a glass of Barolo beside it, fireplace glow behind, candlelight from the left." },
 
-  // ── The Making (/eric) ─────────────────────────────────────────────────
-  {
-    id: "era-screen", kind: "image", where: "/eric · I. The screen", ratio: "4:5", likeness: "eric", wardrobe: "B", priority: 2,
-    brief: "Where it started: Eric at a desk at night, face lit by a monitor, the city dark beyond the window.",
-    prompt: "Eric works at a minimal desk at night, face lit cool by a monitor showing out-of-focus code, a warm desk lamp edge-lighting his shoulder, rain-streaked window with city lights beyond; focused, unposed.",
-  },
-  {
-    id: "era-pressure", kind: "image", where: "/eric · II. The pressure", ratio: "4:5", likeness: "eric", wardrobe: "D", priority: 3,
-    brief: "Motion, not posing: Eric crossing a wet city street at night, collar up.",
-    prompt: "Eric crosses a wet city street at night in a long black overcoat, collar up, mid-stride, headlights and shop light reflecting off the asphalt, slight motion blur on the background.",
-  },
-  {
-    id: "era-conversion", kind: "image", where: "/eric · III. The attention", ratio: "4:5", likeness: "eric", wardrobe: "C", priority: 3,
-    brief: "The study of attention: Eric in front of a wall of printed layouts and sketches, pen in hand.",
-    prompt: "Eric stands before a studio wall pinned with printed page layouts, wireframes and seating sketches, marking one with a black pen, side-lit by a tall window at dusk; the work is out of focus, he is sharp.",
-  },
-  {
-    id: "era-crossover", kind: "image", where: "/eric · IV. The room", ratio: "4:5", likeness: "eric", wardrobe: "C", priority: 2,
-    brief: "From screens to rooms: Eric adjusting a brass pendant over an empty table in a private dining room.",
-    prompt: "Eric reaches up to adjust the height of a brass pendant lamp over an empty dining table set for eight in a dark private room, the pool of light falling on ivory linen; the rest of the room in shadow.",
-  },
-  {
-    id: "era-table", kind: "image", where: "/eric · V. The table", ratio: "4:5", likeness: "hands", priority: 2,
-    brief: "Hands only: Eric placing a printed menu card at a place setting.",
-    prompt: "Close-up of Eric's hands (same skin tone, same watch) placing a letterpress menu card on an ivory linen place setting beside a crystal glass, candlelight raking from the left, very shallow depth of field.",
-  },
-  {
-    id: "era-now", kind: "image", where: "/eric · VI. Now", ratio: "4:5", likeness: "eric", wardrobe: "A", priority: 2,
-    brief: "Wherever the table is: Eric at a doorway, a set table glowing in the room behind him.",
-    prompt: "Eric stands in a tall doorway looking back over his shoulder toward camera, a fully set candlelit table glowing in the room behind him, the corridor in darkness.",
-  },
+  // ── Gallery (home shows 1–6; /gallery shows all 12) ────────────────────
+  { id: "gallery-01", kind: "image", where: "Gallery 1 (home + /gallery)", ratio: "4:5", likeness: "none", priority: 2, brief: "Crudo, close: raw fish, blood orange, fennel on a dark plate.", prompt: "Thin slices of raw fluke with blood orange segments, shaved fennel, pistachio and olive oil on a matte charcoal ceramic plate, side light, table height, shallow depth of field." },
+  { id: "gallery-02", kind: "image", where: "Gallery 2 (home + /gallery)", ratio: "4:3 landscape", likeness: "none", priority: 2, brief: "Before the guests: a long table set by candlelight, empty room.", prompt: "A long dinner table for twelve set with ivory linen, brass candlesticks, crystal and printed menu cards in an elegant dark dining room, candles just lit, no people, shot down the length of the table." },
+  { id: "gallery-03", kind: "image", where: "Gallery 3 (home + /gallery)", ratio: "3:4", likeness: "eric", wardrobe: "B", priority: 2, brief: "Eric at the pass, wiping the rim of a plate, heat lamps glowing.", prompt: "Eric in a white chef jacket at a kitchen pass, wiping the rim of a plated course with a folded cloth, head bowed in concentration, warm heat-lamp light, steam, shallow depth of field." },
+  { id: "gallery-04", kind: "image", where: "Gallery 4 (home + /gallery)", ratio: "1:1 square", likeness: "none", priority: 2, brief: "Hand-cut tagliatelle nests dusted with semolina on a board.", prompt: "Nests of fresh hand-cut tagliatelle dusted with semolina on a worn wooden board, a knife and a few eggs beside, soft daylight from a window, table height." },
+  { id: "gallery-05", kind: "image", where: "Gallery 5 (home + /gallery)", ratio: "4:5", likeness: "none", priority: 2, brief: "A plated course on a yacht's deck at sunset.", prompt: "A plated course of grilled swordfish with caponata on an ivory plate on a yacht's teak table at sunset, wine glass catching the light, sea and horizon out of focus." },
+  { id: "gallery-06", kind: "image", where: "Gallery 6 (home + /gallery)", ratio: "4:3 landscape", likeness: "none", priority: 2, brief: "The market: crates of tomatoes, herbs and fish at dawn.", prompt: "An early-morning farmers' market stall with wooden crates of heirloom tomatoes, bunches of basil and a tray of whole fish on ice, soft cool dawn light, no faces." },
+  { id: "gallery-07", kind: "image", where: "Gallery 7 (/gallery)", ratio: "3:4", likeness: "none", priority: 3, brief: "Dessert, last light: olive-oil cake, berries, dessert wine.", prompt: "A slice of lemon olive-oil cake with macerated berries and a small glass of dessert wine on a linen napkin, last golden light of the evening, table height." },
+  { id: "gallery-08", kind: "image", where: "Gallery 8 (/gallery)", ratio: "1:1 square", likeness: "none", priority: 3, brief: "Fire: a whole fish over glowing coals.", prompt: "A whole branzino in a grill basket over glowing coals outdoors at night, flames licking, sparks, lemon halves charring beside." },
+  { id: "gallery-09", kind: "image", where: "Gallery 9 (/gallery)", ratio: "4:5", likeness: "none", priority: 3, brief: "Letterpress menu cards fanned on linen.", prompt: "A fan of letterpress menu cards with a small brass EJ monogram on ivory linen beside a sprig of rosemary, soft candlelight, shallow depth of field; card text blurred and unreadable." },
+  { id: "gallery-10", kind: "image", where: "Gallery 10 (/gallery)", ratio: "4:3 landscape", likeness: "none", priority: 3, brief: "Toasts: glasses raised, faces out of frame.", prompt: "Glasses of red and sparkling wine raised over a long candlelit table, hands and wrists only, faces out of frame, motion blur on the glasses." },
+  { id: "gallery-11", kind: "image", where: "Gallery 11 (/gallery)", ratio: "3:4", likeness: "hands", priority: 3, brief: "The lesson: floured hands shaping orecchiette.", prompt: "Close-up of floured hands pressing orecchiette with a butter knife on a marble counter, rows of finished pasta beside, soft window light." },
+  { id: "gallery-12", kind: "image", where: "Gallery 12 (/gallery)", ratio: "4:5", likeness: "none", priority: 3, brief: "Midnight: espresso and dark chocolate on a cleared table.", prompt: "A single espresso and a square of dark chocolate with sea salt on a cleared dinner table, one candle burning low, crumbs on the linen, late-night mood." },
 
-  // ── Compose an evening (rooms) ─────────────────────────────────────────
-  { id: "room-residence", kind: "image", where: "Composer · A private home", ratio: "16:11", likeness: "none", priority: 2, brief: "A private dining room after dark, table set, no people.", prompt: "A private home's dining room after dark, table set for eight with ivory linen, brass and candles, art on dark walls, a doorway glowing warm." },
-  { id: "room-penthouse", kind: "image", where: "Composer · A Manhattan penthouse", ratio: "16:11", likeness: "eric", wardrobe: "A", priority: 2, brief: "Eric at a floor-to-ceiling window above the avenue, table set behind him.", prompt: "Eric stands at a floor-to-ceiling penthouse window looking out over Manhattan at blue hour, a candlelit table set for six behind him, his reflection faint in the glass." },
-  { id: "room-estate", kind: "image", where: "Composer · A Hamptons estate", ratio: "16:11", likeness: "none", priority: 3, brief: "A long table on an estate lawn at golden hour, hedges and ocean haze beyond.", prompt: "A long dinner table set on an estate lawn at golden hour, linen moving slightly in the breeze, tall hedges and a hint of ocean haze beyond, lanterns waiting to be lit." },
-  { id: "room-waterfront", kind: "image", where: "Composer · A waterfront home in Florida", ratio: "16:11", likeness: "none", priority: 3, brief: "Doors open to the bay at blue hour.", prompt: "A terrace table at a Florida waterfront home at blue hour, tall doors open to the bay, palms in silhouette, candle hurricanes on the table." },
-  { id: "room-yacht", kind: "image", where: "Composer · Aboard a yacht", ratio: "16:11", likeness: "eric", wardrobe: "B", priority: 2, brief: "Aft deck, second course; Eric pouring wine, guests as blurred shoulders.", prompt: "Eric pours red wine at a table set on the aft deck of a motor yacht at anchor at sunset, guests seen only as out-of-focus shoulders, calm sea and a distant coastline." },
-  { id: "room-island", kind: "image", where: "Composer · On a private island", ratio: "16:11", likeness: "none", priority: 3, brief: "Lanterns along a dock leading to a single table.", prompt: "A lantern-lit wooden dock leading to a single dinner table at the water's edge on a private island at dusk, palms and dark water." },
-  { id: "room-hangar", kind: "image", where: "Composer · In a private hangar", ratio: "16:11", likeness: "none", priority: 3, brief: "A long table under a private jet's wing, dramatic and clean.", prompt: "A long candlelit dinner table set inside a polished private aviation hangar beneath the wing of a business jet, pools of warm light on a dark epoxy floor." },
-  { id: "room-abroad", kind: "image", where: "Composer · Somewhere abroad", ratio: "16:11", likeness: "none", priority: 3, brief: "A villa terrace elsewhere, stone and cypress.", prompt: "A stone villa terrace in the Mediterranean at dusk, a table set under a pergola, cypress trees and distant sea, candlelight." },
+  // ── Market to table (/menus) ───────────────────────────────────────────
+  { id: "food-market", kind: "image", where: "/menus · How your menu is made (1 of 3)", ratio: "4:5", likeness: "hands", priority: 2, brief: "The market, that morning: the chef's hands choosing fish and tomatoes.", prompt: "Close-up of Eric's hands and forearms (white chef-jacket cuffs) choosing a whole day-boat fish on ice beside heirloom tomatoes at an early-morning market stall, soft cool daylight, shallow depth of field." },
+  { id: "food-pass", kind: "image", where: "/menus · How your menu is made (2 of 3)", ratio: "4:5", likeness: "hands", priority: 2, brief: "The pass: the chef's hands placing the last herb on a plate.", prompt: "Close-up of Eric's hands in white chef-jacket sleeves placing a final herb leaf on a plated course with fine tweezers at a kitchen pass, warm light, steam, very shallow depth of field." },
+  { id: "food-table", kind: "image", where: "/menus · How your menu is made (3 of 3)", ratio: "4:5", likeness: "none", priority: 2, brief: "Served: the plate set down on linen, a guest's hand lifting a glass.", prompt: "A plated course just set down on an ivory linen place setting beside a printed menu card, a guest's hand (no face) lifting a wine glass, candles and glassware soft behind, warm low light." },
 
-  // ── Destinations (/private-dining/…) ──────────────────────────────────
-  { id: "place-connecticut", kind: "image", where: "/private-dining/connecticut", ratio: "4:5", likeness: "eric", wardrobe: "B", priority: 3, brief: "A country-house dining room, Eric checking the table.", prompt: "Eric checks a place setting in a New England country-house dining room at dusk, white-painted panelling, candlelight, trees beyond the window." },
-  { id: "place-new-york-city", kind: "image", where: "/private-dining/new-york-city", ratio: "4:5", likeness: "eric", wardrobe: "A", priority: 3, brief: "Above the avenue.", prompt: "Eric in a dark Manhattan apartment beside a set table, the lit skyline filling tall windows behind him." },
-  { id: "place-the-hamptons", kind: "image", where: "/private-dining/the-hamptons", ratio: "4:5", likeness: "none", priority: 3, brief: "Long table, late August.", prompt: "A long table on a Hamptons lawn in late August, golden hour, hydrangeas and a shingled house beyond." },
-  { id: "place-florida", kind: "image", where: "/private-dining/florida", ratio: "4:5", likeness: "none", priority: 3, brief: "Doors open to the bay.", prompt: "A Palm Beach terrace table on the water at blue hour, candle hurricanes, palms in silhouette." },
-  { id: "place-yachts", kind: "image", where: "/private-dining/yachts", ratio: "4:5", likeness: "eric", wardrobe: "B", priority: 3, brief: "Anchored, second course.", prompt: "Eric stands at the rail of a yacht's aft deck beside a set table at sunset, looking out to sea." },
-  { id: "place-private-islands", kind: "image", where: "/private-dining/private-islands", ratio: "4:5", likeness: "none", priority: 3, brief: "Lanterns along the dock.", prompt: "Lanterns along a private island dock leading to a table at dusk, seen from water level." },
+  // ── Plan your evening (rooms) — also used on the location pages ───────
+  { id: "room-residence", kind: "image", where: "Planner · A private home; /private-dining/connecticut", ratio: "16:11 landscape (location pages crop to 4:5 — keep the table centred)", likeness: "none", priority: 2, brief: "A private dining room after dark, table set, no people.", prompt: "A private home's dining room after dark, table set for eight with ivory linen, brass and candles, art on dark walls, a doorway glowing warm." },
+  { id: "room-penthouse", kind: "image", where: "Planner · A Manhattan penthouse; /private-dining/new-york-city", ratio: "16:11 (table centred)", likeness: "eric", wardrobe: "C", priority: 2, brief: "Eric in a dark suit beside a set table, Manhattan lit behind the glass.", prompt: "Eric in a dark charcoal suit stands beside a candlelit table set for six in a Manhattan penthouse at blue hour, floor-to-ceiling windows and the lit skyline behind him." },
+  { id: "room-estate", kind: "image", where: "Planner · A Hamptons estate; /private-dining/the-hamptons", ratio: "16:11 (table centred)", likeness: "none", priority: 3, brief: "A long table on an estate lawn at golden hour.", prompt: "A long dinner table set on an estate lawn at golden hour, linen moving in the breeze, hydrangeas and a shingled house beyond, lanterns waiting to be lit." },
+  { id: "room-waterfront", kind: "image", where: "Planner · A waterfront home in Florida; /private-dining/florida", ratio: "16:11 (table centred)", likeness: "none", priority: 3, brief: "A terrace table on the water at blue hour.", prompt: "A terrace table at a Florida waterfront home at blue hour, tall doors open to the bay, palms in silhouette, candle hurricanes on the table." },
+  { id: "room-yacht", kind: "image", where: "Planner · Aboard a yacht; /private-dining/yachts", ratio: "16:11 (table centred)", likeness: "eric", wardrobe: "A", priority: 2, brief: "Eric pouring wine at a table on a yacht's aft deck at sunset.", prompt: "Eric in a black chef jacket pours red wine at a table set on the aft deck of a motor yacht at anchor at sunset, guests only as out-of-focus shoulders, calm sea and a distant coastline." },
+  { id: "room-island", kind: "image", where: "Planner · On a private island; /private-dining/private-islands", ratio: "16:11 (table centred)", likeness: "none", priority: 3, brief: "Lanterns along a dock leading to a single table.", prompt: "A lantern-lit wooden dock leading to a single dinner table at the water's edge on a private island at dusk, palms and dark water." },
+  { id: "room-hangar", kind: "image", where: "Planner · In a private hangar", ratio: "16:11", likeness: "none", priority: 3, brief: "A long table under a private jet's wing.", prompt: "A long candlelit dinner table inside a polished private aviation hangar beneath the wing of a business jet, pools of warm light on a dark floor." },
+  { id: "room-abroad", kind: "image", where: "Planner · Somewhere abroad", ratio: "16:11", likeness: "none", priority: 3, brief: "A Mediterranean villa terrace at dusk.", prompt: "A stone villa terrace in the Mediterranean at dusk, a table set under a pergola, cypress trees and distant sea, candlelight." },
+
+  // ── The Story (/chef) ──────────────────────────────────────────────────
+  { id: "era-family-table", kind: "image", where: "/chef · I. The family table", ratio: "4:5", likeness: "none", priority: 3, brief: "A warm family kitchen on a Sunday morning, a pot simmering.", prompt: "A warm, slightly worn family kitchen on a Sunday morning, a big pot of sauce simmering on an old stove, wooden spoon resting on the rim, a crowded table with mismatched chairs beyond, soft window light; no people." },
+  { id: "era-the-line", kind: "image", where: "/chef · II. The line", ratio: "4:5", likeness: "eric", wardrobe: "B", priority: 3, brief: "Eric on a restaurant line mid-service, flame under a pan.", prompt: "Eric in a white chef jacket on a busy restaurant line mid-service, tossing a pan over a high flame, tickets on the rail, motion and heat, other cooks blurred." },
+  { id: "era-private-rooms", kind: "image", where: "/chef · III. The private rooms", ratio: "4:5", likeness: "none", priority: 3, brief: "A low-lit private dining room, one table set for eight.", prompt: "An empty, low-lit private dining room with dark wood panelling, a single round table set for eight with ivory linen and candles, quiet and expectant." },
+  { id: "era-the-water", kind: "image", where: "/chef · IV. The water", ratio: "4:5", likeness: "eric", wardrobe: "A", priority: 3, brief: "Eric on a yacht's deck at dusk, a table set behind him.", prompt: "Eric in a black chef jacket stands at the rail of a yacht at dusk, looking out to sea, a dinner table set on the deck behind him, lanterns lit." },
+  { id: "era-the-lessons", kind: "image", where: "/chef · V. The lessons", ratio: "4:5", likeness: "hands", priority: 3, brief: "The chef's hands shaping pasta on a floured counter.", prompt: "Close-up of Eric's hands folding fresh ravioli on a floured wooden counter, raking side light, shallow depth of field." },
+  { id: "era-now", kind: "image", where: "/chef · VI. Now", ratio: "4:5", likeness: "eric", wardrobe: "C", priority: 3, brief: "Eric in a doorway, a glowing set table behind him.", prompt: "Eric in a dark suit stands in a tall doorway looking back over his shoulder toward camera, a fully set candlelit table glowing in the room behind him, the corridor in darkness." },
 ];

@@ -45,34 +45,34 @@ export function Hero() {
         ) : null}
         <p className="hero-fade text-eyebrow flex items-center gap-4" style={d(300)}>
           <span aria-hidden className="hero-draw inline-block h-px w-10 bg-accent" style={d(200)} />
-          <span>Private Evenings<span className="hidden sm:inline"> · By Arrangement</span></span>
+          <span>Private Chef<span className="hidden sm:inline"> · New York &amp; Beyond</span></span>
         </p>
 
         <h1 id="hero-title" className="text-display hero-name hero-depth mt-8 md:mt-10">
           <span className="hero-rise line-mask"><span style={d(350)}>
-            <span className="mr-[0.18em] align-[0.62em] font-display text-[0.2em] italic tracking-normal text-accent">Evenings by</span>
+            <span className="mr-[0.18em] align-[0.62em] font-display text-[0.2em] italic tracking-normal text-accent">Chef</span>
             Eric
           </span></span>
           <span className="hero-rise line-mask"><span style={d(480)} className="pl-[0.7em] italic md:pl-[1.4em]">Jokl</span></span>
-          <span className="sr-only">, private evenings designed, directed and hosted</span>
+          <span className="sr-only">, private chef in New York</span>
         </h1>
 
         <div className="mt-12 grid gap-10 md:mt-16 md:grid-cols-12 md:items-end">
           <p className="hero-fade text-lead max-w-[30rem] md:col-span-6 md:col-start-1" style={d(650)}>
-            Private evenings for people who could go anywhere. Designed, directed and hosted
-            by Eric Jokl — in your home, aboard your yacht, on your island.
+            Private dinners written once, for one table. Modern coastal and Italian
+            cooking — served in your home, aboard your yacht, on your island.
           </p>
           <div className={cn("hero-fade flex flex-wrap items-center gap-x-10 gap-y-6", figure ? "md:col-span-12" : "md:col-span-6 md:justify-end")} style={d(800)}>
             <Cta href="/inquire" track="cta:hero-request">Request an evening</Cta>
-            <Cta href="#possibilities" variant="quiet" track="cta:hero-compose">Compose an evening</Cta>
+            <Cta href="/menus" variant="quiet" track="cta:hero-menus">See sample menus</Cta>
           </div>
         </div>
 
         <div className="mt-14 md:mt-20">
           <div aria-hidden className="hero-draw h-px bg-line" style={d(700)} />
           <div className="hero-fade mt-5 flex items-center justify-between text-[0.66rem] uppercase tracking-[0.28em] text-fg-muted" style={d(1000)}>
-            <span>Built, not catered</span>
-            <span className="hidden sm:inline">New York · The Coast · The Islands</span>
+            <span>Dinners · Yachts · Islands · Classes</span>
+            <span className="hidden md:inline">New York · The Hamptons · The Islands</span>
             <span className="flex items-center gap-3">
               Scroll
               <span aria-hidden className="relative block h-6 w-px overflow-hidden bg-line">

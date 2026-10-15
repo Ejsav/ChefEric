@@ -7,11 +7,11 @@ import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { FaqJsonLd } from "@/components/seo/FaqJsonLd";
 
 export const metadata: Metadata = {
-  title: "Questions — Booking a Private Evening",
+  title: "Questions — Booking a Private Chef",
   description:
-    "How booking, pricing, the chef, dietary needs, travel, yachts, gifts and discretion work when you book a private evening with Eric Jokl.",
+    "How booking, pricing, menus, dietary needs, travel, yachts, gifts and discretion work when you book private chef Eric Jokl.",
   alternates: { canonical: "/questions" },
-  openGraph: { title: "Questions — Eric Jokl", url: "/questions" },
+  openGraph: { title: "Questions — Chef Eric Jokl", url: "/questions" },
 };
 
 export default function QuestionsPage() {

@@ -1,22 +1,21 @@
-// Eric Jokl in his own words, and the people he has hosted in theirs.
-// Every array here starts EMPTY on purpose: the site never shows an invented
-// quote, testimonial or number. Each section appears automatically the moment
-// its array has content. Fill these from docs/ERIC_VOICE.md.
+// The chef in his own words, and the people he has cooked for in theirs.
+// This is a template: the demo shows each section with SAMPLE content, and
+// every sample is labelled "Sample" on the page. A customer version replaces
+// them with real, approved words — or empties an array to hide its section.
 
-/** Eric's own words. The first appears on the home page under the premise;
- *  others can be used across the site. Exact wording, approved by Eric. */
-export const quotes: { text: string; context?: string }[] = [
-  // { text: "…", context: "On designing a room" },
+/** The chef's own words. The first appears on the home page. */
+export const quotes: { text: string; context?: string; sample?: boolean }[] = [];
+
+/** Client words, approved by the client in writing. Attribution describes,
+ *  it doesn't identify. */
+export const testimonials: { quote: string; attribution: string; sample?: boolean }[] = [
+  { quote: "We have eaten in the best rooms in the world. This was better, because it was ours.", attribution: "A host on the Upper East Side", sample: true },
+  { quote: "Twelve guests, three allergies, a galley the size of a closet. Nobody noticed anything but the food.", attribution: "A yacht owner, Newport", sample: true },
+  { quote: "My children still talk about the night they made pasta with the chef. So do the adults.", attribution: "A family in Greenwich", sample: true },
 ];
 
-/** Client words, approved by the client in writing. Never a full name
- *  unless they ask for it. Attribution describes, it doesn't identify. */
-export const testimonials: { quote: string; attribution: string }[] = [
-  // { quote: "…", attribution: "A host in Manhattan" },
-];
-
-/** Verifiable figures for the Eric section ledger, e.g.
- *  { figure: "40", label: "private evenings hosted" }. Only once true. */
+/** Verifiable figures for the chef section, e.g.
+ *  { figure: "15", label: "years in professional kitchens" }. */
 export const credentials: { figure: string; label: string }[] = [];
 
 /** Press and appearances, when they exist. */

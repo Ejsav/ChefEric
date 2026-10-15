@@ -9,11 +9,11 @@ import { Composer } from "@/components/sections/Composer";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 
 export const metadata: Metadata = {
-  title: "Experiences — Private Dining, Yachts, Islands & Salons",
+  title: "Experiences — Private Dining, Yachts, Islands & Classes",
   description:
-    "Private dinners in your residence, private-island and yacht evenings, founders' tables and hosted occasions, designed and directed by Eric Jokl.",
+    "Private dinners in your residence, yacht and private-island dining, cooking classes and celebrations with private chef Eric Jokl, New York.",
   alternates: { canonical: "/experiences" },
-  openGraph: { title: "The Experiences — Eric Jokl", url: "/experiences" },
+  openGraph: { title: "The Experiences — Chef Eric Jokl", url: "/experiences" },
 };
 
 export default function ExperiencesPage() {
@@ -24,9 +24,8 @@ export default function ExperiencesPage() {
         id="experiences-title"
         eyebrow="The Experiences"
         lines={["Begin with", "the room."]}
-        lead={<p>Every evening is composed from nothing for one table: the place, the people, the reason for gathering. Start there — the four forms an evening usually takes follow below.</p>}
+        lead={<p>Every evening is composed from nothing for one table: the place, the people, the reason for gathering. Here are the four forms it usually takes — and a planner to compose your own.</p>}
       />
-      <Composer index="I" />
 
       {experiences.map((exp, i) => {
         const flip = i % 2 === 1;
@@ -70,7 +69,11 @@ export default function ExperiencesPage() {
                   </ul>
                 </div>
 
-                <dl className="mt-10 grid grid-cols-2 gap-6 border-y border-line py-6" data-reveal>
+                <dl className="mt-10 grid grid-cols-2 gap-6 border-y border-line py-6 sm:grid-cols-3" data-reveal>
+                  <div>
+                    <dt className="text-eyebrow">Guide</dt>
+                    <dd className="mt-2 font-display text-lg">{exp.from}</dd>
+                  </div>
                   <div>
                     <dt className="text-eyebrow">Scale</dt>
                     <dd className="mt-2 font-display text-lg">{exp.scale}</dd>
@@ -90,6 +93,7 @@ export default function ExperiencesPage() {
         );
       })}
 
+      <Composer index="V" />
       <InquiryClose title={["Something not", "on this list?"]} />
     </>
   );

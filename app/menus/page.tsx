@@ -8,7 +8,7 @@ import { Plate } from "@/components/ui/Plate";
 import type { PlateTone } from "@/components/ui/Plate";
 
 // From the market to the plate: three food photographs under "How your menu
-// is made". The hands are the chef's, never Eric's.
+// is made".
 const sequence: { slot: string; label: string; alt: string; tone: PlateTone }[] = [
   { slot: "food-market", label: "The market, that morning", tone: "linen", alt: "A chef's hands choosing day-boat fish and heirloom tomatoes at an early-morning market." },
   { slot: "food-pass", label: "The pass", tone: "ember", alt: "A chef's hands placing the last herb on a plated course at the kitchen pass." },
@@ -18,9 +18,9 @@ const sequence: { slot: string; label: string; alt: string; tone: PlateTone }[] 
 export const metadata: Metadata = {
   title: "Sample Menus — Private Dining",
   description:
-    "Sample menus for private evenings by Eric Jokl: after midnight, late summer outdoors, a night aboard, a winter table. Every real menu is written with the chef for one table.",
+    "Sample menus from private chef Eric Jokl: after midnight, late summer outdoors, a night aboard, a winter table. Every real menu is written for one table.",
   alternates: { canonical: "/menus" },
-  openGraph: { title: "Sample menus — Eric Jokl", url: "/menus" },
+  openGraph: { title: "Sample menus — Chef Eric Jokl", url: "/menus" },
 };
 
 export default function MenusPage() {
@@ -50,12 +50,12 @@ export default function MenusPage() {
           <h2 id="menus-how" className="text-h2 md:col-span-5">How your menu <span className="italic text-accent">is made.</span></h2>
           <div className="grid gap-8 text-fg-muted md:col-span-6 md:col-start-7">
             <p className="text-lead text-fg">
-              Eric starts with the people at the table: what they love, what they avoid, what they would never
-              order for themselves. Then he chooses the chef who should cook it.
+              Chef Jokl starts with the people at the table: what they love, what they avoid, what they would
+              never order for themselves.
             </p>
             <p>
               The season and the setting decide the rest. A galley asks for a different menu than an estate
-              kitchen; a founders&rsquo; table is paced around the conversation. Allergies and preferences are
+              kitchen; a class is cooked by the guests themselves. Allergies and preferences are
               designed in from the first draft, never substituted at the end.
             </p>
             <p>

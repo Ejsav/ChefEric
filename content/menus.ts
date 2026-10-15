@@ -1,5 +1,5 @@
 // Sample menus. They are presented on the site as samples, never as records
-// of real past evenings: every real menu is written with the chef chosen for
+// of real past evenings: every real menu is written for
 // one table. They show the range: the season, the setting and the reason for
 // gathering decide the food.
 // CONFIRM: rewrite with the chefs Eric works with, in their dishes.

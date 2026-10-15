@@ -9,15 +9,15 @@ export function Manifesto() {
         <h2 id="premise" className="sr-only">The premise</h2>
         <ScrollWords
           className="text-h1 mt-12 max-w-[22ch] md:mt-16"
-          text="The best nights of your life did not happen in restaurants. They happened in private rooms, on terraces above the water, at tables where someone had thought of everything. That is the room Eric Jokl builds."
+          text="The finest tables in the world are not found in restaurants. They are set in private rooms, on terraces above the water, in kitchens where the chef knows every guest by name. That is where Eric Jokl cooks."
           emphasis={["private", "Eric", "Jokl"]}
         />
         <div className="mt-16 grid gap-10 md:mt-24 md:grid-cols-12">
           <div aria-hidden className="hairline md:col-span-12" data-draw />
           <p className="text-lead md:col-span-5 md:col-start-8" data-reveal>
-            No packages. No banquet trays. Each evening is designed for one table,
-            cooked by a chef chosen for it, directed like a performance and served
-            with the discretion of a great dining room — then it is gone.
+            No set menus. No banquet trays. Each evening is written for one table,
+            cooked in the host&rsquo;s own kitchen and served with the discretion of
+            a great dining room — then it is gone.
           </p>
         </div>
       </div>

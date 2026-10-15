@@ -19,8 +19,8 @@ export const forms = [
   { id: "dinner", label: "A private dinner" },
   { id: "destination", label: "A destination or a stay", hint: "Yachts, islands, travel, several days" },
   { id: "occasion", label: "A celebration or hosted event" },
-  { id: "salon", label: "A founders' table or salon", hint: "A dinner built around a conversation" },
-  { id: "gift", label: "An evening as a gift", hint: "A private evening, given to someone you love" },
+  { id: "lesson", label: "A private cooking class" },
+  { id: "gift", label: "An evening as a gift", hint: "A dinner or a class, given to someone you love" },
   { id: "collaboration", label: "A collaboration or appearance" },
   { id: "unsure", label: "I'm not sure yet" },
 ] as const satisfies readonly Opt[];
@@ -156,7 +156,7 @@ export function summarize(a: Partial<Answers>): string {
     dinner: "A private dinner",
     destination: "A destination stay",
     occasion: "A hosted celebration",
-    salon: "A founders' table",
+    lesson: "A private cooking class",
     gift: "An evening given as a gift",
     unsure: "An evening",
     collaboration: "A collaboration",
@@ -164,7 +164,7 @@ export function summarize(a: Partial<Answers>): string {
 
   const setting = settingOptions.find((s) => s.id === a.setting);
   const place = [setting?.phrase, a.location?.trim() ? `in ${a.location.trim()}` : ""].filter(Boolean).join(" ");
-  const guests = a.guests ? `for ${label(guestOptions, a.guests)!.toLowerCase()} guests` : "";
+  const guests = a.guests ? `for ${label(guestOptions, a.guests)!.toLowerCase()} ${a.form === "lesson" ? "people" : "guests"}` : "";
   const occasion = occasionOptions.find((o) => o.id === a.occasion)?.phrase;
   const tail = [when, guests].filter(Boolean);
 
@@ -205,7 +205,7 @@ export function prefillFromParams(q: URLSearchParams): Partial<Answers> {
   const formByExperience: Record<string, Answers["form"]> = {
     "the-private-table": "dinner",
     "the-island-and-the-water": "destination",
-    "the-founders-table": "salon",
+    "the-kitchen-lessons": "lesson",
     "the-occasion": "occasion",
   };
   if (exp && formByExperience[exp]) out.form = formByExperience[exp];
@@ -217,13 +217,15 @@ export function prefillFromParams(q: URLSearchParams): Partial<Answers> {
   const setting = q.get("setting");
   if (setting && settingOptions.some((s) => s.id === setting)) out.setting = setting as Answers["setting"];
   const occasion = q.get("occasion");
-  if (occasion === "salon") out.form = "salon";
+  if (occasion === "lesson") out.form = "lesson";
   else if (occasion && occasionOptions.some((o) => o.id === occasion)) out.occasion = occasion as Answers["occasion"];
   // From /your-site: a request for this website, not for an evening.
   if (q.get("about") === "website") {
     out.role = "brand";
     out.form = "collaboration";
     out.project = "I'd like a website like this one, customized to me and my business.";
+    const name = q.get("name")?.trim().slice(0, 120);
+    if (name) out.name = name;
   }
   const scale = q.get("scale");
   const guestsByScale: Record<string, Answers["guests"]> = { intimate: "2-8", gathering: "10-24", grand: "25-60" };

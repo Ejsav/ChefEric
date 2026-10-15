@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 // and the evening is written in front of you, with the photograph of the
 // room alongside. It replaces the package list: nothing is for sale here
 // except possibility, and the composition carries straight into the inquiry.
-export function Composer({ index = "II" }: { index?: string }) {
+export function Composer({ index = "VII" }: { index?: string }) {
   const [setting, setSetting] = useState(settings[0]!.id);
   const [occasion, setOccasion] = useState(occasions[1]!.id);
   const [scale, setScale] = useState(scales[0]!.id);
@@ -36,17 +36,17 @@ export function Composer({ index = "II" }: { index?: string }) {
       <div className="container-x">
         <div className="grid gap-y-10 md:grid-cols-12">
           <div className="md:col-span-7">
-            <Eyebrow index={index}>The Possibilities</Eyebrow>
+            <Eyebrow index={index}>The Planner</Eyebrow>
             <h2 id="compose-title" className="text-h1 mt-10" data-reveal-group>
-              <span className="line-mask"><span>There is no menu.</span></span>
+              <span className="line-mask"><span>Plan your</span></span>
               <span className="line-mask" style={{ "--reveal-delay": "110ms" } as React.CSSProperties}>
-                <span className="italic text-accent">Compose an evening.</span>
+                <span className="italic text-accent">evening.</span>
               </span>
             </h2>
           </div>
           <p className="text-lead self-end text-fg-muted md:col-span-4 md:col-start-9" data-reveal>
-            Every engagement begins with the place, the people and the reason for gathering. Choose
-            yours, and read the evening that follows.
+            Choose the room, the reason and the size of the table, and read the evening that follows.
+            One tap carries it into your request.
           </p>
         </div>
 
@@ -94,7 +94,7 @@ export function Composer({ index = "II" }: { index?: string }) {
               </article>
               <div className="mt-10 flex flex-wrap items-center gap-x-10 gap-y-6">
                 <Cta href={href} track="cta:compose-begin">Begin with this evening</Cta>
-                <Cta href="/experiences" variant="quiet" className="text-fg-muted">The four forms</Cta>
+                <Cta href="/experiences" variant="quiet" className="text-fg-muted">All experiences</Cta>
               </div>
             </div>
           </div>

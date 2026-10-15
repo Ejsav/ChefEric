@@ -13,7 +13,7 @@ export function Footer() {
           <div className="md:col-span-5" data-reveal>
             <Monogram className="h-14 w-14 text-accent" />
             <p className="mt-8 max-w-sm font-display text-[1.6rem] italic leading-snug text-fg/90">
-              A table is the oldest interface there is. We still design it by hand.
+              A table is the oldest form of hospitality. We still set it by hand.
             </p>
           </div>
           <div className="grid grid-cols-2 gap-10 md:col-span-7 md:grid-cols-3" data-reveal style={{ "--reveal-delay": "120ms" } as React.CSSProperties}>
@@ -42,7 +42,7 @@ export function Footer() {
             </div>
             <div className="col-span-2 md:col-span-1">
               <p className="text-eyebrow">Where</p>
-              <p className="mt-5 text-fg/85">Wherever the table is.<br />Travelling by arrangement.</p>
+              <p className="mt-5 text-fg/85">Based in {site.region}.<br />Travelling by arrangement.</p>
             </div>
           </div>
         </div>

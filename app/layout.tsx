@@ -17,17 +17,17 @@ import { MobileBar } from "@/components/system/MobileBar";
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "Eric Jokl — Private Evenings, By Arrangement",
-    template: "%s — Eric Jokl",
+    default: "Chef Eric Jokl — Private Chef, New York",
+    template: "%s — Chef Eric Jokl",
   },
   description: site.description,
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     siteName: site.name,
-    title: "Eric Jokl — Private evenings, by arrangement",
+    title: "Chef Eric Jokl — Private tables, by arrangement",
     description:
-      "Private evenings designed, directed and hosted by Eric Jokl, with a chef chosen for every table. In residences, aboard yachts and on private islands.",
+      "Private chef in New York. Private dinners written for one table, yacht and private-island dining, cooking classes and celebrations.",
     url: "/",
     locale: "en_US",
   },

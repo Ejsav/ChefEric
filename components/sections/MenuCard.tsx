@@ -71,7 +71,7 @@ export function MenuCard({ menus, compact = false }: { menus: Menu[]; compact?: 
           </div>
         ) : null}
         <p className="mt-8 hidden max-w-xs text-sm text-fg-muted lg:block">
-          Samples only. Every real menu is written with the chef for one table, then never served the same way again.
+          Samples only. Every real menu is written for one table, then never served the same way again.
         </p>
       </div>
 

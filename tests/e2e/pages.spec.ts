@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 const ROUTES = [
-  "/", "/experiences", "/menus", "/eric", "/private-dining",
+  "/", "/experiences", "/menus", "/chef", "/gallery", "/private-dining",
   "/private-dining/connecticut", "/private-dining/new-york-city", "/private-dining/the-hamptons",
   "/private-dining/florida", "/private-dining/yachts", "/private-dining/private-islands",
   "/questions", "/inquire", "/privacy", "/your-site",

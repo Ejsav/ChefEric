@@ -3,7 +3,7 @@ import type { PlateTone } from "@/components/ui/Plate";
 // The composer's vocabulary. Visitors don't pick a package; they set a room,
 // a reason and a scale, and read the evening that results. Every line is
 // written to combine naturally with every other.
-// CONFIRM: the settings Eric wants to be imagined in.
+// Each customer version sets the rooms it wants to be imagined in.
 
 export type Setting = {
   id: string;
@@ -27,8 +27,8 @@ export const settings: Setting[] = [
     tone: "ember",
     plateLabel: "Your dining room, after dark",
     slot: "room-residence",
-    line: "The house becomes the most private room in town for one night, then goes back to being a home before midnight. Your china, if you like. Your kitchen, left cleaner than it was.",
-    approach: ["A walkthrough of the house ahead of time", "Light and sound designed around the rooms you want to use", "Equipment brought in where the home kitchen needs it"],
+    line: "The house becomes the restaurant for one night, then goes back to being a home before midnight. Your china, if you like. Your kitchen, left cleaner than it was.",
+    approach: ["A walkthrough of the kitchen ahead of time", "Equipment brought in where the home kitchen needs it", "Service planned around the rooms you want to use"],
   },
   {
     id: "penthouse",
@@ -67,7 +67,7 @@ export const settings: Setting[] = [
     tone: "tide",
     plateLabel: "Anchored, second course",
     slot: "room-yacht",
-    line: "A yacht is a precise place to host. Everything is stowed, planned and accounted for before the lines are cast off.",
+    line: "A galley is a precise place to cook. Everything is stowed, planned and accounted for before the lines are cast off.",
     approach: ["Coordination with the captain and interior crew", "Provisioning built around galley and storage", "Menus that respect motion, space and the sea"],
   },
   {
@@ -77,7 +77,7 @@ export const settings: Setting[] = [
     tone: "tide",
     plateLabel: "Lanterns along the dock",
     slot: "room-island",
-    line: "The purest test of planning: what is not on the boat does not exist. The evening is built as one system, with a backup for everything.",
+    line: "The purest test of planning: what is not on the boat does not exist. Everything is planned before departure, with a backup for every ingredient.",
     approach: ["A full logistics plan before departure", "Redundancy for every critical ingredient and tool", "Multi-day menus that use everything that arrives"],
   },
   {
@@ -97,8 +97,8 @@ export const settings: Setting[] = [
     tone: "linen",
     plateLabel: "A terrace, elsewhere",
     slot: "room-abroad",
-    line: "A villa, a chalet, a borrowed palazzo. Eric travels by arrangement, bringing the standard and building the team where he lands.",
-    approach: ["Local chefs and suppliers vetted before arrival", "A team that travels, or is assembled on site", "An evening that honours exactly where you are"],
+    line: "A villa, a chalet, a borrowed palazzo. The chef travels by arrangement, bringing his standard and sourcing where he lands.",
+    approach: ["Local suppliers vetted before arrival", "A team that travels, or is assembled on site", "Menus that honour exactly where you are"],
   },
 ];
 
@@ -108,11 +108,11 @@ export const occasions: Occasion[] = [
   { id: "business", name: "Hosting", title: "An evening of hosting", fragment: "a dinner where the conversation is the point, and the food makes everyone stay a little longer" },
   { id: "family", name: "Family", title: "Family, together", fragment: "a family gathering: one long table, every generation, and nobody stuck in the kitchen" },
   { id: "celebration", name: "A celebration", title: "A celebration", fragment: "an engagement, a closing, a homecoming — a night with toasts in it" },
-  { id: "salon", name: "A founders' table", title: "A founders' table", fragment: "a founders' table: the right people in one room, and a conversation worth flying in for" },
+  { id: "lesson", name: "A class", title: "A private class", fragment: "a private class, where everyone cooks, and everyone eats what they made" },
 ];
 
 export const scales: Scale[] = [
-  { id: "intimate", name: "Intimate", range: "Two to eight", guests: "2-8", line: "Set for a few, the table is close enough for every plate to be introduced at the table, and every guest to be looked after by name." },
+  { id: "intimate", name: "Intimate", range: "Two to eight", guests: "2-8", line: "Set for a few, the table is close enough for every plate to be introduced by the chef himself." },
   { id: "gathering", name: "A gathering", range: "Ten to twenty-four", guests: "10-24", line: "A long table or several; service becomes choreography, and still no one sees it working." },
   { id: "grand", name: "An occasion", range: "Twenty-five and beyond", guests: "25-60", line: "At this scale the team grows and the planning deepens — and the feeling of a private table is what is being protected." },
 ];

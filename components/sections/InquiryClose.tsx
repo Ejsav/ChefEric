@@ -13,7 +13,7 @@ export function InquiryClose({ title = ["Tell us about", "the table."], href = "
           <span className="line-mask" style={{ "--reveal-delay": "120ms" } as React.CSSProperties}><span className="italic text-accent">{title[1]}</span></span>
         </h2>
         <p className="text-lead mx-auto mt-10 max-w-md" data-reveal>
-          A date, a place, a number of guests. Eric&rsquo;s office will take it from there.
+          A date, a place, a number of guests. The chef&rsquo;s office will take it from there.
         </p>
         <div className="mt-12 flex flex-col items-center gap-8" data-reveal>
           <Cta href={href} track="cta:close">Begin an inquiry</Cta>

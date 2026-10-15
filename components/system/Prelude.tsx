@@ -15,7 +15,7 @@ export function Prelude() {
           <span className="prelude-name">Eric <span className="italic">Jokl</span></span>
         </p>
         <span className="prelude-rule mt-6 block h-px w-24 bg-accent/70" />
-        <p className="prelude-sub mt-6 text-[0.62rem] uppercase tracking-[0.36em] text-fg-muted">Private Evenings · By Arrangement</p>
+        <p className="prelude-sub mt-6 text-[0.62rem] uppercase tracking-[0.36em] text-fg-muted">Private Chef · New York</p>
       </div>
     </div>
   );

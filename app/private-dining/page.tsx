@@ -7,22 +7,22 @@ import { Arrow } from "@/components/ui/Cta";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 
 export const metadata: Metadata = {
-  title: "Where Evenings Travel — Private Dining by Location",
+  title: "Where He Cooks — Private Chef by Location",
   description:
-    "Private evenings by Eric Jokl in Manhattan, Connecticut, the Hamptons, Florida, aboard yachts and on private islands. Find out what an evening looks like where you are.",
+    "Private chef Eric Jokl cooks in Manhattan, Connecticut, the Hamptons, Florida, aboard yachts and on private islands. Find out what an evening looks like where you are.",
   alternates: { canonical: "/private-dining" },
-  openGraph: { title: "Where evenings travel — Eric Jokl", url: "/private-dining" },
+  openGraph: { title: "Where he cooks — Chef Eric Jokl", url: "/private-dining" },
 };
 
 export default function PlacesIndex() {
   return (
     <>
-      <Breadcrumbs items={[{ name: "Where evenings travel", path: "/private-dining" }]} />
+      <Breadcrumbs items={[{ name: "Where he cooks", path: "/private-dining" }]} />
       <PageIntro
         id="places-title"
-        eyebrow="Where evenings travel"
+        eyebrow="Where he cooks"
         lines={["Wherever the", "table is."]}
-        lead={<p>Everywhere is by arrangement: a Manhattan apartment, a Connecticut country house, a Hamptons lawn, a Florida terrace, a yacht at anchor, an island reached by boat.</p>}
+        lead={<p>Based in New York. Everywhere else is by arrangement: a Connecticut country house, a Hamptons lawn, a Florida terrace, a yacht at anchor, an island reached by boat.</p>}
       />
       <section aria-label="Places" className="tone-dark section pt-0">
         <ol className="container-x border-t border-line">

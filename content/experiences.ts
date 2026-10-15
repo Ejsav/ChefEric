@@ -1,7 +1,5 @@
-// The four forms an evening by Eric Jokl usually takes.
-// Eric designs, directs and hosts; the kitchen is led by a chef chosen for
-// each table. CONFIRM: every `scale` and `notice` value, and that a chef
-// partner is in place for each form before taking bookings.
+// The four ways to have Chef Jokl cook for you. Demo content: every
+// customer version sets its own services, scales, notice and price guides.
 
 import type { PlateTone } from "@/components/ui/Plate";
 
@@ -10,11 +8,15 @@ export type Experience = {
   numeral: string;
   name: string;
   kicker: string;
+  /** one line for the home page card */
+  teaser: string;
   summary: string;
   body: string[];
   includes: string[];
   scale: string;
   notice: string;
+  /** price guide shown with the details; the proposal gives the full cost */
+  from: string;
   plate: { label: string; tone: PlateTone; slot?: string; src?: string; alt: string };
 };
 
@@ -24,86 +26,93 @@ export const experiences: Experience[] = [
     numeral: "I",
     name: "The Private Table",
     kicker: "In your residence",
+    teaser: "A dinner written for one evening and one table, cooked in your kitchen.",
     summary:
-      "An evening designed for one table and one night. Eric directs the room; a chef chosen for your table takes the kitchen. You never leave your seat.",
+      "A dinner composed for one evening and one table. Chef Jokl and his team take over the kitchen; you never leave the room.",
     body: [
-      "It begins with a conversation, not a package. Who is at the table, what they love, what the night is for. From there Eric builds the evening as a whole: the light, the music, the pace, the order of the room, and a menu written with the chef for that night only.",
-      "The team arrives early, the house becomes a private dining room for a few hours, and by midnight it is a home again. The only trace is the card left at each place.",
+      "It begins with a conversation, not a menu: who is at the table, what they love, what they would never order for themselves. From there the chef writes a menu that exists once, for that night.",
+      "The team arrives early, cooks in your kitchen, serves with the quiet of a great dining room and leaves it cleaner than they found it. The only trace is the menu card left at each place.",
     ],
     includes: [
-      "An evening concept written for your table",
-      "A chef and kitchen team chosen for the menu and the setting",
-      "Table service, directed by Eric on the night",
-      "Lighting, music and table design",
+      "A menu written for the evening",
+      "Sourcing from trusted growers, fishmongers and butchers",
+      "Kitchen team and table service",
       "Wine pairing with a sommelier, on request",
       "Printed menu cards for each guest",
     ],
     scale: "Two to twenty-four guests",
-    notice: "Two to three weeks recommended",
-    plate: { label: "Before the guests", tone: "ember", alt: "Eric Jokl lighting the last candle on a set dinner table.", slot: "exp-private-table" },
+    notice: "Two to three weeks",
+    from: "From $250 per guest",
+    plate: { label: "The first course", tone: "ember", alt: "Chef Eric Jokl plating the first course in a private home kitchen.", slot: "exp-private-table" },
   },
   {
     slug: "the-island-and-the-water",
     numeral: "II",
     name: "The Island & The Water",
-    kicker: "Private islands · Yachts · Destinations",
+    kicker: "Yachts · Private islands · Destinations",
+    teaser: "Galley-planned menus and full provisioning, at anchor or offshore.",
     summary:
-      "Evenings far from a market are a planning problem first. Eric treats them like a launch: every ingredient, every tool and every contingency decided before anyone sets off.",
+      "Cooking far from a market is its own discipline. Every ingredient, tool and contingency is planned before departure, so nothing on the night reveals how far it travelled.",
     body: [
-      "Nothing on the night should reveal how hard it was to get there. Provisioning, staffing, power, weather and timing are planned as one system, with redundancy for everything that cannot be replaced at sea or on an island.",
-      "For yachts, island residences and destination weekends, Eric produces the whole stay and works alongside your captain, house manager or planner rather than around them.",
+      "For yachts, island residences and destination weekends, the chef plans provisioning, staffing and service as one system, with a backup for anything that cannot be replaced at sea.",
+      "He works alongside your captain, house manager or planner — not around them — from a single dinner at anchor to every meal of a stay.",
     ],
     includes: [
-      "A full provisioning and logistics plan",
-      "Multi-day evenings planned as one arc",
-      "A travelling chef and team sized to the stay",
+      "Full provisioning and logistics plan",
+      "Multi-day menus across breakfast, lunch and dinner",
+      "Travelling team sized to the stay",
       "Coordination with captain, estate staff or planner",
       "Confidentiality agreements as standard",
     ],
     scale: "By arrangement",
-    notice: "Six weeks or more recommended",
-    plate: { label: "Late service, open water", tone: "tide", alt: "Eric Jokl walking a lantern-lit dock toward a table at the water's edge.", slot: "exp-island-water" },
+    notice: "Six weeks or more",
+    from: "By proposal",
+    plate: { label: "Late service, open water", tone: "tide", alt: "Chef Eric Jokl at a grill on a private island beach at dusk, lanterns along the dock.", slot: "exp-island-water" },
   },
   {
-    slug: "the-founders-table",
+    slug: "the-kitchen-lessons",
     numeral: "III",
-    name: "The Founders' Table",
-    kicker: "Salons · Builders · Ideas",
+    name: "The Kitchen Lessons",
+    kicker: "Private cooking classes",
+    teaser: "The recipes are not secrets; the hands are. Taught at your counter.",
     summary:
-      "A private dinner for founders, creators and operators: the right people in one room, one long conversation, and a table built to keep it going.",
+      "Private classes at your counter: fresh pasta by hand, a sauce worth the afternoon, how to season with confidence. Everyone eats what they made.",
     body: [
-      "For a company, a fund, a brand or a host who wants a room to matter. The guest list, the seating, the single question for the table and the pace of the courses are designed around the conversation, so ideas land and introductions happen without anyone forcing them.",
-      "It is the evening closest to Eric's own world: builders at a table, talking about what they are making next. Nothing is filmed or published unless every guest agrees.",
+      "For one family, a few friends, or a team that would rather cook together than sit through another dinner. The class is planned around the group's skill and appetite.",
+      "It ends at the table, with the meal you cooked and a glass of something good — and the recipes are yours to keep.",
     ],
     includes: [
-      "Seating plan and conversation design",
-      "A menu written with the chef of the evening",
-      "Invitations and guest communication, on request",
-      "Printed cards and a record of the night",
+      "A class planned around the group",
+      "All ingredients and specialist equipment",
+      "The meal you cook, served at the end",
+      "Printed recipes to keep",
     ],
-    scale: "Eight to twenty-four guests",
-    notice: "Three weeks recommended",
-    plate: { label: "The long conversation", tone: "smoke", alt: "Eric Jokl at the head of a long candlelit table, listening.", slot: "exp-founders-table" },
+    scale: "One to twelve participants",
+    notice: "Two weeks",
+    from: "From $1,500 per class",
+    plate: { label: "Flour, eggs, hands", tone: "linen", alt: "Chef Eric Jokl guiding a guest's hands shaping fresh pasta at a marble counter.", slot: "exp-kitchen-lessons" },
   },
   {
     slug: "the-occasion",
     numeral: "IV",
     name: "The Occasion",
     kicker: "Celebrations · Launches · Hosted evenings",
+    teaser: "Milestones and celebrations up to eighty, with nobody seen working.",
     summary:
-      "Anniversaries, milestone birthdays, engagements, launches, private evenings for clients. Nights where everything must be extraordinary and nobody can be seen working.",
+      "Anniversaries, milestone birthdays, engagements, private evenings for clients. Nights where the food must be extraordinary and nobody can be seen working.",
     body: [
-      "Larger evenings ask for more choreography: many guests, several courses, a room that flows, timing that lets speeches land and the next course arrive warm.",
-      "Eric works with your planner or directly with you, and scales the kitchen, service, rentals and production to the occasion without losing the feeling of a private table.",
+      "Larger evenings ask for more choreography: many courses for many guests, a room that flows, timing that lets speeches land and the next course arrive warm.",
+      "The chef works with your planner or directly with you, and scales the team, rentals and service to the occasion without losing the feeling of a private table.",
     ],
     includes: [
-      "Concept, run of show and tasting, by arrangement",
-      "Chef, kitchen team, service staff and rentals",
+      "Menu development and tasting, by arrangement",
+      "Kitchen team, service staff and rentals",
       "Planner and venue coordination",
       "Seated, family-style or roaming service",
     ],
     scale: "Up to eighty guests",
-    notice: "Four weeks or more recommended",
-    plate: { label: "Toasts, third course", tone: "smoke", alt: "Eric Jokl mid-toast at a long celebration table.", slot: "exp-occasion" },
+    notice: "Four weeks or more",
+    from: "From $300 per guest",
+    plate: { label: "Toasts, third course", tone: "smoke", alt: "A long celebration table with glasses raised, Chef Eric Jokl at the pass beyond.", slot: "exp-occasion" },
   },
 ];

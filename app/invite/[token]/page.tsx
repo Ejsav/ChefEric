@@ -26,7 +26,7 @@ export default async function InvitePage({ params }: { params: Promise<{ token: 
           <h1 className="text-h1 mx-auto mt-10 max-w-[16ch]">
             {result.reason === "expired" ? <>This invitation has <span className="italic text-accent">closed.</span></> : <>This invitation could not be <span className="italic text-accent">opened.</span></>}
           </h1>
-          <p className="text-lead mx-auto mt-8 max-w-md">Eric&rsquo;s office will gladly send a new one — or begin a request below.</p>
+          <p className="text-lead mx-auto mt-8 max-w-md">The chef&rsquo;s office will gladly send a new one — or begin a request below.</p>
           <div className="mt-12"><Cta href="/inquire">Begin a request</Cta></div>
         </div>
       </section>
@@ -48,8 +48,8 @@ export default async function InvitePage({ params }: { params: Promise<{ token: 
           <span className="hero-rise line-mask"><span style={d(540)} className="italic text-accent">{name}</span></span>
         </h1>
         <p className="hero-fade text-lead mx-auto mt-10 max-w-lg" style={d(900)}>
-          Eric Jokl would be glad to host you. Tell us about the table — the place, the
-          people and the reason — and his office will take it from there.
+          Chef Eric Jokl would be glad to cook for you. Tell us about the table — the place,
+          the people and the reason — and his office will take it from there.
         </p>
         {note ? (
           <blockquote className="hero-fade mx-auto mt-10 max-w-md border-y border-line py-6 font-display text-xl italic text-fg/85" style={d(1050)}>

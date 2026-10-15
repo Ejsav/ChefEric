@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: p.metaTitle,
     description: p.metaDescription,
     alternates: { canonical: `/private-dining/${p.slug}` },
-    openGraph: { title: `${p.metaTitle} — Eric Jokl`, description: p.metaDescription, url: `/private-dining/${p.slug}` },
+    openGraph: { title: `${p.metaTitle} — Chef Eric Jokl`, description: p.metaDescription, url: `/private-dining/${p.slug}` },
   };
 }
 
@@ -43,8 +43,8 @@ export default async function PlacePage({ params }: Props) {
   const service = {
     "@context": "https://schema.org",
     "@type": "Service",
-    name: `Private evenings — ${p.name}`,
-    serviceType: "Private dining and event hosting",
+    name: `Private chef — ${p.name}`,
+    serviceType: "Private chef",
     description: p.metaDescription,
     url: `${site.url}/private-dining/${p.slug}`,
     provider: { "@id": `${site.url}/#service` },
@@ -53,7 +53,7 @@ export default async function PlacePage({ params }: Props) {
 
   return (
     <>
-      <Breadcrumbs items={[{ name: "Where evenings travel", path: "/private-dining" }, { name: p.name, path: `/private-dining/${p.slug}` }]} />
+      <Breadcrumbs items={[{ name: "Where he cooks", path: "/private-dining" }, { name: p.name, path: `/private-dining/${p.slug}` }]} />
       <FaqJsonLd faqs={p.faqs} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(service) }} />
 
