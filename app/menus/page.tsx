@@ -4,6 +4,16 @@ import { PageIntro } from "@/components/sections/PageIntro";
 import { MenuCard } from "@/components/sections/MenuCard";
 import { InquiryClose } from "@/components/sections/InquiryClose";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
+import { Plate } from "@/components/ui/Plate";
+import type { PlateTone } from "@/components/ui/Plate";
+
+// From the market to the plate: three food photographs under "How your menu
+// is made". The hands are the chef's, never Eric's.
+const sequence: { slot: string; label: string; alt: string; tone: PlateTone }[] = [
+  { slot: "food-market", label: "The market, that morning", tone: "linen", alt: "A chef's hands choosing day-boat fish and heirloom tomatoes at an early-morning market." },
+  { slot: "food-pass", label: "The pass", tone: "ember", alt: "A chef's hands placing the last herb on a plated course at the kitchen pass." },
+  { slot: "food-table", label: "Served", tone: "smoke", alt: "A plated course set on ivory linen by candlelight, a guest's hand lifting a glass." },
+];
 
 export const metadata: Metadata = {
   title: "Sample Menus — Private Dining",
@@ -53,6 +63,13 @@ export default function MenusPage() {
               at their place.
             </p>
           </div>
+          <ol className="mt-4 grid gap-6 sm:grid-cols-3 md:col-span-12 md:mt-10 md:gap-8">
+            {sequence.map((s, i) => (
+              <li key={s.slot} data-reveal style={{ "--reveal-delay": `${i * 90}ms` } as React.CSSProperties}>
+                <Plate tone={s.tone} slot={s.slot} alt={s.alt} label={s.label} sizes="(min-width: 640px) 30vw, 100vw" />
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
       <InquiryClose title={["Tell us about", "the table."]} />

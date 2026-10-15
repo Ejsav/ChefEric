@@ -98,7 +98,7 @@ On the server (`app/api/inquire/route.ts`, `lib/inquiry-schema.ts`) every reques
 Every image slot is a `Plate` with a `slot` id. To place an asset, export it as `public/media/<slot>.jpg` (or `.avif`/`.webp`/`.png`; films `.webm` + `.mp4`). `next.config.ts` lists that folder at build time, so a filled slot renders the asset through `next/image` and an empty one keeps its lit, grained tonal study. No code changes.
 
 ```bash
-npm run media   # which of the 28 slots are filled
+npm run media   # which of the 36 slots are filled
 ```
 
 Slots, briefs and prompts: `content/media.ts`. Method, identity lock, quality gate and export specs: `docs/AI_IMAGERY.md`.

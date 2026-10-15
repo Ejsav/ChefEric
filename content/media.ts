@@ -94,6 +94,46 @@ export const mediaSlots: MediaSlot[] = [
     prompt: "Eric stands mid-toast at a long celebration table, glass raised, warm low light; a dozen raised glasses in the foreground with slight motion blur, guests seen only as blurred arms and backs; confetti of candle bokeh behind.",
   },
 
+  // ── Food ───────────────────────────────────────────────────────────────
+  // Shot at table height (never overhead flat-lay), one warm light, shallow
+  // depth of field, ivory china on linen or dark wood. Hands, when present,
+  // belong to the chef or a guest — never Eric, never a face.
+  {
+    id: "menu-after-midnight", kind: "image", where: "Home + /menus · beside the menu card “After midnight”", ratio: "4:5 (also shown 16:11 on phones; keep the dish centred)", likeness: "none", priority: 1,
+    brief: "The late pasta: one perfect bowl at one in the morning.",
+    prompt: "Spaghetti with butter, black pepper and aged pecorino twirled high in a shallow ivory bowl on dark marble, a fork resting on the rim, a coupe of champagne and a candle soft behind, steam rising, single warm light from the left, shot at table height.",
+  },
+  {
+    id: "menu-late-summer-outdoors", kind: "image", where: "Home + /menus · beside “Late summer, outdoors”", ratio: "4:5 (dish centred)", likeness: "none", priority: 1,
+    brief: "Heirloom tomatoes and burrata outdoors at golden hour.",
+    prompt: "Sliced heirloom tomatoes in red, yellow and green with a torn burrata, basil and olive oil on an ivory plate, on a linen-covered table outdoors at golden hour, a lawn and hedges out of focus behind, low warm sun from the side.",
+  },
+  {
+    id: "menu-a-night-aboard", kind: "image", where: "Home + /menus · beside “A night aboard”", ratio: "4:5 (dish centred)", likeness: "none", priority: 1,
+    brief: "Oysters on deck at sunset.",
+    prompt: "A dozen oysters on crushed ice in a pewter tray with lemon and mignonette on a yacht's teak table at sunset, two flutes of sparkling wine soft behind, calm sea and horizon out of focus.",
+  },
+  {
+    id: "menu-a-winter-table", kind: "image", where: "Home + /menus · beside “A winter table”", ratio: "4:5 (dish centred)", likeness: "none", priority: 1,
+    brief: "Osso buco by firelight.",
+    prompt: "Osso buco on saffron risotto with bright gremolata in a wide ivory bowl on a dark walnut table, a glass of Barolo beside it, fireplace glow behind, candlelight from the left.",
+  },
+  {
+    id: "food-market", kind: "image", where: "/menus · How your menu is made (1 of 3)", ratio: "4:5", likeness: "none", priority: 2,
+    brief: "The market, that morning: the chef's hands choosing produce. Hands and forearms only.",
+    prompt: "Close-up of a chef's hands and forearms (not Eric) choosing a whole day-boat fish on ice beside heirloom tomatoes at an early-morning market stall, soft cool daylight, shallow depth of field, no faces.",
+  },
+  {
+    id: "food-pass", kind: "image", where: "/menus · How your menu is made (2 of 3)", ratio: "4:5", likeness: "none", priority: 2,
+    brief: "The pass: the chef's hands finishing a plate. Hands only, not Eric.",
+    prompt: "Close-up of a chef's hands in white sleeves (not Eric) placing a final herb leaf on a plated course with tweezers at a kitchen pass, warm heat lamp light, steam, very shallow depth of field, no face.",
+  },
+  {
+    id: "food-table", kind: "image", where: "/menus · How your menu is made (3 of 3)", ratio: "4:5", likeness: "none", priority: 2,
+    brief: "Served: the plate arriving at the table, a guest's hand on a glass.",
+    prompt: "A plated course just set down on an ivory linen place setting with a printed menu card, a guest's hand (no face) lifting a wine glass, candles and glassware soft behind, warm low light.",
+  },
+
   // ── The Making (/eric) ─────────────────────────────────────────────────
   {
     id: "era-screen", kind: "image", where: "/eric · I. The screen", ratio: "4:5", likeness: "eric", wardrobe: "B", priority: 2,

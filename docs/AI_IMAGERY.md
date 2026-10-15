@@ -22,7 +22,8 @@ A slot with no file keeps rendering its lit, grained tonal study, so the site is
 | Rule | Why |
 |---|---|
 | **One identity.** Same face, hairline, build, skin and grooming in every frame. | A single drifting jawline breaks the illusion for the whole site. |
-| **Nothing implies Eric cooks.** No chef whites, no stove, no plating. He hosts, directs, lights, pours, welcomes. | The site makes no culinary claims. The kitchen belongs to a chef chosen for each table. |
+| **Nothing implies Eric cooks.** No stove, no plating by Eric. He hosts, directs, lights, pours, welcomes. Food shots show the chef's or a guest's hands, never his. | The site makes no culinary claims. The kitchen belongs to a chef chosen for each table. |
+| **Food at table height.** Never overhead flat-lay; ivory china, linen or dark wood, one warm light, shallow depth of field. | Food should look like a moment at the table, not a menu photo. |
 | **Guests are never identifiable.** Backs, hands, out-of-focus shoulders only. | The brand promise is discretion, and generated strangers' faces read as fake. |
 | **No invented proof.** No press logos, awards, recognisable venues or real people. | Never let the image become louder than the proof. |
 | **Disclosure stays on.** `site.imageryNote` in `lib/site.ts` renders in the footer. | Honesty is the standard, and it protects the brand when the work is shared. |
@@ -100,18 +101,26 @@ Upscale before export if the tool's native output is smaller. Add a whisper of g
 
 ## 7. Every slot
 
-Priority 1 is launch-critical (the hero, the portrait and the experiences). Priority 2 completes the story. Priority 3 is the long tail.
+Priority 1 is launch-critical (the hero, the portrait, the experiences and the four signature dishes). Priority 2 completes the story. Priority 3 is the long tail.
 
 | P | Slot (file name) | Where | Ratio | Likeness | Wardrobe | Brief |
 |---|---|---|---|---|---|---|
 | 1 | `hero-still.jpg` | Home hero (behind the name) | 16:9, 3840×2160, subject in the right third | eric | A | The opening frame. Eric at the head of a candlelit table, the room around him in darkness. Negative space on the left for the name. |
+| 1 | `hero-figure.webp (transparent)` | Home hero (Eric standing right of the name) | 2:3 transparent cutout (PNG/WebP with alpha), 1024×1536 or larger, cut at the waist or below | eric | — | Eric as a cutout figure standing in the candlelit hero. Supplied by Eric: the first image on the site. Graded warm and faded into the floor by the hero itself. |
 | 1 | `portrait.jpg` | Home — The Host section; right half of the share card | 4:5, 2400×3000 | eric | A | The most important image on the site. A portrait with presence: one key light from the left, looking just off camera, controlled intensity. |
 | 1 | `exp-private-table.jpg` | Experiences I · The Private Table | 4:5 | eric | C | Before the guests: Eric lighting the last candle on a fully set table in a private home. |
 | 1 | `exp-island-water.jpg` | Experiences II · The Island & The Water | 4:5 | eric | B | Late service on open water: Eric walking a lantern-lit dock toward a table at the water's edge at dusk. |
 | 1 | `exp-founders-table.jpg` | Experiences III · The Founders' Table | 4:5 | eric | B | A long table mid-conversation. Eric at the head, listening; guests only as shoulders, hands and backs, out of focus. |
+| 1 | `menu-after-midnight.jpg` | Home + /menus · beside the menu card “After midnight” | 4:5 (also shown 16:11 on phones; keep the dish centred) | none | — | The late pasta: one perfect bowl at one in the morning. |
+| 1 | `menu-late-summer-outdoors.jpg` | Home + /menus · beside “Late summer, outdoors” | 4:5 (dish centred) | none | — | Heirloom tomatoes and burrata outdoors at golden hour. |
+| 1 | `menu-a-night-aboard.jpg` | Home + /menus · beside “A night aboard” | 4:5 (dish centred) | none | — | Oysters on deck at sunset. |
+| 1 | `menu-a-winter-table.jpg` | Home + /menus · beside “A winter table” | 4:5 (dish centred) | none | — | Osso buco by firelight. |
 | 2 | `hero-film.webm + .mp4` | Home hero (replaces the still on capable devices) | 16:9, 1920×1080, 10–15s seamless loop, silent, under 2 MB WebM + MP4 | eric | A | A breathing photograph: candle flames move, Eric's head turns slightly toward the table, smoke from a snuffed match drifts. No cuts, no camera move beyond a slow 2% push. |
 | 2 | `hero-film-poster.jpg` | First frame of the hero film | 16:9, same as hero-film | eric | A | Export the first frame of hero-film so the loop starts without a jump. |
 | 2 | `exp-occasion.jpg` | Experiences IV · The Occasion | 4:5 | eric | A | Toasts, third course. Glasses raised over a long table; Eric standing, mid-toast; motion blur allowed on the glasses. |
+| 2 | `food-market.jpg` | /menus · How your menu is made (1 of 3) | 4:5 | none | — | The market, that morning: the chef's hands choosing produce. Hands and forearms only. |
+| 2 | `food-pass.jpg` | /menus · How your menu is made (2 of 3) | 4:5 | none | — | The pass: the chef's hands finishing a plate. Hands only, not Eric. |
+| 2 | `food-table.jpg` | /menus · How your menu is made (3 of 3) | 4:5 | none | — | Served: the plate arriving at the table, a guest's hand on a glass. |
 | 2 | `era-screen.jpg` | /eric · I. The screen | 4:5 | eric | B | Where it started: Eric at a desk at night, face lit by a monitor, the city dark beyond the window. |
 | 2 | `era-crossover.jpg` | /eric · IV. The room | 4:5 | eric | C | From screens to rooms: Eric adjusting a brass pendant over an empty table in a private dining room. |
 | 2 | `era-table.jpg` | /eric · V. The table | 4:5 | hands | — | Hands only: Eric placing a printed menu card at a place setting. |

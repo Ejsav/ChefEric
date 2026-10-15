@@ -2,13 +2,14 @@
 import { useId, useState } from "react";
 import type { Menu } from "@/content/menus";
 import { Monogram } from "@/components/ui/Monogram";
+import { Plate } from "@/components/ui/Plate";
 import { Cta } from "@/components/ui/Cta";
 import { track } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 
 // The menu as an object: a printed card on heavy paper, the way it sits at
 // each guest's place. Tabs switch between sample menus; the card re-sets
-// itself line by line. It is the food, without a photograph.
+// itself line by line, and the signature dish photograph changes with it.
 export function MenuCard({ menus, compact = false }: { menus: Menu[]; compact?: boolean }) {
   const [active, setActive] = useState(0);
   const id = useId();
@@ -54,6 +55,21 @@ export function MenuCard({ menus, compact = false }: { menus: Menu[]; compact?: 
             </button>
           ))}
         </div>
+        {!compact ? (
+          <div className="mt-8 lg:mt-10 lg:max-w-[22rem]">
+            <div key={menu.slug} className="animate-[fade-up_900ms_var(--ease-out-expo)_both]">
+              <Plate
+                tone={menu.dish.tone}
+                slot={menu.dish.slot}
+                alt={menu.dish.alt}
+                label={menu.dish.label}
+                ratio="aspect-[16/11] lg:aspect-[4/5]"
+                reveal={false}
+                sizes="(min-width: 1024px) 22rem, 100vw"
+              />
+            </div>
+          </div>
+        ) : null}
         <p className="mt-8 hidden max-w-xs text-sm text-fg-muted lg:block">
           Samples only. Every real menu is written with the chef for one table, then never served the same way again.
         </p>

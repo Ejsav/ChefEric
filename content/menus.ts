@@ -3,6 +3,10 @@
 // one table. They show the range: the season, the setting and the reason for
 // gathering decide the food.
 // CONFIRM: rewrite with the chefs Eric works with, in their dishes.
+// Each menu carries one signature dish photograph (media slot), shown beside
+// the card and changing with it.
+
+import type { PlateTone } from "@/components/ui/Plate";
 
 export type Course = { label: string; dish: string; note?: string };
 export type Menu = {
@@ -14,6 +18,7 @@ export type Menu = {
   intro: string;
   courses: Course[];
   pairing: string;
+  dish: { slot: string; label: string; alt: string; tone: PlateTone };
 };
 
 export const menus: Menu[] = [
@@ -32,6 +37,7 @@ export const menus: Menu[] = [
       { label: "To close", dish: "Dark chocolate, sea salt, espresso", note: "amaro on the table" },
     ],
     pairing: "Grower champagne to begin, a cool Nerello Mascalese until late.",
+    dish: { slot: "menu-after-midnight", label: "The late pasta", tone: "ember", alt: "Spaghetti with butter, black pepper and pecorino in a shallow bowl by candlelight." },
   },
   {
     slug: "late-summer-outdoors",
@@ -48,6 +54,7 @@ export const menus: Menu[] = [
       { label: "Dessert", dish: "Roasted peaches, amaretti, mascarpone" },
     ],
     pairing: "Vermentino with the fish, a chilled Frappato as the light goes.",
+    dish: { slot: "menu-late-summer-outdoors", label: "Tomatoes, burrata, basil", tone: "linen", alt: "Heirloom tomatoes and burrata on an ivory plate at an outdoor table in golden light." },
   },
   {
     slug: "a-night-aboard",
@@ -64,6 +71,7 @@ export const menus: Menu[] = [
       { label: "Dessert", dish: "Lemon olive-oil cake, macerated berries" },
     ],
     pairing: "Franciacorta to start, Fiano through dinner.",
+    dish: { slot: "menu-a-night-aboard", label: "Oysters, on deck", tone: "tide", alt: "Oysters on crushed ice on a yacht's teak table at sunset." },
   },
   {
     slug: "a-winter-table",
@@ -80,5 +88,6 @@ export const menus: Menu[] = [
       { label: "Dessert", dish: "Tiramisù, made that afternoon", note: "amaro to finish" },
     ],
     pairing: "Barolo with the osso buco; Vin Santo with dessert.",
+    dish: { slot: "menu-a-winter-table", label: "Osso buco, by the fire", tone: "smoke", alt: "Osso buco with saffron risotto and gremolata in a wide bowl by firelight." },
   },
 ];
