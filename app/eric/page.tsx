@@ -6,7 +6,7 @@ import { Standards } from "@/components/sections/Standards";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 
 export const metadata: Metadata = {
-  title: "Eric Jokl — The Builder Behind the Evening",
+  title: "The Builder Behind the Evening",
   description:
     "Eric Jokl is a digital builder who designs, directs and hosts private evenings: how a career in code, brands and experience design became a standard for the room.",
   alternates: { canonical: "/eric" },
