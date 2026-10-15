@@ -52,6 +52,11 @@ export const mediaSlots: MediaSlot[] = [
     prompt: "Eric stands at the far end of a long candlelit dinner table set for twelve in a dark private dining room, one hand resting on the back of a chair, looking just past camera; ivory linen, brass candlesticks, crystal in soft focus; the left two thirds of the frame fall into near-black shadow.",
   },
   {
+    id: "hero-figure", kind: "image", where: "Home hero (Eric standing right of the name)", ratio: "2:3 transparent cutout (PNG/WebP with alpha), 1024×1536 or larger, cut at the waist or below", likeness: "eric", priority: 1,
+    brief: "Eric as a cutout figure standing in the candlelit hero. Supplied by Eric: the first image on the site. Graded warm and faded into the floor by the hero itself.",
+    prompt: "Supplied asset. For a regenerated version: Eric standing, three-quarter length, hands in pockets, looking into camera, on a transparent background.",
+  },
+  {
     id: "hero-film", kind: "film", where: "Home hero (replaces the still on capable devices)", ratio: "16:9, 1920×1080, 10–15s seamless loop, silent, under 2 MB WebM + MP4", likeness: "eric", wardrobe: "A", priority: 2,
     brief: "A breathing photograph: candle flames move, Eric's head turns slightly toward the table, smoke from a snuffed match drifts. No cuts, no camera move beyond a slow 2% push.",
     prompt: "Image-to-video from hero-still: almost still; candle flames flicker naturally, Eric slowly turns his head a few degrees toward the table and back, a thin ribbon of smoke rises from a just-lit candle; camera pushes in 2% over 12 seconds; loopable.",

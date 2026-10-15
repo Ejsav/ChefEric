@@ -1,6 +1,8 @@
 import { Cta } from "@/components/ui/Cta";
 import { HeroLight } from "@/components/system/HeroLight";
 import { HeroMedia } from "@/components/system/HeroMedia";
+import { mediaImage } from "@/lib/media";
+import { cn } from "@/lib/utils";
 
 // The hero is a private room with the lights low. One warm source —
 // a candle just out of frame — breathes beneath the name. When the hero
@@ -9,6 +11,9 @@ import { HeroMedia } from "@/components/system/HeroMedia";
 const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
 
 export function Hero() {
+  // With Eric's figure standing on the right, the actions move under the
+  // lead so they never sit on top of him.
+  const figure = !!mediaImage("hero-figure");
   return (
     <section id="hero" aria-labelledby="hero-title" className="tone-dark grain relative isolate flex min-h-[max(100svh,640px)] flex-col overflow-hidden">
       {/* Photograph or film, when present */}
@@ -42,7 +47,7 @@ export function Hero() {
             Private evenings for people who could go anywhere. Designed, directed and hosted
             by Eric Jokl — in your home, aboard your yacht, on your island.
           </p>
-          <div className="hero-fade flex flex-wrap items-center gap-x-10 gap-y-6 md:col-span-6 md:justify-end" style={d(800)}>
+          <div className={cn("hero-fade flex flex-wrap items-center gap-x-10 gap-y-6", figure ? "md:col-span-12" : "md:col-span-6 md:justify-end")} style={d(800)}>
             <Cta href="/inquire" track="cta:hero-request">Request an evening</Cta>
             <Cta href="#possibilities" variant="quiet" track="cta:hero-compose">Compose an evening</Cta>
           </div>
