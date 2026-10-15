@@ -14,8 +14,8 @@ import { cn } from "@/lib/utils";
 import { Arrow } from "@/components/ui/Cta";
 
 // ─────────────────────────────────────────────────────────────────────────
-// The inquiry as a conversation: the first chapter of working with Chef
-// Gennaro. One question at a time, each shaped by the answers before it —
+// The inquiry as a conversation: the first chapter of working with Eric
+// Jokl. One question at a time, each shaped by the answers before it —
 // a planner is asked about their client, a yacht about its galley, a
 // collaboration skips the dinner questions entirely. Letter keys choose,
 // Enter continues, progress is saved as a draft, and the visitor reads their
@@ -76,7 +76,7 @@ function stepErrors(id: StepId, a: A): Partial<Record<AnswerKey, string>> {
   return e;
 }
 
-const DRAFT = "rg:inquiry-draft";
+const DRAFT = "ej:inquiry-draft";
 type Draft = { answers: A; step: StepId; ts: number };
 
 export function Concierge() {
@@ -223,13 +223,13 @@ export function Concierge() {
     return (
       <div role="status" className="animate-[fade-up_1s_var(--ease-out-expo)_both]">
         <p className="text-eyebrow flex items-center gap-4"><span aria-hidden className="h-px w-10 bg-accent" />Received{ref ? ` · ${ref}` : ""}</p>
-        <h2 className="text-h1 mt-8 max-w-[16ch]">Your request is with <span className="italic text-accent">Chef Gennaro.</span></h2>
+        <h2 className="text-h1 mt-8 max-w-[16ch]">Your request is with <span className="italic text-accent">Eric Jokl.</span></h2>
         <p className="text-lead mt-8 max-w-lg">{site.responseNote}</p>
         <ol className="mt-14 border-t border-line">
           {[
-            ["Read", "Your request is read in full by Chef Gennaro's office — not sorted by software."],
+            ["Read", "Your request is read in full by Eric's office — not sorted by software."],
             ["A conversation", "A call or a note to understand the people, the place and the reason."],
-            ["A proposal", "A menu and a plan written for your table, refined together until it is right."],
+            ["A proposal", "A concept, a menu and a plan written for your table, refined together until it is right."],
           ].map(([t, b], i) => (
             <li key={t} className="grid grid-cols-[3rem_1fr] gap-4 border-b border-line py-6">
               <span className="font-display text-lg italic text-accent">{["i", "ii", "iii"][i]}.</span>
@@ -313,7 +313,7 @@ export function Concierge() {
         )}
 
         {step.id === "project" && (
-          <Question headingRef={headingRef} title="Tell us about the project." sub="What it is, who it is for, and what you would like Chef Gennaro to bring to it.">
+          <Question headingRef={headingRef} title="Tell us about the project." sub="What it is, who it is for, and what you would like Eric to bring to it.">
             <TextArea field="project" label="The project" value={answers.project} onChange={(v) => set("project", v)} error={errors.project} rows={6} autoFocus />
             <Text field="organisation" label="Brand, company or production" value={answers.organisation} onChange={(v) => set("organisation", v)} optional autoComplete="organization" />
           </Question>
@@ -366,7 +366,7 @@ export function Concierge() {
         )}
 
         {step.id === "guests" && (
-          <Question headingRef={headingRef} title={answers.form === "lesson" ? "How many will be cooking?" : "How many at the table?"} sub="An estimate is perfect.">
+          <Question headingRef={headingRef} title="How many at the table?" sub="An estimate is perfect.">
             <Choices field="guests" options={guestOptions} value={answers.guests} onChoose={(v, adv) => choose("guests", v, adv)} error={errors.guests} letters />
           </Question>
         )}
@@ -379,7 +379,7 @@ export function Concierge() {
         )}
 
         {step.id === "considerations" && (
-          <Question headingRef={headingRef} title="Anything Chef should know?" sub="All of this is optional — and all of it helps.">
+          <Question headingRef={headingRef} title="Anything we should know?" sub="All of this is optional — and all of it helps.">
             <TextArea field="dietary" label="Allergies and preferences" value={answers.dietary} onChange={(v) => set("dietary", v)} optional rows={3} placeholder="Allergies, things nobody at the table eats, favourite things…" />
             <Choices field="discretion" legend="Discretion" options={discretionOptions} value={answers.discretion} onChoose={(v) => choose("discretion", v, false)} letters />
             {isIntermediary(answers) ? (
@@ -435,7 +435,7 @@ export function Concierge() {
       {/* Actions */}
       <div className="mt-14 flex flex-col-reverse gap-6 border-t border-line pt-10 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-[0.66rem] uppercase tracking-[0.24em] text-fg-muted">
-          {isLast ? "Nothing is booked until you have spoken with Chef's office." : <>Press <kbd className="font-body text-fg">Enter ↵</kbd> to continue</>}
+          {isLast ? "Nothing is booked until you have spoken with Eric's office." : <>Press <kbd className="font-body text-fg">Enter ↵</kbd> to continue</>}
         </p>
         <button
           type="button"

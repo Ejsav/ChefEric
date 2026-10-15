@@ -1,8 +1,8 @@
 import { cn } from "@/lib/utils";
 
-// The house mark: R and G set in Bodoni inside a double ring — the
+// The house mark: E and J set in Bodoni inside a double ring — the
 // shape of a wax seal or the crest on a menu card.
-export function Monogram({ className, title = "Ray Gennaro" }: { className?: string; title?: string }) {
+export function Monogram({ className, title = "Eric Jokl" }: { className?: string; title?: string }) {
   return (
     <svg
       viewBox="0 0 64 64"
@@ -18,7 +18,7 @@ export function Monogram({ className, title = "Ray Gennaro" }: { className?: str
         fill="currentColor"
         style={{ fontFamily: "var(--font-display), Didot, serif", fontSize: "21px", letterSpacing: "-0.5px" }}
       >
-        R<tspan fontStyle="italic" dx="-1">G</tspan>
+        E<tspan fontStyle="italic" dx="2.2">J</tspan>
       </text>
     </svg>
   );

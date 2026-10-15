@@ -20,8 +20,8 @@ export function TheTable({ index = "III" }: { index?: string }) {
             </h2>
           </div>
           <p className="text-lead self-end text-fg-muted md:col-span-4 md:col-start-9" data-reveal>
-            Italian-American at the root, the season and the setting deciding the rest. These samples show
-            the range; yours will be written for your table.
+            Written with the chef chosen for your table; the season, the setting and the reason for
+            gathering decide the rest. These samples show the range.
           </p>
         </div>
         <div className="mt-16 md:mt-24">

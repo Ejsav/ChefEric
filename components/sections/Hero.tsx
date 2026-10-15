@@ -1,14 +1,18 @@
 import { Cta } from "@/components/ui/Cta";
 import { HeroLight } from "@/components/system/HeroLight";
+import { HeroMedia } from "@/components/system/HeroMedia";
 
 // The hero is a private room with the lights low. One warm source —
-// a candle just out of frame — breathes beneath the name. No video, no
-// carousel, no stock: atmosphere first, then the name, then the invitation.
+// a candle just out of frame — breathes beneath the name. When the hero
+// still or film exists (public/media/hero-still.*, hero-film.*) it sits
+// behind the same atmosphere; until then the room is type and light alone.
 const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
 
 export function Hero() {
   return (
     <section id="hero" aria-labelledby="hero-title" className="tone-dark grain relative isolate flex min-h-[max(100svh,640px)] flex-col overflow-hidden">
+      {/* Photograph or film, when present */}
+      <HeroMedia />
       {/* Atmosphere */}
       <HeroLight targetId="hero" />
       <div aria-hidden className="hero-lights absolute inset-0 -z-10">
@@ -21,22 +25,22 @@ export function Hero() {
       <div className="container-x relative flex flex-1 flex-col justify-end pb-10 pt-[calc(var(--header-h)+3rem)] md:pb-14">
         <p className="hero-fade text-eyebrow flex items-center gap-4" style={d(300)}>
           <span aria-hidden className="hero-draw inline-block h-px w-10 bg-accent" style={d(200)} />
-          Private Chef · Connecticut
+          <span>Private Evenings<span className="hidden sm:inline"> · By Arrangement</span></span>
         </p>
 
         <h1 id="hero-title" className="text-display hero-name hero-depth mt-8 md:mt-10">
           <span className="hero-rise line-mask"><span style={d(350)}>
-            <span className="mr-[0.18em] align-[0.62em] font-display text-[0.2em] italic tracking-normal text-accent">Chef</span>
-            Ray
+            <span className="mr-[0.18em] align-[0.62em] font-display text-[0.2em] italic tracking-normal text-accent">Evenings by</span>
+            Eric
           </span></span>
-          <span className="hero-rise line-mask"><span style={d(480)} className="pl-[0.7em] italic md:pl-[1.4em]">Gennaro</span></span>
-          <span className="sr-only">, Italian-American private chef in Connecticut</span>
+          <span className="hero-rise line-mask"><span style={d(480)} className="pl-[0.7em] italic md:pl-[1.4em]">Jokl</span></span>
+          <span className="sr-only">, private evenings designed, directed and hosted</span>
         </h1>
 
         <div className="mt-12 grid gap-10 md:mt-16 md:grid-cols-12 md:items-end">
           <p className="hero-fade text-lead max-w-[30rem] md:col-span-6 md:col-start-1" style={d(650)}>
-            Private tables for people who could dine anywhere. Italian-American cooking
-            with New Haven roots — served in your home, aboard your yacht, on your island.
+            Private evenings for people who could go anywhere. Designed, directed and hosted
+            by Eric Jokl — in your home, aboard your yacht, on your island.
           </p>
           <div className="hero-fade flex flex-wrap items-center gap-x-10 gap-y-6 md:col-span-6 md:justify-end" style={d(800)}>
             <Cta href="/inquire" track="cta:hero-request">Request an evening</Cta>
@@ -47,8 +51,8 @@ export function Hero() {
         <div className="mt-14 md:mt-20">
           <div aria-hidden className="hero-draw h-px bg-line" style={d(700)} />
           <div className="hero-fade mt-5 flex items-center justify-between text-[0.66rem] uppercase tracking-[0.28em] text-fg-muted" style={d(1000)}>
-            <span>New Haven roots</span>
-            <span className="hidden sm:inline">Connecticut · New York · The Islands</span>
+            <span>Built, not catered</span>
+            <span className="hidden sm:inline">New York · The Coast · The Islands</span>
             <span className="flex items-center gap-3">
               Scroll
               <span aria-hidden className="relative block h-6 w-px overflow-hidden bg-line">

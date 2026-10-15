@@ -17,17 +17,17 @@ import { MobileBar } from "@/components/system/MobileBar";
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "Chef Ray Gennaro — Private Chef, Connecticut",
-    template: "%s — Chef Ray Gennaro",
+    default: "Eric Jokl — Private Evenings, By Arrangement",
+    template: "%s — Eric Jokl",
   },
   description: site.description,
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     siteName: site.name,
-    title: "Chef Ray Gennaro — Private tables, by arrangement",
+    title: "Eric Jokl — Private evenings, by arrangement",
     description:
-      "Italian-American private chef with New Haven roots. Private dining in Connecticut and beyond, destination and private-island dinners, and cooking lessons.",
+      "Private evenings designed, directed and hosted by Eric Jokl, with a chef chosen for every table. In residences, aboard yachts and on private islands.",
     url: "/",
     locale: "en_US",
   },

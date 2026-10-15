@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Generate a private invitation link.
 //   INVITE_SECRET=... node scripts/invite.mjs "Mr. and Mrs. Whitman" --note "For the anniversary in June." --days 30 --setting yacht
-// Optional: --base https://www.raygennaro.com (defaults to NEXT_PUBLIC_SITE_URL)
+// Optional: --base https://www.example.com (defaults to NEXT_PUBLIC_SITE_URL)
 import { createHmac } from "node:crypto";
 
 const args = process.argv.slice(2);

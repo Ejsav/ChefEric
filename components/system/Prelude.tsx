@@ -12,10 +12,10 @@ export function Prelude() {
           <circle className="prelude-ring prelude-ring--inner" cx="32" cy="32" r="27" fill="none" stroke="currentColor" strokeWidth="0.3" pathLength={1} />
         </svg>
         <p className="line-mask mt-8 font-display text-[clamp(1.6rem,3vw,2.2rem)] tracking-[0.01em] text-fg">
-          <span className="prelude-name">Ray <span className="italic">Gennaro</span></span>
+          <span className="prelude-name">Eric <span className="italic">Jokl</span></span>
         </p>
         <span className="prelude-rule mt-6 block h-px w-24 bg-accent/70" />
-        <p className="prelude-sub mt-6 text-[0.62rem] uppercase tracking-[0.36em] text-fg-muted">New Haven · Connecticut</p>
+        <p className="prelude-sub mt-6 text-[0.62rem] uppercase tracking-[0.36em] text-fg-muted">Private Evenings · By Arrangement</p>
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { getLenis } from "@/lib/lenis";
 import { cn } from "@/lib/utils";
 
-// The Archive. On large screens the eras travel horizontally while the page
+// The Making. On large screens the chapters travel horizontally while the page
 // is pinned — reading a life left to right, like a contact sheet — with a
 // rail of eras you can jump between. On phones and for reduced motion it
 // becomes a vertical sequence with the same content and rhythm.
@@ -71,11 +71,11 @@ export function Archive() {
       <div className={cn("flex flex-col", pinned && "h-[100svh]")}>
         <div className="container-x flex items-end justify-between gap-8 pt-[clamp(6rem,10vw,9rem)] lg:pt-[calc(var(--header-h)+2.5rem)]">
           <div>
-            <p className="text-eyebrow flex items-center gap-4"><span aria-hidden className="h-px w-10 bg-accent/60" />The Archive</p>
+            <p className="text-eyebrow flex items-center gap-4"><span aria-hidden className="h-px w-10 bg-accent/60" />The Making</p>
             <h2 id="archive-title" className="text-h2 mt-6 max-w-[18ch]">Where the standard <span className="italic text-accent">came from.</span></h2>
           </div>
           {/* Era rail */}
-          <nav aria-label="Eras" className="hidden lg:block">
+          <nav aria-label="Chapters" className="hidden lg:block">
             <ol className="flex gap-6">
               {archive.map((e, i) => (
                 <li key={e.id}>

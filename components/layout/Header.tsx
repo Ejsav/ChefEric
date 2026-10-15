@@ -78,7 +78,7 @@ export function Header() {
           <Link href="/" className="group flex items-center gap-3">
             <Monogram className="h-10 w-10 text-[rgb(var(--brass))] transition-transform duration-1000 ease-out-expo group-hover:rotate-[-8deg]" title="" />
             <span className="sr-only font-display text-[1.15rem] tracking-[0.02em] sm:not-sr-only">
-              Ray Gennaro
+              Eric Jokl
             </span>
           </Link>
 
@@ -150,7 +150,7 @@ export function Header() {
             </Link>
           ))}
         </nav>
-        <div className="container-x pb-10 text-eyebrow">Connecticut · By arrangement</div>
+        <div className="container-x pb-10 text-eyebrow">Private Evenings · By arrangement</div>
         <style>{`@keyframes menu-in{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}`}</style>
       </div>
     </>

@@ -27,8 +27,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: p.metaTitle,
     description: p.metaDescription,
-    alternates: { canonical: `/private-chef/${p.slug}` },
-    openGraph: { title: `${p.metaTitle} — Chef Ray Gennaro`, description: p.metaDescription, url: `/private-chef/${p.slug}` },
+    alternates: { canonical: `/private-dining/${p.slug}` },
+    openGraph: { title: `${p.metaTitle} — Eric Jokl`, description: p.metaDescription, url: `/private-dining/${p.slug}` },
   };
 }
 
@@ -43,17 +43,17 @@ export default async function PlacePage({ params }: Props) {
   const service = {
     "@context": "https://schema.org",
     "@type": "Service",
-    name: `Private chef — ${p.name}`,
-    serviceType: "Private chef",
+    name: `Private evenings — ${p.name}`,
+    serviceType: "Private dining and event hosting",
     description: p.metaDescription,
-    url: `${site.url}/private-chef/${p.slug}`,
+    url: `${site.url}/private-dining/${p.slug}`,
     provider: { "@id": `${site.url}/#service` },
     areaServed: { "@type": "Place", name: p.name },
   };
 
   return (
     <>
-      <Breadcrumbs items={[{ name: "Where he cooks", path: "/private-chef" }, { name: p.name, path: `/private-chef/${p.slug}` }]} />
+      <Breadcrumbs items={[{ name: "Where evenings travel", path: "/private-dining" }, { name: p.name, path: `/private-dining/${p.slug}` }]} />
       <FaqJsonLd faqs={p.faqs} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(service) }} />
 
@@ -113,7 +113,7 @@ export default async function PlacePage({ params }: Props) {
         <div className="container-x flex flex-wrap items-baseline gap-x-8 gap-y-3 py-10">
           <span className="text-eyebrow">Also by arrangement</span>
           {others.map((o) => (
-            <Link key={o.slug} href={`/private-chef/${o.slug}`} className="link-underline pb-0.5 font-display text-lg text-fg/80 hover:text-fg">{o.name}</Link>
+            <Link key={o.slug} href={`/private-dining/${o.slug}`} className="link-underline pb-0.5 font-display text-lg text-fg/80 hover:text-fg">{o.name}</Link>
           ))}
         </div>
       </nav>

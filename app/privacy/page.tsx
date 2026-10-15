@@ -3,10 +3,10 @@ import { site } from "@/lib/site";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 
 // Plain-language privacy notice describing exactly what this site does.
-// CLIENT: have counsel review before launch; update if providers change.
+// CONFIRM: have counsel review before launch; update if providers change.
 export const metadata: Metadata = {
   title: "Privacy",
-  description: "How Chef Ray Gennaro's website handles the information you share.",
+  description: "How Eric Jokl's website handles the information you share.",
   alternates: { canonical: "/privacy" },
 };
 
@@ -43,7 +43,7 @@ const sections: { h: string; body: React.ReactNode }[] = [
   {
     h: "Who processes it",
     body: (
-      <p>The site is hosted by Vercel. Requests are delivered to Chef Gennaro&rsquo;s office by an email delivery service. These providers process information only to run the service.</p>
+      <p>The site is hosted by Vercel. Requests are delivered to Eric Jokl&rsquo;s office by an email delivery service. These providers process information only to run the service.</p>
     ),
   },
   {
@@ -63,7 +63,7 @@ export default function PrivacyPage() {
           <header className="md:col-span-4">
             <p className="text-eyebrow">Updated {UPDATED}</p>
             <h1 id="privacy-title" className="text-h1 mt-6">Privacy, <span className="italic text-accent">plainly.</span></h1>
-            <p className="mt-6 text-fg-muted">Discretion is part of the menu. This page explains what the website does with what you share.</p>
+            <p className="mt-6 text-fg-muted">Discretion is part of the design. This page explains what the website does with what you share.</p>
           </header>
           <div className="space-y-12 md:col-span-7 md:col-start-6">
             {sections.map((s) => (

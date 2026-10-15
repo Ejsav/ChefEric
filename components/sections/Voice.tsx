@@ -4,7 +4,7 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 // Three sections that exist only when real content does. Each renders
 // nothing while its array in content/voice.ts is empty.
 
-/** Ray's own words, set large: the closest thing to meeting him. */
+/** Eric's own words, set large: the closest thing to meeting him. */
 export function PullQuote({ index = 0 }: { index?: number }) {
   const q = quotes[index];
   if (!q) return null;
@@ -13,7 +13,7 @@ export function PullQuote({ index = 0 }: { index?: number }) {
       <figure className="container-x mx-auto max-w-5xl text-center" data-reveal>
         <span aria-hidden className="font-display text-[5rem] leading-none text-accent">&ldquo;</span>
         <blockquote className="text-h1 -mt-6 italic">{q.text}</blockquote>
-        <figcaption className="text-eyebrow mt-10">Ray Gennaro{q.context ? ` · ${q.context}` : ""}</figcaption>
+        <figcaption className="text-eyebrow mt-10">Eric Jokl{q.context ? ` · ${q.context}` : ""}</figcaption>
       </figure>
     </section>
   );
@@ -40,7 +40,7 @@ export function Testimonials() {
   );
 }
 
-/** Verified figures, shown above the Chef ledger. */
+/** Verified figures, shown above the host ledger. */
 export function Credentials() {
   if (!credentials.length) return null;
   return (

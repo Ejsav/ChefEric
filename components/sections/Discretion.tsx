@@ -1,19 +1,20 @@
 import { Monogram } from "@/components/ui/Monogram";
 
-// The trust section for a house that does not name its guests. Instead of
-// logos and testimonials, it states the rules — which is the stronger signal.
+// The trust section for a host who builds in public but never publishes his
+// guests. Instead of logos and testimonials, it states the rules — which is
+// the stronger signal.
 const principles = [
   {
     title: "Guests are never named",
     body: "No guest lists, no name-dropping, no photographs of your home. Ever.",
   },
   {
-    title: "Cameras by invitation",
-    body: "Nothing from your evening is published unless you ask for it to be.",
+    title: "Content by consent",
+    body: "Eric documents his craft in public. Your evening is never part of it unless you say so, in writing.",
   },
   {
-    title: "References, privately",
-    body: "For serious inquiries, introductions to past hosts are made personally — never published.",
+    title: "Phones down, on request",
+    body: "For evenings that should stay in the room, phones are checked discreetly at the door.",
   },
 ] as const;
 
@@ -27,7 +28,7 @@ export function Discretion() {
         </div>
         <h2 id="discretion-title" className="text-h1 mx-auto mt-10 max-w-[16ch]" data-reveal-group>
           <span className="line-mask"><span>Discretion is part</span></span>
-          <span className="line-mask" style={{ "--reveal-delay": "100ms" } as React.CSSProperties}><span className="italic text-accent">of the menu.</span></span>
+          <span className="line-mask" style={{ "--reveal-delay": "100ms" } as React.CSSProperties}><span className="italic text-accent">of the design.</span></span>
         </h2>
 
         <div className="mt-20 grid gap-px overflow-hidden border border-line bg-[rgb(var(--fg)/0.12)] text-left md:grid-cols-3">

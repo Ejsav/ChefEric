@@ -70,7 +70,7 @@ export function Composer({ index = "II" }: { index?: string }) {
                       x.id === setting ? "opacity-100 [clip-path:inset(0)]" : "z-10 opacity-0 [clip-path:inset(4%)]",
                     )}
                   >
-                    <Plate tone={x.tone} alt={`Evening ${x.phrase}.`} label={x.plateLabel} ratio="h-full" reveal={false} sizes="(min-width: 768px) 45vw, 100vw" />
+                    <Plate tone={x.tone} slot={x.slot} alt={`An evening ${x.phrase}.`} label={x.plateLabel} ratio="h-full" reveal={false} sizes="(min-width: 768px) 45vw, 100vw" />
                   </div>
                 ))}
               </div>

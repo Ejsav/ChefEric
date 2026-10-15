@@ -17,7 +17,7 @@ export function Standards() {
             <span className="line-mask"><span>How he</span></span>
             <span className="line-mask" style={{ "--reveal-delay": "100ms" } as React.CSSProperties}><span className="italic text-accent">works.</span></span>
           </h2>
-          <p className="mt-8 max-w-xs text-fg-muted" data-reveal>Five rules that came from New Haven and survived every kitchen since.</p>
+          <p className="mt-8 max-w-xs text-fg-muted" data-reveal>Five rules that came from building for screens and survived every room since.</p>
         </div>
         <ol className="md:col-span-7 md:col-start-6">
           {standards.map((s, i) => {

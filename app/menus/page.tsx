@@ -6,11 +6,11 @@ import { InquiryClose } from "@/components/sections/InquiryClose";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 
 export const metadata: Metadata = {
-  title: "Sample Menus — Italian-American Private Dining",
+  title: "Sample Menus — Private Dining",
   description:
-    "Sample menus from Chef Ray Gennaro: Sunday gravy the New Haven way, late-summer Connecticut, a night aboard, a winter table. Every real menu is written for one table.",
+    "Sample menus for private evenings by Eric Jokl: after midnight, late summer outdoors, a night aboard, a winter table. Every real menu is written with the chef for one table.",
   alternates: { canonical: "/menus" },
-  openGraph: { title: "Sample menus — Chef Ray Gennaro", url: "/menus" },
+  openGraph: { title: "Sample menus — Eric Jokl", url: "/menus" },
 };
 
 export default function MenusPage() {
@@ -24,8 +24,8 @@ export default function MenusPage() {
         lead={
           <p>
             Each evening begins as a conversation and becomes a menu nobody else will be served. These four
-            samples show the range: the Sunday table he grew up around, the Connecticut summer, a dinner at
-            anchor, a winter night.
+            samples show the range: a table that starts after midnight, a summer lawn, a dinner at anchor, a
+            winter night.
           </p>
         }
       />
@@ -40,13 +40,13 @@ export default function MenusPage() {
           <h2 id="menus-how" className="text-h2 md:col-span-5">How your menu <span className="italic text-accent">is made.</span></h2>
           <div className="grid gap-8 text-fg-muted md:col-span-6 md:col-start-7">
             <p className="text-lead text-fg">
-              Chef Gennaro starts with the people at the table: what they love, what they avoid, what they would
-              never order for themselves.
+              Eric starts with the people at the table: what they love, what they avoid, what they would never
+              order for themselves. Then he chooses the chef who should cook it.
             </p>
             <p>
               The season and the setting decide the rest. A galley asks for a different menu than an estate
-              kitchen; a lesson is cooked by the guests themselves. Allergies and preferences are designed in from
-              the first draft, never substituted at the end.
+              kitchen; a founders&rsquo; table is paced around the conversation. Allergies and preferences are
+              designed in from the first draft, never substituted at the end.
             </p>
             <p>
               You receive the menu as a proposal, refine it together, and on the night each guest finds it printed

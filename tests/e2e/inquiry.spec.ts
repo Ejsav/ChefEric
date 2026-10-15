@@ -40,7 +40,7 @@ test("planner booking a yacht follows the yacht branch and submits", async ({ pa
   await next(page);
   await expect(page.locator("p.font-display.italic").first()).toContainText("aboard a yacht in Newport, RI, in late June");
   await page.getByRole("button", { name: "Send the request" }).click();
-  await expect(page.getByRole("status")).toContainText(/RG-[A-Z0-9]{6}/);
+  await expect(page.getByRole("status")).toContainText(/EJ-[A-Z0-9]{6}/);
 });
 
 test("a collaboration skips the dinner questions", async ({ page }) => {

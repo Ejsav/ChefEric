@@ -13,7 +13,7 @@ export function Footer() {
           <div className="md:col-span-5" data-reveal>
             <Monogram className="h-14 w-14 text-accent" />
             <p className="mt-8 max-w-sm font-display text-[1.6rem] italic leading-snug text-fg/90">
-              A table is the oldest form of hospitality. We still set it by hand.
+              A table is the oldest interface there is. We still design it by hand.
             </p>
           </div>
           <div className="grid grid-cols-2 gap-10 md:col-span-7 md:grid-cols-3" data-reveal style={{ "--reveal-delay": "120ms" } as React.CSSProperties}>
@@ -42,7 +42,7 @@ export function Footer() {
             </div>
             <div className="col-span-2 md:col-span-1">
               <p className="text-eyebrow">Where</p>
-              <p className="mt-5 text-fg/85">Based in {site.region}.<br />Travelling by arrangement.</p>
+              <p className="mt-5 text-fg/85">Wherever the table is.<br />Travelling by arrangement.</p>
             </div>
           </div>
         </div>
@@ -51,14 +51,15 @@ export function Footer() {
       {/* The name, set at architectural scale and cropped by the page edge. */}
       <div aria-hidden className="pointer-events-none select-none overflow-hidden">
         {/* Rendered via ::before so the decorative word is not text content. */}
-        <p className="translate-y-[18%] whitespace-nowrap text-center font-display text-[19.5vw] leading-[0.8] tracking-[-0.03em] text-fg/[0.07] before:content-['Gennaro']" />
+        <p className="translate-y-[18%] whitespace-nowrap text-center font-display text-[17vw] leading-[0.8] tracking-[-0.03em] text-fg/[0.07] before:content-['Eric_Jokl']" />
       </div>
 
       <div className="container-x relative flex flex-col gap-3 border-t border-line py-7 text-[0.7rem] uppercase tracking-[0.22em] text-fg-muted sm:flex-row sm:items-center sm:justify-between">
         <span>© {year} {site.name}</span>
         <span className="flex flex-wrap gap-x-6 gap-y-2">
           <Link href="/privacy" className="link-underline pb-0.5 hover:text-fg">Privacy</Link>
-          <span>Private dining · {site.region}</span>
+          <span>{site.house} · {site.region}</span>
+          <span>{site.imageryNote}</span>
         </span>
       </div>
     </footer>

@@ -1,10 +1,11 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { mediaImage } from "@/lib/media";
 
-// A "plate" is a photograph slot. When `src` is supplied it renders the
-// photograph through next/image. Until the shoot happens it renders a
-// lit, grained tonal study in the same mood — never a stock photo, never a
-// grey box. Swap in real imagery by adding `src` in content/ (see PHOTOGRAPHY.md).
+// A "plate" is a photograph slot. Give it a `slot` id (content/media.ts) and
+// it renders public/media/<slot>.* through next/image as soon as that file
+// exists. Until then it renders a lit, grained tonal study in the same
+// mood — never a stock photo, never a grey box. See docs/AI_IMAGERY.md.
 
 export type PlateTone = "ember" | "linen" | "tide" | "smoke" | "portrait";
 
@@ -67,6 +68,8 @@ type Props = {
   alt: string;
   label?: string;
   src?: string;
+  /** media slot id; resolves to public/media/<slot>.* when present */
+  slot?: string;
   sizes?: string;
   priority?: boolean;
   className?: string;
@@ -77,7 +80,8 @@ type Props = {
   cursorLabel?: string;
 };
 
-export function Plate({ tone, alt, label, src, sizes = "(min-width: 1024px) 50vw, 100vw", priority, className, ratio = "aspect-[4/5]", reveal = true, cursorLabel }: Props) {
+export function Plate({ tone, alt, label, src: given, slot, sizes = "(min-width: 1024px) 50vw, 100vw", priority, className, ratio = "aspect-[4/5]", reveal = true, cursorLabel }: Props) {
+  const src = given ?? mediaImage(slot);
   return (
     <figure
       className={cn("group/plate relative overflow-hidden bg-bg-elevated", ratio, className)}
@@ -100,7 +104,7 @@ export function Plate({ tone, alt, label, src, sizes = "(min-width: 1024px) 50vw
       {label ? (
         <figcaption className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4 text-[0.66rem] uppercase tracking-[0.26em] text-[rgba(237,229,214,0.7)] md:bottom-7 md:left-7 md:right-7">
           <span>{label}</span>
-          <span aria-hidden className="font-display text-sm normal-case italic tracking-normal">RG</span>
+          <span aria-hidden className="font-display text-sm normal-case italic tracking-normal">EJ</span>
         </figcaption>
       ) : null}
     </figure>

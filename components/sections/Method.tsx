@@ -15,7 +15,7 @@ export function Method() {
               <span className="line-mask" style={{ "--reveal-delay": "100ms" } as React.CSSProperties}><span className="italic text-accent">is made.</span></span>
             </h2>
             <p className="mt-8 max-w-sm text-fg-muted" data-reveal>
-              Five movements, from the first call to the last plate. You are asked to do
+              Five movements, from the first call to the last pour. You are asked to do
               one thing: arrive at your own table.
             </p>
           </div>

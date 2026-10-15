@@ -1,10 +1,11 @@
 import type { PlateTone } from "@/components/ui/Plate";
 
-// The Archive: Chef Gennaro's history as eras, each with a place and the
-// lesson it left him — the "why" behind how he cooks and hosts today.
-// Every era is drawn from his documented history. CLIENT: add `years`,
-// named places and archival photographs (family, early kitchens, menus)
-// as they are approved; the layout already makes room for them.
+// The Making: how a builder of digital systems came to build evenings —
+// six chapters, each with a place and the lesson it left him. This is the
+// "why" behind how he designs and hosts today.
+// Nothing here is a dated biography: no years, employers or clients are
+// claimed. CONFIRM: Eric approves every line, and adds `years` and named
+// places only where he wants them published.
 
 export type Era = {
   id: string;
@@ -15,78 +16,78 @@ export type Era = {
   place: string;
   body: string;
   lesson: string;
-  plate: { tone: PlateTone; label: string; alt: string; src?: string };
+  plate: { tone: PlateTone; label: string; alt: string; slot?: string; src?: string };
 };
 
 export const archive: Era[] = [
   {
-    id: "family-table",
+    id: "the-screen",
     numeral: "I",
     era: "The beginning",
-    title: "The family table",
-    place: "New Haven, Connecticut",
-    body: "In New Haven's Italian-American households, Sunday meant a pot of gravy started in the morning and more chairs than the room was built for. The kitchen was the centre of the house, and feeding people properly was a matter of respect.",
-    lesson: "Feed people properly — generously, and without shortcuts.",
-    plate: { tone: "linen", label: "Sunday, before noon", alt: "A family kitchen in New Haven, a pot simmering on the stove." },
+    title: "The screen",
+    place: "A desk, after midnight",
+    body: "It started with a screen and a blank file. Code taught him the first rule of everything he builds now: every experience is a system, and a system can be designed down to the second — what loads first, what waits, what makes someone stay.",
+    lesson: "Every feeling was designed by someone.",
+    plate: { tone: "smoke", label: "After midnight", alt: "Eric Jokl at a desk at night, his face lit by a monitor.", slot: "era-screen" },
   },
   {
-    id: "the-line",
+    id: "the-pressure",
     numeral: "II",
     era: "The formation",
-    title: "The line",
-    place: "Professional kitchens",
-    body: "Then decades in restaurant kitchens: the heat, the speed, the discipline of service. The line teaches what no family kitchen can — timing to the second, consistency at volume, and the respect of the people working beside you.",
-    lesson: "Consistency is a form of respect.",
-    plate: { tone: "ember", label: "Service, nine o’clock", alt: "A restaurant line mid-service, flame beneath a pan." },
+    title: "The pressure",
+    place: "Building with no safety net",
+    body: "Then the years of building under pressure, with no shortcuts and nobody to hand the hard part to. Ship it, test it, fix it, raise the standard. Pressure is where taste stops being an opinion and becomes a discipline.",
+    lesson: "Never confuse motion with progress.",
+    plate: { tone: "tide", label: "Crossing, late", alt: "Eric Jokl crossing a wet city street at night, collar up.", slot: "era-pressure" },
   },
   {
-    id: "private-rooms",
+    id: "the-attention",
     numeral: "III",
     era: "The turn",
-    title: "The private rooms",
-    place: "Households, estates & luxury dining",
-    body: "Private service asks for something a restaurant never does. The guest is not a ticket on a rail; you are standing in their home. Precision has to sit alongside warmth, and everything happens with absolute discretion.",
-    lesson: "The guest should never see the effort.",
-    plate: { tone: "smoke", label: "A private room", alt: "A low-lit private dining room with a single table set for eight." },
+    title: "The attention",
+    place: "Brands, pages & offers",
+    body: "Designing pages that make strangers trust, click and decide is a study of human attention: what people notice first, what they remember, what quietly makes them leave. A dining room obeys exactly the same laws.",
+    lesson: "Trust is decided before anyone speaks.",
+    plate: { tone: "linen", label: "The wall of drafts", alt: "Eric Jokl marking printed layouts pinned to a studio wall.", slot: "era-conversion" },
   },
   {
-    id: "islands",
+    id: "the-room",
     numeral: "IV",
-    era: "The distance",
-    title: "The islands",
-    place: "Private islands",
-    body: "Cooking on a private island is the purest test of planning. Every ingredient, every tool and every contingency is accounted for before departure — and the measure of success is that nobody at the table notices how far the food has travelled.",
-    lesson: "Plan for everything, so the evening feels like nothing was planned.",
-    plate: { tone: "tide", label: "Open water", alt: "A private island dock at dusk with lanterns lit." },
+    era: "The crossing",
+    title: "The room",
+    place: "From screens to rooms",
+    body: "The next build was one people walk into instead of scroll past. Light, sound, pace, a seating plan, the moment the first plate lands: an evening is the most demanding interface there is, and nobody can refresh it.",
+    lesson: "An evening is an interface. Design every touchpoint.",
+    plate: { tone: "ember", label: "Setting the light", alt: "Eric Jokl adjusting a brass pendant over an empty table.", slot: "era-crossover" },
   },
   {
-    id: "lessons",
+    id: "the-table",
     numeral: "V",
-    era: "The circle",
-    title: "The lessons",
-    place: "Counters, everywhere",
-    body: "Teaching closes the circle. In private lessons he passes on what was passed to him: the feel of a dough, the patience of a sauce, the confidence to season by taste.",
-    lesson: "What you were given, you hand on.",
-    plate: { tone: "linen", label: "Hands in the dough", alt: "A guest learning to shape fresh pasta by hand." },
+    era: "The craft",
+    title: "The table",
+    place: "Private rooms, anywhere",
+    body: "Private evenings are where all of it meets: the systems, the taste, the obsession with how people feel. A chef's craft owns the kitchen. His craft is everything else — and the rule that the guest never sees any of it working.",
+    lesson: "The guest should never see the effort.",
+    plate: { tone: "linen", label: "The card at each place", alt: "Eric Jokl's hands placing a printed menu card at a place setting.", slot: "era-table" },
   },
   {
     id: "now",
     numeral: "VI",
     era: "Now",
     title: "Wherever the table is",
-    place: "Connecticut, and beyond",
-    body: "Today Chef Gennaro cooks for private tables from his base in Connecticut and travels by arrangement — a Manhattan apartment, an estate, a yacht, an island. The family table is still the reference for all of it.",
-    lesson: "Every evening is written once.",
-    plate: { tone: "ember", label: "The table, tonight", alt: "A table set by candlelight, waiting for its guests." },
+    place: "By arrangement",
+    body: "Today Eric Jokl designs and hosts private evenings by arrangement — a city apartment, an estate, a yacht, an island — and builds the systems behind them in public. The standard is the same in every room.",
+    lesson: "Every evening is built once.",
+    plate: { tone: "ember", label: "The table, tonight", alt: "Eric Jokl in a doorway, a candlelit table glowing behind him.", slot: "era-now" },
   },
 ];
 
-// How he works, in his terms. CLIENT: Chef to approve the wording of each
+// How he works, in his terms. CONFIRM: Eric approves the wording of each
 // standard — these should sound exactly like him.
 export const standards = [
-  { title: "The guest never sees the effort.", body: "Preparation, logistics, the problem with the oven at six o'clock — none of it reaches the table. What reaches the table is the evening." },
-  { title: "Taste everything. Twice.", body: "Once when it is made, once before it leaves. Seasoning is a decision, not a habit." },
-  { title: "Leave the kitchen cleaner than you found it.", body: "It is your home. The team leaves it as if nobody had cooked there — except for the smell of garlic, which is permanent." },
-  { title: "No two tables get the same night.", body: "Menus are written for one table and one occasion. If you loved a dish, it can come back — but the evening is always new." },
-  { title: "What is said at the table stays at the table.", body: "Discretion is not a policy; it is how he was raised to behave in someone else's home." },
+  { title: "The guest never sees the effort.", body: "Logistics, timing, the problem at six o'clock — none of it reaches the table. What reaches the table is the evening." },
+  { title: "Design every second.", body: "Arrival, first light, first pour, the pause before dessert. Every moment is planned like a launch and timed like a show." },
+  { title: "Taste is a decision.", body: "Every glass, every song, every candle height is chosen on purpose. If it does not make the night better, it does not make the room." },
+  { title: "No two tables get the same night.", body: "Each evening is built for one table and one reason. If you loved a moment, it can come back — but the night is always new." },
+  { title: "What is said at the table stays at the table.", body: "Eric builds in public. Your evening is never part of it. Discretion is not a policy; it is the job." },
 ] as const;

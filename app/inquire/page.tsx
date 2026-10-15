@@ -6,9 +6,9 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Inquire — Request a Private Evening",
   description:
-    "Request a private dinner, a yacht or private-island evening, a celebration or a cooking lesson with Chef Ray Gennaro. Every request is read and answered personally.",
+    "Request a private dinner, a yacht or private-island evening, a founders' table or a celebration hosted by Eric Jokl. Every request is read and answered personally.",
   alternates: { canonical: "/inquire" },
-  openGraph: { title: "Request an evening — Chef Ray Gennaro", url: "/inquire" },
+  openGraph: { title: "Request an evening — Eric Jokl", url: "/inquire" },
 };
 
 const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
@@ -31,7 +31,7 @@ export default function InquirePage() {
             </h1>
             <p className="hero-fade mt-8 max-w-sm text-fg-muted" style={d(650)}>
               A few questions, each shaped by your last answer. It takes about two minutes, and
-              nothing is booked until you have spoken with Chef&rsquo;s office.
+              nothing is booked until you have spoken with Eric&rsquo;s office.
             </p>
             {site.email ? (
               <div className="hero-fade mt-10 hidden space-y-2 border-t border-line pt-8 text-sm lg:block" style={d(800)}>

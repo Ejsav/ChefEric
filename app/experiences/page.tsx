@@ -9,11 +9,11 @@ import { Composer } from "@/components/sections/Composer";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 
 export const metadata: Metadata = {
-  title: "Experiences — Private Dining, Yachts, Islands & Lessons",
+  title: "Experiences — Private Dining, Yachts, Islands & Salons",
   description:
-    "Private dinners in your residence, private-island and yacht dining, private cooking lessons and hosted occasions with Chef Ray Gennaro, Connecticut.",
+    "Private dinners in your residence, private-island and yacht evenings, founders' tables and hosted occasions, designed and directed by Eric Jokl.",
   alternates: { canonical: "/experiences" },
-  openGraph: { title: "The Experiences — Chef Ray Gennaro", url: "/experiences" },
+  openGraph: { title: "The Experiences — Eric Jokl", url: "/experiences" },
 };
 
 export default function ExperiencesPage() {

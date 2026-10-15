@@ -14,8 +14,8 @@ export type Touch = {
   term?: string;
 };
 
-const FIRST = "rg:first-touch";
-const SESSION = "rg:session-touch";
+const FIRST = "ej:first-touch";
+const SESSION = "ej:session-touch";
 const THIRTY_DAYS = 30 * 24 * 60 * 60 * 1000;
 
 function read(store: Storage, key: string): Touch | null {

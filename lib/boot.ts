@@ -19,5 +19,5 @@ var still=mq('(prefers-reduced-motion: reduce)');
 var lite=!!c.saveData||/(^|slow-)2g|3g/.test(c.effectiveType||'')||(n.deviceMemory&&n.deviceMemory<=2)||(n.hardwareConcurrency&&n.hardwareConcurrency<=2);
 d.dataset.tier=still?'still':lite?'lite':'full';
 d.dataset.pointer=mq('(hover: hover) and (pointer: fine)')?'fine':'coarse';
-try{if(location.pathname==='/'&&d.dataset.tier==='full'&&d.dataset.pointer==='fine'&&!sessionStorage.getItem('rg:prelude')&&!/bot|crawl|spider|slurp|preview/i.test(n.userAgent)){d.classList.add('prelude');sessionStorage.setItem('rg:prelude','1');setTimeout(function(){d.classList.remove('prelude')},4200)}}catch(e){}
+try{if(location.pathname==='/'&&d.dataset.tier==='full'&&d.dataset.pointer==='fine'&&!sessionStorage.getItem('ej:prelude')&&!/bot|crawl|spider|slurp|preview/i.test(n.userAgent)){d.classList.add('prelude');sessionStorage.setItem('ej:prelude','1');setTimeout(function(){d.classList.remove('prelude')},4200)}}catch(e){}
 })();`;
