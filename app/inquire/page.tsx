@@ -26,12 +26,12 @@ export default function InquirePage() {
               A private request
             </p>
             <h1 id="inquire-title" className="mt-8 whitespace-nowrap font-display text-[clamp(2.4rem,4vw,3.75rem)] leading-[1.02] tracking-[-0.02em]">
-              <span className="hero-rise line-mask"><span style={d(220)}>The first</span></span>
-              <span className="hero-rise line-mask"><span style={d(340)} className="italic text-accent">chapter.</span></span>
+              <span className="hero-rise line-mask"><span style={d(220)}>Where it</span></span>
+              <span className="hero-rise line-mask"><span style={d(340)} className="italic text-accent">begins.</span></span>
             </h1>
             <p className="hero-fade mt-8 max-w-sm text-fg-muted" style={d(650)}>
-              A few questions, each shaped by your last answer. It takes about two minutes, and
-              nothing is booked until you have spoken with the chef&rsquo;s office.
+              About two minutes of questions, each one following from your last answer. Sending
+              this books nothing; it starts a conversation.
             </p>
             {site.email ? (
               <div className="hero-fade mt-10 hidden space-y-2 border-t border-line pt-8 text-sm lg:block" style={d(800)}>

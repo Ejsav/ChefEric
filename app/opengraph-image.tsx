@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
-// 1200×630 share card rendered at build time: the name in Bodoni under a
+// 1200×630 share card rendered at build time: the name in Instrument Serif under a
 // warm candle pool, the same scene as the hero. When the portrait slot is
 // filled (public/media/portrait.jpg or .png) it takes the right of the card.
 export const alt = "Chef Eric Jokl — Private tables, by arrangement";
@@ -33,18 +33,18 @@ function portrait(): string | null {
 
 export default async function OG() {
   const [roman, italic] = await Promise.all([
-    font("Eric", "Bodoni+Moda"),
-    font("Chef Jokl Private dinners, written once, for one table.", "Bodoni+Moda", true),
+    font("Eric", "Instrument+Serif"),
+    font("Chef Jokl Private dinners, written once, for one table.", "Instrument+Serif", true),
   ]);
   const fonts = [
-    roman && { name: "Bodoni", data: roman, style: "normal" as const, weight: 400 as const },
-    italic && { name: "Bodoni", data: italic, style: "italic" as const, weight: 400 as const },
+    roman && { name: "Display", data: roman, style: "normal" as const, weight: 400 as const },
+    italic && { name: "Display", data: italic, style: "italic" as const, weight: 400 as const },
   ].filter(Boolean) as { name: string; data: ArrayBuffer; style: "normal" | "italic"; weight: 400 }[];
   const face = portrait();
 
   return new ImageResponse(
     (
-      <div style={{ width: "100%", height: "100%", display: "flex", backgroundColor: "#110c09", color: "#ede5d6", fontFamily: "Bodoni, serif" }}>
+      <div style={{ width: "100%", height: "100%", display: "flex", backgroundColor: "#110c09", color: "#ede5d6", fontFamily: "Display, serif" }}>
         {face ? (
           <img src={face} alt="" width={504} height={630} style={{ position: "absolute", right: 0, top: 0, width: 504, height: 630, objectFit: "cover" }} />
         ) : null}

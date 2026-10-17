@@ -4,24 +4,24 @@ A luxury private-chef website, shown under a demo persona: **“Chef Eric Jokl�
 
 The benchmark is luxury hospitality (Aman, Casa Cipriani, private members' clubs), not other chef websites. That means restraint, negative space, editorial typography, and discretion as the trust signal.
 
-> **Separate from the original.** This site lives on the branch `claude/eric-jokl-rebrand-a4wmzc` and deploys as its own Vercel project (`eric-jokl`). The original site on `main` and its live deployment are untouched.
+> **Repository boundary.** This repository is only the Chef Eric Jokl template. A separate client project lives in its own repository (`Ejsav/Chef`) with its own Vercel project, and nothing moves between the two. `npm run guard` fails CI on any trace of it; `CLAUDE.md` holds the rules for anyone, human or AI, working here. See [Deploy](#deploy) for how the Vercel projects and `chef.ericjokl.com` must be wired.
 
 ## Art direction
 
 | | |
 |---|---|
 | **Mood** | A private room at night. One warm light source. Linen, walnut, aged brass. Oxblood appears twice on the whole site. |
-| **Display type** | **Bodoni Moda**, the face of Italian luxury printing for two centuries. Italic is used for emphasis, the way a maître d' would underline. |
-| **Body type** | **Instrument Sans**, a quiet, tailored modern counterweight. |
+| **Display type** | **Instrument Serif**: tall, slightly condensed, cinematic, the voice of a film title card. Italic is used for emphasis, the way a maître d' would underline. |
+| **Body type** | **Instrument Sans**, the serif's sibling, so display and body read as one hand. |
 | **Palette** | Espresso `#110c09`, walnut `#1b140f`, ivory `#ede5d6`, linen `#f2ece1`, brass `#be9c68` (deep brass `#7a5e34` on linen), oxblood `#6c1e22`. |
-| **Mark** | E and J in Bodoni inside a double ring, like a wax seal (`components/ui/Monogram.tsx`). |
+| **Mark** | E and J in the display serif inside a double ring, like a wax seal (`components/ui/Monogram.tsx`). |
 | **Rhythm** | Sections alternate dark / linen like the pages of a menu card. Tones are CSS-variable scopes (`.tone-dark`, `.tone-walnut`, `.tone-linen`), so every component works on all of them. |
 | **Motion** | Slow, weighted, cinematic easing (`expo.out`, 1.4–1.8s). Lines rise from masks, hairlines draw, the candle glow breathes. Everything respects `prefers-reduced-motion`. |
 
 ## The demo, honestly
 
 - The notice bar on every page and the footer say this is a template and that “Chef Eric Jokl” is a demo persona; `/your-site` repeats it in its first line.
-- The chef's story (`/chef`) is deliberately free of dates, employers, awards and press.
+- The chef page (`/chef`) describes how the work is done, in six chapters of the craft, not a life story: no dates, employers, awards, press or past clients are claimed.
 - Testimonials are labelled **Sample** on the page (`content/voice.ts`, `sample: true`). A customer version replaces them with real, approved words or empties the array to hide the section.
 - Prices (`content/experiences.ts` → `from`, and the pricing FAQ) are demo guides.
 - The photography is AI-generated from Eric's likeness and the footer says so.
@@ -45,12 +45,12 @@ The site is built as layers, so new ideas plug into the system instead of being 
 
 ### 2. Possibilities, not packages
 
-**Compose an evening** (`components/sections/Composer.tsx`, `content/possibilities.ts`). The visitor sets the room (a private home, a Manhattan penthouse, a Hamptons estate, a Florida waterfront, a yacht, a private island, a hangar, abroad), the reason (including *a class*) and the scale, then reads the evening written in front of them. The composition carries straight into the inquiry.
+**Compose an evening** (`components/sections/Composer.tsx`, `content/possibilities.ts`). The visitor sets the room (a private home, a Manhattan penthouse, a Hamptons estate, a waterfront home, a yacht, a private island, a hangar, abroad), the reason (including *a class*) and the scale, then reads the evening written in front of them. The composition carries straight into the inquiry.
 
 ### 3. The chef
 
 - **The Chef** on the home page (`components/sections/ChefIntro.tsx`): the portrait beside the story and a ledger (cuisine, service, base, table size, the rule).
-- **The Story** (`components/sections/Archive.tsx`, `content/archive.ts`): six chapters — the family table, the line, the private rooms, the water, the lessons, now — each with *what it taught him*. Pinned horizontal travel on desktop; vertical on phones.
+- **The Chapters** (`components/sections/Archive.tsx`, `content/archive.ts`): six chapters of the craft (patience, fire, the room, distance, hands, tonight), each with its principle. Pinned horizontal travel on desktop; vertical on phones. A client version can replace them with verified history; the layout takes years and places.
 - **The Standards** (`components/sections/Standards.tsx`): how he works, in five sentences.
 
 ### 4. The four forms
@@ -84,7 +84,7 @@ On the server (`app/api/inquire/route.ts`, `lib/inquiry-schema.ts`) every reques
 | `/chef` | The story (six chapters), the standards, discretion |
 | `/gallery` | Twelve photographs in an editorial masonry |
 | `/your-site` | The template offer: type-your-name preview, what is customized, hosting price, how it works, questions |
-| `/private-dining` and `/private-dining/[place]` | Connecticut, New York City, the Hamptons, Florida, yachts and private islands, each with unique copy, FAQ data and a pre-filled inquiry |
+| `/private-dining` and `/private-dining/[place]` | New York City, the Hamptons, Palm Beach, yachts, private islands and private aviation, each with unique copy, FAQ data and a pre-filled inquiry |
 | `/questions` | Booking, the chef, the evening, travel, salons, discretion |
 | `/inquire` | The conversational request, including the gift path |
 | `/invite/[token]` | Signed private invitations (never indexed) |
@@ -95,14 +95,23 @@ On the server (`app/api/inquire/route.ts`, `lib/inquiry-schema.ts`) every reques
 Every image slot is a `Plate` with a `slot` id. To place an asset, export it as `public/media/<slot>.jpg` (or `.avif`/`.webp`/`.png`; films `.webm` + `.mp4`). `next.config.ts` lists that folder at build time, so a filled slot renders the asset through `next/image` and an empty one keeps its lit, grained tonal study. No code changes.
 
 ```bash
-npm run media   # which of the 40 slots are filled
+npm run media         # which slots are filled
+npm run media:guide   # regenerate docs/PHOTOGRAPHY_GUIDE.md after editing the manifest
 ```
 
-Slots, briefs and prompts: `content/media.ts`. Method, identity lock, quality gate and export specs: `docs/AI_IMAGERY.md`.
+| Document | For |
+|---|---|
+| `content/media.ts` | The manifest: every slot, where it appears, ratio, priority, brief and generation prompt. |
+| `docs/PHOTOGRAPHY_GUIDE.md` | **The professional shoot brief** a client's photographer works from: the standard, delivery and film specs, rights, the full shot list by page, a shoot plan and an acceptance checklist. Generated from the manifest; CI fails if it is stale. |
+| `docs/DEMO_IMAGES.md` | Which of the supplied demo images goes in which slot, and what is still to create. |
+| `docs/AI_IMAGERY.md` | How the demo imagery is generated from Eric's likeness. |
+
+**Production notes.** Open any page with `?notes=1`, press **N**, or use *Production notes* in the footer: every image slot then shows the file it expects and whether it has been delivered. It is the fastest way to show a client exactly which photographs their site needs and where each one goes.
 
 ## Quality gates
 
 ```bash
+npm run guard        # repository boundary
 npm run type-check   # TypeScript
 npm run lint         # ESLint (next/core-web-vitals)
 npm run build
@@ -122,13 +131,22 @@ npm run build && npm start   # production
 
 ## Deploy
 
-Its own Vercel project, separate from the original site's:
+This repository deploys to **one** Vercel project, `eric-jokl`, and `chef.ericjokl.com` points at it. The target wiring:
 
-1. In Vercel, **Add New → Project**, import `Ejsav/ChefEric`, and name it (for example `eric-jokl`).
-2. **Settings → Git → Production Branch:** `claude/eric-jokl-rebrand-a4wmzc`.
-3. Environment variables: `NEXT_PUBLIC_SITE_URL`, `INVITE_SECRET`, `RESEND_API_KEY`, `INQUIRY_TO_EMAIL`, `INQUIRY_FROM_EMAIL`, optional `NEXT_PUBLIC_CONTACT_EMAIL`, `NEXT_PUBLIC_INSTAGRAM`, `NEXT_PUBLIC_PLAUSIBLE_DOMAIN`.
+| Vercel project | Git repository | Domains |
+|---|---|---|
+| `eric-jokl` | `Ejsav/ChefEric` | `chef.ericjokl.com`, `eric-jokl.vercel.app` |
+| the client's project | `Ejsav/Chef` only | the client's own |
 
-The original project keeps `main` as its production branch, so its live site never changes because of this branch. (Pushes here may also produce a *preview* deployment in the original project if it builds every branch; previews never replace production. To stop them, set **Ignored Build Step** there to skip this branch.)
+To get there from the October 2026 state (where the client's project was still connected to this repository and held `chef.ericjokl.com`):
+
+1. **Free the domain.** Client project → *Settings → Domains* → remove `chef.ericjokl.com`.
+2. **Attach it here.** `eric-jokl` → *Settings → Domains* → add `chef.ericjokl.com`. DNS is on Vercel's nameservers, so it verifies immediately.
+3. **Disconnect this repository from the client project.** Client project → *Settings → Git* → disconnect `Ejsav/ChefEric` and connect `Ejsav/Chef`, then promote the client's last good deployment so its live site is pinned to its own code.
+4. **Point production here at `main`.** Once this work is merged, `eric-jokl` → *Settings → Git → Production Branch:* `main`.
+5. Environment variables on `eric-jokl`: `NEXT_PUBLIC_SITE_URL=https://chef.ericjokl.com`, `INVITE_SECRET`, `RESEND_API_KEY`, `INQUIRY_TO_EMAIL`, `INQUIRY_FROM_EMAIL`, optional `NEXT_PUBLIC_CONTACT_EMAIL`, `NEXT_PUBLIC_INSTAGRAM`, `NEXT_PUBLIC_PLAUSIBLE_DOMAIN`.
+
+Do step 3 before merging anything to `main`: until then, a merge here would redeploy the client's live site.
 
 ## Launch checklist
 

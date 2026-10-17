@@ -23,7 +23,7 @@ export default function QuestionsPage() {
         id="questions-title"
         eyebrow="Questions"
         lines={["Before you", "ask."]}
-        lead={<p>How an evening is booked, priced and planned, and what to expect on the night. Anything not answered here is welcome in your request.</p>}
+        lead={<p>Booking, cost, allergies, travel and privacy, answered plainly. If your question is not here, put it in your request and it will be answered personally.</p>}
       />
       {faqGroups.map((g, i) => (
         <section key={g.title} aria-labelledby={`faq-${i}`} className={i % 2 ? "tone-dark section" : "tone-linen section"}>
@@ -33,7 +33,7 @@ export default function QuestionsPage() {
           </div>
         </section>
       ))}
-      <InquiryClose title={["Still a", "question?"]} />
+      <InquiryClose title={["Ask us", "directly."]} />
     </>
   );
 }

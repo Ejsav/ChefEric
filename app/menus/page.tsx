@@ -18,7 +18,7 @@ const sequence: { slot: string; label: string; alt: string; tone: PlateTone }[] 
 export const metadata: Metadata = {
   title: "Sample Menus — Private Dining",
   description:
-    "Sample menus from private chef Eric Jokl: after midnight, late summer outdoors, a night aboard, a winter table. Every real menu is written for one table.",
+    "Sample menus from private chef Eric Jokl: after midnight, late summer outdoors, at anchor, by the fire. Every real menu is written for one table.",
   alternates: { canonical: "/menus" },
   openGraph: { title: "Sample menus — Chef Eric Jokl", url: "/menus" },
 };
@@ -30,12 +30,12 @@ export default function MenusPage() {
       <PageIntro
         id="menus-title"
         eyebrow="Sample menus"
-        lines={["A menu is", "written once."]}
+        lines={["Nothing here", "is on offer."]}
         lead={
           <p>
-            Each evening begins as a conversation and becomes a menu nobody else will be served. These four
-            samples show the range: a table that starts after midnight, a summer lawn, a dinner at anchor, a
-            winter night.
+            These four are examples, not choices. Your menu is written after a conversation about the people
+            at your table, and it is never cooked for anyone else. Read them for the range: a supper that
+            starts after midnight, a lawn in August, a deck at anchor, a fire in January.
           </p>
         }
       />
@@ -50,17 +50,17 @@ export default function MenusPage() {
           <h2 id="menus-how" className="text-h2 md:col-span-5">How your menu <span className="italic text-accent">is made.</span></h2>
           <div className="grid gap-8 text-fg-muted md:col-span-6 md:col-start-7">
             <p className="text-lead text-fg">
-              Chef Jokl starts with the people at the table: what they love, what they avoid, what they would
-              never order for themselves.
+              It starts with names, not dishes: who is coming, what they always order, what they would never
+              admit to loving.
             </p>
             <p>
-              The season and the setting decide the rest. A galley asks for a different menu than an estate
-              kitchen; a class is cooked by the guests themselves. Allergies and preferences are
-              designed in from the first draft, never substituted at the end.
+              Then the week and the place take over. What is good at the market that week, what a galley or a
+              borrowed kitchen can handle, what will still be perfect at the far end of a long table. Allergies
+              are written into the first draft, so nobody gets the plate with something missing.
             </p>
             <p>
-              You receive the menu as a proposal, refine it together, and on the night each guest finds it printed
-              at their place.
+              The draft comes to you as a proposal. You change what you like; the final version is printed and
+              waiting at every place when your guests sit down.
             </p>
           </div>
           <ol className="mt-4 grid gap-6 sm:grid-cols-3 md:col-span-12 md:mt-10 md:gap-8">
@@ -72,7 +72,7 @@ export default function MenusPage() {
           </ol>
         </div>
       </section>
-      <InquiryClose title={["Tell us about", "the table."]} />
+      <InquiryClose title={["Start with the guests.", "The menu follows."]} />
     </>
   );
 }

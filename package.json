@@ -1,5 +1,5 @@
 {
-  "name": "eric-jokl-private-evenings",
+  "name": "chef-eric-jokl-template",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,8 +9,10 @@
     "lint": "eslint .",
     "type-check": "tsc --noEmit",
     "test:e2e": "playwright test",
-    "check": "npm run type-check && npm run lint && npm run build",
-    "media": "node scripts/media-status.mjs"
+    "check": "npm run guard && npm run type-check && npm run lint && npm run build",
+    "media": "node scripts/media-status.mjs",
+    "media:guide": "node --no-warnings scripts/media-guide.mjs",
+    "guard": "node scripts/guard.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",

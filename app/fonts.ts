@@ -1,14 +1,15 @@
-import { Bodoni_Moda, Instrument_Sans } from "next/font/google";
+import { Instrument_Sans, Instrument_Serif } from "next/font/google";
 
-// Bodoni: born in Parma, the typeface of Italian luxury printing for two
-// centuries — old-world authority with razor hairlines. Instrument Sans is the
-// quiet modern counterweight for UI and body, with an even, tailored rhythm.
-export const bodoni = Bodoni_Moda({
+// Instrument Serif: a tall, slightly condensed display serif with a cinematic,
+// editorial voice — the type of a film title card or a couture invitation.
+// Its sibling Instrument Sans carries UI and body on the same proportions,
+// so the pairing reads as one hand.
+export const serif = Instrument_Serif({
   subsets: ["latin"],
+  weight: "400",
   style: ["normal", "italic"],
-  axes: ["opsz"],
   display: "swap",
-  variable: "--font-bodoni",
+  variable: "--font-serif",
 });
 
 export const instrument = Instrument_Sans({

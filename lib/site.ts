@@ -19,7 +19,7 @@ export const site = {
   // no address is shown anywhere; every "write to us" becomes a request link.
   email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || null,
   region: "New York",
-  serviceArea: ["New York", "Connecticut", "The Hamptons", "Florida", "Yachts and private islands, by arrangement"],
+  serviceArea: ["New York", "The Hamptons", "Palm Beach", "Yachts", "Private islands", "Private aviation, by arrangement"],
   responseNote: "Every inquiry is read by Chef Jokl's office and answered personally.",
   description:
     "Chef Eric Jokl — private chef based in New York. Private dinners written for one table, yacht and private-island dining, cooking classes and celebrations, by arrangement.",

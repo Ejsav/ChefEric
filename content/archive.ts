@@ -1,10 +1,10 @@
 import type { PlateTone } from "@/components/ui/Plate";
 
-// The Story: the chef's path as six chapters, each with a place and the
-// lesson it left him — the "why" behind how he cooks and hosts today.
-// Demo content for the persona "Chef Eric Jokl": deliberately free of dates,
-// employers, awards or names. Each customer version tells its own story and
-// can add `years` and real places; the layout already makes room.
+// The Chapters: six parts of the craft, each with the principle behind it.
+// Demo content for the persona "Chef Eric Jokl", written as how the work is
+// done rather than as a life story: no dates, employers, awards, mentors or
+// past clients are claimed. A customer version replaces these with its own
+// verified history (years and real places fit the same layout).
 
 export type Era = {
   id: string;
@@ -20,73 +20,73 @@ export type Era = {
 
 export const archive: Era[] = [
   {
-    id: "family-table",
+    id: "patience",
     numeral: "I",
-    era: "The beginning",
-    title: "The family table",
-    place: "A crowded kitchen, Sundays",
-    body: "It started where most cooks start: a small kitchen, a big table, more chairs than the room was built for. Feeding people properly was not a hobby there. It was how you showed respect.",
-    lesson: "Feed people properly — generously, and without shortcuts.",
-    plate: { tone: "linen", label: "Sunday, before noon", alt: "A young Eric Jokl at a family stove, a pot simmering.", slot: "era-family-table" },
+    era: "Patience",
+    title: "Started before dawn",
+    place: "The stove, since morning",
+    body: "The dishes people remember are rarely the quick ones. A braise, a stock, a sauce reduced over hours: the best part of the evening is often already cooking when the host wakes up.",
+    lesson: "Start the slow things first.",
+    plate: { tone: "linen", label: "Since early morning", alt: "A large pot of sauce simmering on an old stove, a long table set beyond.", slot: "chapter-patience" },
   },
   {
-    id: "the-line",
+    id: "fire",
     numeral: "II",
-    era: "The formation",
-    title: "The line",
-    place: "Restaurant kitchens",
-    body: "Then the line: heat, speed and the discipline of service. A restaurant kitchen teaches what no home kitchen can — timing to the second, consistency at volume, and respect for the people working beside you.",
-    lesson: "Consistency is a form of respect.",
-    plate: { tone: "ember", label: "Service, nine o’clock", alt: "Chef Eric Jokl on a restaurant line mid-service, flame beneath a pan.", slot: "era-the-line" },
+    era: "Fire",
+    title: "Heat, controlled",
+    place: "Over the flame",
+    body: "Fire is the one ingredient that cannot be faked or rushed. Knowing exactly when a pan is ready, when to pull a fish off the embers, when to let something rest: that is most of cooking, and none of it can be read from a recipe.",
+    lesson: "Watch the heat, not the clock.",
+    plate: { tone: "ember", label: "Full flame", alt: "Chef Eric Jokl tossing a pan over a high flame in a busy kitchen.", slot: "chapter-fire" },
   },
   {
-    id: "private-rooms",
+    id: "the-room",
     numeral: "III",
-    era: "The turn",
-    title: "The private rooms",
-    place: "Homes, estates & private dining rooms",
-    body: "Private service asks for something a restaurant never does. The guest is not a ticket on a rail; you are standing in their home. Precision has to sit beside warmth, and everything happens with absolute discretion.",
-    lesson: "The guest should never see the effort.",
-    plate: { tone: "smoke", label: "A private room", alt: "A low-lit private dining room, one table set for eight.", slot: "era-private-rooms" },
+    era: "The room",
+    title: "Set before anyone arrives",
+    place: "The dining room, an hour early",
+    body: "Linen pressed, glasses polished, candles trimmed to the same height, chairs a hand's width from the table. Guests do not notice any of it. They only notice when it is missing.",
+    lesson: "A room is ready when it looks untouched.",
+    plate: { tone: "smoke", label: "An hour before", alt: "A round table for eight set by candlelight in a dark wood-panelled dining room.", slot: "chapter-room" },
   },
   {
-    id: "the-water",
+    id: "distance",
     numeral: "IV",
-    era: "The distance",
-    title: "The water",
-    place: "Yachts & private islands",
-    body: "Cooking at sea or on an island is the purest test of planning. Every ingredient, tool and contingency is accounted for before departure — and the measure of success is that nobody at the table notices how far the food travelled.",
-    lesson: "Plan for everything, so the evening feels like nothing was planned.",
-    plate: { tone: "tide", label: "Open water", alt: "Chef Eric Jokl on a yacht's deck at dusk, a table set behind him.", slot: "era-the-water" },
+    era: "Distance",
+    title: "Far from the market",
+    place: "Decks, docks & islands",
+    body: "At sea or on an island the kitchen is only what was packed. Planning becomes part of the cooking: lists, spares, storage, a second plan for every first one, so the table never learns how far the food came.",
+    lesson: "Pack twice. Serve once.",
+    plate: { tone: "tide", label: "Blue hour, on deck", alt: "Chef Eric Jokl at the rail of a yacht at dusk, a table set behind him.", slot: "chapter-distance" },
   },
   {
-    id: "the-lessons",
+    id: "hands",
     numeral: "V",
-    era: "The circle",
-    title: "The lessons",
-    place: "Counters, everywhere",
-    body: "Teaching closes the circle: the feel of a dough, the patience of a sauce, the confidence to season by taste. What was handed to him, he hands on, one counter at a time.",
-    lesson: "What you were given, you hand on.",
-    plate: { tone: "linen", label: "Hands in the dough", alt: "Chef Eric Jokl's hands shaping fresh pasta on a floured counter.", slot: "era-the-lessons" },
+    era: "Hands",
+    title: "Made by hand",
+    place: "A floured counter",
+    body: "Pasta rolled and cut, ravioli sealed one at a time, bread shaped rather than bought. Machines are faster. Hands are the reason it tastes like someone made it for you.",
+    lesson: "If it can be made by hand, make it by hand.",
+    plate: { tone: "linen", label: "By hand", alt: "Hands sealing ravioli on a floured wooden board.", slot: "chapter-hands" },
   },
   {
-    id: "now",
+    id: "tonight",
     numeral: "VI",
-    era: "Now",
-    title: "Wherever the table is",
-    place: "New York, and beyond",
-    body: "Today Chef Jokl cooks for private tables from New York and travels by arrangement — a Manhattan apartment, a Hamptons lawn, a yacht, an island. The family table is still the reference for all of it.",
+    era: "Tonight",
+    title: "One table, one night",
+    place: "New York, and wherever you are",
+    body: "All of it comes down to one evening at one table: an apartment above the avenue, a lawn on the East End, a deck at anchor, a dock at the edge of an island. The menu is written for it and will not be cooked again.",
     lesson: "Every menu is written once.",
-    plate: { tone: "ember", label: "The table, tonight", alt: "Chef Eric Jokl in a doorway, a candlelit table glowing behind him.", slot: "era-now" },
+    plate: { tone: "ember", label: "The table, tonight", alt: "Chef Eric Jokl at the door of a candlelit dining room, looking back.", slot: "chapter-tonight" },
   },
 ];
 
-// How he works, in his terms. Each customer version rewrites these in their
-// own voice.
+// How he works, in his own terms. Each customer version rewrites these in
+// their own voice.
 export const standards = [
-  { title: "The guest never sees the effort.", body: "Preparation, logistics, the problem with the oven at six o'clock — none of it reaches the table. What reaches the table is the evening." },
-  { title: "Taste everything. Twice.", body: "Once when it is made, once before it leaves. Seasoning is a decision, not a habit." },
-  { title: "Leave the kitchen cleaner than you found it.", body: "It is your home. The team leaves it as if nobody had cooked there — except for the smell of garlic, which is permanent." },
-  { title: "No two tables get the same night.", body: "Menus are written for one table and one occasion. If you loved a dish, it can come back — but the evening is always new." },
-  { title: "What is said at the table stays at the table.", body: "Discretion is not a policy; it is how you behave in someone else's home." },
+  { title: "Nobody sees the work.", body: "The late delivery, the oven that runs hot, the plan B for the rain: all of it is dealt with out of sight. What reaches the table is only the dinner." },
+  { title: "Taste it twice.", body: "Once at the stove and once at the pass, every plate, every time. Seasoning is a decision made on purpose." },
+  { title: "Hand the kitchen back better.", body: "Counters wiped, floors mopped, the dishwasher emptied. The only sign anyone cooked should be the leftovers wrapped in the fridge." },
+  { title: "Never the same night twice.", body: "A favourite dish can return by request. The menu around it is always new, because the table and the occasion are." },
+  { title: "Silence is part of the service.", body: "Conversations heard at the table are not repeated, names are not mentioned, and nobody posts about where they cooked." },
 ] as const;

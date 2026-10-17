@@ -11,12 +11,12 @@ export function Method() {
           <div className="md:sticky md:top-[calc(var(--header-h)+3rem)]">
             <Eyebrow index="VI">The Evening</Eyebrow>
             <h2 id="method-title" className="text-h1 mt-10" data-reveal-group>
-              <span className="line-mask"><span>How an evening</span></span>
-              <span className="line-mask" style={{ "--reveal-delay": "100ms" } as React.CSSProperties}><span className="italic text-accent">is made.</span></span>
+              <span className="line-mask"><span>From the first call</span></span>
+              <span className="line-mask" style={{ "--reveal-delay": "100ms" } as React.CSSProperties}><span className="italic text-accent">to the last plate.</span></span>
             </h2>
             <p className="mt-8 max-w-sm text-fg-muted" data-reveal>
-              Five movements, from the first call to the last plate. You are asked to do
-              one thing: arrive at your own table.
+              Five steps, all of them handled for you. Your only job on the night is to
+              sit down at your own table.
             </p>
           </div>
         </div>

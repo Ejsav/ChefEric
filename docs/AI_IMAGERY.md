@@ -113,8 +113,8 @@ Priority 1 is launch-critical (the hero, the portrait, the four experiences and 
 | 1 | `exp-occasion.jpg` | Home experience card IV + /experiences · The Occasion | 4:5 | eric | A | A long celebration table mid-toast, glasses raised and blurred in the foreground; Eric at the pass in the background. |
 | 1 | `menu-after-midnight.jpg` | Beside the menu card “After midnight” | 4:5 (phones crop to 16:11 — keep the dish centred) | none | — | The late pasta: one perfect bowl at one in the morning. |
 | 1 | `menu-late-summer-outdoors.jpg` | Beside the menu card “Late summer, outdoors” | 4:5 (dish centred) | none | — | Heirloom tomatoes and burrata outdoors at golden hour. |
-| 1 | `menu-a-night-aboard.jpg` | Beside the menu card “A night aboard” | 4:5 (dish centred) | none | — | Oysters on deck at sunset. |
-| 1 | `menu-a-winter-table.jpg` | Beside the menu card “A winter table” | 4:5 (dish centred) | none | — | Osso buco by firelight. |
+| 1 | `menu-at-anchor.jpg` | Beside the menu card “At anchor” | 4:5 (dish centred) | none | — | Oysters on deck at sunset. |
+| 1 | `menu-by-the-fire.jpg` | Beside the menu card “By the fire” | 4:5 (dish centred) | none | — | Osso buco by firelight. |
 | 2 | `gallery-01.jpg` | Gallery 1 (home + /gallery) | 4:5 | none | — | Crudo, close: raw fish, blood orange, fennel on a dark plate. |
 | 2 | `gallery-02.jpg` | Gallery 2 (home + /gallery) | 4:3 landscape | none | — | Before the guests: a long table set by candlelight, empty room. |
 | 2 | `gallery-03.jpg` | Gallery 3 (home + /gallery) | 3:4 | eric | B | Eric at the pass, wiping the rim of a plate, heat lamps glowing. |
@@ -124,7 +124,7 @@ Priority 1 is launch-critical (the hero, the portrait, the four experiences and 
 | 2 | `food-market.jpg` | /menus · How your menu is made (1 of 3) | 4:5 | hands | — | The market, that morning: the chef's hands choosing fish and tomatoes. |
 | 2 | `food-pass.jpg` | /menus · How your menu is made (2 of 3) | 4:5 | hands | — | The pass: the chef's hands placing the last herb on a plate. |
 | 2 | `food-table.jpg` | /menus · How your menu is made (3 of 3) | 4:5 | none | — | Served: the plate set down on linen, a guest's hand lifting a glass. |
-| 2 | `room-residence.jpg` | Planner · A private home; /private-dining/connecticut | 16:11 landscape (location pages crop to 4:5 — keep the table centred) | none | — | A private dining room after dark, table set, no people. |
+| 2 | `room-residence.jpg` | Planner · A private home (the default room, seen on the home page before any click) | 16:11 landscape (location pages crop to 4:5 — keep the table centred) | none | — | A private dining room after dark, table set, no people. |
 | 2 | `room-penthouse.jpg` | Planner · A Manhattan penthouse; /private-dining/new-york-city | 16:11 (table centred) | eric | C | Eric in a dark suit beside a set table, Manhattan lit behind the glass. |
 | 2 | `room-yacht.jpg` | Planner · Aboard a yacht; /private-dining/yachts | 16:11 (table centred) | eric | A | Eric pouring wine at a table on a yacht's aft deck at sunset. |
 | 3 | `hero-film.webm + .mp4` | Home hero, behind the figure (optional) | 16:9, 1920×1080, 10–15s silent loop, under 2 MB WebM + MP4 | none | — | Pure atmosphere behind the figure: candle flames and steam in a dark kitchen, out of focus. No people. |
@@ -135,16 +135,16 @@ Priority 1 is launch-critical (the hero, the portrait, the four experiences and 
 | 3 | `gallery-11.jpg` | Gallery 11 (/gallery) | 3:4 | hands | — | The lesson: floured hands shaping orecchiette. |
 | 3 | `gallery-12.jpg` | Gallery 12 (/gallery) | 4:5 | none | — | Midnight: espresso and dark chocolate on a cleared table. |
 | 3 | `room-estate.jpg` | Planner · A Hamptons estate; /private-dining/the-hamptons | 16:11 (table centred) | none | — | A long table on an estate lawn at golden hour. |
-| 3 | `room-waterfront.jpg` | Planner · A waterfront home in Florida; /private-dining/florida | 16:11 (table centred) | none | — | A terrace table on the water at blue hour. |
+| 3 | `room-waterfront.jpg` | Planner · A waterfront home; /private-dining/palm-beach | 16:11 (table centred) | none | — | A terrace table on the water at blue hour. |
 | 3 | `room-island.jpg` | Planner · On a private island; /private-dining/private-islands | 16:11 (table centred) | none | — | Lanterns along a dock leading to a single table. |
-| 3 | `room-hangar.jpg` | Planner · In a private hangar | 16:11 | none | — | A long table under a private jet's wing. |
+| 3 | `room-hangar.jpg` | Planner · In a private hangar; /private-dining/private-aviation | 16:11 | none | — | A long table under a private jet's wing. |
 | 3 | `room-abroad.jpg` | Planner · Somewhere abroad | 16:11 | none | — | A Mediterranean villa terrace at dusk. |
-| 3 | `era-family-table.jpg` | /chef · I. The family table | 4:5 | none | — | A warm family kitchen on a Sunday morning, a pot simmering. |
-| 3 | `era-the-line.jpg` | /chef · II. The line | 4:5 | eric | B | Eric on a restaurant line mid-service, flame under a pan. |
-| 3 | `era-private-rooms.jpg` | /chef · III. The private rooms | 4:5 | none | — | A low-lit private dining room, one table set for eight. |
-| 3 | `era-the-water.jpg` | /chef · IV. The water | 4:5 | eric | A | Eric on a yacht's deck at dusk, a table set behind him. |
-| 3 | `era-the-lessons.jpg` | /chef · V. The lessons | 4:5 | hands | — | The chef's hands shaping pasta on a floured counter. |
-| 3 | `era-now.jpg` | /chef · VI. Now | 4:5 | eric | C | Eric in a doorway, a glowing set table behind him. |
+| 3 | `chapter-patience.jpg` | /chef · I. Patience | 4:5 | none | — | A pot that has been on the stove since morning, a long table set in the room beyond. |
+| 3 | `chapter-fire.jpg` | /chef · II. Fire | 4:5 | eric | B | The chef tossing a pan over a high flame, the kitchen busy behind him. |
+| 3 | `chapter-room.jpg` | /chef · III. The room | 4:5 | none | — | A low-lit private dining room, one round table set for eight, an hour before anyone arrives. |
+| 2 | `chapter-distance.jpg` | /chef · IV. Distance; /private-dining/yachts | 4:5 | eric | A | The chef at the rail of a yacht at blue hour, a table set on deck behind him. |
+| 3 | `chapter-hands.jpg` | /chef · V. Hands | 4:5 | hands | — | Hands sealing ravioli on a floured wooden counter. |
+| 2 | `chapter-tonight.jpg` | /chef · VI. Tonight | 4:5 | eric | C | The chef at the door of a candlelit dining room, looking back toward camera. |
 
 The full prompt for each slot is in `content/media.ts`.
 

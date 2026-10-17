@@ -9,7 +9,7 @@ import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 export const metadata: Metadata = {
   title: "Where He Cooks — Private Chef by Location",
   description:
-    "Private chef Eric Jokl cooks in Manhattan, Connecticut, the Hamptons, Florida, aboard yachts and on private islands. Find out what an evening looks like where you are.",
+    "Private chef Eric Jokl cooks in Manhattan, the Hamptons and Palm Beach, aboard yachts, on private islands and in private hangars. See what an evening looks like where you are.",
   alternates: { canonical: "/private-dining" },
   openGraph: { title: "Where he cooks — Chef Eric Jokl", url: "/private-dining" },
 };
@@ -22,7 +22,7 @@ export default function PlacesIndex() {
         id="places-title"
         eyebrow="Where he cooks"
         lines={["Wherever the", "table is."]}
-        lead={<p>Based in New York. Everywhere else is by arrangement: a Connecticut country house, a Hamptons lawn, a Florida terrace, a yacht at anchor, an island reached by boat.</p>}
+        lead={<p>Home is New York. Everything else is a matter of planning: a lawn on the East End, a terrace in Palm Beach, a deck at anchor, an island only the boat can reach, a hangar with a jet parked inside.</p>}
       />
       <section aria-label="Places" className="tone-dark section pt-0">
         <ol className="container-x border-t border-line">

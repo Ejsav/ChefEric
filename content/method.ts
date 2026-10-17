@@ -1,27 +1,27 @@
 export const method = [
   {
     n: "01",
-    title: "A conversation",
-    body: "A private call with the chef. The guests, the occasion, the setting, the allergies nobody mentions until the night. Nothing is assumed.",
+    title: "One call",
+    body: "Twenty minutes about the people, the place and the reason for the evening. Allergies, dislikes, the guest who only eats steak: all of it, up front.",
   },
   {
     n: "02",
-    title: "A menu written once",
-    body: "A menu composed for your table and your season — sent as a proposal with the full cost, refined together, then never repeated in the same form.",
+    title: "A written menu",
+    body: "A draft menu arrives as a proposal with every cost itemised. You change what you like until it reads exactly right.",
   },
   {
     n: "03",
-    title: "Provisioning",
-    body: "Fish chosen the morning of. Produce from growers the chef trusts. Wine, rentals and staff arranged so you have nothing to manage.",
+    title: "The shopping",
+    body: "Fish bought the morning of, produce from growers the chef knows by name, wine and rentals ordered and delivered. Nothing for you to chase.",
   },
   {
     n: "04",
-    title: "The evening",
-    body: "The team arrives hours before the first guest. Service is warm, precise and nearly invisible. The kitchen is left spotless.",
+    title: "The night",
+    body: "The team arrives hours early, cooks, serves and stays out of the way. When the last guest leaves, the kitchen is spotless.",
   },
   {
     n: "05",
-    title: "A note after",
-    body: "A printed card with the menu of the night, so the evening can be remembered exactly — and repeated by nobody else.",
+    title: "The card",
+    body: "The menu from the night, printed for you to keep. A record of an evening that will not be cooked again.",
   },
 ] as const;

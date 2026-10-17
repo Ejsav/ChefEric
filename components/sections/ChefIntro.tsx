@@ -53,7 +53,7 @@ export function ChefIntro() {
           </dl>
 
           <div className="mt-12" data-reveal>
-            <Cta href="/chef" variant="quiet">Read his story</Cta>
+            <Cta href="/chef" variant="quiet">The chef, in full</Cta>
           </div>
         </div>
       </div>

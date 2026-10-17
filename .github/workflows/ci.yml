@@ -20,6 +20,10 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: Repository boundary
+        run: npm run guard
+      - name: Photography guide matches the manifest
+        run: npm run media:guide -- --check
       - name: Typecheck
         run: npm run type-check
       - name: Lint

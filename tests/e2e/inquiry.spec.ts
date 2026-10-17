@@ -7,7 +7,7 @@ test("composer hands a composed evening to the inquiry", async ({ page }) => {
   await page.goto("/");
   await page.locator('#possibilities input[value="yacht"]').check({ force: true });
   await page.locator('#possibilities input[value="celebration"]').check({ force: true });
-  const href = await page.getByRole("link", { name: /Begin with this evening/ }).getAttribute("href");
+  const href = await page.getByRole("link", { name: /Request this evening/ }).getAttribute("href");
   expect(href).toContain("setting=yacht");
   await page.goto(href!);
   await expect(page.getByText(/You composed:.*aboard a yacht/)).toBeVisible();
@@ -52,10 +52,10 @@ test("a collaboration skips the dinner questions", async ({ page }) => {
 });
 
 test("a gift can be requested and sample menus pre-fill the request", async ({ page }) => {
-  await page.goto("/inquire?menu=a-night-aboard");
+  await page.goto("/inquire?menu=at-anchor");
   await page.getByText("For myself, or my family").click();
   await expect(page.getByText("An evening as a gift")).toBeVisible();
-  await page.goto("/inquire?menu=a-night-aboard&form=gift");
+  await page.goto("/inquire?menu=at-anchor&form=gift");
   await page.getByText("For myself, or my family").click();
   await expect(page.locator('input[value="gift"]')).toBeChecked();
 });

@@ -14,10 +14,10 @@ export function Standards() {
         <div className="md:col-span-4">
           <Eyebrow index="—">The Standards</Eyebrow>
           <h2 id="standards-title" className="text-h1 mt-10" data-reveal-group>
-            <span className="line-mask"><span>How he</span></span>
-            <span className="line-mask" style={{ "--reveal-delay": "100ms" } as React.CSSProperties}><span className="italic text-accent">works.</span></span>
+            <span className="line-mask"><span>The rules</span></span>
+            <span className="line-mask" style={{ "--reveal-delay": "100ms" } as React.CSSProperties}><span className="italic text-accent">of the house.</span></span>
           </h2>
-          <p className="mt-8 max-w-xs text-fg-muted" data-reveal>Five rules that came from building for screens and survived every room since.</p>
+          <p className="mt-8 max-w-xs text-fg-muted" data-reveal>Five rules that travel with the knives: to every home, galley and borrowed kitchen.</p>
         </div>
         <ol className="md:col-span-7 md:col-start-6">
           {standards.map((s, i) => {

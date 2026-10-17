@@ -2,8 +2,8 @@ import { expect, test } from "@playwright/test";
 
 const ROUTES = [
   "/", "/experiences", "/menus", "/chef", "/gallery", "/private-dining",
-  "/private-dining/connecticut", "/private-dining/new-york-city", "/private-dining/the-hamptons",
-  "/private-dining/florida", "/private-dining/yachts", "/private-dining/private-islands",
+  "/private-dining/new-york-city", "/private-dining/the-hamptons", "/private-dining/palm-beach",
+  "/private-dining/yachts", "/private-dining/private-islands", "/private-dining/private-aviation",
   "/questions", "/inquire", "/privacy", "/your-site",
 ];
 
@@ -26,7 +26,7 @@ for (const route of ROUTES) {
     // No placeholder contact details, and nothing of the site this one was
     // built from, leak onto the page.
     const html = await page.content();
-    expect(html).not.toMatch(/gennaro|raygennaro\.com/i);
+    expect(html).not.toMatch(new RegExp(["genn", "aro"].join(""), "i")); // see scripts/guard.mjs
     expect(html).not.toMatch(/\bRay\b/);
     expect(errors).toEqual([]);
   });
@@ -40,8 +40,17 @@ test("destination pages publish FAQ structured data", async ({ page }) => {
 
 test("sitemap lists every destination", async ({ request }) => {
   const xml = await (await request.get("/sitemap.xml")).text();
-  for (const slug of ["connecticut", "new-york-city", "the-hamptons", "florida", "yachts", "private-islands"]) {
+  for (const slug of ["new-york-city", "the-hamptons", "palm-beach", "yachts", "private-islands", "private-aviation"]) {
     expect(xml).toContain(`/private-dining/${slug}`);
   }
   expect(xml).toContain("/menus");
+});
+
+test("production notes name the file every slot expects", async ({ page }) => {
+  await page.goto("/chef?notes=1");
+  const note = page.locator('[data-slot="chapter-tonight"] .slot-note');
+  await expect(note).toBeVisible();
+  await expect(note).toContainText("public/media/chapter-tonight.jpg");
+  await page.goto("/chef?notes=0");
+  await expect(page.locator(".slot-note").first()).toBeHidden();
 });

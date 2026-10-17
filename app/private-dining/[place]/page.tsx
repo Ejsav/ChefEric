@@ -118,7 +118,7 @@ export default async function PlacePage({ params }: Props) {
         </div>
       </nav>
 
-      <InquiryClose title={["Tell us about", "the table."]} href={href} />
+      <InquiryClose title={[`Dinner in ${p.name}?`, "Tell us when."]} href={href} />
     </>
   );
 }

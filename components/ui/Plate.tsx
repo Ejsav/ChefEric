@@ -87,6 +87,7 @@ export function Plate({ tone, alt, label, src: given, slot, sizes = "(min-width:
       className={cn("group/plate relative overflow-hidden bg-bg-elevated", ratio, className)}
       data-reveal={reveal ? "fade" : undefined}
       data-cursor-label={cursorLabel}
+      data-slot={slot}
     >
       {/* Two planes: the parallax wrapper drifts with scroll (CSS scroll
           timeline), the inner layer settles from 1.06 on reveal. */}
@@ -107,6 +108,20 @@ export function Plate({ tone, alt, label, src: given, slot, sizes = "(min-width:
           <span aria-hidden className="font-display text-sm normal-case italic tracking-normal">EJ</span>
         </figcaption>
       ) : null}
+      {slot ? <SlotNote slot={slot} delivered={!!src} /> : null}
     </figure>
+  );
+}
+
+// Production note, shown over every media slot only while notes are on
+// (html[data-notes="on"], toggled from the footer, the N key or ?notes=1).
+// It names the file each slot expects, so a client walking the template can
+// see exactly which photograph belongs where and which are still to come.
+export function SlotNote({ slot, delivered }: { slot: string; delivered: boolean }) {
+  return (
+    <span aria-hidden className="slot-note">
+      <span className="slot-note__file">public/media/{slot}.jpg</span>
+      <span className={delivered ? "slot-note__status is-done" : "slot-note__status"}>{delivered ? "Delivered" : "Awaiting photograph"}</span>
+    </span>
   );
 }

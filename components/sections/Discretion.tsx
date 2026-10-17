@@ -1,19 +1,19 @@
 import { Monogram } from "@/components/ui/Monogram";
 
-// The trust section for a house that does not name its guests. It states
-// the rules — which, at this level, is a stronger signal than any logo.
+// Trust without a logo wall: three plain rules about privacy, which at this
+// level of client say more than any list of names could.
 const principles = [
   {
-    title: "Guests are never named",
-    body: "No guest lists, no name-dropping, no photographs of your home. Ever.",
+    title: "No names, ever",
+    body: "Who came to dinner is not a story the chef tells. Not online, not to the next client, not to anyone.",
   },
   {
-    title: "Cameras by invitation",
-    body: "Nothing from your evening is published unless you ask for it to be.",
+    title: "No photographs of your home",
+    body: "The team does not post, tag or keep pictures of where they cooked. If you want the evening captured, you choose the photographer.",
   },
   {
-    title: "Agreements as standard",
-    body: "Confidentiality agreements are signed on request, for every guest list and every crew.",
+    title: "Paper, if you need it",
+    body: "A confidentiality agreement covers the chef and every member of the team, signed before anyone walks through the door.",
   },
 ] as const;
 
@@ -26,8 +26,8 @@ export function Discretion() {
           <Monogram className="h-16 w-16 text-accent" />
         </div>
         <h2 id="discretion-title" className="text-h1 mx-auto mt-10 max-w-[16ch]" data-reveal-group>
-          <span className="line-mask"><span>Discretion is part</span></span>
-          <span className="line-mask" style={{ "--reveal-delay": "100ms" } as React.CSSProperties}><span className="italic text-accent">of the menu.</span></span>
+          <span className="line-mask"><span>What is said here</span></span>
+          <span className="line-mask" style={{ "--reveal-delay": "100ms" } as React.CSSProperties}><span className="italic text-accent">stays here.</span></span>
         </h2>
 
         <div className="mt-20 grid gap-px overflow-hidden border border-line bg-[rgb(var(--fg)/0.12)] text-left md:grid-cols-3">

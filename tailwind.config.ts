@@ -16,7 +16,7 @@ export default {
         oxblood: "rgb(var(--oxblood) / <alpha-value>)",
       },
       fontFamily: {
-        display: ["var(--font-display)", "Didot", '"Bodoni 72"', "serif"],
+        display: ["var(--font-display)", '"Instrument Serif"', "Didot", "serif"],
         body: ["var(--font-body)", "ui-sans-serif", "system-ui", "sans-serif"],
       },
       transitionTimingFunction: {

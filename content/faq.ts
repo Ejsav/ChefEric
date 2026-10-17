@@ -5,41 +5,41 @@ export const faqGroups: { title: string; faqs: { q: string; a: string }[] }[] = 
   {
     title: "Booking",
     faqs: [
-      { q: "How does booking work?", a: "Send a request with the date, place and number of guests. The chef's office reads it personally and arranges a short call. From that call comes a written proposal: menu, staffing and the full cost. Your date is held once the proposal is agreed." },
-      { q: "How far in advance should I book?", a: "Two to three weeks suits most private dinners. Celebrations, travel, yachts and islands need more, usually four to six weeks. Holidays and summer weekends fill first. If your date is close, ask anyway." },
-      { q: "How is an evening priced?", a: "Private dinners begin from $250 per guest; celebrations from $300 per guest; classes from $1,500. Every engagement is then quoted individually — guests, menu and sourcing, team, rentals, wine and travel — and you see the complete cost before you confirm anything." },
-      { q: "Can I give an evening as a gift?", a: "Yes. A private dinner or a cooking class makes a memorable gift. Choose “An evening as a gift” in the request and the office will arrange the details with you, discreetly." },
+      { q: "How do I book?", a: "Send a request with the date, the place and roughly how many guests. You will hear back personally, usually the same day, to set up a short call. After the call you receive a written proposal with the menu, the team and the full cost. The date is yours once the proposal is signed." },
+      { q: "How much notice do you need?", a: "Two to three weeks is comfortable for a dinner at home. Celebrations, yachts, islands and travel need four to six. Holidays and summer weekends go first. If your date is next week, ask anyway." },
+      { q: "What does an evening cost?", a: "Private dinners start from $250 per guest, celebrations from $300 per guest and classes from $1,500. The proposal then prices your evening exactly: guests, menu, ingredients, team, rentals, wine and any travel, all itemised before you commit." },
+      { q: "Can I give a dinner as a gift?", a: "Yes. Choose “An evening as a gift” when you send the request. Dates and details are arranged quietly with you, so the person receiving it only has to show up." },
     ],
   },
   {
-    title: "The evening",
+    title: "On the night",
     faqs: [
-      { q: "What is included?", a: "A menu written for your table, sourcing, cooking in your kitchen, table service and a kitchen left cleaner than it was found. Wine pairing, rentals, extra staff and printed menu cards can all be added in the proposal." },
-      { q: "Do you accommodate allergies and dietary needs?", a: "Always. Allergies, intolerances and preferences are designed into the menu from the first draft rather than substituted at the end. Tell us everything in the request, including things nobody at the table eats." },
-      { q: "Who serves the meal?", a: "The chef's own team. For larger evenings the team grows to match, from a single server to a full brigade, so you can be a guest at your own table." },
-      { q: "What do I need to provide?", a: "Usually a working stove and oven. Anything else, from extra burners to platters and glassware, is brought or arranged in advance. For venues without a kitchen, a mobile kitchen can be planned." },
+      { q: "What is included?", a: "The menu, the shopping, the cooking, the service and the clean-up. Paired wines, rentals, extra staff and printed menus can be added to the proposal." },
+      { q: "Can you work around allergies and diets?", a: "Always, and from the first draft rather than as a substitution on the night. List everything in the request, including the things someone simply refuses to eat." },
+      { q: "Who serves?", a: "The chef's own team: a single server for a small dinner, a full service team for a large one. You should be a guest at your own party." },
+      { q: "What do we need to have?", a: "A working stove and oven is usually enough. Anything missing, from burners to platters to glassware, is brought in. Without a kitchen, a temporary one is built." },
     ],
   },
   {
     title: "Travel and settings",
     faqs: [
-      { q: "Where do you cook?", a: "The chef is based in New York and cooks throughout the city, Connecticut and the Hamptons. Florida, yachts, private islands and destinations abroad are all by arrangement." },
-      { q: "Do you cook on yachts and private islands?", a: "Yes. Yacht dinners are planned with the captain and crew around the galley and provisioning; island engagements are planned in full before departure, with a backup for every critical ingredient." },
-      { q: "How is travel handled?", a: "Travel and accommodation for the chef and team are set out clearly in the proposal, so the full cost is known before you confirm." },
+      { q: "Where do you cook?", a: "Home is New York, and most dinners are in the city and on the East End. Palm Beach, yachts, private islands, hangars and destinations abroad are all by arrangement." },
+      { q: "Do you cook on yachts and islands?", a: "Yes. On a yacht the menu is planned with the captain around the galley and storage. For an island, everything is packed and planned before departure, with spares for anything critical." },
+      { q: "How is travel billed?", a: "Flights, lodging and transport for the team appear as separate lines in the proposal, so the total is clear before you agree to anything." },
     ],
   },
   {
     title: "Classes and collaborations",
     faqs: [
-      { q: "What happens in a private cooking class?", a: "A class at your counter for one family, a few friends or a team: fresh pasta by hand, sauces, technique. It is planned around the group's skill and appetite, everyone eats what they made, and the recipes are yours to keep." },
-      { q: "Do you take on brand collaborations, events or appearances?", a: "Selectively. Choose “A collaboration or appearance” in the request and tell us about the project; the office replies to every serious inquiry." },
+      { q: "What happens in a private class?", a: "An afternoon at your counter for a family, a few friends or a team: fresh pasta, fish, sauces, whatever the group wants to learn. It ends with everyone eating what they cooked, and printed recipes to take home." },
+      { q: "Do you do brand work, events or appearances?", a: "Occasionally. Choose “A collaboration or appearance” in the request and describe the project. Every serious enquiry gets a reply." },
     ],
   },
   {
-    title: "Discretion",
+    title: "Privacy",
     faqs: [
-      { q: "Will my name or home appear anywhere?", a: "No. Guests are never named, homes are never photographed for publicity, and nothing from your evening is published unless you ask for it." },
-      { q: "Can you sign a confidentiality agreement?", a: "Yes. Say so in the request and it will be part of the proposal." },
+      { q: "Will anyone find out I booked you?", a: "Not from the chef or the team. Clients are never named, homes are never photographed and nothing about your evening is posted anywhere." },
+      { q: "Will you sign an NDA?", a: "Yes. Mention it in the request and it becomes part of the proposal, covering everyone who works the evening." },
     ],
   },
 ];

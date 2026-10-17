@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import { bodoni, instrument } from "./fonts";
+import { serif, instrument } from "./fonts";
 import { site } from "@/lib/site";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -43,7 +43,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${bodoni.variable} ${instrument.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${serif.variable} ${instrument.variable}`} suppressHydrationWarning>
       <head>
         {/* Capability tier, pointer type and prelude decided before first paint. */}
         <script dangerouslySetInnerHTML={{ __html: bootScript }} />

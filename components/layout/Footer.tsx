@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { footerNav, site } from "@/lib/site";
 import { Monogram } from "@/components/ui/Monogram";
+import { NotesToggle } from "@/components/system/NotesToggle";
 
 // The footer is the last course: the full name set large, quiet details
 // underneath, nothing that looks like a sitemap dump.
@@ -13,7 +14,7 @@ export function Footer() {
           <div className="md:col-span-5" data-reveal>
             <Monogram className="h-14 w-14 text-accent" />
             <p className="mt-8 max-w-sm font-display text-[1.6rem] italic leading-snug text-fg/90">
-              A table is the oldest form of hospitality. We still set it by hand.
+              Every menu is written once. Every table is set by hand.
             </p>
           </div>
           <div className="grid grid-cols-2 gap-10 md:col-span-7 md:grid-cols-3" data-reveal style={{ "--reveal-delay": "120ms" } as React.CSSProperties}>
@@ -56,7 +57,8 @@ export function Footer() {
 
       <div className="container-x relative flex flex-col gap-3 border-t border-line py-7 text-[0.7rem] uppercase tracking-[0.22em] text-fg-muted sm:flex-row sm:items-center sm:justify-between">
         <span>© {year} {site.name}</span>
-        <span className="flex flex-wrap gap-x-6 gap-y-2">
+        <span className="flex flex-wrap items-center gap-x-6 gap-y-2">
+          <NotesToggle />
           <Link href="/privacy" className="link-underline pb-0.5 hover:text-fg">Privacy</Link>
           <span>{site.house} · {site.region}</span>
           <span>{site.imageryNote}</span>

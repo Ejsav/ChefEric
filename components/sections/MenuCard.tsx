@@ -71,7 +71,7 @@ export function MenuCard({ menus, compact = false }: { menus: Menu[]; compact?: 
           </div>
         ) : null}
         <p className="mt-8 hidden max-w-xs text-sm text-fg-muted lg:block">
-          Samples only. Every real menu is written for one table, then never served the same way again.
+          Examples, not choices. Your menu is written after one conversation and cooked for nobody else.
         </p>
       </div>
 
@@ -103,7 +103,7 @@ export function MenuCard({ menus, compact = false }: { menus: Menu[]; compact?: 
           </div>
         </div>
         <div className="mt-10 flex flex-wrap items-center justify-center gap-x-10 gap-y-6">
-          <Cta href={`/inquire?setting=${menu.setting}&menu=${menu.slug}`} track="cta:menu-begin">Begin with a menu like this</Cta>
+          <Cta href={`/inquire?setting=${menu.setting}&menu=${menu.slug}`} track="cta:menu-begin">Start from this menu</Cta>
           {compact ? null : <Cta href="/menus" variant="quiet" className="text-fg-muted">All sample menus</Cta>}
         </div>
       </div>

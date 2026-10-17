@@ -9,7 +9,7 @@ import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 export const metadata: Metadata = {
   title: "The Chef — Eric Jokl",
   description:
-    "The story of private chef Eric Jokl: the family table, the restaurant line, private rooms, yachts and islands, and the standards he cooks by.",
+    "How private chef Eric Jokl works: six chapters of the craft, from slow cooking and live fire to the room, the water and the table, and the rules of the house.",
   alternates: { canonical: "/chef" },
   openGraph: { title: "The Chef — Eric Jokl", url: "/chef" },
 };
@@ -24,15 +24,16 @@ export default function ChefPage() {
         lines={["Eric", "Jokl"]}
         lead={
           <p>
-            A cook shaped by family tables, professional kitchens and evenings in places most
-            people never see. Private by profession, precise by habit, generous by upbringing.
+            Private dinners for people who could book any restaurant and would rather not. What
+            follows is how the work is done: six chapters of the craft and the rules that hold
+            in every kitchen.
           </p>
         }
       />
       <Archive />
       <Standards />
       <Discretion />
-      <InquiryClose title={["Bring him", "to your table."]} />
+      <InquiryClose title={["Your table,", "his kitchen."]} />
     </>
   );
 }

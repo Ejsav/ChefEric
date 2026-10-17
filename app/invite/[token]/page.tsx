@@ -48,8 +48,8 @@ export default async function InvitePage({ params }: { params: Promise<{ token: 
           <span className="hero-rise line-mask"><span style={d(540)} className="italic text-accent">{name}</span></span>
         </h1>
         <p className="hero-fade text-lead mx-auto mt-10 max-w-lg" style={d(900)}>
-          Chef Eric Jokl would be glad to cook for you. Tell us about the table — the place,
-          the people and the reason — and his office will take it from there.
+          You have been invited to book a private evening with Chef Eric Jokl. Share a date, a
+          place and who will be at the table, and he will be in touch personally.
         </p>
         {note ? (
           <blockquote className="hero-fade mx-auto mt-10 max-w-md border-y border-line py-6 font-display text-xl italic text-fg/85" style={d(1050)}>

@@ -93,7 +93,7 @@ export function Composer({ index = "VII" }: { index?: string }) {
                 </ul>
               </article>
               <div className="mt-10 flex flex-wrap items-center gap-x-10 gap-y-6">
-                <Cta href={href} track="cta:compose-begin">Begin with this evening</Cta>
+                <Cta href={href} track="cta:compose-begin">Request this evening</Cta>
                 <Cta href="/experiences" variant="quiet" className="text-fg-muted">All experiences</Cta>
               </div>
             </div>

@@ -29,7 +29,7 @@
     "model": "nano_banana_pro",
     "aspect_ratio": "4:5",
     "resolution": "2k",
-    "prompt": "<<<92b4254f-82da-4679-a215-5ec62ea6eeb8>>> in a white shirt and dark linen apron stands beside a guest (face out of frame, only forearms and hands) at a floured marble counter, guiding them as they shape fresh pasta; nests of tagliatelle, eggs and a wooden board; soft window light from the left. Wearing white shirt with sleeves rolled, long dark linen apron \u2014 for classes. Cinematic low-key lighting from a single warm practical source (candle, pendant, fire or window at blue hour), deep shadow falloff, shallow depth of field, 50mm lens at f/1.8, subtle Kodak Vision3 500T grain, true-to-life colour; espresso, walnut, ivory linen and aged brass palette. Avoid: no extra or fused fingers, no warped hands, no distorted cutlery, glassware or plates, no plastic or waxy skin, no glossy CGI food, no over-sharpening, no HDR, no text, no logos, no watermarks, no identifiable guest faces, no overhead flat-lay, no stock-photo smiles."
+    "prompt": "<<<92b4254f-82da-4679-a215-5ec62ea6eeb8>>> in a white shirt and dark linen apron stands beside a guest (face out of frame, only forearms and hands) at a floured marble counter, guiding them as they shape fresh pasta; nests of tagliatelle, eggs and a wooden board; soft window light from the left. Wearing white shirt with sleeves rolled, long dark linen apron — for classes. Cinematic low-key lighting from a single warm practical source (candle, pendant, fire or window at blue hour), deep shadow falloff, shallow depth of field, 50mm lens at f/1.8, subtle Kodak Vision3 500T grain, true-to-life colour; espresso, walnut, ivory linen and aged brass palette. Avoid: no extra or fused fingers, no warped hands, no distorted cutlery, glassware or plates, no plastic or waxy skin, no glossy CGI food, no over-sharpening, no HDR, no text, no logos, no watermarks, no identifiable guest faces, no overhead flat-lay, no stock-photo smiles."
   },
   {
     "slot": "exp-occasion",
@@ -56,7 +56,7 @@
     "prompt": "Sliced heirloom tomatoes in red, yellow and green with a torn burrata, basil and olive oil on an ivory plate, on a linen-covered table outdoors at golden hour, lawn and hedges out of focus, low sun from the side. Cinematic low-key lighting from a single warm practical source (candle, pendant, fire or window at blue hour), deep shadow falloff, shallow depth of field, 50mm lens at f/1.8, subtle Kodak Vision3 500T grain, true-to-life colour; espresso, walnut, ivory linen and aged brass palette. Avoid: no extra or fused fingers, no warped hands, no distorted cutlery, glassware or plates, no plastic or waxy skin, no glossy CGI food, no over-sharpening, no HDR, no text, no logos, no watermarks, no identifiable guest faces, no overhead flat-lay, no stock-photo smiles."
   },
   {
-    "slot": "menu-a-night-aboard",
+    "slot": "menu-at-anchor",
     "priority": 1,
     "model": "nano_banana_pro",
     "aspect_ratio": "4:5",
@@ -64,7 +64,7 @@
     "prompt": "A dozen oysters on crushed ice in a pewter tray with lemon and mignonette on a yacht's teak table at sunset, two flutes of sparkling wine soft behind, calm sea and horizon out of focus. Cinematic low-key lighting from a single warm practical source (candle, pendant, fire or window at blue hour), deep shadow falloff, shallow depth of field, 50mm lens at f/1.8, subtle Kodak Vision3 500T grain, true-to-life colour; espresso, walnut, ivory linen and aged brass palette. Avoid: no extra or fused fingers, no warped hands, no distorted cutlery, glassware or plates, no plastic or waxy skin, no glossy CGI food, no over-sharpening, no HDR, no text, no logos, no watermarks, no identifiable guest faces, no overhead flat-lay, no stock-photo smiles."
   },
   {
-    "slot": "menu-a-winter-table",
+    "slot": "menu-by-the-fire",
     "priority": 1,
     "model": "nano_banana_pro",
     "aspect_ratio": "4:5",
@@ -157,7 +157,7 @@
     "model": "nano_banana_pro",
     "aspect_ratio": "3:2",
     "resolution": "2k",
-    "prompt": "<<<92b4254f-82da-4679-a215-5ec62ea6eeb8>>> in a dark charcoal suit stands beside a candlelit table set for six in a Manhattan penthouse at blue hour, floor-to-ceiling windows and the lit skyline behind him. Wearing dark charcoal tailored suit, black shirt open at the collar \u2014 for greeting guests. Cinematic low-key lighting from a single warm practical source (candle, pendant, fire or window at blue hour), deep shadow falloff, shallow depth of field, 50mm lens at f/1.8, subtle Kodak Vision3 500T grain, true-to-life colour; espresso, walnut, ivory linen and aged brass palette. Avoid: no extra or fused fingers, no warped hands, no distorted cutlery, glassware or plates, no plastic or waxy skin, no glossy CGI food, no over-sharpening, no HDR, no text, no logos, no watermarks, no identifiable guest faces, no overhead flat-lay, no stock-photo smiles."
+    "prompt": "<<<92b4254f-82da-4679-a215-5ec62ea6eeb8>>> in a dark charcoal suit stands beside a candlelit table set for six in a Manhattan penthouse at blue hour, floor-to-ceiling windows and the lit skyline behind him. Wearing dark charcoal tailored suit, black shirt open at the collar — for greeting guests. Cinematic low-key lighting from a single warm practical source (candle, pendant, fire or window at blue hour), deep shadow falloff, shallow depth of field, 50mm lens at f/1.8, subtle Kodak Vision3 500T grain, true-to-life colour; espresso, walnut, ivory linen and aged brass palette. Avoid: no extra or fused fingers, no warped hands, no distorted cutlery, glassware or plates, no plastic or waxy skin, no glossy CGI food, no over-sharpening, no HDR, no text, no logos, no watermarks, no identifiable guest faces, no overhead flat-lay, no stock-photo smiles."
   },
   {
     "slot": "room-yacht",
@@ -256,51 +256,51 @@
     "prompt": "A stone villa terrace in the Mediterranean at dusk, a table set under a pergola, cypress trees and distant sea, candlelight. Cinematic low-key lighting from a single warm practical source (candle, pendant, fire or window at blue hour), deep shadow falloff, shallow depth of field, 50mm lens at f/1.8, subtle Kodak Vision3 500T grain, true-to-life colour; espresso, walnut, ivory linen and aged brass palette. Avoid: no extra or fused fingers, no warped hands, no distorted cutlery, glassware or plates, no plastic or waxy skin, no glossy CGI food, no over-sharpening, no HDR, no text, no logos, no watermarks, no identifiable guest faces, no overhead flat-lay, no stock-photo smiles."
   },
   {
-    "slot": "era-family-table",
+    "slot": "chapter-patience",
     "priority": 3,
     "model": "nano_banana_pro",
     "aspect_ratio": "4:5",
     "resolution": "2k",
-    "prompt": "A warm, slightly worn family kitchen on a Sunday morning, a big pot of sauce simmering on an old stove, wooden spoon resting on the rim, a crowded table with mismatched chairs beyond, soft window light; no people. Cinematic low-key lighting from a single warm practical source (candle, pendant, fire or window at blue hour), deep shadow falloff, shallow depth of field, 50mm lens at f/1.8, subtle Kodak Vision3 500T grain, true-to-life colour; espresso, walnut, ivory linen and aged brass palette. Avoid: no extra or fused fingers, no warped hands, no distorted cutlery, glassware or plates, no plastic or waxy skin, no glossy CGI food, no over-sharpening, no HDR, no text, no logos, no watermarks, no identifiable guest faces, no overhead flat-lay, no stock-photo smiles."
+    "prompt": "A heavy enamel pot of tomato sauce simmering on an old range in a warm, lived-in kitchen, a wooden spoon resting on the rim, steam rising, a long table set with bread and wine beyond, soft window light; no people. Cinematic low-key lighting from a single warm practical source (candle, pendant, fire or window at blue hour), deep shadow falloff, shallow depth of field, 50mm lens at f/1.8, subtle Kodak Vision3 500T grain, true-to-life colour; espresso, walnut, ivory linen and aged brass palette. Avoid: no extra or fused fingers, no warped hands, no distorted cutlery, glassware or plates, no plastic or waxy skin, no glossy CGI food, no over-sharpening, no HDR, no text, no logos, no watermarks, no identifiable guest faces, no overhead flat-lay, no stock-photo smiles."
   },
   {
-    "slot": "era-the-line",
+    "slot": "chapter-fire",
     "priority": 3,
     "model": "nano_banana_pro",
     "aspect_ratio": "4:5",
     "resolution": "2k",
-    "prompt": "<<<92b4254f-82da-4679-a215-5ec62ea6eeb8>>> in a white chef jacket on a busy restaurant line mid-service, tossing a pan over a high flame, tickets on the rail, motion and heat, other cooks blurred. Wearing white double-breasted chef jacket with cloth buttons (as in hero-figure), black trousers. Cinematic low-key lighting from a single warm practical source (candle, pendant, fire or window at blue hour), deep shadow falloff, shallow depth of field, 50mm lens at f/1.8, subtle Kodak Vision3 500T grain, true-to-life colour; espresso, walnut, ivory linen and aged brass palette. Avoid: no extra or fused fingers, no warped hands, no distorted cutlery, glassware or plates, no plastic or waxy skin, no glossy CGI food, no over-sharpening, no HDR, no text, no logos, no watermarks, no identifiable guest faces, no overhead flat-lay, no stock-photo smiles."
+    "prompt": "<<<92b4254f-82da-4679-a215-5ec62ea6eeb8>>> in a white chef jacket tossing a pan over a high flame, flames and steam rising, ticket rail and other cooks blurred behind, warm practical light. Wearing white double-breasted chef jacket with cloth buttons (as in hero-figure), black trousers. Cinematic low-key lighting from a single warm practical source (candle, pendant, fire or window at blue hour), deep shadow falloff, shallow depth of field, 50mm lens at f/1.8, subtle Kodak Vision3 500T grain, true-to-life colour; espresso, walnut, ivory linen and aged brass palette. Avoid: no extra or fused fingers, no warped hands, no distorted cutlery, glassware or plates, no plastic or waxy skin, no glossy CGI food, no over-sharpening, no HDR, no text, no logos, no watermarks, no identifiable guest faces, no overhead flat-lay, no stock-photo smiles."
   },
   {
-    "slot": "era-private-rooms",
+    "slot": "chapter-room",
     "priority": 3,
     "model": "nano_banana_pro",
     "aspect_ratio": "4:5",
     "resolution": "2k",
-    "prompt": "An empty, low-lit private dining room with dark wood panelling, a single round table set for eight with ivory linen and candles, quiet and expectant. Cinematic low-key lighting from a single warm practical source (candle, pendant, fire or window at blue hour), deep shadow falloff, shallow depth of field, 50mm lens at f/1.8, subtle Kodak Vision3 500T grain, true-to-life colour; espresso, walnut, ivory linen and aged brass palette. Avoid: no extra or fused fingers, no warped hands, no distorted cutlery, glassware or plates, no plastic or waxy skin, no glossy CGI food, no over-sharpening, no HDR, no text, no logos, no watermarks, no identifiable guest faces, no overhead flat-lay, no stock-photo smiles."
+    "prompt": "An empty, low-lit private dining room with dark wood panelling and a landscape painting, a single round table set for eight with ivory linen, crystal and three taper candles, leather chairs; quiet and expectant. Cinematic low-key lighting from a single warm practical source (candle, pendant, fire or window at blue hour), deep shadow falloff, shallow depth of field, 50mm lens at f/1.8, subtle Kodak Vision3 500T grain, true-to-life colour; espresso, walnut, ivory linen and aged brass palette. Avoid: no extra or fused fingers, no warped hands, no distorted cutlery, glassware or plates, no plastic or waxy skin, no glossy CGI food, no over-sharpening, no HDR, no text, no logos, no watermarks, no identifiable guest faces, no overhead flat-lay, no stock-photo smiles."
   },
   {
-    "slot": "era-the-water",
-    "priority": 3,
+    "slot": "chapter-distance",
+    "priority": 2,
     "model": "nano_banana_pro",
     "aspect_ratio": "4:5",
     "resolution": "2k",
-    "prompt": "<<<92b4254f-82da-4679-a215-5ec62ea6eeb8>>> in a black chef jacket stands at the rail of a yacht at dusk, looking out to sea, a dinner table set on the deck behind him, lanterns lit. Wearing black double-breasted chef jacket with black buttons, sleeves turned back once, black trousers. Cinematic low-key lighting from a single warm practical source (candle, pendant, fire or window at blue hour), deep shadow falloff, shallow depth of field, 50mm lens at f/1.8, subtle Kodak Vision3 500T grain, true-to-life colour; espresso, walnut, ivory linen and aged brass palette. Avoid: no extra or fused fingers, no warped hands, no distorted cutlery, glassware or plates, no plastic or waxy skin, no glossy CGI food, no over-sharpening, no HDR, no text, no logos, no watermarks, no identifiable guest faces, no overhead flat-lay, no stock-photo smiles."
+    "prompt": "<<<92b4254f-82da-4679-a215-5ec62ea6eeb8>>> in a black chef jacket stands at the rail of a yacht at blue hour, hands in pockets, looking out to sea, a dinner table set with candles on the teak deck behind him, coastline lights across the water. Wearing black double-breasted chef jacket with black buttons, sleeves turned back once, black trousers. Cinematic low-key lighting from a single warm practical source (candle, pendant, fire or window at blue hour), deep shadow falloff, shallow depth of field, 50mm lens at f/1.8, subtle Kodak Vision3 500T grain, true-to-life colour; espresso, walnut, ivory linen and aged brass palette. Avoid: no extra or fused fingers, no warped hands, no distorted cutlery, glassware or plates, no plastic or waxy skin, no glossy CGI food, no over-sharpening, no HDR, no text, no logos, no watermarks, no identifiable guest faces, no overhead flat-lay, no stock-photo smiles."
   },
   {
-    "slot": "era-the-lessons",
+    "slot": "chapter-hands",
     "priority": 3,
     "model": "nano_banana_pro",
     "aspect_ratio": "4:5",
     "resolution": "2k",
-    "prompt": "Close-up of Eric's hands folding fresh ravioli on a floured wooden counter, raking side light, shallow depth of field. Cinematic low-key lighting from a single warm practical source (candle, pendant, fire or window at blue hour), deep shadow falloff, shallow depth of field, 50mm lens at f/1.8, subtle Kodak Vision3 500T grain, true-to-life colour; espresso, walnut, ivory linen and aged brass palette. Avoid: no extra or fused fingers, no warped hands, no distorted cutlery, glassware or plates, no plastic or waxy skin, no glossy CGI food, no over-sharpening, no HDR, no text, no logos, no watermarks, no identifiable guest faces, no overhead flat-lay, no stock-photo smiles."
+    "prompt": "Close-up of Eric's hands sealing fresh ravioli on a floured wooden counter, apron and rolled sleeves, a bowl of ricotta filling, raking side light, shallow depth of field. Cinematic low-key lighting from a single warm practical source (candle, pendant, fire or window at blue hour), deep shadow falloff, shallow depth of field, 50mm lens at f/1.8, subtle Kodak Vision3 500T grain, true-to-life colour; espresso, walnut, ivory linen and aged brass palette. Avoid: no extra or fused fingers, no warped hands, no distorted cutlery, glassware or plates, no plastic or waxy skin, no glossy CGI food, no over-sharpening, no HDR, no text, no logos, no watermarks, no identifiable guest faces, no overhead flat-lay, no stock-photo smiles."
   },
   {
-    "slot": "era-now",
-    "priority": 3,
+    "slot": "chapter-tonight",
+    "priority": 2,
     "model": "nano_banana_pro",
     "aspect_ratio": "4:5",
     "resolution": "2k",
-    "prompt": "<<<92b4254f-82da-4679-a215-5ec62ea6eeb8>>> in a dark suit stands in a tall doorway looking back over his shoulder toward camera, a fully set candlelit table glowing in the room behind him, the corridor in darkness. Wearing dark charcoal tailored suit, black shirt open at the collar \u2014 for greeting guests. Cinematic low-key lighting from a single warm practical source (candle, pendant, fire or window at blue hour), deep shadow falloff, shallow depth of field, 50mm lens at f/1.8, subtle Kodak Vision3 500T grain, true-to-life colour; espresso, walnut, ivory linen and aged brass palette. Avoid: no extra or fused fingers, no warped hands, no distorted cutlery, glassware or plates, no plastic or waxy skin, no glossy CGI food, no over-sharpening, no HDR, no text, no logos, no watermarks, no identifiable guest faces, no overhead flat-lay, no stock-photo smiles."
+    "prompt": "<<<92b4254f-82da-4679-a215-5ec62ea6eeb8>>> in a dark tailored jacket stands in a tall doorway looking back over his shoulder toward camera, a fully set candlelit table glowing in the room behind him, the hallway in darkness. Wearing dark charcoal tailored suit, black shirt open at the collar — for greeting guests. Cinematic low-key lighting from a single warm practical source (candle, pendant, fire or window at blue hour), deep shadow falloff, shallow depth of field, 50mm lens at f/1.8, subtle Kodak Vision3 500T grain, true-to-life colour; espresso, walnut, ivory linen and aged brass palette. Avoid: no extra or fused fingers, no warped hands, no distorted cutlery, glassware or plates, no plastic or waxy skin, no glossy CGI food, no over-sharpening, no HDR, no text, no logos, no watermarks, no identifiable guest faces, no overhead flat-lay, no stock-photo smiles."
   }
 ]

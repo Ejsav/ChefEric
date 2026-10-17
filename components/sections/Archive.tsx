@@ -72,7 +72,7 @@ export function Archive() {
         <div className="container-x flex items-end justify-between gap-8 pt-[clamp(6rem,10vw,9rem)] lg:pt-[calc(var(--header-h)+2.5rem)]">
           <div>
             <p className="text-eyebrow flex items-center gap-4"><span aria-hidden className="h-px w-10 bg-accent/60" />The Making</p>
-            <h2 id="archive-title" className="text-h2 mt-6 max-w-[18ch]">Where the standard <span className="italic text-accent">came from.</span></h2>
+            <h2 id="archive-title" className="text-h2 mt-6 max-w-[18ch]">Six chapters <span className="italic text-accent">of the craft.</span></h2>
           </div>
           {/* Era rail */}
           <nav aria-label="Chapters" className="hidden lg:block">
@@ -119,7 +119,7 @@ export function Archive() {
                   <p className="mt-4 text-[0.7rem] uppercase tracking-[0.26em] text-accent">{e.place}</p>
                   <p className="mt-8 max-w-[32rem] text-fg/80">{e.body}</p>
                   <div className="mt-10 max-w-[32rem] border-t border-line pt-6">
-                    <p className="text-[0.62rem] uppercase tracking-[0.26em] text-fg-muted">What it taught him</p>
+                    <p className="text-[0.62rem] uppercase tracking-[0.26em] text-fg-muted">The principle</p>
                     <p className="mt-3 font-display text-[1.5rem] italic leading-snug text-fg">&ldquo;{e.lesson}&rdquo;</p>
                   </div>
                 </div>

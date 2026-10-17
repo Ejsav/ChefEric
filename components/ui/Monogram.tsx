@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-// The house mark: E and J set in Bodoni inside a double ring — the
+// The house mark: E and J set in the display serif inside a double ring — the
 // shape of a wax seal or the crest on a menu card.
 export function Monogram({ className, title = "Eric Jokl" }: { className?: string; title?: string }) {
   return (

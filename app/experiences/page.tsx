@@ -94,7 +94,7 @@ export default function ExperiencesPage() {
       })}
 
       <Composer index="V" />
-      <InquiryClose title={["Something not", "on this list?"]} />
+      <InquiryClose title={["None of these", "quite right?"]} />
     </>
   );
 }
