@@ -1,6 +1,6 @@
 # Demonstration images: where each one goes
 
-The demonstration edition uses imagery created from Eric Jokl's likeness. This is the placement for the set supplied in October 2026. Save each image under the file name shown, in `public/media/`, and the next build puts it in place. Nothing else changes.
+The demonstration edition uses imagery created from Eric Jokl's likeness. This is the placement for the set supplied in October 2026; all of it is now live in `public/media/`. To replace or add an image, save it under the file name shown, in `public/media/`, and the next build puts it in place.
 
 The quickest way, with no tools installed:
 
@@ -32,8 +32,7 @@ Then open the site with `?notes=1` to check every frame says *Delivered*, or run
 | `gallery-11.jpg` | Hands shaping orecchiette with a knife | Gallery |
 | `gallery-12.jpg` | Espresso and salted chocolate by candlelight | Gallery |
 | `food-pass.jpg` | White jacket at the pass under copper lamps, steam rising on the right | Menus · How a menu is made |
-| `hero-still.jpg` | Long table with crystal and taper candles in a panelled dining room | Home · behind the hero |
-| `room-residence.jpg` | *Same image as `hero-still`, until a second dining room is shot* | Plan your evening · A private home |
+| `room-residence.jpg` | Long table with crystal and taper candles in a panelled dining room | Plan your evening · A private home |
 | `room-estate.jpg` | Long linen table on the lawn of a shingled house at sunset | Plan your evening · Hamptons; /private-dining/the-hamptons |
 | `room-waterfront.jpg` | Terrace table framed by open doors, palms and the bay at blue hour | Plan your evening · Waterfront; /private-dining/palm-beach |
 | `room-island.jpg` | Table for two at the end of a lantern-lit dock | Plan your evening · Island; /private-dining/private-islands |
@@ -56,7 +55,6 @@ These slots have no image in the set yet. Until they do, each shows a lit tonal 
 |---|---|
 | `room-penthouse` | You in a dark suit beside a set table, Manhattan lit behind the glass (16:11 landscape) |
 | `room-yacht` | A table on a yacht's aft deck at sunset, **landscape** 16:11 |
-| `room-residence` | A second dining room, so it no longer repeats the hero |
 | `gallery-02` | A long table set and empty, shot down its length (4:3) |
 | `gallery-04` | Nests of hand-cut tagliatelle on a board (square) |
 | `gallery-05` | A plated course on a yacht's teak table at sunset (4:5) |

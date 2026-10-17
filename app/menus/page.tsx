@@ -6,6 +6,7 @@ import { InquiryClose } from "@/components/sections/InquiryClose";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { Plate } from "@/components/ui/Plate";
 import type { PlateTone } from "@/components/ui/Plate";
+import { mediaImage } from "@/lib/media";
 
 // From the market to the plate: three food photographs under "How your menu
 // is made".
@@ -14,6 +15,11 @@ const sequence: { slot: string; label: string; alt: string; tone: PlateTone }[] 
   { slot: "food-pass", label: "The pass", tone: "ember", alt: "A chef's hands placing the last herb on a plated course at the kitchen pass." },
   { slot: "food-table", label: "Served", tone: "smoke", alt: "A plated course set on ivory linen by candlelight, a guest's hand lifting a glass." },
 ];
+
+// The sequence reads as one story, so it shows complete or as studies,
+// never as one photograph flanked by placeholders.
+const filled = sequence.filter((s) => mediaImage(s.slot)).length;
+const showSequence = filled === 0 || filled === sequence.length;
 
 export const metadata: Metadata = {
   title: "Sample Menus — Private Dining",
@@ -63,13 +69,13 @@ export default function MenusPage() {
               waiting at every place when your guests sit down.
             </p>
           </div>
-          <ol className="mt-4 grid gap-6 sm:grid-cols-3 md:col-span-12 md:mt-10 md:gap-8">
+          {showSequence ? <ol className="mt-4 grid gap-6 sm:grid-cols-3 md:col-span-12 md:mt-10 md:gap-8">
             {sequence.map((s, i) => (
               <li key={s.slot} data-reveal style={{ "--reveal-delay": `${i * 90}ms` } as React.CSSProperties}>
                 <Plate tone={s.tone} slot={s.slot} alt={s.alt} label={s.label} sizes="(min-width: 640px) 30vw, 100vw" />
               </li>
             ))}
-          </ol>
+          </ol> : null}
         </div>
       </section>
       <InquiryClose title={["Start with the guests.", "The menu follows."]} />
