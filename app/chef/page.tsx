@@ -7,7 +7,7 @@ import { Discretion } from "@/components/sections/Discretion";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 
 export const metadata: Metadata = {
-  title: "The Chef — Eric Jokl",
+  title: "The Chef",
   description:
     "How private chef Eric Jokl works: six chapters of the craft, from slow cooking and live fire to the room, the water and the table, and the rules of the house.",
   alternates: { canonical: "/chef" },
