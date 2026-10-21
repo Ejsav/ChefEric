@@ -2,14 +2,15 @@ import type { Metadata } from "next";
 import { Concierge } from "@/components/inquiry/Concierge";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { site } from "@/lib/site";
+import { demoPage } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = demoPage({
   title: "Inquire — Request a Private Evening",
   description:
-    "Request a private dinner, a yacht or private-island evening, a celebration or a cooking class with Chef Eric Jokl. Every request is read and answered personally.",
+    "The request for a private dinner, a yacht or island evening, a celebration or a cooking class: one question at a time, read back before it is sent.",
   alternates: { canonical: "/inquire" },
   openGraph: { title: "Request an evening — Chef Eric Jokl", url: "/inquire" },
-};
+});
 
 const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
 

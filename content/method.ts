@@ -22,6 +22,6 @@ export const method = [
   {
     n: "05",
     title: "The card",
-    body: "The menu from the night, printed for you to keep. A record of an evening that will not be cooked again.",
+    body: "The menu from the night, printed at every place for guests to take home, and a note the next day to ask how it went.",
   },
 ] as const;

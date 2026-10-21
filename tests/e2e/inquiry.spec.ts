@@ -3,7 +3,7 @@ import { expect, test, type Page } from "@playwright/test";
 const next = (page: Page) => page.getByRole("button", { name: "Continue" }).click();
 const heading = (page: Page) => page.locator("h2").first();
 
-test("composer hands a composed evening to the inquiry", async ({ page }) => {
+test("the planner hands a composed evening to the request", async ({ page }) => {
   await page.goto("/");
   await page.locator('#possibilities input[value="yacht"]').check({ force: true });
   await page.locator('#possibilities input[value="celebration"]').check({ force: true });
@@ -13,8 +13,9 @@ test("composer hands a composed evening to the inquiry", async ({ page }) => {
   await expect(page.getByText(/You composed:.*aboard a yacht/)).toBeVisible();
 });
 
-test("planner booking a yacht follows the yacht branch and submits", async ({ page }) => {
+test("the chef request says it is a demonstration, follows the yacht branch and shows what a chef would receive", async ({ page }) => {
   await page.goto("/inquire?setting=yacht&occasion=celebration&scale=gathering");
+  await expect(page.getByText("Nothing is booked, stored or sent to a chef")).toBeVisible();
   await page.getByText("For a client", { exact: true }).click(); // auto-advances
   await expect(heading(page)).toHaveText("What is your client imagining?");
   await next(page);
@@ -40,7 +41,27 @@ test("planner booking a yacht follows the yacht branch and submits", async ({ pa
   await next(page);
   await expect(page.locator("p.font-display.italic").first()).toContainText("aboard a yacht in Newport, RI, in late June");
   await page.getByRole("button", { name: "Send the request" }).click();
-  await expect(page.getByRole("status")).toContainText(/EJ-[A-Z0-9]{6}/);
+  const done = page.getByRole("status");
+  await expect(done).toContainText(/Demonstration complete · EJ-[A-Z0-9]{6}/);
+  await expect(done).toContainText("Nothing was booked");
+  await expect(done.getByText("What the chef receives")).toBeVisible();
+  await expect(done.locator("pre")).toContainText("Location: Newport, RI");
+  await expect(done.getByRole("link", { name: "Get this website" })).toHaveAttribute("href", "/your-site");
+});
+
+test("a class offers class-sized groups only", async ({ page }) => {
+  await page.goto("/inquire?occasion=lesson&scale=gathering&setting=residence");
+  await page.getByText("For myself, or my family").click();
+  await expect(page.locator('input[value="lesson"]')).toBeChecked();
+  await next(page);
+  await page.locator('[data-field="location"]').fill("Greenwich");
+  await next(page); // place
+  await next(page); // details (kitchen optional)
+  await page.getByText("We're flexible").click();
+  await next(page);
+  await expect(heading(page)).toHaveText("How many will be cooking?");
+  await expect(page.locator('input[value="9-12"]')).toBeChecked();
+  await expect(page.getByText("Twenty-five to sixty")).toHaveCount(0);
 });
 
 test("a collaboration skips the dinner questions", async ({ page }) => {
@@ -65,4 +86,18 @@ test("the API rejects incomplete requests", async ({ request }) => {
   expect(res.status()).toBe(422);
   const body = await res.json();
   expect(body.errors.email).toBeTruthy();
+});
+
+test("the API refuses a class for sixty", async ({ request }) => {
+  const res = await request.post("/api/inquire", {
+    data: { role: "host", form: "lesson", setting: "residence", location: "Greenwich", when: "flexible", guests: "25-60", name: "Alex Morgan", email: "alex@example.com" },
+  });
+  expect(res.status()).toBe(422);
+  expect((await res.json()).errors.guests).toContain("twelve");
+});
+
+test("old website links land on the website request", async ({ page }) => {
+  await page.goto("/inquire?about=website&name=Sofia%20Marchetti");
+  await expect(page).toHaveURL(/\/your-site\/start\?.*name=Sofia/);
+  await expect(page.locator("#f-name")).toHaveValue("Sofia Marchetti");
 });

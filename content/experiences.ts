@@ -17,6 +17,10 @@ export type Experience = {
   notice: string;
   /** price guide shown with the details; the proposal gives the full cost */
   from: string;
+  /** what the guide covers, and what the proposal adds */
+  priceNote: string;
+  /** what the place needs to have, in plain terms */
+  venue: string[];
   plate: { label: string; tone: PlateTone; slot?: string; src?: string; alt: string };
 };
 
@@ -43,6 +47,12 @@ export const experiences: Experience[] = [
     scale: "Two to twenty-four guests",
     notice: "Two to three weeks",
     from: "From $250 per guest",
+    priceNote: "Covers the menu, ingredients, cooking, service and clean-up for a seated dinner. Wine, rentals and extra staff are priced separately in the proposal.",
+    venue: [
+      "A working stove and oven, and a little counter space",
+      "Access for the team about three hours before guests arrive",
+      "Plates, glasses and linen, or they are brought in",
+    ],
     plate: { label: "The first course", tone: "ember", alt: "Chef Eric Jokl plating the first course in a private home kitchen.", slot: "exp-private-table" },
   },
   {
@@ -67,6 +77,12 @@ export const experiences: Experience[] = [
     scale: "By arrangement",
     notice: "Six weeks or more",
     from: "By proposal",
+    priceNote: "Priced as a whole stay: menus, provisioning, the travelling team, their travel and lodging, and any equipment that has to make the crossing.",
+    venue: [
+      "A galley or kitchen, even a compact one; without one, a field kitchen is planned",
+      "Cold storage sized to the stay, confirmed with the captain or house manager",
+      "A berth or room for the team on stays longer than a day",
+    ],
     plate: { label: "Late service, open water", tone: "tide", alt: "Chef Eric Jokl at a grill on a private island beach at dusk, lanterns along the dock.", slot: "exp-island-water" },
   },
   {
@@ -90,6 +106,12 @@ export const experiences: Experience[] = [
     scale: "One to twelve participants",
     notice: "Two weeks",
     from: "From $1,500 per class",
+    priceNote: "Covers a three-hour class for up to six, all ingredients and tools, and the dinner at the end. Larger groups and wine are added in the proposal.",
+    venue: [
+      "A counter long enough for everyone to stand at",
+      "A stove and an oven; a pasta table or machine is brought in",
+      "No more than twelve cooks, so everyone actually cooks",
+    ],
     plate: { label: "Flour, eggs, hands", tone: "linen", alt: "Chef Eric Jokl guiding a guest's hands shaping fresh pasta at a marble counter.", slot: "exp-kitchen-lessons" },
   },
   {
@@ -113,6 +135,12 @@ export const experiences: Experience[] = [
     scale: "Up to eighty guests",
     notice: "Four weeks or more",
     from: "From $300 per guest",
+    priceNote: "Covers the menu, kitchen team and service staff for a seated dinner. Rentals, tenting, bar service and a menu tasting are itemised in the proposal.",
+    venue: [
+      "A kitchen, or space and power for a temporary one",
+      "Room for the service team to work out of sight",
+      "A site visit or a floor plan at least three weeks ahead",
+    ],
     plate: { label: "Toasts, third course", tone: "smoke", alt: "A long celebration table with glasses raised, Chef Eric Jokl at the pass beyond.", slot: "exp-occasion" },
   },
 ];

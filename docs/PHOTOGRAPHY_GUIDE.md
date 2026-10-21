@@ -14,7 +14,7 @@ The demonstration edition fills these slots with imagery created from Eric Jokl'
 | **Completes the set** | 17: a second half-day, or replace over time |
 | **Chef on camera** | 16 frames need the chef or the chef's hands; group them into one session |
 
-To see every slot in place on the live site, open any page with `?notes=1` (or press **N**, or use *Production notes* in the footer). Each frame then shows the file it expects and whether it has been delivered.
+To see which slots are filled and which still show their tonal study, run `npm run media` in the repository. Each slot is listed with the file it expects.
 
 ---
 
@@ -172,5 +172,5 @@ Before a frame goes live, it should pass every line:
 - [ ] One sharp subject; the rest falls away.
 - [ ] No identifiable guest, no logo, no house number, boat name or tail number.
 - [ ] Grade matches the rest of the series side by side.
-- [ ] Seen in place with `?notes=1` on desktop **and** a phone; nothing important is cropped by the frame or covered by type.
+- [ ] Seen in place on a preview deployment, on desktop **and** a phone; nothing important is cropped by the frame or covered by type.
 - [ ] Releases on file.

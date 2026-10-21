@@ -27,7 +27,7 @@ export const forms = [
 
 export const settingOptions = [
   { id: "residence", label: "A private home", phrase: "in a private home" },
-  { id: "penthouse", label: "A city apartment", phrase: "in a city apartment" },
+  { id: "penthouse", label: "A city apartment or penthouse", phrase: "in a city apartment" },
   { id: "estate", label: "An estate", phrase: "on an estate" },
   { id: "waterfront", label: "A waterfront home", phrase: "in a waterfront home" },
   { id: "yacht", label: "Aboard a yacht", phrase: "aboard a yacht" },
@@ -65,10 +65,16 @@ export const whenOptions = [
 
 export const guestOptions = [
   { id: "2-8", label: "Two to eight" },
+  { id: "9-12", label: "Nine to twelve" },
   { id: "10-24", label: "Ten to twenty-four" },
   { id: "25-60", label: "Twenty-five to sixty" },
   { id: "60+", label: "More than sixty" },
 ] as const;
+
+// A class is taught to twelve or fewer; every other evening counts guests.
+const LESSON_GUESTS = ["2-8", "9-12"] as const;
+export const guestOptionsFor = (form?: string) =>
+  guestOptions.filter((g) => (form === "lesson" ? (LESSON_GUESTS as readonly string[]).includes(g.id) : g.id !== "9-12"));
 
 export const occasionOptions = [
   { id: "friends", label: "Dinner among friends", phrase: "dinner among friends" },
@@ -198,6 +204,28 @@ export function details(a: Partial<Answers>): { key: AnswerKey; label: string; v
   return rows.filter((r): r is { key: AnswerKey; label: string; value: string } => !!r.value && r.value.trim() !== "");
 }
 
+/**
+ * The email the chef's office receives for a request. Used by the API to
+ * deliver it and, on the demo, to show the visitor exactly what a chef using
+ * this site would get.
+ */
+export function officeEmail(a: Partial<Answers>, ref: string, origin: string[] = []) {
+  const summary = summarize(a);
+  return {
+    subject: `${ref} · ${a.name ?? ""} · ${summary}`.slice(0, 200),
+    text: [
+      summary,
+      "",
+      ...details(a).map((r) => `${r.label}: ${r.value}`),
+      "",
+      "— Origin —",
+      ...(origin.length ? origin : ["No attribution captured"]),
+      "",
+      `Reference: ${ref}`,
+    ].join("\n"),
+  };
+}
+
 // Map arrivals from the composer and experience pages onto answers.
 export function prefillFromParams(q: URLSearchParams): Partial<Answers> {
   const out: Partial<Answers> = {};
@@ -219,16 +247,9 @@ export function prefillFromParams(q: URLSearchParams): Partial<Answers> {
   const occasion = q.get("occasion");
   if (occasion === "lesson") out.form = "lesson";
   else if (occasion && occasionOptions.some((o) => o.id === occasion)) out.occasion = occasion as Answers["occasion"];
-  // From /your-site: a request for this website, not for an evening.
-  if (q.get("about") === "website") {
-    out.role = "brand";
-    out.form = "collaboration";
-    out.project = "I'd like a website like this one, customized to me and my business.";
-    const name = q.get("name")?.trim().slice(0, 120);
-    if (name) out.name = name;
-  }
+  // From the planner. A class at "a gathering" is the larger class size.
   const scale = q.get("scale");
-  const guestsByScale: Record<string, Answers["guests"]> = { intimate: "2-8", gathering: "10-24", grand: "25-60" };
+  const guestsByScale: Record<string, Answers["guests"]> = { intimate: "2-8", gathering: out.form === "lesson" ? "9-12" : "10-24", grand: out.form === "lesson" ? "9-12" : "25-60" };
   if (scale && guestsByScale[scale]) out.guests = guestsByScale[scale];
   if (out.setting && !out.form) out.form = out.setting === "yacht" || out.setting === "island" || out.setting === "abroad" ? "destination" : "dinner";
   return out;

@@ -17,6 +17,11 @@ export type Menu = {
   intro: string;
   courses: Course[];
   pairing: string;
+  /** Allergens present as written, printed at the foot of the card. */
+  contains: string[];
+  /** How the menu changes for common diets. Every real menu is written
+   *  around the table's allergies from the first draft. */
+  adapts: string;
   dish: { slot: string; label: string; alt: string; tone: PlateTone };
 };
 
@@ -36,6 +41,8 @@ export const menus: Menu[] = [
       { label: "To close", dish: "Dark chocolate, sea salt, espresso", note: "amaro on the table" },
     ],
     pairing: "Grower champagne to begin, a cool Nerello Mascalese until late.",
+    contains: ["shellfish", "fish", "raw egg", "gluten", "dairy"],
+    adapts: "Gluten-free pasta and bread on request; the raw courses are cooked or replaced for anyone who prefers.",
     dish: { slot: "menu-after-midnight", label: "The late pasta", tone: "ember", alt: "Spaghetti with butter, black pepper and pecorino in a shallow bowl by candlelight." },
   },
   {
@@ -53,6 +60,8 @@ export const menus: Menu[] = [
       { label: "Dessert", dish: "Grilled peaches, almond crumb, crème fraîche" },
     ],
     pairing: "A coastal white through the first plates, a light red served cool once the sun is down.",
+    contains: ["shellfish", "fish", "gluten", "dairy", "egg", "almond"],
+    adapts: "Vegetarian throughout, with grilled summer vegetables in place of the scallops and the fish; dairy-free on request.",
     dish: { slot: "menu-late-summer-outdoors", label: "Tomatoes, burrata, basil", tone: "linen", alt: "Heirloom tomatoes and burrata on an ivory plate at an outdoor table in golden light." },
   },
   {
@@ -70,6 +79,8 @@ export const menus: Menu[] = [
       { label: "Dessert", dish: "Olive-oil cake, lemon, summer berries" },
     ],
     pairing: "Champagne while the anchor goes down, a saline white for the rest of the night.",
+    contains: ["shellfish", "fish", "gluten", "egg", "pistachio"],
+    adapts: "Shellfish-free, with the oysters and clams replaced by crudo and a tomato linguine; gluten-free pasta on request.",
     dish: { slot: "menu-at-anchor", label: "Oysters, on deck", tone: "tide", alt: "Oysters on crushed ice on a yacht's teak table at sunset." },
   },
   {
@@ -87,6 +98,8 @@ export const menus: Menu[] = [
       { label: "Dessert", dish: "Espresso, salted dark chocolate", note: "and a digestif by the fire" },
     ],
     pairing: "A serious Nebbiolo with the braise; something amber and sweet with the chocolate.",
+    contains: ["dairy", "gluten", "egg", "hazelnut", "celery"],
+    adapts: "A vegetarian version built around wild mushrooms and squash; gluten-free on request.",
     dish: { slot: "menu-by-the-fire", label: "Osso buco, by the fire", tone: "smoke", alt: "Osso buco with saffron risotto and gremolata in a wide bowl by firelight." },
   },
 ];

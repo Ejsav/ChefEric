@@ -1,21 +1,9 @@
 import { Monogram } from "@/components/ui/Monogram";
+import { home } from "@/content/home";
 
 // Trust without a logo wall: three plain rules about privacy, which at this
 // level of client say more than any list of names could.
-const principles = [
-  {
-    title: "No names, ever",
-    body: "Who came to dinner is not a story the chef tells. Not online, not to the next client, not to anyone.",
-  },
-  {
-    title: "No photographs of your home",
-    body: "The team does not post, tag or keep pictures of where they cooked. If you want the evening captured, you choose the photographer.",
-  },
-  {
-    title: "Paper, if you need it",
-    body: "A confidentiality agreement covers the chef and every member of the team, signed before anyone walks through the door.",
-  },
-] as const;
+const principles = home.discretion;
 
 export function Discretion() {
   return (
@@ -30,7 +18,7 @@ export function Discretion() {
           <span className="line-mask" style={{ "--reveal-delay": "100ms" } as React.CSSProperties}><span className="italic text-accent">stays here.</span></span>
         </h2>
 
-        <div className="mt-20 grid gap-px overflow-hidden border border-line bg-[rgb(var(--fg)/0.12)] text-left md:grid-cols-3">
+        <div className="mt-16 grid gap-px overflow-hidden border border-line bg-[rgb(var(--fg)/0.12)] text-left md:grid-cols-3">
           {principles.map((p, i) => (
             <div key={p.title} className="bg-bg p-8 md:p-10" data-reveal style={{ "--reveal-delay": `${i * 100}ms` } as React.CSSProperties}>
               <p className="font-display text-sm italic text-accent">{["i", "ii", "iii"][i]}.</p>

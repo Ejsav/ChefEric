@@ -8,7 +8,7 @@ The quickest way, with no tools installed:
 2. **Add file → Upload files**, drag the images in, and rename each one to its slot name *before* uploading (for example `portrait.jpg`). The extension can be `.jpg`, `.png`, `.webp` or `.avif`.
 3. Commit. Vercel rebuilds and the photographs appear.
 
-Then open the site with `?notes=1` to check every frame says *Delivered*, or run `npm run media` locally.
+Then run `npm run media` locally to confirm every slot is filled, and check the preview deployment on a desktop and a phone.
 
 ## The placement
 

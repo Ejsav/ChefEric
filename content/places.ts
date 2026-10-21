@@ -1,4 +1,4 @@
-import type { PlateTone } from "@/components/ui/Plate";
+import type { PlateFallback, PlateTone } from "@/components/ui/Plate";
 
 // Where Chef Jokl cooks: one page per place, for the people searching
 // "private chef in …". Each page is written for its place
@@ -14,9 +14,11 @@ export type Place = {
   lines: [string, string];
   metaTitle: string;
   metaDescription: string;
+  /** one line for the index of places */
+  summary: string;
   setting: string; // composer + inquiry setting id
   menu: string;    // sample menu slug that suits the place
-  plate: { tone: PlateTone; label: string; alt: string; slot?: string; src?: string };
+  plate: { tone: PlateTone; label: string; alt: string; slot?: string; src?: string; fallback?: PlateFallback };
   intro: string[];
   evening: { title: string; body: string }[];
   logistics: string[];
@@ -33,9 +35,13 @@ export const places: Place[] = [
     metaTitle: "Private Chef in New York City & Manhattan",
     metaDescription:
       "Private dinners in Manhattan apartments, townhouses and lofts with New York private chef Eric Jokl: a menu written for your guests, cooked in your kitchen, served without a single stranger in the room.",
+    summary: "Apartments, townhouses and lofts: the building handled, the cooking finished in your kitchen.",
     setting: "penthouse",
     menu: "after-midnight",
-    plate: { tone: "smoke", label: "Above the avenue", alt: "Chef Eric Jokl beside a set table before tall windows, the city lit beyond.", slot: "room-penthouse" },
+    plate: {
+      tone: "smoke", label: "Above the avenue", alt: "Chef Eric Jokl beside a set table before tall windows, the city lit beyond.", slot: "room-penthouse",
+      fallback: { slot: "chapter-room", label: "The dining room, an hour early", alt: "A round table for eight set by candlelight in a dark wood-panelled dining room." },
+    },
     intro: [
       "In a city with a reservation for everything, the rarest table is the one nobody else can book. A private dinner at home means no waiting list, no neighbouring tables and no one listening, and a menu that was written with your guests in mind.",
       "Home base is New York, so most evenings happen in Manhattan apartments, townhouses and lofts, often in kitchens that were designed for takeout. That is fine. Most of the cooking is done before the elevator ride up; your kitchen is for the finishing.",
@@ -66,6 +72,7 @@ export const places: Place[] = [
     metaTitle: "Private Chef in the Hamptons",
     metaDescription:
       "Long tables on the lawn, beach lunches and full summer weekends in the Hamptons with private chef Eric Jokl, cooked from the East End's farm stands and day boats.",
+    summary: "Lawn dinners, beach lunches and whole summer weekends, cooked from the East End's farms and boats.",
     setting: "estate",
     menu: "late-summer-outdoors",
     plate: { tone: "linen", label: "Long table, late August", alt: "A long table on an estate lawn at golden hour.", slot: "room-estate" },
@@ -99,6 +106,7 @@ export const places: Place[] = [
     metaTitle: "Private Chef in Palm Beach & South Florida",
     metaDescription:
       "Terrace dinners on the water and season-long engagements in Palm Beach, Jupiter and Miami with private chef Eric Jokl, travelling from New York by arrangement.",
+    summary: "Terraces and waterfront homes in the season, menus written for the heat.",
     setting: "waterfront",
     menu: "at-anchor",
     plate: { tone: "tide", label: "Blue hour, doors open", alt: "A terrace table on the water at blue hour.", slot: "room-waterfront" },
@@ -132,6 +140,7 @@ export const places: Place[] = [
     metaTitle: "Private Yacht Chef for Owners & Charters",
     metaDescription:
       "Yacht chef Eric Jokl cooks for owners and charter guests: menus written for the galley, provisioning planned in full, and service run alongside your captain and crew.",
+    summary: "Dinner at anchor or a week aboard, planned with the captain around the galley.",
     setting: "yacht",
     menu: "at-anchor",
     plate: { tone: "tide", label: "Blue hour, on deck", alt: "Chef Eric Jokl at the rail of a yacht at dusk, a table set behind him.", slot: "chapter-distance" },
@@ -164,6 +173,7 @@ export const places: Place[] = [
     metaTitle: "Private Island Chef",
     metaDescription:
       "Island dinners and full island stays with private chef Eric Jokl: every ingredient, tool and spare planned before the crossing, so nothing at the table shows how far it came.",
+    summary: "Every ingredient, tool and spare packed before the crossing.",
     setting: "island",
     menu: "at-anchor",
     plate: { tone: "tide", label: "The end of the dock", alt: "A lantern-lit dock leading to a table on a private island at dusk.", slot: "room-island" },
@@ -196,6 +206,7 @@ export const places: Place[] = [
     metaTitle: "Private Chef for Hangar Dinners & Aviation Events",
     metaDescription:
       "Candlelit dinners in private hangars and terminals with private chef Eric Jokl: a field kitchen built for the space, power and access agreed with the FBO, service timed around arrivals.",
+    summary: "A long table in the hangar, or dinner waiting on arrival.",
     setting: "hangar",
     menu: "after-midnight",
     plate: { tone: "smoke", label: "Wheels down, table set", alt: "A candlelit dinner table beneath the wing of a private jet in a hangar.", slot: "room-hangar" },

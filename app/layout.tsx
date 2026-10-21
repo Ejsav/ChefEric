@@ -13,26 +13,31 @@ import { Transitions } from "@/components/system/Transitions";
 import { Cursor } from "@/components/system/Cursor";
 import { Telemetry } from "@/components/system/Telemetry";
 import { MobileBar } from "@/components/system/MobileBar";
+import { Colophon } from "@/components/layout/Colophon";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "Chef Eric Jokl — Private Chef, New York",
+    default: site.demo ? "Chef Eric Jokl — Luxury Private Chef Website, Live Demo" : "Chef Eric Jokl — Private Chef, New York",
     template: "%s — Chef Eric Jokl",
   },
-  description: site.description,
+  description: site.demo
+    ? "A live demonstration of a luxury private-chef website by Eric Jokl: editorial design, sample menus, an evening planner and a request flow that reads like a reservation book. Chef Eric Jokl is a demo persona; the website can be yours."
+    : site.description,
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
-    siteName: site.name,
-    title: "Chef Eric Jokl — Private tables, by arrangement",
-    description:
-      "Private chef in New York. Private dinners written for one table, yacht and private-island dining, cooking classes and celebrations.",
+    siteName: site.demo ? "Chef Eric Jokl · website demo" : site.name,
+    title: site.demo ? "Chef Eric Jokl — a private-chef website, live demo" : "Chef Eric Jokl — Private tables, by arrangement",
+    description: site.demo
+      ? "Explore a luxury private-chef website, then make it yours: your name, your story, your photographs."
+      : "Private chef in New York. Private dinners for one table, yacht and private-island dining, cooking classes and celebrations.",
     url: "/",
     locale: "en_US",
   },
   twitter: { card: "summary_large_image" },
   robots: { index: true, follow: true },
+  formatDetection: { telephone: false, email: false, address: false },
 };
 
 export const viewport: Viewport = {
@@ -58,6 +63,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Telemetry />
         <Header />
         <main id="main">{children}</main>
+        <Colophon />
         <Footer />
         <MobileBar />
         <Cursor />

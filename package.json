@@ -26,6 +26,7 @@
     "zod": "^4.6.5"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.10.2",
     "@eslint/eslintrc": "^3.3.7",
     "@playwright/test": "^1.56.1",
     "@types/node": "^26.6.4",
@@ -37,5 +38,10 @@
     "postcss": "^8.5.29",
     "tailwindcss": "^3.4.19",
     "typescript": "^5.9.3"
+  },
+  "overrides": {
+    "next": {
+      "postcss": "$postcss"
+    }
   }
 }

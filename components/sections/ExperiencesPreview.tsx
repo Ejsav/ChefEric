@@ -3,6 +3,7 @@ import { experiences } from "@/content/experiences";
 import { Plate } from "@/components/ui/Plate";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Arrow, Cta } from "@/components/ui/Cta";
+import { home } from "@/content/home";
 
 // What the chef offers, at a glance: four photographs, four lines, four
 // price guides. Each card opens its full description on /experiences.
@@ -14,20 +15,19 @@ export function ExperiencesPreview({ index = "II" }: { index?: string }) {
           <div className="md:col-span-7">
             <Eyebrow index={index}>The Experiences</Eyebrow>
             <h2 id="offer-title" className="text-h1 mt-10" data-reveal-group>
-              <span className="line-mask"><span>Four ways</span></span>
+              <span className="line-mask"><span>{home.experiences.lines[0]}</span></span>
               <span className="line-mask" style={{ "--reveal-delay": "110ms" } as React.CSSProperties}>
-                <span className="italic text-accent">to the table.</span>
+                <span className="italic text-accent">{home.experiences.lines[1]}</span>
               </span>
             </h2>
           </div>
           <p className="text-lead self-end text-fg-muted md:col-span-4 md:col-start-9" data-reveal>
-            In your home, on the water, at your counter or at a celebration. Every one begins with a
-            conversation and a menu written once.
+            {home.experiences.lead}
           </p>
         </div>
 
         {/* Phones: a swipeable rail. Tablet and up: a grid whose cards align on the price line. */}
-        <ul className="-mx-[var(--gutter)] mt-16 flex snap-x snap-mandatory scroll-px-[var(--gutter)] gap-5 overflow-x-auto px-[var(--gutter)] pb-4 [scrollbar-width:none] sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-14 sm:overflow-visible sm:px-0 sm:pb-0 md:mt-24 lg:grid-cols-4 [&::-webkit-scrollbar]:hidden">
+        <ul className="-mx-[var(--gutter)] mt-14 flex snap-x snap-mandatory scroll-px-[var(--gutter)] gap-5 overflow-x-auto px-[var(--gutter)] pb-4 [scrollbar-width:none] sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-14 sm:overflow-visible sm:px-0 sm:pb-0 md:mt-20 lg:grid-cols-4 [&::-webkit-scrollbar]:hidden">
           {experiences.map((e, i) => (
             <li key={e.slug} className="w-[80vw] max-w-[22rem] shrink-0 snap-start sm:w-auto sm:max-w-none" data-reveal style={{ "--reveal-delay": `${i * 90}ms` } as React.CSSProperties}>
               <Link href={`/experiences#${e.slug}`} className="group flex h-full flex-col" data-track={`cta:home-experience-${e.slug}`}>

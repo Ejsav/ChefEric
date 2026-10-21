@@ -1,28 +1,23 @@
 import { NextResponse } from "next/server";
-import { details, summarize } from "@/lib/inquiry";
+import { officeEmail, summarize } from "@/lib/inquiry";
 import { inquirySchema } from "@/lib/inquiry-schema";
 import { verifyInvite } from "@/lib/invite";
+import { deliver, originLines, reference, remember, remembered } from "@/lib/leads";
+import { clientIp, limited } from "@/lib/rate-limit";
+import { site } from "@/lib/site";
 
-// Every request is validated against the same rules the conversation uses,
-// tagged with where the visitor came from, given a reference, and sent to the
-// office (Resend) — or logged when email is not configured, so nothing is lost.
-
-// Best-effort burst protection per instance. Serverless instances don't share
-// memory; put this behind Vercel Firewall rate limiting for a hard guarantee.
-const hits = new Map<string, number[]>();
-function limited(ip: string) {
-  const now = Date.now();
-  const recent = (hits.get(ip) ?? []).filter((t) => now - t < 10 * 60_000);
-  recent.push(now);
-  hits.set(ip, recent);
-  return recent.length > 6;
-}
-
-const reference = () => `EJ-${Date.now().toString(36).slice(-4).toUpperCase()}${Math.random().toString(36).slice(2, 4).toUpperCase()}`;
+// The request for an evening. Every request is validated against the same
+// rules the conversation uses and given a reference.
+//  - On the demo (site.demo) that is all: nothing is stored, logged or sent,
+//    because nobody is booking a real chef. The visitor is shown the email a
+//    chef using this site would receive.
+//  - On a customer's site it is delivered to the office (lib/leads.ts), and
+//    the visitor is told it arrived only once a channel has accepted it.
 
 export async function POST(req: Request) {
-  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "local";
-  if (limited(ip)) return NextResponse.json({ ok: false, error: "Too many requests. Please write to us directly." }, { status: 429 });
+  if (limited(`inquire:${clientIp(req)}`)) {
+    return NextResponse.json({ ok: false, error: "Too many requests in a short time. Please wait a few minutes and try again." }, { status: 429 });
+  }
 
   let json: unknown;
   try {
@@ -39,51 +34,46 @@ export async function POST(req: Request) {
   }
 
   const data = parsed.data;
-  const ref = reference();
-  if (data.company) return NextResponse.json({ ok: true, ref }); // honeypot: accept quietly
+  const ref = reference("EJ");
+  if (data.company) return NextResponse.json({ ok: true, ref, demo: site.demo }); // honeypot: accept quietly
+
+  if (site.demo) return NextResponse.json({ ok: true, ref, demo: true });
+
+  const submissionId = data.submissionId || ref;
+  const again = remembered(submissionId);
+  if (again) return NextResponse.json(again);
 
   const invite = data.invite ? verifyInvite(data.invite) : null;
-  const invitedAs = invite?.ok ? invite.payload.n : null;
-  const summary = summarize(data);
-  const a = data.attribution;
   const origin = [
-    a?.first && `First touch: ${[a.first.source, a.first.medium, a.first.campaign].filter(Boolean).join(" / ") || "direct"} — landed on ${a.first.landing ?? "?"}${a.first.referrer ? ` from ${a.first.referrer}` : ""}${a.first.ts ? ` (${new Date(a.first.ts).toDateString()})` : ""}`,
-    a?.session && `This visit: ${[a.session.source, a.session.medium, a.session.campaign].filter(Boolean).join(" / ") || "direct"} — landed on ${a.session.landing ?? "?"}${a.session.referrer ? ` from ${a.session.referrer}` : ""}`,
-    invitedAs && `Private invitation: ${invitedAs}`,
-    data.invite && !invite?.ok && `Invitation token present but ${invite?.reason}`,
-  ].filter(Boolean) as string[];
+    ...originLines(data.attribution),
+    ...(invite?.ok ? [`Private invitation: ${invite.payload.n}`] : []),
+    ...(data.invite && !invite?.ok ? [`Invitation token present but ${invite?.reason}`] : []),
+  ];
+  const mail = officeEmail(data, ref, origin);
+  const first = data.name.split(" ")[0];
 
-  const text = [
-    summary,
-    "",
-    ...details(data).map((r) => `${r.label}: ${r.value}`),
-    "",
-    "— Origin —",
-    ...(origin.length ? origin : ["No attribution captured"]),
-    "",
-    `Reference: ${ref}`,
-  ].join("\n");
+  const result = await deliver({
+    kind: "evening",
+    ref,
+    submissionId,
+    subject: mail.subject,
+    text: mail.text,
+    replyTo: data.email,
+    data: { name: data.name, email: data.email, phone: data.phone || null, summary: summarize(data), answers: { ...data, attribution: undefined, company: undefined } },
+    ack: {
+      to: data.email,
+      subject: `Your request — ${ref}`,
+      text: [`Dear ${first},`, "", "Thank you. Your request has arrived and will be read personally.", "", `“${summarize(data)}”`, "", `Your reference is ${ref}. To add anything, reply to this email.`, "", site.name].join("\n"),
+    },
+  });
 
-  const { RESEND_API_KEY, INQUIRY_TO_EMAIL, INQUIRY_FROM_EMAIL } = process.env;
-  if (RESEND_API_KEY && INQUIRY_TO_EMAIL && INQUIRY_FROM_EMAIL) {
-    const res = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: { Authorization: `Bearer ${RESEND_API_KEY}`, "Content-Type": "application/json" },
-      body: JSON.stringify({
-        from: INQUIRY_FROM_EMAIL,
-        to: INQUIRY_TO_EMAIL,
-        reply_to: data.email,
-        subject: `${ref} · ${data.name} · ${summary}`.slice(0, 200),
-        text,
-      }),
-    });
-    if (!res.ok) {
-      console.error("[inquire] Resend failed", res.status, await res.text());
-      return NextResponse.json({ ok: false, error: "We could not send your request. Please write to us directly." }, { status: 502 });
-    }
-  } else {
-    console.info(`[inquire] Email not configured. Request received:\n${text}`);
+  if (!result.ok) {
+    return NextResponse.json(
+      { ok: false, error: `Your request could not be delivered just now. Your answers are kept on this device; please try again in a few minutes${site.email ? `, or write to ${site.email}` : ""}.` },
+      { status: 503 },
+    );
   }
-
-  return NextResponse.json({ ok: true, ref });
+  const body = { ok: true, ref, acknowledged: result.acknowledged };
+  remember(submissionId, body);
+  return NextResponse.json(body);
 }

@@ -11,6 +11,7 @@ import { Cta } from "@/components/ui/Cta";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Faq } from "@/components/ui/Faq";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
+import { demoPage } from "@/lib/seo";
 import { FaqJsonLd } from "@/components/seo/FaqJsonLd";
 
 type Props = { params: Promise<{ place: string }> };
@@ -24,12 +25,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { place } = await params;
   const p = places.find((x) => x.slug === place);
   if (!p) return {};
-  return {
+  return demoPage({
     title: p.metaTitle,
     description: p.metaDescription,
     alternates: { canonical: `/private-dining/${p.slug}` },
     openGraph: { title: `${p.metaTitle} — Chef Eric Jokl`, description: p.metaDescription, url: `/private-dining/${p.slug}` },
-  };
+  });
 }
 
 export default async function PlacePage({ params }: Props) {
@@ -54,8 +55,14 @@ export default async function PlacePage({ params }: Props) {
   return (
     <>
       <Breadcrumbs items={[{ name: "Where he cooks", path: "/private-dining" }, { name: p.name, path: `/private-dining/${p.slug}` }]} />
-      <FaqJsonLd faqs={p.faqs} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(service) }} />
+      {/* Service and FAQ structured data describe a real business, so they
+          are published only when the site is not a demo. */}
+      {site.demo ? null : (
+        <>
+          <FaqJsonLd faqs={p.faqs} />
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(service) }} />
+        </>
+      )}
 
       <PageIntro id="place-title" eyebrow={p.eyebrow} lines={p.lines} lead={<p>{p.intro[0]}</p>} />
 
@@ -92,7 +99,7 @@ export default async function PlacePage({ params }: Props) {
             </div>
             <div className="mt-12 flex flex-wrap items-center gap-x-10 gap-y-6" data-reveal>
               <Cta href={href} track={`cta:place-${p.slug}`}>Request an evening in {p.name}</Cta>
-              {menu ? <Cta href="/menus" variant="quiet">Sample menu: {menu.title}</Cta> : null}
+              {menu ? <Cta href="/menus" variant="quiet">Sample menus</Cta> : null}
             </div>
           </div>
         </div>
@@ -103,7 +110,7 @@ export default async function PlacePage({ params }: Props) {
           <div className="md:col-span-4">
             <Eyebrow>Questions</Eyebrow>
             <h2 id="place-faq" className="text-h2 mt-8">Asked about <span className="italic text-accent">{p.name}.</span></h2>
-            <p className="mt-6 text-fg-muted"><Link href="/questions" className="link-underline pb-0.5">All questions</Link></p>
+            <p className="mt-6 text-fg-muted"><Link href="/questions" className="link-underline inline-block py-1">All questions</Link></p>
           </div>
           <Faq faqs={p.faqs} className="md:col-span-7 md:col-start-6" />
         </div>
@@ -113,7 +120,7 @@ export default async function PlacePage({ params }: Props) {
         <div className="container-x flex flex-wrap items-baseline gap-x-8 gap-y-3 py-10">
           <span className="text-eyebrow">Also by arrangement</span>
           {others.map((o) => (
-            <Link key={o.slug} href={`/private-dining/${o.slug}`} className="link-underline pb-0.5 font-display text-lg text-fg/80 hover:text-fg">{o.name}</Link>
+            <Link key={o.slug} href={`/private-dining/${o.slug}`} className="link-underline inline-block py-1 font-display text-lg text-fg/80 hover:text-fg">{o.name}</Link>
           ))}
         </div>
       </nav>

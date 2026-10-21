@@ -1,16 +1,17 @@
 "use client";
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
 import {
-  contactOptions, details, discretionOptions, forms, galleyOptions, guestOptions, isCollab, isIntermediary,
-  kitchenOptions, needsKitchen, needsStay, occasionOptions, prefillFromParams, roles, settingOptions,
+  contactOptions, details, discretionOptions, forms, galleyOptions, guestOptionsFor, isCollab, isIntermediary,
+  kitchenOptions, needsKitchen, needsStay, occasionOptions, officeEmail, prefillFromParams, roles, settingOptions,
   stayOptions, summarize, whenOptions, type AnswerKey, type Answers,
 } from "@/lib/inquiry";
-import { getAttribution } from "@/lib/attribution";
+import Link from "next/link";
+import { getAttribution, originLines } from "@/lib/attribution";
 import { peekInviteName } from "@/lib/invite-public";
 import { track } from "@/lib/analytics";
 import { getLenis } from "@/lib/lenis";
 import { site } from "@/lib/site";
-import { cn } from "@/lib/utils";
+import { cn, submissionId } from "@/lib/utils";
 import { Arrow } from "@/components/ui/Cta";
 
 // ─────────────────────────────────────────────────────────────────────────
@@ -94,6 +95,8 @@ export function Concierge() {
   const rootRef = useRef<HTMLDivElement>(null);
   const honeypot = useRef<HTMLInputElement>(null);
   const autoTimer = useRef<number>(0);
+  const submission = useRef("");
+  const [demoMail, setDemoMail] = useState<{ subject: string; text: string } | null>(null);
 
   const visible = useMemo(() => STEPS.filter((s) => s.show(answers)), [answers]);
   const index = Math.max(0, visible.findIndex((s) => s.id === stepId));
@@ -109,7 +112,6 @@ export function Concierge() {
     if (Object.keys(pre).length) {
       setAnswers(pre);
       setComposed(!!(pre.setting || pre.occasion || pre.guests));
-      if (pre.project) setStepId("project"); // arriving from /your-site
       return;
     }
     try {
@@ -175,16 +177,21 @@ export function Concierge() {
   };
 
   async function submit() {
+    if (status === "sending") return; // a second press while the first is in flight
     if (honeypot.current?.value) { setStatus("sent"); return; }
     setStatus("sending");
     setFormError("");
+    // One id per request: a retry after a dropped connection is recognised as
+    // the same request, never delivered twice.
+    submission.current ||= submissionId();
+    const attribution = getAttribution();
     try {
       const res = await fetch("/api/inquire", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...answers, invite: invite?.token, attribution: getAttribution(), company: "" }),
+        body: JSON.stringify({ ...answers, invite: invite?.token, attribution, submissionId: submission.current, company: "" }),
       });
-      const body = (await res.json()) as { ok: boolean; ref?: string; error?: string; errors?: Record<string, string> };
+      const body = (await res.json().catch(() => ({ ok: false }))) as { ok: boolean; ref?: string; demo?: boolean; error?: string; errors?: Record<string, string> };
       if (!res.ok || !body.ok) {
         setStatus("idle");
         if (body.errors) {
@@ -196,8 +203,9 @@ export function Concierge() {
         return;
       }
       setRef(body.ref ?? "");
+      if (body.demo) setDemoMail(officeEmail(answers, body.ref ?? "EJ-DEMO", originLines(attribution)));
       setStatus("sent");
-      track("inquiry_submit", { form: answers.form, setting: answers.setting, guests: answers.guests, role: answers.role, invited: !!invite });
+      track("inquiry_submit", { form: answers.form, setting: answers.setting, guests: answers.guests, role: answers.role, invited: !!invite, demo: !!body.demo });
       try { localStorage.removeItem(DRAFT); } catch {}
     } catch {
       setStatus("idle");
@@ -220,6 +228,43 @@ export function Concierge() {
   };
 
   // ── Sent ─────────────────────────────────────────────────────────────
+  if (status === "sent" && demoMail) {
+    return (
+      <div role="status" className="animate-[fade-up_1s_var(--ease-out-expo)_both]">
+        <p className="text-eyebrow flex items-center gap-4"><span aria-hidden className="h-px w-10 bg-accent" />Demonstration complete{ref ? ` · ${ref}` : ""}</p>
+        <h2 className="text-h1 mt-8 max-w-[18ch]">That is the whole <span className="italic text-accent">request.</span></h2>
+        <p className="text-lead mt-8 max-w-xl">
+          Nothing was booked, and your answers were not stored or sent anywhere: Chef Eric Jokl is a demo
+          persona. On a live site, this is the email the chef would have in their inbox now, with an
+          acknowledgment on its way to the client.
+        </p>
+        <figure className="mt-12 border border-line bg-bg-elevated">
+          <figcaption className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b border-line px-5 py-4 text-[0.66rem] uppercase tracking-[0.22em] text-fg-muted sm:px-7">
+            <span>What the chef receives</span>
+            <span>Reply goes straight to the client</span>
+          </figcaption>
+          <div className="px-5 py-6 sm:px-7">
+            <p className="text-[0.66rem] uppercase tracking-[0.22em] text-fg-muted">Subject</p>
+            <p className="mt-1 break-words font-display text-[1.15rem] leading-snug">{demoMail.subject}</p>
+            <pre className="mt-6 max-h-[24rem] overflow-auto whitespace-pre-wrap break-words border-t border-line pt-6 font-body text-sm leading-relaxed text-fg/85">{demoMail.text}</pre>
+          </div>
+        </figure>
+        <div className="mt-12 flex flex-wrap items-center gap-x-10 gap-y-6">
+          <Link href="/your-site" data-track="cta:inquiry-demo-done" className="cta-primary group">
+            <span className="cta-fill" aria-hidden /><span className="relative">Get this website</span><Arrow className="relative transition-transform duration-700 ease-out-expo group-hover:translate-x-1" />
+          </Link>
+          <button
+            type="button"
+            onClick={() => { setAnswers({}); setStepId("role"); setStatus("idle"); setDemoMail(null); setRef(""); submission.current = ""; }}
+            className="link-underline inline-flex min-h-11 items-center text-[0.74rem] font-medium uppercase tracking-[0.26em] text-fg-muted hover:text-fg"
+          >
+            Try another request
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   if (status === "sent") {
     return (
       <div role="status" className="animate-[fade-up_1s_var(--ease-out-expo)_both]">
@@ -267,6 +312,13 @@ export function Concierge() {
 
   return (
     <div ref={rootRef} onKeyDown={onKeyDown}>
+      {site.demo && index === 0 ? (
+        <p className="mb-10 border-l border-accent/70 pl-4 text-sm text-fg/80">
+          <span className="text-eyebrow mb-1 block text-accent">Demonstration</span>
+          This is the request your clients would use. Nothing is booked, stored or sent to a chef, so use any
+          details you like. <Link href="/your-site" className="link-underline text-fg">Get this website</Link>
+        </p>
+      ) : null}
       {/* Progress */}
       <div className="flex items-center justify-between gap-6 text-[0.66rem] uppercase tracking-[0.26em] text-fg-muted">
         <span aria-live="polite">
@@ -368,7 +420,7 @@ export function Concierge() {
 
         {step.id === "guests" && (
           <Question headingRef={headingRef} title={answers.form === "lesson" ? "How many will be cooking?" : "How many at the table?"} sub="An estimate is perfect.">
-            <Choices field="guests" options={guestOptions} value={answers.guests} onChoose={(v, adv) => choose("guests", v, adv)} error={errors.guests} letters />
+            <Choices field="guests" options={guestOptionsFor(answers.form)} value={answers.guests} onChoose={(v, adv) => choose("guests", v, adv)} error={errors.guests} letters />
           </Question>
         )}
 
@@ -397,7 +449,7 @@ export function Concierge() {
         )}
 
         {step.id === "contact" && (
-          <Question headingRef={headingRef} title={answers.role === "host" || !answers.role ? "And who should we write back to?" : "And how do we reach you?"} sub="Used only to reply to this request. Never shared, never added to a list.">
+          <Question headingRef={headingRef} title={answers.role === "host" || !answers.role ? "And who should we write back to?" : "And how do we reach you?"} sub={site.demo ? "On a live site, used only to reply to this request. On this demo, nothing you type leaves the page except to be checked and shown back to you." : "Used only to reply to this request. Never shared, never added to a list."}>
             <div className="grid gap-x-10 md:grid-cols-2">
               <Text field="name" label="Your name" value={answers.name} onChange={(v) => set("name", v)} error={errors.name} autoComplete="name" />
               <Text field="email" label="Email" type="email" value={answers.email} onChange={(v) => set("email", v)} error={errors.email} autoComplete="email" inputMode="email" />
@@ -417,7 +469,7 @@ export function Concierge() {
                   <dd className="col-span-2 row-start-2 whitespace-pre-line break-words text-fg sm:col-span-1 sm:row-start-auto">{r.value}</dd>
                   <dd className="col-start-2 row-start-1 sm:col-start-auto sm:row-start-auto">
                     {ownerOf(r.key, answers) ? (
-                      <button type="button" onClick={() => goTo(ownerOf(r.key, answers)!)} className="link-underline pb-0.5 text-[0.66rem] uppercase tracking-[0.24em] text-accent">
+                      <button type="button" onClick={() => goTo(ownerOf(r.key, answers)!)} className="link-underline inline-flex min-h-6 items-center text-[0.66rem] uppercase tracking-[0.24em] text-accent">
                         Edit<span className="sr-only"> {r.label}</span>
                       </button>
                     ) : null}
@@ -436,7 +488,9 @@ export function Concierge() {
       {/* Actions */}
       <div className="mt-14 flex flex-col-reverse gap-6 border-t border-line pt-10 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-[0.66rem] uppercase tracking-[0.24em] text-fg-muted">
-          {isLast ? "Nothing is booked until you have spoken with the chef's office." : <>Press <kbd className="font-body text-fg">Enter ↵</kbd> to continue</>}
+          {isLast
+            ? site.demo ? "Demonstration: sending shows what a chef would receive. Nothing is booked." : "Nothing is booked until you have spoken with the chef's office."
+            : <>Press <kbd className="font-body text-fg">Enter ↵</kbd> to continue</>}
         </p>
         <button
           type="button"

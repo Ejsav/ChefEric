@@ -30,11 +30,10 @@ export function Standards() {
                     aria-expanded={isOpen}
                     aria-controls={`standard-${i}`}
                     onClick={() => setOpen(i)}
-                    onMouseEnter={() => setOpen(i)}
                     className="grid w-full grid-cols-[2.75rem_1fr] items-baseline gap-4 py-7 text-left md:grid-cols-[4rem_1fr]"
                   >
                     <span className="font-display text-lg italic text-accent">{String(i + 1).padStart(2, "0")}</span>
-                    <span className={cn("font-display leading-tight transition-[font-size,color] duration-700 ease-out-expo", isOpen ? "text-[clamp(1.6rem,2.8vw,2.4rem)] text-fg" : "text-[clamp(1.25rem,2vw,1.6rem)] text-fg/55")}>
+                    <span className={cn("font-display leading-tight transition-[font-size,color] duration-700 ease-out-expo", isOpen ? "text-[clamp(1.6rem,2.8vw,2.4rem)] text-fg" : "text-[clamp(1.25rem,2vw,1.6rem)] text-fg/75")}>
                       {s.title}
                     </span>
                   </button>

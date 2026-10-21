@@ -51,8 +51,9 @@ export const inquirySchema = z
     phone: text(40),
     contactPref: z.enum(ids(contactOptions)).optional(),
     invite: text(2000),
+    submissionId: z.string().trim().max(64).optional(),
     attribution: z.object({ first: touch, session: touch }).optional(),
-    company: z.string().max(0).optional().or(z.literal("")), // honeypot
+    company: z.string().max(500).optional(), // honeypot: anything here means a bot
   })
   .superRefine((a, ctx) => {
     const req = (path: string, message: string) => ctx.addIssue({ code: "custom", path: [path], message });
@@ -65,6 +66,8 @@ export const inquirySchema = z
     if (a.when === "date" && !a.date) req("date", "Please choose the date.");
     if (a.when === "season" && !a.season) req("season", "A month or season, please.");
     if ((a.contactPref === "phone" || a.contactPref === "text") && !a.phone) req("phone", "A number, so we can reach you as you prefer.");
+    if (a.form === "lesson" && a.guests && a.guests !== "2-8" && a.guests !== "9-12") req("guests", "Classes are kept to twelve or fewer.");
+    if (a.form !== "lesson" && a.guests === "9-12") req("guests", "Please choose how many guests.");
   });
 
 export type Inquiry = z.infer<typeof inquirySchema>;

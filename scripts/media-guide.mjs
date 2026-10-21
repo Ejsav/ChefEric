@@ -3,7 +3,7 @@
 // shoot brief for every photograph and film slot on the site.
 //   npm run media:guide          regenerate
 //   npm run media:guide -- --check   fail if the committed guide is stale (CI)
-// The site, the production notes overlay and this guide all read the same
+// The site, `npm run media` and this guide all read the same
 // manifest, so they cannot disagree about what is needed or where it goes.
 import { readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
@@ -50,7 +50,7 @@ w(`| **Important** | ${count(2)}: shoot on the main day |`);
 w(`| **Completes the set** | ${count(3)}: a second half-day, or replace over time |`);
 w(`| **Chef on camera** | ${onCamera} frames need the chef or the chef's hands; group them into one session |`);
 w();
-w("To see every slot in place on the live site, open any page with `?notes=1` (or press **N**, or use *Production notes* in the footer). Each frame then shows the file it expects and whether it has been delivered.");
+w("To see which slots are filled and which still show their tonal study, run `npm run media` in the repository. Each slot is listed with the file it expects.");
 w();
 w("---");
 w();
@@ -134,7 +134,7 @@ w("- [ ] One warm key light, deep shadow, no flash, no overhead flat-lay.");
 w("- [ ] One sharp subject; the rest falls away.");
 w("- [ ] No identifiable guest, no logo, no house number, boat name or tail number.");
 w("- [ ] Grade matches the rest of the series side by side.");
-w("- [ ] Seen in place with `?notes=1` on desktop **and** a phone; nothing important is cropped by the frame or covered by type.");
+w("- [ ] Seen in place on a preview deployment, on desktop **and** a phone; nothing important is cropped by the frame or covered by type.");
 w("- [ ] Releases on file.");
 w();
 

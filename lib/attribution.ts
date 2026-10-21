@@ -47,3 +47,11 @@ export function getAttribution(): { first: Touch | null; session: Touch | null }
   if (typeof window === "undefined") return { first: null, session: null };
   try { return { first: read(localStorage, FIRST), session: read(sessionStorage, SESSION) }; } catch { return { first: null, session: null }; }
 }
+
+/** Attribution as lines for the office email: where this visitor came from. */
+type Maybe = Partial<Touch> | null | undefined;
+export function originLines(a?: { first?: Maybe; session?: Maybe } | null) {
+  const line = (label: string, t: Maybe) =>
+    t && `${label}: ${[t.source, t.medium, t.campaign].filter(Boolean).join(" / ") || "direct"} — landed on ${t.landing ?? "?"}${t.referrer ? ` from ${t.referrer}` : ""}${t.ts ? ` (${new Date(t.ts).toDateString()})` : ""}`;
+  return [line("First touch", a?.first), line("This visit", a?.session)].filter(Boolean) as string[];
+}

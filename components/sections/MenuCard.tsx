@@ -20,10 +20,16 @@ export function MenuCard({ menus, compact = false }: { menus: Menu[]; compact?: 
     track("menu_view", { menu: menus[i]!.slug });
   };
 
+  // Arrow keys move between tabs (both axes, since the rail is horizontal on
+  // phones and vertical on desktop); Home and End jump to the ends.
   const onKey = (e: React.KeyboardEvent, i: number) => {
-    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+    const step: Record<string, number> = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 };
+    let next: number;
+    if (e.key in step) next = (i + step[e.key]! + menus.length) % menus.length;
+    else if (e.key === "Home") next = 0;
+    else if (e.key === "End") next = menus.length - 1;
+    else return;
     e.preventDefault();
-    const next = (i + (e.key === "ArrowRight" ? 1 : -1) + menus.length) % menus.length;
     select(next);
     document.getElementById(`${id}-tab-${next}`)?.focus();
   };
@@ -33,7 +39,7 @@ export function MenuCard({ menus, compact = false }: { menus: Menu[]; compact?: 
       {/* min-w-0: lets the phone tab rail scroll inside its column instead of
           widening the grid (and the page) to fit every tab. */}
       <div className={cn("min-w-0", !compact && "lg:col-span-4")}>
-        <div role="tablist" aria-label="Sample menus" className="-mx-[var(--gutter)] flex snap-x gap-x-6 overflow-x-auto px-[var(--gutter)] pb-2 [scrollbar-width:none] lg:mx-0 lg:flex-col lg:gap-y-1 lg:overflow-visible lg:px-0 [&::-webkit-scrollbar]:hidden">
+        <div role="tablist" aria-label="Sample menus" className="-mx-[var(--gutter)] flex snap-x scroll-px-[var(--gutter)] gap-x-6 overflow-x-auto px-[var(--gutter)] pb-2 [scrollbar-width:none] lg:mx-0 lg:flex-col lg:gap-y-1 lg:overflow-visible lg:px-0 [&::-webkit-scrollbar]:hidden">
           {menus.map((m, i) => (
             <button
               key={m.slug}
@@ -45,6 +51,7 @@ export function MenuCard({ menus, compact = false }: { menus: Menu[]; compact?: 
               tabIndex={i === active ? 0 : -1}
               onClick={() => select(i)}
               onKeyDown={(e) => onKey(e, i)}
+              onFocus={(e) => e.currentTarget.scrollIntoView({ block: "nearest", inline: "nearest" })}
               className={cn(
                 "group shrink-0 snap-start border-b py-3 text-left transition-colors duration-500 lg:border-b-0 lg:border-l lg:py-4 lg:pl-6",
                 i === active ? "border-accent text-fg" : "border-transparent text-fg/55 hover:text-fg/85",
@@ -70,9 +77,12 @@ export function MenuCard({ menus, compact = false }: { menus: Menu[]; compact?: 
             </div>
           </div>
         ) : null}
-        <p className="mt-8 hidden max-w-xs text-sm text-fg-muted lg:block">
-          Examples, not choices. Your menu is written after one conversation and cooked for nobody else.
-        </p>
+        <dl className="mt-8 hidden max-w-[22rem] space-y-4 border-t border-line pt-6 text-sm lg:block">
+          <div>
+            <dt className="text-eyebrow">Dietary</dt>
+            <dd className="mt-2 text-fg-muted">{menu.adapts}</dd>
+          </div>
+        </dl>
       </div>
 
       {/* The card */}
@@ -100,6 +110,10 @@ export function MenuCard({ menus, compact = false }: { menus: Menu[]; compact?: 
             </ol>
             <span aria-hidden className="mx-auto mt-10 block h-px w-12 bg-[rgb(var(--brass-deep)/0.6)]" />
             <p className="mx-auto mt-6 max-w-xs text-[0.82rem] leading-relaxed text-[rgb(98_84_70)]">{menu.pairing}</p>
+            <p className="mx-auto mt-6 max-w-sm text-[0.66rem] uppercase leading-relaxed tracking-[0.18em] text-[rgb(98_84_70)]">
+              Contains {menu.contains.join(", ")}
+            </p>
+            <p className="mx-auto mt-2 max-w-sm text-[0.78rem] italic leading-relaxed text-[rgb(98_84_70)] lg:hidden">{menu.adapts}</p>
           </div>
         </div>
         <div className="mt-10 flex flex-wrap items-center justify-center gap-x-10 gap-y-6">

@@ -1,8 +1,9 @@
+import Image from "next/image";
 import { Cta } from "@/components/ui/Cta";
 import { HeroLight } from "@/components/system/HeroLight";
-import Image from "next/image";
 import { HeroMedia } from "@/components/system/HeroMedia";
 import { mediaImage } from "@/lib/media";
+import { home } from "@/content/home";
 import { cn } from "@/lib/utils";
 
 // The hero is a private room with the lights low. One warm source —
@@ -12,10 +13,11 @@ import { cn } from "@/lib/utils";
 const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
 
 export function Hero() {
-  // With Eric's figure standing on the right, the actions move under the
-  // lead so they never sit on top of him.
-  const figureSrc = mediaImage("hero-figure");
-  const figure = !!figureSrc;
+  const { hero } = home;
+  // Eric's figure (a transparent cutout) is ONE image: in the flow above the
+  // name on phones, standing to the right of it from tablet up. One element
+  // means one preload, whichever device asks.
+  const figure = mediaImage("hero-figure");
   return (
     <section id="hero" aria-labelledby="hero-title" className="tone-dark grain relative isolate flex min-h-[max(100svh,640px)] flex-col overflow-hidden">
       {/* Photograph or film, when present */}
@@ -29,23 +31,27 @@ export function Hero() {
         <div className="absolute inset-0 bg-[radial-gradient(120%_90%_at_50%_40%,transparent_40%,rgba(8,6,4,0.85)_100%)]" />
       </div>
 
-      <div className={cn("container-x relative flex flex-1 flex-col justify-end pb-10 md:pb-14 md:pt-[calc(var(--header-h)+3rem)]", figureSrc ? "pt-[calc(var(--header-h)+0.5rem)]" : "pt-[calc(var(--header-h)+3rem)]")}>
-        {/* Phones: Eric stands above the name, fading into the room. */}
-        {figureSrc ? (
-          <div aria-hidden className="hero-fade relative -mb-6 h-[min(46svh,26rem)] md:hidden" style={d(150)}>
+      <div className={cn("container-x relative flex flex-1 flex-col justify-end pb-10 md:pb-14 md:pt-[calc(var(--header-h)+3rem)]", figure ? "pt-[calc(var(--header-h)+0.5rem)]" : "pt-[calc(var(--header-h)+3rem)]")}>
+        {figure ? (
+          <div
+            aria-hidden
+            className="hero-fade pointer-events-none relative -mb-6 h-[min(46svh,26rem)] md:absolute md:bottom-0 md:right-[1%] md:top-[calc(var(--header-h)-0.5rem)] md:-z-[5] md:mb-0 md:h-auto md:w-[42%] lg:right-[4%] lg:w-[36%]"
+            style={d(150)}
+          >
             <Image
-              src={figureSrc}
+              src={figure}
               alt=""
               fill
               priority
-              sizes="100vw"
-              className="object-contain object-bottom [filter:brightness(0.8)_contrast(1.06)_saturate(0.9)_sepia(0.12)] [mask-image:linear-gradient(to_top,transparent_0%,black_30%)]"
+              sizes="(min-width: 1024px) 36vw, (min-width: 768px) 42vw, 70vw"
+              className="object-contain object-bottom [filter:brightness(0.8)_contrast(1.06)_saturate(0.9)_sepia(0.12)] [mask-image:linear-gradient(to_top,transparent_0%,black_28%)]"
             />
           </div>
         ) : null}
+
         <p className="hero-fade text-eyebrow flex items-center gap-4" style={d(300)}>
           <span aria-hidden className="hero-draw inline-block h-px w-10 bg-accent" style={d(200)} />
-          <span>Private Chef<span className="hidden sm:inline"> · New York &amp; Beyond</span></span>
+          <span>{hero.eyebrow}<span className="hidden sm:inline">{hero.eyebrowMore}</span></span>
         </p>
 
         <h1 id="hero-title" className="text-display hero-name hero-depth mt-8 md:mt-10">
@@ -57,25 +63,21 @@ export function Hero() {
           <span className="sr-only">, private chef in New York</span>
         </h1>
 
-        <div className="mt-12 grid gap-10 md:mt-16 md:grid-cols-12 md:items-end">
-          <p className="hero-fade text-lead max-w-[30rem] md:col-span-6 md:col-start-1" style={d(650)}>
-            Private dinners written once, for one table. Modern coastal and Italian
-            cooking — served in your home, aboard your yacht, on your island.
-          </p>
+        <div className="mt-10 grid gap-10 md:mt-14 md:grid-cols-12 md:items-end">
+          <p className="hero-fade text-lead max-w-[29rem] md:col-span-6 md:col-start-1" style={d(650)}>{hero.lead}</p>
           <div className={cn("hero-fade flex flex-wrap items-center gap-x-10 gap-y-6", figure ? "md:col-span-12" : "md:col-span-6 md:justify-end")} style={d(800)}>
-            <Cta href="/inquire" track="cta:hero-request">Request an evening</Cta>
-            <Cta href="/menus" variant="quiet" track="cta:hero-menus">See sample menus</Cta>
+            <Cta href={hero.primary.href} track="cta:hero-request">{hero.primary.label}</Cta>
+            <Cta href={hero.secondary.href} variant="quiet" track="cta:hero-menus">{hero.secondary.label}</Cta>
           </div>
         </div>
 
-        <div className="mt-14 md:mt-20">
+        <div className="mt-12 md:mt-16">
           <div aria-hidden className="hero-draw h-px bg-line" style={d(700)} />
-          <div className="hero-fade mt-5 flex items-center justify-between text-[0.66rem] uppercase tracking-[0.28em] text-fg-muted" style={d(1000)}>
-            <span>Dinners · Yachts · Islands · Classes</span>
-            <span className="hidden md:inline">New York · The Hamptons · The Islands</span>
-            <span className="flex items-center gap-3">
-              Scroll
-              <span aria-hidden className="relative block h-6 w-px overflow-hidden bg-line">
+          <div className="hero-fade mt-5 flex items-center justify-between gap-6 text-[0.62rem] uppercase tracking-[0.24em] text-fg-muted sm:text-[0.66rem] sm:tracking-[0.28em]" style={d(1000)}>
+            <span>{hero.foot}</span>
+            <span aria-hidden className="flex items-center gap-3">
+              <span className="hidden sm:inline">Scroll</span>
+              <span className="relative block h-6 w-px overflow-hidden bg-line">
                 <span className="scroll-cue absolute inset-0 bg-accent" />
               </span>
             </span>

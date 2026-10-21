@@ -16,9 +16,16 @@ This repository is **the Chef Eric Jokl luxury private-chef website template**: 
 - Testimonials stay labelled *Sample*. Prices are demo guides.
 - The demo imagery is created from Eric's likeness and the footer says so.
 
+## The demo switch and the offer
+
+- `site.demo` in `lib/site.ts` decides what is a showcase (notice bar, colophon, chef request that never delivers, noindex on persona pages). Keep it `true` here.
+- The commercial offer (prices, inclusions, terms) lives only in `content/offer.ts`. Its figures are proposed until Eric confirms them; never change a price or a term without being asked.
+- The website request (`/your-site/start`) is real business: never weaken its delivery guarantees in `lib/leads.ts` (no "success" without a channel that a person reads).
+
 ## Where things live
 
-- Brand facts: `lib/site.ts`. Copy: `content/`. Media slots: `content/media.ts`.
+- Brand facts: `lib/site.ts`. Copy: `content/` (home page words in `content/home.ts`). Media slots: `content/media.ts`.
+- Operations, customization and QA: `docs/OPERATIONS.md`, `docs/CUSTOMIZING.md`, `docs/QA.md`.
 - Images: `public/media/<slot>.<ext>`; the build picks them up. `npm run media` shows status, `docs/DEMO_IMAGES.md` maps the supplied demo images to slots.
 - The professional shoot brief, `docs/PHOTOGRAPHY_GUIDE.md`, is generated: edit `content/media.ts`, then `npm run media:guide`.
 

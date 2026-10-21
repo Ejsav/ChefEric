@@ -1,6 +1,7 @@
 import { menus } from "@/content/menus";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { MenuCard } from "@/components/sections/MenuCard";
+import { home } from "@/content/home";
 
 // The food, on the home page. A section of paper and type, set in the
 // dark room like a menu card left at a place setting.
@@ -13,18 +14,17 @@ export function TheTable({ index = "III" }: { index?: string }) {
           <div className="md:col-span-7">
             <Eyebrow index={index}>The Table</Eyebrow>
             <h2 id="table-title" className="text-h1 mt-10" data-reveal-group>
-              <span className="line-mask"><span>Cooked for your table.</span></span>
+              <span className="line-mask"><span>{home.table.lines[0]}</span></span>
               <span className="line-mask" style={{ "--reveal-delay": "110ms" } as React.CSSProperties}>
-                <span className="italic text-accent">Then retired.</span>
+                <span className="italic text-accent">{home.table.lines[1]}</span>
               </span>
             </h2>
           </div>
           <p className="text-lead self-end text-fg-muted md:col-span-4 md:col-start-9" data-reveal>
-            Coastal, fire-led and Italian in spirit, shaped by the week&rsquo;s market and the room it is served in.
-            Read these as a sense of range; yours is written after one conversation.
+            {home.table.lead}
           </p>
         </div>
-        <div className="mt-16 md:mt-24">
+        <div className="mt-14 md:mt-20">
           <MenuCard menus={menus} />
         </div>
       </div>

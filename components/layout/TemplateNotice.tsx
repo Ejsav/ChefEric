@@ -1,19 +1,23 @@
 import Link from "next/link";
-import { site } from "@/lib/site";
+import { offer, money } from "@/content/offer";
 
 // This site is a template shown under a demo persona. The notice sits above
-// the navigation on every page, says so plainly, and leads to the offer.
+// the navigation on every page, says so plainly in one quiet line, and leads
+// to the offer. It is the only standing commercial element on the demo.
 export function TemplateNotice() {
   return (
-    <div className="border-b border-[rgba(190,156,104,0.22)] bg-[rgba(12,8,6,0.94)]">
-      <div className="container-x flex h-[var(--notice-h)] items-center justify-center gap-x-3 text-center text-[0.62rem] uppercase tracking-[0.2em] text-[rgba(237,229,214,0.78)] sm:text-[0.64rem]">
-        <span className="truncate">
-          <span className="text-[rgb(var(--brass))]">Template example</span>
-          <span className="hidden md:inline"> · &ldquo;Chef Eric Jokl&rdquo; is a demo persona. This website can be yours, customized to you</span>
-        </span>
-        <Link href="/your-site" data-track="cta:template-notice" className="link-underline shrink-0 pb-0.5 text-[rgb(var(--ivory))]">
-          <span className="md:hidden">Get this site →</span>
-          <span className="hidden md:inline">Get this site · ${site.offer.monthly}/mo →</span>
+    <div className="border-b border-[rgba(190,156,104,0.2)] bg-[rgba(12,8,6,0.94)]">
+      <div className="container-x flex h-[var(--notice-h)] items-center justify-between gap-x-4 text-[0.62rem] uppercase tracking-[0.2em] text-[rgba(237,229,214,0.8)] sm:justify-center sm:text-[0.64rem]">
+        <p className="min-w-0 truncate">
+          <span className="text-[rgb(var(--brass))]">Live demo</span>
+          <span className="hidden md:inline"> · Chef Eric Jokl is a fictional persona. This website can be yours.</span>
+        </p>
+        <Link
+          href="/your-site"
+          data-track="cta:template-notice"
+          className="link-underline inline-flex min-h-6 shrink-0 items-center text-[rgb(var(--ivory))]"
+        >
+          Get this website<span className="hidden sm:inline">&nbsp;· {money(offer.monthly)}/mo</span>&nbsp;→
         </Link>
       </div>
     </div>

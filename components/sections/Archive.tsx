@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { archive } from "@/content/archive";
 import { Plate } from "@/components/ui/Plate";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
+import type { ScrollTrigger } from "gsap/ScrollTrigger";
 import { getLenis } from "@/lib/lenis";
 import { cn } from "@/lib/utils";
 
@@ -27,31 +27,39 @@ export function Archive() {
     return () => mq.removeEventListener("change", update);
   }, []);
 
+  // GSAP is loaded only here, only when the pinned layout is in use: phones,
+  // reduced motion and slow devices never download it.
   useEffect(() => {
     const el = section.current, tr = track.current;
     if (!pinned || !el || !tr) return;
-    const distance = () => tr.scrollWidth - window.innerWidth;
-    const lenis = getLenis();
-    const sync = () => ScrollTrigger.update();
-    lenis?.on("scroll", sync);
-    const ctx = gsap.context(() => {
-      const tween = gsap.to(tr, {
-        x: () => -distance(),
-        ease: "none",
-        scrollTrigger: {
-          trigger: el,
-          pin: true,
-          scrub: 0.9,
-          start: "top top",
-          end: () => `+=${distance()}`,
-          invalidateOnRefresh: true,
-          onUpdate: (self) => setActive(Math.round(self.progress * (archive.length - 1))),
-        },
-      });
-      trigger.current = tween.scrollTrigger ?? null;
-    }, el);
-    ScrollTrigger.refresh();
-    return () => { ctx.revert(); lenis?.off("scroll", sync); trigger.current = null; };
+    let undo = () => {};
+    let cancelled = false;
+    void import("@/lib/gsap").then(({ gsap, ScrollTrigger }) => {
+      if (cancelled) return;
+      const distance = () => tr.scrollWidth - window.innerWidth;
+      const lenis = getLenis();
+      const sync = () => ScrollTrigger.update();
+      lenis?.on("scroll", sync);
+      const ctx = gsap.context(() => {
+        const tween = gsap.to(tr, {
+          x: () => -distance(),
+          ease: "none",
+          scrollTrigger: {
+            trigger: el,
+            pin: true,
+            scrub: 0.9,
+            start: "top top",
+            end: () => `+=${distance()}`,
+            invalidateOnRefresh: true,
+            onUpdate: (self) => setActive(Math.round(self.progress * (archive.length - 1))),
+          },
+        });
+        trigger.current = tween.scrollTrigger ?? null;
+      }, el);
+      ScrollTrigger.refresh();
+      undo = () => { ctx.revert(); lenis?.off("scroll", sync); trigger.current = null; };
+    });
+    return () => { cancelled = true; undo(); };
   }, [pinned]);
 
   const jump = (i: number) => {
@@ -83,7 +91,7 @@ export function Archive() {
                     type="button"
                     onClick={() => jump(i)}
                     aria-current={pinned && i === active ? "step" : undefined}
-                    className={cn("group flex flex-col items-start gap-2 text-left transition-colors duration-500", pinned && i === active ? "text-fg" : "text-fg/40 hover:text-fg/80")}
+                    className={cn("group flex flex-col items-start gap-2 text-left transition-colors duration-500", pinned && i === active ? "text-fg" : "text-fg/65 hover:text-fg")}
                   >
                     <span className="font-display text-sm italic">{e.numeral}</span>
                     <span className="text-[0.6rem] uppercase tracking-[0.24em]">{e.era}</span>

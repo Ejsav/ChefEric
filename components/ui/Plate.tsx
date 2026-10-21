@@ -63,6 +63,10 @@ const studies: Record<PlateTone, string> = {
   ].join(", "),
 };
 
+/** A delivered photograph to stand in while a slot is still empty. It
+ *  carries its own alt text and label, because it is a different picture. */
+export type PlateFallback = { slot: string; alt: string; label?: string };
+
 type Props = {
   tone: PlateTone;
   alt: string;
@@ -70,58 +74,60 @@ type Props = {
   src?: string;
   /** media slot id; resolves to public/media/<slot>.* when present */
   slot?: string;
+  /** shown, with its own alt and label, while `slot` has no asset */
+  fallback?: PlateFallback;
   sizes?: string;
   priority?: boolean;
   className?: string;
   /** aspect ratio utility, e.g. "aspect-[4/5]" */
   ratio?: string;
+  /** object-position utility for crops, e.g. "object-[50%_30%]" */
+  focus?: string;
   reveal?: boolean;
   /** word the cursor carries over this plate, e.g. "View" */
   cursorLabel?: string;
 };
 
-export function Plate({ tone, alt, label, src: given, slot, sizes = "(min-width: 1024px) 50vw, 100vw", priority, className, ratio = "aspect-[4/5]", reveal = true, cursorLabel }: Props) {
-  const src = given ?? mediaImage(slot);
+/** Which picture a plate will actually show: its own asset, the fallback, or none. */
+export function resolvePlate({ src, slot, alt, label, fallback }: Pick<Props, "src" | "slot" | "alt" | "label" | "fallback">) {
+  const own = src ?? mediaImage(slot);
+  if (own) return { src: own, alt, label };
+  const stand = fallback ? mediaImage(fallback.slot) : undefined;
+  if (stand && fallback) return { src: stand, alt: fallback.alt, label: fallback.label ?? label };
+  return { src: undefined, alt, label };
+}
+
+export function Plate({ tone, sizes = "(min-width: 1024px) 50vw, 100vw", priority, className, ratio = "aspect-[4/5]", focus, reveal = true, cursorLabel, ...picture }: Props) {
+  const { src, alt, label } = resolvePlate(picture);
   return (
     <figure
       className={cn("group/plate relative overflow-hidden bg-bg-elevated", ratio, className)}
       data-reveal={reveal ? "fade" : undefined}
       data-cursor-label={cursorLabel}
-      data-slot={slot}
     >
       {/* Two planes: the parallax wrapper drifts with scroll (CSS scroll
           timeline), the inner layer settles from 1.06 on reveal. */}
       <div className="parallax absolute inset-x-0 -inset-y-[5%]">
-      <div className="absolute inset-0 scale-[1.06] transition-transform duration-[2400ms] ease-out-expo group-[.is-in]/plate:scale-100">
-        {src ? (
-          <Image src={src} alt={alt} fill sizes={sizes} priority={priority} className="object-cover" />
-        ) : (
-          <div role="img" aria-label={alt} className="grain absolute inset-0" style={{ backgroundImage: studies[tone] }} />
-        )}
-      </div>
+        <div className="absolute inset-0 scale-[1.06] transition-transform duration-[2400ms] ease-out-expo group-[.is-in]/plate:scale-100">
+          {src ? (
+            <Image src={src} alt={alt} fill sizes={sizes} priority={priority} className={cn("object-cover", focus)} />
+          ) : (
+            <div role="img" aria-label={alt} className="grain absolute inset-0" style={{ backgroundImage: studies[tone] }} />
+          )}
+        </div>
       </div>
       {/* Inset hairline frame — the edge of a printed photograph */}
       <div aria-hidden className="pointer-events-none absolute inset-3 border border-[rgba(237,229,214,0.12)] md:inset-4" />
       {label ? (
-        <figcaption className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4 text-[0.66rem] uppercase tracking-[0.26em] text-[rgba(237,229,214,0.7)] md:bottom-7 md:left-7 md:right-7">
-          <span>{label}</span>
-          <span aria-hidden className="font-display text-sm normal-case italic tracking-normal">EJ</span>
-        </figcaption>
+        <>
+          {/* A low scrim so the caption reads on bright frames too. */}
+          <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-[linear-gradient(0deg,rgba(10,7,5,0.72),rgba(10,7,5,0.28)_55%,transparent)]" />
+          <figcaption className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4 text-[0.66rem] uppercase leading-relaxed tracking-[0.24em] text-[rgba(237,229,214,0.9)] md:bottom-7 md:left-7 md:right-7">
+            <span>{label}</span>
+            <span aria-hidden className="font-display text-sm normal-case italic tracking-normal text-[rgba(237,229,214,0.7)]">EJ</span>
+          </figcaption>
+        </>
       ) : null}
-      {slot ? <SlotNote slot={slot} delivered={!!src} /> : null}
     </figure>
-  );
-}
-
-// Production note, shown over every media slot only while notes are on
-// (html[data-notes="on"], toggled from the footer, the N key or ?notes=1).
-// It names the file each slot expects, so a client walking the template can
-// see exactly which photograph belongs where and which are still to come.
-export function SlotNote({ slot, delivered }: { slot: string; delivered: boolean }) {
-  return (
-    <span aria-hidden className="slot-note">
-      <span className="slot-note__file">public/media/{slot}.jpg</span>
-      <span className={delivered ? "slot-note__status is-done" : "slot-note__status"}>{delivered ? "Delivered" : "Awaiting photograph"}</span>
-    </span>
   );
 }

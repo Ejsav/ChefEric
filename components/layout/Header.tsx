@@ -18,6 +18,13 @@ export function Header() {
   const [hidden, setHidden] = useState(false);
   const [open, setOpen] = useState(false);
   const last = useRef(0);
+  // On the offer and its legal pages, the standing action is the offer's own.
+  const offerSide = ["/your-site", "/terms", "/privacy"].some((p) => pathname.startsWith(p));
+  // Pages that open on paper (linen) need the smoked bar from the start, or
+  // ivory navigation would sit on an ivory page.
+  const paper = ["/terms", "/privacy"].includes(pathname);
+  const solid = scrolled || paper;
+  const action = offerSide ? { href: "/your-site/start", label: "Start your website", track: "cta:header-start" } : { href: "/inquire", label: "Request an evening", track: "cta:header" };
   const toggleRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
 
@@ -70,8 +77,8 @@ export function Header() {
         className={cn(
           "fixed inset-x-0 top-0 z-50 transition-[transform,background-color,border-color] duration-700 ease-out-expo",
           hidden && !open ? "-translate-y-full" : "translate-y-0",
-          scrolled && !open
-            ? "border-b border-[rgba(237,229,214,0.08)] bg-[rgba(17,12,9,0.72)] backdrop-blur-xl"
+          solid && !open
+            ? cn("border-b border-[rgba(237,229,214,0.08)]", paper ? "bg-[rgb(17,12,9)]" : "bg-[rgba(17,12,9,0.72)] backdrop-blur-xl")
             : "border-b border-transparent",
         )}
       >
@@ -100,12 +107,12 @@ export function Header() {
             ))}
             <Ambience className="-mr-2" />
             <Link
-              href="/inquire"
+              href={action.href}
               data-magnetic="0.18"
-              data-track="cta:header"
+              data-track={action.track}
               className="whitespace-nowrap border border-[rgba(190,156,104,0.6)] px-5 py-2.5 text-[0.7rem] font-medium uppercase tracking-[0.28em] transition-colors duration-700 ease-out-expo hover:border-[rgb(var(--brass))] hover:bg-[rgb(var(--brass))] hover:text-[rgb(var(--ink))]"
             >
-              Request an evening
+              {action.label}
             </Link>
           </nav>
 

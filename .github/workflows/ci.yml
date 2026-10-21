@@ -22,6 +22,8 @@ jobs:
       - run: npm ci
       - name: Repository boundary
         run: npm run guard
+      - name: Known vulnerabilities in production dependencies
+        run: npm audit --omit=dev --audit-level=high
       - name: Photography guide matches the manifest
         run: npm run media:guide -- --check
       - name: Typecheck
