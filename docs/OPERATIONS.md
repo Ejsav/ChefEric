@@ -46,7 +46,7 @@ A useful log drain or alert: notify when any log line contains `[leads]` and `fa
 ## Staging and releases
 
 - Every branch and pull request gets a **preview deployment** on Vercel: review there, never on production.
-- `main` is production. CI must be green (guard, media guide, type-check, lint, build, dependency audit, 151 end-to-end checks) before merging.
+- `main` is production. CI must be green (guard, media guide, type-check, lint, build, dependency audit, 152 end-to-end checks) before merging.
 - Rollback: Vercel → Deployments → choose the last good deployment → **Promote to Production**. Deployments are immutable, so a rollback is exact.
 - Reproducible builds: `npm ci` from the committed lockfile on Node 22.
 
