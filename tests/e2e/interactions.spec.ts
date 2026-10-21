@@ -105,12 +105,23 @@ test.describe("sound", () => {
     const on = page.getByRole("navigation", { name: "Primary" }).getByRole("button", { name: "Turn sound off" });
     await expect(on).toHaveAttribute("aria-pressed", "true");
     await expect(on).toContainText("Sound on");
+    // And the music is really moving, not just the label.
+    const position = () => page.evaluate(() => {
+      const a = document.getElementById("site-ambience") as HTMLAudioElement | null;
+      return a ? { paused: a.paused, time: a.currentTime } : null;
+    });
+    await expect.poll(async () => (await position())?.time ?? 0, { timeout: 8000 }).toBeGreaterThan(0.5);
+    expect((await position())?.paused).toBe(false);
 
     await page.getByRole("navigation", { name: "Primary" }).getByRole("link", { name: "Menus" }).click();
     await expect(page).toHaveURL(/\/menus$/);
     await expect(page.getByRole("navigation", { name: "Primary" }).getByRole("button", { name: "Turn sound off" })).toBeVisible();
 
+    const before = (await position())!.time;
+    expect(before).toBeGreaterThan(0.5); // still playing after the page change
+
     await page.getByRole("navigation", { name: "Primary" }).getByRole("button", { name: "Turn sound off" }).click();
     await expect(page.getByRole("navigation", { name: "Primary" }).getByRole("button", { name: "Turn sound on" })).toHaveAttribute("aria-pressed", "false");
+    await expect.poll(async () => (await position())?.paused, { timeout: 4000 }).toBe(true);
   });
 });
