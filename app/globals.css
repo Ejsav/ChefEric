@@ -383,37 +383,93 @@ html.prelude #site-header { animation: fade-up 1.2s var(--ease-out-expo) 2.3s bo
 @keyframes vt-out { to { opacity: 0.35; transform: translate3d(0, -3%, 0) scale(0.985); filter: brightness(0.35); } }
 @keyframes vt-in { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0 0 0 0); } }
 
-/* Cursor ──────────────────────────────────────────────────────── */
-html.has-cursor, html.has-cursor * { cursor: none !important; }
-html.has-cursor input, html.has-cursor textarea, html.has-cursor select,
-html.has-cursor [contenteditable] { cursor: text !important; }
-html.has-cursor select { cursor: pointer !important; }
-.cursor-ring {
-  position: fixed; top: 0; left: 0; z-index: 400; pointer-events: none;
-  width: 2.25rem; height: 2.25rem; margin: -1.125rem 0 0 -1.125rem;
-  border: 1px solid rgb(var(--ivory) / 0.45);
-  border-radius: 999px;
-  display: flex; align-items: center; justify-content: center;
-  transition: width 600ms var(--ease-out-expo), height 600ms var(--ease-out-expo), margin 600ms var(--ease-out-expo),
-    background-color 600ms var(--ease-out-expo), border-color 600ms var(--ease-out-expo), opacity 400ms, scale 300ms var(--ease-out-expo);
-  mix-blend-mode: normal;
+/* The fork ─────────────────────────────────────────────────────── */
+/* The site's pointer is a miniature dining fork (artwork: scripts/cursor.mjs,
+   files: public/cursor). It is the NATIVE cursor, drawn by the operating
+   system: no lag, exact to the pixel, smooth even while the page is busy,
+   and in place before any script runs. The hotspot (4 4) is the tip of the
+   tines. Three states, switched by CSS alone:
+     rest   everywhere
+     hover  anything you can act on: polished brighter, a glint, a touch larger
+     press  while pressing it: foreshortened, the tines going into the plate
+   Text fields keep the system I-beam, disabled controls say not-allowed, and
+   selecting text shows the text cursor (html[data-fork-selecting], set by
+   components/system/Cursor.tsx). Touch-only devices, high-contrast and forced-
+   colour modes keep their own cursors.
+   Keep the INTERACTIVE and TEXT_ENTRY lists in step with Cursor.tsx. */
+@media (any-pointer: fine) and (prefers-contrast: no-preference) and (forced-colors: none) {
+  /* Each state is declared three times, oldest syntax first; a browser keeps
+     the last one it understands, so every browser gets the sharpest artwork
+     it can draw and none is left without a fork. */
+  html, html * {
+    cursor: url("/cursor/fork.png") 4 4, auto !important;
+    cursor: -webkit-image-set(url("/cursor/fork.png") 1x, url("/cursor/fork@2x.png") 2x, url("/cursor/fork@3x.png") 3x) 4 4, auto !important;
+    cursor: image-set(url("/cursor/fork.png") 1x, url("/cursor/fork@2x.png") 2x, url("/cursor/fork@3x.png") 3x) 4 4, auto !important;
+  }
+
+  html :is(a[href], button, [role="button"], [role="link"], [role="tab"], [role="radio"], [role="checkbox"], [role="switch"], [role="menuitem"], [role="option"], summary, label, select, input:is([type="checkbox"], [type="radio"], [type="range"], [type="submit"], [type="button"], [type="reset"], [type="color"], [type="file"], [type="image"]), [data-cursor-label]),
+  html :is(a[href], button, [role="button"], [role="link"], [role="tab"], [role="radio"], [role="checkbox"], [role="switch"], [role="menuitem"], [role="option"], summary, label, select, input:is([type="checkbox"], [type="radio"], [type="range"], [type="submit"], [type="button"], [type="reset"], [type="color"], [type="file"], [type="image"]), [data-cursor-label]) * {
+    cursor: url("/cursor/fork-hover.png") 4 4, pointer !important;
+    cursor: -webkit-image-set(url("/cursor/fork-hover.png") 1x, url("/cursor/fork-hover@2x.png") 2x, url("/cursor/fork-hover@3x.png") 3x) 4 4, pointer !important;
+    cursor: image-set(url("/cursor/fork-hover.png") 1x, url("/cursor/fork-hover@2x.png") 2x, url("/cursor/fork-hover@3x.png") 3x) 4 4, pointer !important;
+  }
+  html :is(a[href], button, [role="button"], [role="link"], [role="tab"], [role="radio"], [role="checkbox"], [role="switch"], [role="menuitem"], [role="option"], summary, label, select, input:is([type="checkbox"], [type="radio"], [type="range"], [type="submit"], [type="button"], [type="reset"], [type="color"], [type="file"], [type="image"]), [data-cursor-label]):active,
+  html :is(a[href], button, [role="button"], [role="link"], [role="tab"], [role="radio"], [role="checkbox"], [role="switch"], [role="menuitem"], [role="option"], summary, label, select, input:is([type="checkbox"], [type="radio"], [type="range"], [type="submit"], [type="button"], [type="reset"], [type="color"], [type="file"], [type="image"]), [data-cursor-label]):active * {
+    cursor: url("/cursor/fork-press.png") 4 4, pointer !important;
+    cursor: -webkit-image-set(url("/cursor/fork-press.png") 1x, url("/cursor/fork-press@2x.png") 2x, url("/cursor/fork-press@3x.png") 3x) 4 4, pointer !important;
+    cursor: image-set(url("/cursor/fork-press.png") 1x, url("/cursor/fork-press@2x.png") 2x, url("/cursor/fork-press@3x.png") 3x) 4 4, pointer !important;
+  }
+
+  /* Typing: the system's own cursor (I-beam, resize grip, date pickers). */
+  html body :is(input:not([type="checkbox"], [type="radio"], [type="range"], [type="submit"], [type="button"], [type="reset"], [type="color"], [type="file"], [type="image"], [type="hidden"]), textarea, [contenteditable]:not([contenteditable="false"])) {
+    cursor: auto !important;
+  }
+  /* Refusals and waits outrank the fork, pressed or not (the :active forms
+     match the press rule's weight and come after it). */
+  html body :is(:disabled, [aria-disabled="true"]), html body :is(:disabled, [aria-disabled="true"]) *,
+  html body :is(:disabled, [aria-disabled="true"]):active, html body :is(:disabled, [aria-disabled="true"]):active * { cursor: not-allowed !important; }
+  html body :is(.cta-primary:disabled, [aria-busy="true"]), html body :is(.cta-primary:disabled, [aria-busy="true"]) *,
+  html body :is(.cta-primary:disabled, [aria-busy="true"]):active, html body :is(.cta-primary:disabled, [aria-busy="true"]):active * { cursor: progress !important; }
+  html body [draggable="true"] { cursor: grab !important; }
+  html body [draggable="true"]:active { cursor: grabbing !important; }
+  html[data-fork-selecting] body, html[data-fork-selecting] body * { cursor: text !important; }
 }
-.cursor-dot {
-  position: fixed; top: 0; left: 0; z-index: 401; pointer-events: none;
-  width: 5px; height: 5px; margin: -2.5px 0 0 -2.5px; border-radius: 999px;
-  background: rgb(var(--brass));
-  transition: opacity 300ms, scale 400ms var(--ease-out-expo);
+
+/* What the cursor carries over photographs ("View"): a small brass label
+   that rides beside the handle, never over what the tines point at. */
+.fork-label {
+  position: fixed; left: 0; top: 0; z-index: 2147483000; pointer-events: none;
+  transform: translate3d(-999px, -999px, 0);
 }
-.cursor-label {
-  font-size: 0.58rem; letter-spacing: 0.26em; text-transform: uppercase; color: rgb(var(--ink));
-  opacity: 0; transition: opacity 300ms;
+.fork-label > span {
+  position: absolute; left: 23px; top: 9px; white-space: nowrap;
+  padding: 0.3rem 0.6rem; border-radius: 999px;
+  background: rgb(var(--brass)); color: rgb(var(--ink));
+  font: 500 0.58rem/1 var(--font-body); letter-spacing: 0.26em; text-transform: uppercase;
+  box-shadow: 0 6px 18px -8px rgb(0 0 0 / 0.6);
+  opacity: 0; scale: 0.82; transform-origin: 0 50%;
+  transition: opacity 220ms var(--ease-out-expo), scale 320ms var(--ease-out-expo);
 }
-.cursor-ring[data-state="link"] { width: 3.5rem; height: 3.5rem; margin: -1.75rem 0 0 -1.75rem; border-color: rgb(var(--brass) / 0.8); background: rgb(var(--brass) / 0.08); }
-.cursor-ring[data-state="label"] { width: 5.75rem; height: 5.75rem; margin: -2.875rem 0 0 -2.875rem; border-color: transparent; background: rgb(var(--brass)); }
-.cursor-ring[data-state="label"] .cursor-label { opacity: 1; }
-.cursor-ring[data-state="text"], .cursor-ring[data-state="hidden"] { opacity: 0; }
-.cursor-ring[data-pressed="true"] { scale: 0.82; }
-.cursor-dot[data-state="label"], .cursor-dot[data-state="text"], .cursor-dot[data-state="hidden"] { opacity: 0; }
+.fork-label[data-on="true"] > span { opacity: 1; scale: 1; }
+
+/* A press on something you can act on leaves four tine marks and a ring,
+   like a fork meeting a plate, then fades. Placed once; never follows. */
+.fork-contact { position: fixed; left: 0; top: 0; z-index: 2147483000; pointer-events: none; }
+.fork-contact__set { position: absolute; left: 0; top: 0; rotate: -38deg; }
+.fork-contact i {
+  position: absolute; width: 1.7px; height: 1.7px; margin: -0.85px 0 0 -0.85px; border-radius: 50%;
+  background: rgb(var(--brass)); box-shadow: 0 0 0 0.6px rgb(22 16 12 / 0.5);
+  animation: fork-tine 460ms var(--ease-out-expo) both;
+}
+.fork-contact b {
+  position: absolute; left: 0; top: 0; width: 16px; height: 16px; margin: -8px 0 0 -8px; border-radius: 50%;
+  border: 1px solid rgb(var(--brass) / 0.6);
+  animation: fork-ring 560ms var(--ease-out-expo) both;
+}
+@keyframes fork-tine { 0% { opacity: 0; transform: scale(1.9); } 22% { opacity: 0.95; transform: scale(1); } 100% { opacity: 0; transform: scale(0.8); } }
+@keyframes fork-ring { 0% { opacity: 0.6; transform: scale(0.2); } 100% { opacity: 0; transform: scale(1); } }
+@media (prefers-reduced-motion: reduce) { .fork-contact { display: none; } }
+
 [data-magnetic] { transition: translate 700ms var(--ease-out-expo); }
 
 /* Scroll-driven parallax — compositor-only, zero JS ───────────── */
@@ -454,7 +510,7 @@ html[data-tier="still"] .hero-light, html[data-tier="still"] .hero-depth { trans
 }
 .cta-primary:hover { color: rgb(var(--ink)); border-color: rgb(var(--accent)); }
 .cta-primary:active { scale: 0.97; }
-.cta-primary:disabled { opacity: 0.6; cursor: wait; }
+.cta-primary:disabled { opacity: 0.6; cursor: progress; }
 .cta-fill { position: absolute; inset: 0; transform: scaleY(0); transform-origin: bottom; background: rgb(var(--accent)); transition: transform 700ms var(--ease-out-expo); }
 .cta-primary:hover .cta-fill { transform: scaleY(1); }
 

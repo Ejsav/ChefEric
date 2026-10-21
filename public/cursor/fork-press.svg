@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="metal" gradientUnits="userSpaceOnUse" x1="-2.2" y1="0" x2="2.2" y2="0"><stop offset="0" stop-color="#4f381d"/><stop offset="0.143" stop-color="#8c6b3b"/><stop offset="0.286" stop-color="#c9aa72"/><stop offset="0.429" stop-color="#efdfbf"/><stop offset="0.571" stop-color="#f8edd6"/><stop offset="0.714" stop-color="#d3b680"/><stop offset="0.857" stop-color="#987442"/><stop offset="1" stop-color="#523b1f"/></linearGradient>
+    <linearGradient id="length" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="29.5">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.10"/>
+      <stop offset="0.27" stop-color="#fff" stop-opacity="0.28"/>
+      <stop offset="0.43" stop-color="#000" stop-opacity="0.22"/>
+      <stop offset="0.6" stop-color="#000" stop-opacity="0"/>
+      <stop offset="0.92" stop-color="#fff" stop-opacity="0.08"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.12"/>
+    </linearGradient>
+    <linearGradient id="streak" gradientUnits="userSpaceOnUse" x1="0" y1="15" x2="0" y2="28.6">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="0.35" stop-color="#fff" stop-opacity="0.6"/>
+      <stop offset="0.8" stop-color="#fff" stop-opacity="0.33"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="160%" height="160%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0.35" dy="0.6" stdDeviation="0.5" flood-color="#000" flood-opacity="0.55"/>
+    </filter>
+    <clipPath id="body"><path d="M -3.19 1.75 C -3.19 0.95 -2.875 0.5 -2.715 0.5 C -2.555 0.5 -2.24 0.95 -2.24 1.75 L -2.24 7.57 A 0.43 0.43 0 0 0 -1.38 7.57 L -1.38 1.25 C -1.38 0.45 -1.065 0 -0.905 0 C -0.745 0 -0.43 0.45 -0.43 1.25 L -0.43 7.57 A 0.43 0.43 0 0 0 0.43 7.57 L 0.43 1.25 C 0.43 0.45 0.745 0 0.905 0 C 1.065 0 1.38 0.45 1.38 1.25 L 1.38 7.57 A 0.43 0.43 0 0 0 2.24 7.57 L 2.24 1.75 C 2.24 0.95 2.555 0.5 2.715 0.5 C 2.875 0.5 3.19 0.95 3.19 1.75 L 3.19 9 C 3.19 11.2 1.35 12.1 0.75 13.6 C 0.7 15.5 0.95 19 1.18 22 C 1.32 24 1.5 25.6 1.48 26.9 C 1.46 28.3 0.85 29.05 0 29.1 C -0.85 29.05 -1.46 28.3 -1.48 26.9 C -1.5 25.6 -1.32 24 -1.18 22 C -0.95 19 -0.7 15.5 -0.75 13.6 C -1.35 12.1 -3.19 11.2 -3.19 9 Z"/></clipPath>
+  </defs>
+  <g filter="url(#shadow)">
+    <g transform="translate(4.5 4.5) rotate(-38) scale(0.97 0.84)">
+      <path d="M -3.19 1.75 C -3.19 0.95 -2.875 0.5 -2.715 0.5 C -2.555 0.5 -2.24 0.95 -2.24 1.75 L -2.24 7.57 A 0.43 0.43 0 0 0 -1.38 7.57 L -1.38 1.25 C -1.38 0.45 -1.065 0 -0.905 0 C -0.745 0 -0.43 0.45 -0.43 1.25 L -0.43 7.57 A 0.43 0.43 0 0 0 0.43 7.57 L 0.43 1.25 C 0.43 0.45 0.745 0 0.905 0 C 1.065 0 1.38 0.45 1.38 1.25 L 1.38 7.57 A 0.43 0.43 0 0 0 2.24 7.57 L 2.24 1.75 C 2.24 0.95 2.555 0.5 2.715 0.5 C 2.875 0.5 3.19 0.95 3.19 1.75 L 3.19 9 C 3.19 11.2 1.35 12.1 0.75 13.6 C 0.7 15.5 0.95 19 1.18 22 C 1.32 24 1.5 25.6 1.48 26.9 C 1.46 28.3 0.85 29.05 0 29.1 C -0.85 29.05 -1.46 28.3 -1.48 26.9 C -1.5 25.6 -1.32 24 -1.18 22 C -0.95 19 -0.7 15.5 -0.75 13.6 C -1.35 12.1 -3.19 11.2 -3.19 9 Z" fill="url(#metal)" stroke="#160f0a" stroke-opacity="0.95" stroke-width="0.85" stroke-linejoin="round" paint-order="stroke"/>
+      <g clip-path="url(#body)">
+        <path d="M -3.19 1.75 C -3.19 0.95 -2.875 0.5 -2.715 0.5 C -2.555 0.5 -2.24 0.95 -2.24 1.75 L -2.24 7.57 A 0.43 0.43 0 0 0 -1.38 7.57 L -1.38 1.25 C -1.38 0.45 -1.065 0 -0.905 0 C -0.745 0 -0.43 0.45 -0.43 1.25 L -0.43 7.57 A 0.43 0.43 0 0 0 0.43 7.57 L 0.43 1.25 C 0.43 0.45 0.745 0 0.905 0 C 1.065 0 1.38 0.45 1.38 1.25 L 1.38 7.57 A 0.43 0.43 0 0 0 2.24 7.57 L 2.24 1.75 C 2.24 0.95 2.555 0.5 2.715 0.5 C 2.875 0.5 3.19 0.95 3.19 1.75 L 3.19 9 C 3.19 11.2 1.35 12.1 0.75 13.6 C 0.7 15.5 0.95 19 1.18 22 C 1.32 24 1.5 25.6 1.48 26.9 C 1.46 28.3 0.85 29.05 0 29.1 C -0.85 29.05 -1.46 28.3 -1.48 26.9 C -1.5 25.6 -1.32 24 -1.18 22 C -0.95 19 -0.7 15.5 -0.75 13.6 C -1.35 12.1 -3.19 11.2 -3.19 9 Z" fill="url(#length)"/>
+        <path d="M -0.3 15.4 C -0.36 19 -0.56 24 -0.5 28.2" fill="none" stroke="url(#streak)" stroke-width="0.45" stroke-linecap="round"/>
+        <path d="M -0.76 22 C -0.9 24 -1.08 25.6 -1.06 26.9 C -1.04 27.9 -0.7 28.55 0 28.6 C 0.7 28.55 1.04 27.9 1.06 26.9 C 1.08 25.6 0.9 24 0.76 22" fill="none" stroke="#5a4020" stroke-opacity="0.4" stroke-width="0.22"/>
+        <path d="M -2.89 9 C -2.85 10.9 -1.1 11.9 -0.5 13.3" fill="none" stroke="#fff" stroke-opacity="0.45" stroke-width="0.3" stroke-linecap="round"/>
+      </g>
+      
+    </g>
+  </g>
+</svg>

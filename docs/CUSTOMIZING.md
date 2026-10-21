@@ -26,6 +26,7 @@ Selling another site must never mean rebuilding this one, and one customer's mat
 | Testimonials (real, approved in writing) | `content/voice.ts` — remove `sample: true` |
 | Photographs | `public/media/<slot>.*`, slots in `content/media.ts` |
 | Palette | the tokens at the top of `app/globals.css` (`--brass` and friends); the five palettes in `content/offer.ts` are tested starting points |
+| Cursor | the fork's shape and finish in `scripts/cursor.mjs`, then `npm run cursor:build`. For the system cursor instead, remove `<Cursor />` from `app/layout.tsx` and the fork block in `app/globals.css` |
 | Monogram | `components/ui/Monogram.tsx` |
 | Share card | `app/opengraph-image.tsx` |
 | Privacy and terms | `app/privacy`, `app/terms` — reviewed for the customer's business |

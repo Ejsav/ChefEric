@@ -8,7 +8,7 @@
 | Photography guide matches the manifest | `npm run media:guide -- --check` |
 | Types, lint, production build | `npm run type-check`, `npm run lint`, `npm run build` |
 | Known vulnerabilities in production dependencies | `npm audit --omit=dev --audit-level=high` |
-| 152 end-to-end checks | `npm run test:e2e` |
+| 162 end-to-end checks | `npm run test:e2e` |
 
 The end-to-end suite runs every route at 1440px (desktop), a Pixel 7 (phone), **320px** (the smallest phones) and **1024px landscape** (tablet). See the README for the full list of what it asserts, including axe WCAG 2.2 AA on every route.
 
@@ -40,6 +40,7 @@ Automated tests do not replace eyes and real devices. Before promoting to produc
 - [ ] Phone landscape on the home page and the request form.
 - [ ] Keyboard only: tab through the home page, open the menu, use the planner with arrows, open and close the lightbox, complete both forms.
 - [ ] VoiceOver (iOS) on the planner and the chef request: changes are announced.
+- [ ] The fork cursor on a Retina Mac (Safari, Chrome, Firefox) and on Windows at 100% and 150% scaling: sharp, tines exactly on the click point (click the edge of a small link), I-beam in the form fields, grip on the notes box.
 - [ ] Reduced motion on: no prelude, no parallax, content fully visible.
 - [ ] One real website request reaches the inbox (and the webhook, if set), and the acknowledgment arrives.
 - [ ] Share `/` and `/your-site` in a messaging app: the share cards render.
