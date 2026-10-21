@@ -48,6 +48,7 @@ Every figure and term lives in **`content/offer.ts`** and is read by `/your-site
 | **Lead delivery** | Each lead fans out to email (Resend, with an idempotency key) and/or a CRM webhook (signed). The visitor sees *received* only when a channel accepted it; on a Vercel production deploy with no channel configured the request fails loudly instead of disappearing. The writer gets an acknowledgment. | `lib/leads.ts` |
 | **Analytics** | One `track()` to Vercel Analytics, Plausible or a `dataLayer`; no personal data. Tracked: CTA clicks (`data-track`), menu views, planner changes and shares, gallery opens and steps, studio use, form start, errors and submissions, page errors. | `lib/analytics.ts`, `components/system/Telemetry.tsx` |
 | **Security** | CSP (same-origin plus the analytics collectors), HSTS, frame, referrer, opener and permissions policies; APIs `no-store` and `noindex`; server-side zod validation with control-character stripping. | `next.config.ts`, `lib/*-schema.ts` |
+| **Sound** | The header's *Sound* button plays an Italian kitchen soundtrack (`public/audio/kitchen-music.mp3`, set in `site.ambience`). Off until clicked and not downloaded before; one shared player that fades in and out, keeps playing across pages and pauses while the tab is hidden. | `components/system/Ambience.tsx` |
 | **Invitations** | HMAC-signed links that greet a guest by name and expire. Never indexed. | `app/invite/[token]`, `lib/invite.ts`, `scripts/invite.mjs` |
 
 ## Pages
@@ -88,7 +89,7 @@ npm run media:guide   # regenerate docs/PHOTOGRAPHY_GUIDE.md after editing the m
 
 ```bash
 npm run check        # guard, type-check, lint, build
-npm run test:e2e     # Playwright: 151 checks
+npm run test:e2e     # Playwright: 152 checks
 ```
 
 The end-to-end suite runs every route at **1440px, a phone, 320px and a 1024px tablet**: one `<h1>`, canonical and description, no horizontal overflow, no console errors, no production tooling or client traces in the HTML; **axe WCAG 2.2 AA** on every route (desktop and phone); every internal link resolves; security headers; noindex and sitemap rules; structured data never presenting the persona as a business; the planner's rules, shared links and keyboard; the lightbox's keyboard, Escape and focus return; menu tabs; the chef request (demo notice, yacht branch, class sizes, read-back, inbox preview, API validation); the website request (validation summary, delivery with reference, studio hand-off, server validation, duplicate protection, honeypot, rate limiting); invitations. CI (`.github/workflows/ci.yml`) also audits production dependencies.
@@ -129,5 +130,6 @@ Do step 3 before merging anything to `main`: until then, a merge here would rede
 - [ ] `NEXT_PUBLIC_CONTACT_EMAIL` set, so failure messages and the footer offer a direct address.
 - [ ] `NEXT_PUBLIC_BUILDER_URL` confirmed (defaults to `https://ericjokl.com`).
 - [ ] Vercel Firewall rate-limit rule on `/api/*` (see `docs/OPERATIONS.md`).
+- [ ] **Music licence:** confirm `public/audio/kitchen-music.mp3` may be used on a commercial site (or replace it with a licensed track of the same name).
 - [ ] Remaining imagery: `room-penthouse`, `room-yacht` (both currently stand in with a delivered frame), and optional gallery and food frames.
 - [ ] After deploy: Speed Insights shows field LCP ≤ 2.5s, INP ≤ 200ms, CLS ≤ 0.1 at p75 once traffic accrues.

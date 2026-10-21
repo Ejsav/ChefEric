@@ -36,6 +36,10 @@ export const site = {
   // Shown in the footer. This is a demo, and its photography is AI-generated
   // from Eric's likeness; saying so plainly is part of the standard.
   imageryNote: "Demo site · imagery created with AI",
+  // The optional music behind the Sound button (components/system/Ambience).
+  // Off until a visitor asks; streamed only then.
+  // CONFIRM: the licence for this recording covers use on a commercial site.
+  ambience: "/audio/kitchen-music.mp3",
   social: {
     instagram: process.env.NEXT_PUBLIC_INSTAGRAM || "", // CONFIRM: handle without @; hidden while empty
   },

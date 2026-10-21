@@ -8,7 +8,7 @@
 | Photography guide matches the manifest | `npm run media:guide -- --check` |
 | Types, lint, production build | `npm run type-check`, `npm run lint`, `npm run build` |
 | Known vulnerabilities in production dependencies | `npm audit --omit=dev --audit-level=high` |
-| 151 end-to-end checks | `npm run test:e2e` |
+| 152 end-to-end checks | `npm run test:e2e` |
 
 The end-to-end suite runs every route at 1440px (desktop), a Pixel 7 (phone), **320px** (the smallest phones) and **1024px landscape** (tablet). See the README for the full list of what it asserts, including axe WCAG 2.2 AA on every route.
 

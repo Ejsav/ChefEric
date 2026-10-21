@@ -87,3 +87,30 @@ test.describe("menus", () => {
     await expect(page.getByRole("tabpanel")).toContainText("Contains");
   });
 });
+
+test.describe("sound", () => {
+  test("music is off until asked, plays on request, survives navigation and turns off", async ({ page }) => {
+    const audio: string[] = [];
+    page.on("request", (r) => { if (r.url().includes("/audio/")) audio.push(r.url()); });
+    await page.goto("/", { waitUntil: "networkidle" });
+    expect(audio).toEqual([]); // nothing downloads before the visitor asks
+
+    const button = page.getByRole("navigation", { name: "Primary" }).getByRole("button", { name: "Turn sound on" });
+    const served = page.waitForResponse((r) => r.url().includes("/audio/kitchen-music.mp3"));
+    await button.click();
+    const res = await served;
+    expect([200, 206]).toContain(res.status());
+    expect(res.headers()["content-type"]).toContain("audio/mpeg");
+    // "Sound on" appears only once playback has actually started.
+    const on = page.getByRole("navigation", { name: "Primary" }).getByRole("button", { name: "Turn sound off" });
+    await expect(on).toHaveAttribute("aria-pressed", "true");
+    await expect(on).toContainText("Sound on");
+
+    await page.getByRole("navigation", { name: "Primary" }).getByRole("link", { name: "Menus" }).click();
+    await expect(page).toHaveURL(/\/menus$/);
+    await expect(page.getByRole("navigation", { name: "Primary" }).getByRole("button", { name: "Turn sound off" })).toBeVisible();
+
+    await page.getByRole("navigation", { name: "Primary" }).getByRole("button", { name: "Turn sound off" }).click();
+    await expect(page.getByRole("navigation", { name: "Primary" }).getByRole("button", { name: "Turn sound on" })).toHaveAttribute("aria-pressed", "false");
+  });
+});
