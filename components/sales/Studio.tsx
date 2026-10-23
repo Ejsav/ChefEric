@@ -7,8 +7,8 @@ import { track } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 
 // "Your name here", literally: type a name, a title and a place, choose a
-// palette, and watch the hero reset itself. The choices travel into the
-// website request. Nothing is sent from here.
+// palette, and watch the hero reset itself. All four choices travel into the
+// website request (and from there into the lead). Nothing is sent from here.
 const DEFAULT_LINE = "Private dinners, by arrangement.";
 
 export function Studio() {
@@ -20,8 +20,10 @@ export function Studio() {
   const [used, setUsed] = useState(false);
 
   const accent = palettes.find((p) => p.id === palette)!.accent;
-  const clean = name.trim().replace(/\s+/g, " ").slice(0, 40);
-  const href = `/your-site/start?${new URLSearchParams({ ...(clean ? { name: clean } : {}), palette }).toString()}`;
+  const tidy = (s: string) => s.trim().replace(/\s+/g, " ").slice(0, 40);
+  const clean = tidy(name);
+  const preview = { name: clean, title: tidy(role), place: tidy(place), palette };
+  const href = `/your-site/start?${new URLSearchParams(Object.entries(preview).filter(([, v]) => v)).toString()}`;
 
   const touch = () => { if (!used) { setUsed(true); track("studio_use"); } };
 

@@ -63,6 +63,8 @@ export async function POST(req: Request) {
       phone: r.phone || null,
       business: r.business,
       website: r.website || null,
+      title: r.title || null,
+      place: r.place || null,
       type: r.type,
       design: r.design,
       palette: r.palette ?? null,

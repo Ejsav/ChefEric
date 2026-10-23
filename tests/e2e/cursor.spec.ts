@@ -176,6 +176,18 @@ test.describe("fork cursor", () => {
     expect(await page.evaluate(() => document.getSelection()?.toString().length ?? 0)).toBeGreaterThan(3); // the selection itself is untouched
   });
 
+  test("the fork stays the cursor inside the gallery's lightbox", async ({ page }) => {
+    await page.goto("/gallery");
+    await page.getByRole("button", { name: /Enlarge photograph 1 of/ }).click();
+    const dialog = page.getByRole("dialog", { name: "Gallery" });
+    await expect(dialog).toBeVisible();
+    expect(await dialog.evaluate((el) => getComputedStyle(el).cursor)).toMatch(/fork\.png/);
+    const close = dialog.getByRole("button", { name: "Close" });
+    expect(await close.evaluate((el) => getComputedStyle(el).cursor)).toMatch(/fork-hover\.png/);
+    // And it is never hidden: no element in the dialog asks for cursor: none.
+    expect(await dialog.evaluate((d) => [d, ...d.querySelectorAll("*")].some((el) => getComputedStyle(el).cursor === "none"))).toBe(false);
+  });
+
   test("clicks land on what the tines point at", async ({ page }) => {
     // The hotspot is the click point: a click at a link's edge pixel still opens it.
     await page.goto("/");

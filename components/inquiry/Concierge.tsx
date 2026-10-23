@@ -1,9 +1,9 @@
 "use client";
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
 import {
-  contactOptions, details, discretionOptions, forms, galleyOptions, guestOptionsFor, isCollab, isIntermediary,
-  kitchenOptions, needsKitchen, needsStay, occasionOptions, officeEmail, prefillFromParams, roles, settingOptions,
-  stayOptions, summarize, whenOptions, type AnswerKey, type Answers,
+  contactOptions, dateProblem, details, discretionOptions, forms, galleyOptions, guestOptionsFor, guestsFit, isCollab,
+  isIntermediary, kitchenOptions, latestDay, localDay, needsKitchen, needsStay, occasionOptions, officeEmail,
+  prefillFromParams, roles, settingOptions, stayOptions, stillValid, summarize, whenOptions, type AnswerKey, type Answers,
 } from "@/lib/inquiry";
 import Link from "next/link";
 import { getAttribution, originLines } from "@/lib/attribution";
@@ -65,10 +65,10 @@ function stepErrors(id: StepId, a: A): Partial<Record<AnswerKey, string>> {
   }
   if (id === "when") {
     if (!a.when) e.when = "Choose one to continue.";
-    else if (a.when === "date" && !a.date) e.date = "Choose the date.";
+    else if (a.when === "date") { const p = dateProblem(a.date, localDay()); if (p) e.date = p; }
     else if (a.when === "season" && !a.season?.trim()) e.season = "A month or a season, please.";
   }
-  if (id === "guests" && !a.guests) e.guests = "Choose one to continue.";
+  if (id === "guests" && !guestsFit(a.form, a.guests)) e.guests = "Choose one to continue.";
   if (id === "contact") {
     if (!a.name || a.name.trim().length < 2) e.name = "Please share your name.";
     if (!a.email || !EMAIL.test(a.email.trim())) e.email = "Please use a valid email address.";
@@ -116,7 +116,7 @@ export function Concierge() {
     }
     try {
       const d = JSON.parse(localStorage.getItem(DRAFT) ?? "null") as Draft | null;
-      if (d && Date.now() - d.ts < 14 * 864e5 && Object.keys(d.answers).length > 1) setResume(d);
+      if (d && Date.now() - d.ts < 14 * 864e5 && Object.keys(d.answers).length > 1) setResume({ ...d, answers: stillValid(d.answers) });
     } catch {}
   }, []);
 
@@ -142,7 +142,7 @@ export function Concierge() {
 
   const set = useCallback(<K extends AnswerKey>(key: K, value: Answers[K] | undefined) => {
     touched.current = true;
-    setAnswers((a) => ({ ...a, [key]: value }));
+    setAnswers((a) => stillValid({ ...a, [key]: value }));
     setErrors((e) => ({ ...e, [key]: undefined }));
   }, []);
 
@@ -234,9 +234,10 @@ export function Concierge() {
         <p className="text-eyebrow flex items-center gap-4"><span aria-hidden className="h-px w-10 bg-accent" />Demonstration complete{ref ? ` · ${ref}` : ""}</p>
         <h2 className="text-h1 mt-8 max-w-[18ch]">That is the whole <span className="italic text-accent">request.</span></h2>
         <p className="text-lead mt-8 max-w-xl">
-          Nothing was booked, and your answers were not stored or sent anywhere: Chef Eric Jokl is a demo
-          persona. On a live site, this is the email the chef would have in their inbox now, with an
-          acknowledgment on its way to the client.
+          Nothing was booked: Chef Eric Jokl is a demo persona. Your answers were checked by the server and
+          discarded, not kept or passed to anyone, and the draft saved in this browser has been cleared. On a
+          live site, this is the email the chef would have in their inbox now, with an acknowledgment on its
+          way to the client.
         </p>
         <figure className="mt-12 border border-line bg-bg-elevated">
           <figcaption className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b border-line px-5 py-4 text-[0.66rem] uppercase tracking-[0.22em] text-fg-muted sm:px-7">
@@ -315,8 +316,9 @@ export function Concierge() {
       {site.demo && index === 0 ? (
         <p className="mb-10 border-l border-accent/70 pl-4 text-sm text-fg/80">
           <span className="text-eyebrow mb-1 block text-accent">Demonstration</span>
-          This is the request your clients would use. Nothing is booked, stored or sent to a chef, so use any
-          details you like. <Link href="/your-site" className="link-underline text-fg">Get this website</Link>
+          This is the request your clients would use, so use any details you like. Your progress is saved as a
+          draft in this browser only; when you send, the server checks the answers and discards them. Nothing is
+          booked, kept or passed to anyone. <Link href="/your-site" className="link-underline text-fg">Get this website</Link>
         </p>
       ) : null}
       {/* Progress */}
@@ -410,7 +412,7 @@ export function Concierge() {
           <Question headingRef={headingRef} title="When are you thinking?" sub={`Tell us as much as ${subject === "you" ? "you know" : `${subject} know${subject === "they" ? "" : "s"}`}.`}>
             <Choices field="when" options={whenOptions} value={answers.when} onChoose={(v) => choose("when", v, false)} error={errors.when} letters />
             {answers.when === "date" ? (
-              <Text field="date" label="The date" type="date" value={answers.date} onChange={(v) => set("date", v)} error={errors.date} min={new Date().toISOString().slice(0, 10)} />
+              <Text field="date" label="The date" type="date" value={answers.date} onChange={(v) => set("date", v)} error={errors.date} min={localDay()} max={latestDay(localDay())} />
             ) : null}
             {answers.when === "season" ? (
               <Text field="season" label="Month or season" value={answers.season} onChange={(v) => set("season", v)} error={errors.season} placeholder="Late June, the holidays, next spring…" />
@@ -449,7 +451,7 @@ export function Concierge() {
         )}
 
         {step.id === "contact" && (
-          <Question headingRef={headingRef} title={answers.role === "host" || !answers.role ? "And who should we write back to?" : "And how do we reach you?"} sub={site.demo ? "On a live site, used only to reply to this request. On this demo, nothing you type leaves the page except to be checked and shown back to you." : "Used only to reply to this request. Never shared, never added to a list."}>
+          <Question headingRef={headingRef} title={answers.role === "host" || !answers.role ? "And who should we write back to?" : "And how do we reach you?"} sub={site.demo ? "On a live site, used only to reply to this request. On this demo, it stays in this browser's draft until you send; the server then checks it and discards it." : "Used only to reply to this request. Never shared, never added to a list."}>
             <div className="grid gap-x-10 md:grid-cols-2">
               <Text field="name" label="Your name" value={answers.name} onChange={(v) => set("name", v)} error={errors.name} autoComplete="name" />
               <Text field="email" label="Email" type="email" value={answers.email} onChange={(v) => set("email", v)} error={errors.email} autoComplete="email" inputMode="email" />

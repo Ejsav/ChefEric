@@ -26,7 +26,7 @@ export function Header() {
   const solid = scrolled || paper;
   const action = offerSide ? { href: "/your-site/start", label: "Start your website", track: "cta:header-start" } : { href: "/inquire", label: "Request an evening", track: "cta:header" };
   const toggleRef = useRef<HTMLButtonElement>(null);
-  const panelRef = useRef<HTMLDivElement>(null);
+  const menuRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
     const onScroll = () => {
@@ -42,28 +42,20 @@ export function Header() {
 
   useEffect(() => setOpen(false), [pathname]);
 
-  // Menu open: freeze page scroll, trap focus, close on Escape.
+  // Menu open: a native modal dialog. The browser makes the rest of the page
+  // inert, keeps focus inside and closes it on Escape; this freezes page
+  // scroll, starts on the first link and hands focus back to the toggle.
   useEffect(() => {
-    if (!open) return;
+    const menu = menuRef.current;
+    if (!open || !menu) return;
     const lenis = getLenis();
     const toggle = toggleRef.current;
+    if (!menu.open) menu.showModal();
     lenis?.stop();
     document.body.style.overflow = "hidden";
-    const panel = panelRef.current;
-    const focusables = panel?.querySelectorAll<HTMLElement>("a, button");
-    focusables?.[0]?.focus();
-
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
-      if (e.key !== "Tab" || !focusables?.length) return;
-      const first = focusables[0]!;
-      const lastEl = focusables[focusables.length - 1]!;
-      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); lastEl.focus(); }
-      else if (!e.shiftKey && document.activeElement === lastEl) { e.preventDefault(); first.focus(); }
-    };
-    window.addEventListener("keydown", onKey);
+    menu.querySelector<HTMLElement>("nav a")?.focus();
     return () => {
-      window.removeEventListener("keydown", onKey);
+      if (menu.open) menu.close();
       document.body.style.overflow = "";
       lenis?.start();
       toggle?.focus();
@@ -134,34 +126,52 @@ export function Header() {
         </div>
       </header>
 
-      {/* Mobile menu — a full-bleed curtain, not a drawer. */}
-      <div
+      {/* Mobile menu: a full-bleed curtain, not a drawer. Its own bar repeats
+          the header's, so the close button sits where the toggle was. On short
+          screens (landscape phones, zoomed pages) it tightens and scrolls, so
+          every link stays in reach. */}
+      <dialog
         id="mobile-menu"
-        ref={panelRef}
-        role="dialog"
-        aria-modal="true"
+        ref={menuRef}
         aria-label="Menu"
-        hidden={!open}
-        className={cn(
-          "tone-dark grain fixed inset-0 z-40 flex-col justify-between overflow-hidden pt-[var(--header-h)] lg:hidden",
-          open ? "flex" : "hidden",
-        )}
+        onClose={() => setOpen(false)}
+        className="tone-dark grain fixed inset-0 m-0 h-full max-h-none w-full max-w-none overflow-hidden border-0 p-0 open:flex lg:hidden"
       >
-        <nav aria-label="Mobile" className="container-x mt-12 flex flex-col gap-2">
-          {[{ href: "/", label: "Home" }, ...nav].map((item, i) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="font-display text-[2.75rem] leading-[1.2] text-fg"
-              style={{ animation: `menu-in 1s ${120 + i * 70}ms var(--ease-out-expo) both` }}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-        <div className="container-x pb-10 text-eyebrow">Private Chef · New York · By arrangement</div>
-        <style>{`@keyframes menu-in{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}`}</style>
-      </div>
+        <div className="flex min-h-0 w-full flex-1 flex-col overflow-y-auto overscroll-contain">
+          <div className="pt-[var(--notice-h)] short:pt-0">
+            <div className="container-x flex h-[var(--nav-h)] items-center justify-between text-[rgb(var(--ivory))] short:h-16">
+              <Monogram className="h-10 w-10 text-[rgb(var(--brass))]" title="" />
+              <div className="flex items-center gap-2">
+                <Ambience />
+                <button
+                  type="button"
+                  className="relative -mr-2 flex h-11 w-11 items-center justify-center"
+                  aria-label="Close menu"
+                  onClick={() => setOpen(false)}
+                >
+                  <span aria-hidden className="absolute h-px w-6 rotate-45 bg-current" />
+                  <span aria-hidden className="absolute h-px w-6 -rotate-45 bg-current" />
+                </button>
+              </div>
+            </div>
+          </div>
+          <nav aria-label="Mobile" className="container-x mt-12 flex flex-col gap-2 short:mt-2 short:gap-0">
+            {[{ href: "/", label: "Home" }, ...nav].map((item, i) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                aria-current={(item.href === "/" ? pathname === "/" : pathname.startsWith(item.href)) ? "page" : undefined}
+                className="menu-in self-start font-display text-[2.75rem] leading-[1.2] text-fg aria-[current=page]:text-accent short:py-1 short:text-[1.75rem]"
+                style={{ "--d": `${120 + i * 70}ms` } as React.CSSProperties}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+          <div className="container-x mt-auto pb-10 pt-12 text-eyebrow short:pb-6 short:pt-6">Private Chef · New York · By arrangement</div>
+        </div>
+      </dialog>
     </>
   );
 }

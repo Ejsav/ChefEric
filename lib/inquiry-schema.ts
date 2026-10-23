@@ -1,15 +1,16 @@
 import "server-only";
 import { z } from "zod";
 import {
-  contactOptions, discretionOptions, forms, guestOptions, kitchenOptions, occasionOptions, roles,
-  settingOptions, stayOptions, whenOptions, type Answers,
+  contactOptions, dateProblem, discretionOptions, earliestDayAnywhere, forms, guestOptions, guestsFit, kitchenOptions,
+  occasionOptions, roles, settingOptions, stayOptions, whenOptions, type Answers,
 } from "@/lib/inquiry";
 
 const ids = <T extends readonly { id: string }[]>(o: T) => o.map((x) => x.id) as unknown as [T[number]["id"], ...T[number]["id"][]];
 
 // ─────────────────────────────────────────────────────────────────────────
 // Schema — the server's gate. The client validates step by step with the
-// same rules (see stepErrors) so the visitor never meets a surprise at the end.
+// same rules (stepErrors in components/inquiry/Concierge.tsx, sharing the
+// helpers in lib/inquiry.ts) so the visitor never meets a surprise at the end.
 // ─────────────────────────────────────────────────────────────────────────
 
 const text = (max: number) => z.string().trim().max(max).optional().or(z.literal(""));
@@ -63,11 +64,16 @@ export const inquirySchema = z
       if (!a.setting) req("setting", "Please choose where the table will be.");
       if (a.setting && a.setting !== "undecided" && (!a.location || a.location.length < 2)) req("location", "Where, roughly? A town, city or region is enough.");
     }
-    if (a.when === "date" && !a.date) req("date", "Please choose the date.");
+    if (a.when === "date") {
+      const problem = dateProblem(a.date, earliestDayAnywhere());
+      if (problem) req("date", problem);
+    }
     if (a.when === "season" && !a.season) req("season", "A month or season, please.");
     if ((a.contactPref === "phone" || a.contactPref === "text") && !a.phone) req("phone", "A number, so we can reach you as you prefer.");
-    if (a.form === "lesson" && a.guests && a.guests !== "2-8" && a.guests !== "9-12") req("guests", "Classes are kept to twelve or fewer.");
-    if (a.form !== "lesson" && a.guests === "9-12") req("guests", "Please choose how many guests.");
+    if (a.form !== "collaboration") {
+      if (!a.guests) req("guests", a.form === "lesson" ? "Please tell us how many will be cooking." : "Please tell us how many guests.");
+      else if (!guestsFit(a.form, a.guests)) req("guests", a.form === "lesson" ? "Classes are kept to twelve or fewer." : "Please choose how many guests.");
+    }
   });
 
 export type Inquiry = z.infer<typeof inquirySchema>;

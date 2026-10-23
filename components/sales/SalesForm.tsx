@@ -16,7 +16,7 @@ import { Arrow } from "@/components/ui/Cta";
 
 type Draft = Partial<WebsiteRequest>;
 const DRAFT = "ej:website-request";
-const ORDER: WebsiteField[] = ["name", "email", "phone", "business", "website", "type", "design", "timeline", "budget", "notes"];
+const ORDER: WebsiteField[] = ["name", "email", "phone", "business", "website", "title", "place", "type", "design", "palette", "timeline", "budget", "notes"];
 
 export function SalesForm() {
   const [r, setR] = useState<Draft>({ features: [] });
@@ -31,19 +31,27 @@ export function SalesForm() {
   const submission = useRef("");
   const touched = useRef(false);
 
-  // Arrival: a name or palette carried from /your-site, else a saved draft.
+  // Arrival: the preview built on /your-site (name, title, place, palette)
+  // over a saved draft. The preview is the newer choice, so it wins.
   useEffect(() => {
     started.current = Date.now();
     let draft: Draft = {};
     try { draft = JSON.parse(localStorage.getItem(DRAFT) ?? "{}") as Draft; } catch {}
     const q = new URLSearchParams(location.search);
-    const name = q.get("name")?.trim().slice(0, 120);
+    const param = (key: string, max: number) => q.get(key)?.trim().replace(/\s+/g, " ").slice(0, max) || undefined;
+    const name = param("name", 120);
+    const title = param("title", 60);
+    const place = param("place", 80);
     const palette = palettes.find((p) => p.id === q.get("palette"))?.id;
+    if (name || title || place || palette) touched.current = true; // keep what arrived, even if they leave at once
     setR((prev) => ({
       ...prev,
       ...draft,
       ...(name ? { name } : {}),
-      ...(palette && palette !== "brass" ? { design: "palette" as const, palette } : {}),
+      ...(title ? { title } : {}),
+      ...(place ? { place } : {}),
+      // The house palette is this design as it stands; any other is this design in those colors.
+      ...(palette ? (palette === "brass" ? { design: "as-is" as const, palette: undefined } : { design: "palette" as const, palette }) : {}),
       features: draft.features ?? [],
     }));
   }, []);
@@ -169,6 +177,8 @@ export function SalesForm() {
         <div className="grid gap-x-10 gap-y-8 md:grid-cols-2">
           <Text field="business" label="Business name" value={r.business} onChange={(v) => set("business", v)} error={errors.business} autoComplete="organization" />
           <Text field="website" label="Current website" value={r.website} onChange={(v) => set("website", v)} error={errors.website} autoComplete="url" inputMode="url" placeholder="yourname.com" optional />
+          <Text field="title" label="Title on your site" value={r.title} onChange={(v) => set("title", v)} error={errors.title} autoComplete="organization-title" placeholder="Private Chef" maxLength={60} optional />
+          <Text field="place" label="Where you work" value={r.place} onChange={(v) => set("place", v)} error={errors.place} autoComplete="address-level2" placeholder="New York" maxLength={80} optional />
         </div>
         <Chips field="type" legend="What you do" options={businessTypes} value={r.type} onChange={(v) => set("type", v as WebsiteRequest["type"])} error={errors.type} />
       </Group>

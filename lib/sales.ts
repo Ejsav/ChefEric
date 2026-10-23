@@ -13,6 +13,9 @@ export type WebsiteRequest = {
   phone?: string;
   business: string;
   website?: string;
+  /** From the preview on /your-site: the title and place under the name. */
+  title?: string;
+  place?: string;
   type: Id<typeof businessTypes>;
   design: Id<typeof designChoices>;
   palette?: Id<typeof palettes>;
@@ -49,6 +52,8 @@ export function checkRequest(r: Partial<WebsiteRequest>): Partial<Record<Website
   if (r.phone?.trim() && !PHONE.test(r.phone.trim())) e.phone = "Digits, spaces and + ( ) - only.";
   if (!r.business || r.business.trim().length < 2) e.business = "The name of your business, or your own name if they are the same.";
   if (r.website?.trim() && !normalizeUrl(r.website)) e.website = "That doesn't look like a web address. Leave it empty if you don't have one.";
+  if (r.title && r.title.trim().length > 60) e.title = "Please keep the title under 60 characters.";
+  if (r.place && r.place.trim().length > 80) e.place = "Please keep this under 80 characters.";
   if (!r.type) e.type = "Choose the closest.";
   if (!r.design) e.design = "Choose one.";
   if (!r.timeline) e.timeline = "Choose one.";
@@ -57,15 +62,17 @@ export function checkRequest(r: Partial<WebsiteRequest>): Partial<Record<Website
   return e;
 }
 
-export function describeRequest(r: WebsiteRequest) {
+export function describeRequest(r: WebsiteRequest): (readonly [string, string])[] {
+  const heading = [r.name.trim(), r.title?.trim(), r.place?.trim()].filter(Boolean).join(" · ");
   return [
     ["Business", `${r.business} (${labelOf(businessTypes, r.type)})`],
     ["Current website", normalizeUrl(r.website) ?? "None yet"],
+    ...(r.title?.trim() || r.place?.trim() ? [["On the site", heading] as const] : []),
     ["Design", `${labelOf(designChoices, r.design)}${r.design === "palette" && r.palette ? ` — ${labelOf(palettes, r.palette)}` : ""}`],
     ["Features", r.features.length ? r.features.map((f) => labelOf(featureChoices, f)).join(", ") : "The standard set"],
     ["Launch", labelOf(timelines, r.timeline)],
     ["Budget", labelOf(budgets, r.budget)],
-  ] as const;
+  ];
 }
 
 export function websiteLeadEmail(r: WebsiteRequest, ref: string, origin: string[], flags: string[] = []) {

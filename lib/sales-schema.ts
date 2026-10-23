@@ -32,6 +32,8 @@ export const websiteRequestSchema = z.object({
   phone: optional(40).refine((v) => !v || PHONE.test(v), "Digits, spaces and + ( ) - only."),
   business: line(2, 160, "Please add the name of your business."),
   website: optional(300).refine((v) => !v || normalizeUrl(v) !== null, "That doesn't look like a web address."),
+  title: optional(60),
+  place: optional(80),
   type: z.enum(ids(businessTypes), "Choose the closest."),
   design: z.enum(ids(designChoices), "Choose a design."),
   palette: z.enum(ids(palettes)).optional(),

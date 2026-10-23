@@ -32,7 +32,9 @@ export type Setting = {
 };
 
 export type Occasion = { id: string; name: string; title: string; fragment: string; lesson?: boolean };
-export type Scale = { id: ScaleId; name: string; range: string; line: string; lessonRange: string; lessonLine: string; guests: string };
+// `guests` and `lessonGuests` are the request's bands (lib/inquiry.ts guestOptions),
+// so the request opens on exactly the size the planner showed.
+export type Scale = { id: ScaleId; name: string; range: string; guests: string; line: string; lessonRange: string; lessonGuests?: string; lessonLine: string };
 
 const ALL: ScaleId[] = ["intimate", "gathering", "grand"];
 
@@ -130,7 +132,7 @@ export const settings: Setting[] = [
     line: "Polished concrete, a jet parked overhead, a single long table lit by candles. Handled well, it is the most memorable dining room your guests will see all year.",
     noLesson: "A hangar has no kitchen to teach in",
     scales: ["gathering", "grand"],
-    scaleNote: "A hangar is set for a long table, from ten guests",
+    scaleNote: "A hangar is set for a long table, from nine guests",
     approach: ["Power, rentals and access agreed with the FBO", "A field kitchen built to fit the space", "Service paced around landings and arrivals"],
   },
   {
@@ -158,9 +160,9 @@ export const occasions: Occasion[] = [
 ];
 
 export const scales: Scale[] = [
-  { id: "intimate", name: "Intimate", range: "Two to eight", guests: "2-8", line: "Small enough for the chef to bring each course out and say a word about it.", lessonRange: "Two to eight", lessonLine: "Small enough for everyone to have a station and the chef's full attention." },
-  { id: "gathering", name: "A gathering", range: "Ten to twenty-four", guests: "10-24", line: "One long table or a few round ones, with a service team that moves like it has rehearsed, because it has.", lessonRange: "Nine to twelve", lessonLine: "Up to twelve at the counter, cooking in pairs, with a second cook helping." },
-  { id: "grand", name: "An occasion", range: "Twenty-five to eighty", guests: "25-60", line: "More cooks, more planning, the same promise: it should still feel like dinner at someone's house.", lessonRange: "", lessonLine: "" },
+  { id: "intimate", name: "Intimate", range: "Two to eight", guests: "2-8", line: "Small enough for the chef to bring each course out and say a word about it.", lessonRange: "One to eight", lessonGuests: "1-8", lessonLine: "Small enough for everyone to have a station and the chef's full attention." },
+  { id: "gathering", name: "A gathering", range: "Nine to twenty-four", guests: "9-24", line: "One long table or a few round ones, with a service team that moves like it has rehearsed, because it has.", lessonRange: "Nine to twelve", lessonGuests: "9-12", lessonLine: "Up to twelve at the counter, cooking in pairs, with a second cook helping." },
+  { id: "grand", name: "An occasion", range: "Twenty-five to eighty", guests: "25-80", line: "More cooks, more planning, the same promise: it should still feel like dinner at someone's house.", lessonRange: "", lessonLine: "" },
 ];
 
 export const defaults = { room: "residence", reason: "milestone", table: "intimate" } as const;

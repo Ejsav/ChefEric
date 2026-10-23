@@ -1,4 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
+import { websiteLeadEmail, type WebsiteRequest } from "../../lib/sales";
 
 // The one form that is real business: it must validate, never send twice,
 // screen bots, and only say "arrived" when the request has a destination.
@@ -38,14 +39,36 @@ test("a complete request arrives with a reference", async ({ page }) => {
   await expect(done).toContainText("Thank you, Sofia.");
 });
 
-test("the studio carries a name and palette into the request", async ({ page }) => {
+test("the studio carries the whole preview into the request", async ({ page }) => {
   await page.goto("/your-site");
   await page.locator("#studio-name").fill("Aiko Mori");
+  await page.locator("#studio-role").fill("Chef's Table");
+  await page.locator("#studio-place").fill("Kyoto");
   await page.getByText("Tide", { exact: true }).first().click();
   await page.getByRole("link", { name: "Start with this" }).click();
   await expect(page).toHaveURL(/name=Aiko\+Mori|name=Aiko%20Mori/);
   await expect(page.locator("#f-name")).toHaveValue("Aiko Mori");
+  await expect(page.locator("#f-title")).toHaveValue("Chef's Table");
+  await expect(page.locator("#f-place")).toHaveValue("Kyoto");
+  await expect(page.locator('input[value="palette"]')).toBeChecked();
   await expect(page.getByText("A palette to start from")).toBeVisible();
+  await expect(page.locator('input[value="tide"]')).toBeChecked();
+
+  // The house palette is this design as it stands.
+  await page.goto("/your-site/start?name=Aiko%20Mori&palette=brass");
+  await expect(page.locator('input[value="as-is"]')).toBeChecked();
+});
+
+test("the preview reaches the lead", async ({ request }) => {
+  // The server accepts it…
+  const ok = await request.post("/api/website-inquiry", { data: { ...valid, title: "Chef's Table", place: "Kyoto", submissionId: `e2e-preview-${Date.now()}` } });
+  expect(ok.status()).toBe(200);
+  const long = await request.post("/api/website-inquiry", { data: { ...valid, title: "x".repeat(61), submissionId: `e2e-preview-long-${Date.now()}` } });
+  expect(long.status()).toBe(422);
+  // …and the email Eric receives (and the confirmation) says what was previewed.
+  const lead = websiteLeadEmail({ ...valid, title: "Chef's Table", place: "Kyoto", design: "palette", palette: "tide" } as WebsiteRequest, "EW-TEST01", []);
+  expect(lead.text).toContain("On the site: Sofia Marchetti · Chef's Table · Kyoto");
+  expect(lead.text).toContain("Design: This design, in my colors — Tide");
 });
 
 const valid = {

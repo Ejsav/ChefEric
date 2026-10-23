@@ -26,7 +26,7 @@ const sections: { h: string; body: React.ReactNode }[] = [
     h: "The website request form",
     body: (
       <>
-        <p>When you ask for a website at <Link href="/your-site/start" className="link-underline text-fg">/your-site/start</Link>, we receive what you type: your name, email, telephone if given, business name, current website, your choices (design, features, timing, budget) and any notes.</p>
+        <p>When you ask for a website at <Link href="/your-site/start" className="link-underline text-fg">/your-site/start</Link>, we receive what you type: your name, email, telephone if given, business name, current website, the title and place from your preview, your choices (design, palette, features, timing, budget) and any notes.</p>
         <p>With it, the site sends how you found us (the first page you landed on, the referring website and any campaign tags in the link) and when you started the form, which helps screen out automated spam. It is used only to reply to you and prepare a proposal. A confirmation is emailed to the address you give.</p>
       </>
     ),

@@ -308,6 +308,7 @@ textarea.field { resize: vertical; min-height: 8rem; line-height: 1.6; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
+    animation-delay: 0ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     transition-delay: 0ms !important;
@@ -471,6 +472,12 @@ html.prelude #site-header { animation: fade-up 1.2s var(--ease-out-expo) 2.3s bo
 @media (prefers-reduced-motion: reduce) { .fork-contact { display: none; } }
 
 [data-magnetic] { transition: translate 700ms var(--ease-out-expo); }
+
+/* The phone menu's links arrive one after another; with reduced motion they
+   are simply there (the global rule shortens animations but not their delays). */
+@keyframes menu-in { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+.menu-in { animation: menu-in 1s var(--d, 0ms) var(--ease-out-expo) both; }
+@media (prefers-reduced-motion: reduce) { .menu-in { animation: none; } }
 
 /* Scroll-driven parallax — compositor-only, zero JS ───────────── */
 @supports (animation-timeline: view()) {

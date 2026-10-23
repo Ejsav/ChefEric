@@ -48,7 +48,13 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${serif.variable} ${instrument.variable}`} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${serif.variable} ${instrument.variable}`}
+      // No demo notice on a customer's site, so no room is kept for it.
+      style={site.demo ? undefined : ({ "--notice-h": "0px" } as React.CSSProperties)}
+      suppressHydrationWarning
+    >
       <head>
         {/* Capability tier, pointer type and prelude decided before first paint. */}
         <script dangerouslySetInnerHTML={{ __html: bootScript }} />

@@ -71,6 +71,62 @@ test.describe("gallery", () => {
     await dialog.getByRole("button", { name: "Close" }).click();
     await expect(dialog).toBeHidden();
   });
+
+  test("leaving the page with the lightbox open never leaves the site unable to scroll", async ({ page }) => {
+    await page.goto("/");
+    await page.locator("header").getByRole("link", { name: "Gallery" }).click();
+    await expect(page).toHaveURL(/\/gallery$/);
+    await page.getByRole("button", { name: /Enlarge photograph 2 of/ }).click();
+    await expect(page.getByRole("dialog", { name: "Gallery" })).toBeVisible();
+    expect(await page.evaluate(() => document.documentElement.style.overflow)).toBe("hidden");
+    await page.goBack(); // the lightbox is unmounted while open
+    await expect(page).toHaveURL(/\/$/);
+    expect(await page.evaluate(() => document.documentElement.style.overflow)).toBe("");
+    await page.mouse.wheel(0, 800);
+    await expect.poll(() => page.evaluate(() => scrollY)).toBeGreaterThan(200);
+  });
+});
+
+test.describe("smooth scrolling", () => {
+  // Counts animation frames requested by the page, to prove it goes still when idle.
+  const countFrames = () => {
+    const w = window as unknown as { __frames: number };
+    w.__frames = 0;
+    const raf = window.requestAnimationFrame.bind(window);
+    window.requestAnimationFrame = (cb) => { w.__frames++; return raf(cb); };
+  };
+  const frames = (page: import("@playwright/test").Page) => page.evaluate(() => (window as unknown as { __frames: number }).__frames);
+
+  test("glides on a capable desktop, then sleeps", async ({ browser }) => {
+    const context = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: "no-preference" });
+    const page = await context.newPage();
+    await page.addInitScript(countFrames);
+    await page.goto("/terms");
+    await expect(page.locator("html")).toHaveClass(/lenis/);
+    await page.waitForTimeout(1500); // settle
+    const idleFrom = await frames(page);
+    await page.waitForTimeout(1000);
+    expect(await frames(page) - idleFrom).toBeLessThan(5); // asleep
+    await page.mouse.move(700, 500);
+    await page.mouse.wheel(0, 600);
+    await expect.poll(() => page.evaluate(() => scrollY)).toBeGreaterThan(300); // woke and glided
+    await page.waitForTimeout(1500);
+    const after = await frames(page);
+    await page.waitForTimeout(1000);
+    expect(await frames(page) - after).toBeLessThan(5); // asleep again
+    await context.close();
+  });
+
+  test("slow or low-powered devices keep native scrolling", async ({ browser }) => {
+    const context = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: "no-preference" });
+    const page = await context.newPage();
+    await page.addInitScript(() => Object.defineProperty(Navigator.prototype, "deviceMemory", { get: () => 1 }));
+    await page.goto("/terms");
+    await expect(page.locator("html")).toHaveAttribute("data-tier", "lite");
+    await page.waitForTimeout(800);
+    await expect(page.locator("html")).not.toHaveClass(/lenis/);
+    await context.close();
+  });
 });
 
 test.describe("menus", () => {

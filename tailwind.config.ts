@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin";
 
 // Utilities read from CSS variables in app/globals.css. Tones (dark / linen)
 // swap the variables, so every component works on both without variants.
@@ -27,5 +28,8 @@ export default {
       maxWidth: { container: "var(--container)" },
     },
   },
-  plugins: [],
+  plugins: [
+    // short: — short screens (phones in landscape, pages zoomed to 200%).
+    plugin(({ addVariant }) => addVariant("short", "@media (max-height: 560px)")),
+  ],
 } satisfies Config;

@@ -103,19 +103,25 @@ function Lightbox({ shots, index, onIndex, onClosed }: { shots: Ready[]; index: 
     track("gallery_nav", { how, slot: shots[next]!.slot });
   }, [index, total, onIndex, shots]);
 
+  // Open: show the dialog and hold the page still. The cleanup releases the
+  // page however the lightbox ends (closed, a route change, unmounted), so
+  // the site can never be left unable to scroll.
+  const isOpen = index !== null;
   useEffect(() => {
     const d = ref.current;
-    if (!d) return;
-    if (index !== null && !d.open) {
-      d.showModal();
-      getLenis()?.stop();
-      document.documentElement.style.overflow = "hidden";
-    }
-  }, [index]);
+    if (!isOpen || !d) return;
+    if (!d.open) d.showModal();
+    const lenis = getLenis();
+    lenis?.stop();
+    document.documentElement.style.overflow = "hidden";
+    return () => {
+      if (d.open && d.isConnected) d.close();
+      lenis?.start();
+      document.documentElement.style.overflow = "";
+    };
+  }, [isOpen]);
 
   const onClose = () => {
-    getLenis()?.start();
-    document.documentElement.style.overflow = "";
     onIndex(null);
     onClosed();
   };

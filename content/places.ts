@@ -228,7 +228,7 @@ export const places: Place[] = [
     faqs: [
       { q: "Can you really cook in a hangar?", a: "Yes. A temporary kitchen is built for the evening, with everything it needs agreed with the operator in advance." },
       { q: "Who arranges access and permissions?", a: "The team, together with your FBO or flight department, well before the date." },
-      { q: "How many guests can a hangar dinner seat?", a: "From an intimate table of eight to a long table of sixty or more, depending on the space." },
+      { q: "How many guests can a hangar dinner seat?", a: "From a long table of nine to eighty seated, depending on the space. Larger receptions are possible by proposal." },
     ],
   },
 ];

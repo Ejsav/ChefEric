@@ -1,4 +1,5 @@
 import { menus } from "@/content/menus";
+import { scales } from "@/content/possibilities";
 
 // ─────────────────────────────────────────────────────────────────────────
 // The inquiry's vocabulary. Shared by the conversational client (questions,
@@ -63,18 +64,22 @@ export const whenOptions = [
   { id: "flexible", label: "We're flexible" },
 ] as const;
 
+// How many. The bands meet without gaps and match the planner's table sizes
+// (content/possibilities.ts) and every number the site states: dinners from
+// two to eighty, larger by proposal; classes from one to twelve.
 export const guestOptions = [
-  { id: "2-8", label: "Two to eight" },
-  { id: "9-12", label: "Nine to twelve" },
-  { id: "10-24", label: "Ten to twenty-four" },
-  { id: "25-60", label: "Twenty-five to sixty" },
-  { id: "60+", label: "More than sixty" },
+  { id: "1-8", label: "One to eight", lesson: true },
+  { id: "2-8", label: "Two to eight", lesson: false },
+  { id: "9-12", label: "Nine to twelve", lesson: true },
+  { id: "9-24", label: "Nine to twenty-four", lesson: false },
+  { id: "25-80", label: "Twenty-five to eighty", lesson: false },
+  { id: "80+", label: "More than eighty", lesson: false },
 ] as const;
 
-// A class is taught to twelve or fewer; every other evening counts guests.
-const LESSON_GUESTS = ["2-8", "9-12"] as const;
-export const guestOptionsFor = (form?: string) =>
-  guestOptions.filter((g) => (form === "lesson" ? (LESSON_GUESTS as readonly string[]).includes(g.id) : g.id !== "9-12"));
+/** The bands that apply: a class counts cooks (twelve at most), everything else guests. */
+export const guestOptionsFor = (form?: string) => guestOptions.filter((g) => g.lesson === (form === "lesson"));
+export const guestsFit = (form?: string, guests?: string): guests is NonNullable<Answers["guests"]> =>
+  guestOptionsFor(form).some((g) => g.id === guests);
 
 export const occasionOptions = [
   { id: "friends", label: "Dinner among friends", phrase: "dinner among friends" },
@@ -141,6 +146,30 @@ export type AnswerKey = keyof Answers;
 // ─────────────────────────────────────────────────────────────────────────
 
 const label = <T extends readonly { id: string; label: string }[]>(o: T, id?: string) => o.find((x) => x.id === id)?.label;
+
+// Dates. The browser's date field writes yyyy-mm-dd in the visitor's own
+// calendar, so "today" is the visitor's local day on the page; the server,
+// which cannot know the visitor's time zone, accepts any day that is today
+// somewhere on Earth.
+const pad = (n: number) => String(n).padStart(2, "0");
+/** A day on this device's calendar, as the date field writes it. */
+export const localDay = (d = new Date()) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+/** The earliest calendar day anywhere right now (UTC-12). */
+export const earliestDayAnywhere = (now = Date.now()) => new Date(now - 12 * 36e5).toISOString().slice(0, 10);
+const AHEAD_YEARS = 3;
+export const latestDay = (today: string) => `${Number(today.slice(0, 4)) + AHEAD_YEARS}${today.slice(4)}`;
+
+/** Why a chosen date cannot be used, or null. `today` is yyyy-mm-dd. */
+export function dateProblem(iso: string | undefined, today: string): string | null {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso?.trim() ?? "");
+  if (!m) return iso?.trim() ? "Please choose a real date." : "Please choose the date.";
+  const [y, mo, d] = [Number(m[1]), Number(m[2]), Number(m[3])];
+  const at = new Date(Date.UTC(y, mo - 1, d));
+  if (at.getUTCFullYear() !== y || at.getUTCMonth() !== mo - 1 || at.getUTCDate() !== d) return "Please choose a real date.";
+  if (iso! < today) return "Please choose a date from today onwards.";
+  if (iso! > latestDay(today)) return `Please choose a date within the next ${AHEAD_YEARS} years.`;
+  return null;
+}
 
 export function formatDate(iso?: string) {
   if (!iso) return "";
@@ -247,10 +276,19 @@ export function prefillFromParams(q: URLSearchParams): Partial<Answers> {
   const occasion = q.get("occasion");
   if (occasion === "lesson") out.form = "lesson";
   else if (occasion && occasionOptions.some((o) => o.id === occasion)) out.occasion = occasion as Answers["occasion"];
-  // From the planner. A class at "a gathering" is the larger class size.
-  const scale = q.get("scale");
-  const guestsByScale: Record<string, Answers["guests"]> = { intimate: "2-8", gathering: out.form === "lesson" ? "9-12" : "10-24", grand: out.form === "lesson" ? "9-12" : "25-60" };
-  if (scale && guestsByScale[scale]) out.guests = guestsByScale[scale];
   if (out.setting && !out.form) out.form = out.setting === "yacht" || out.setting === "island" || out.setting === "abroad" ? "destination" : "dinner";
+  // From the planner: exactly the band the planner showed. A size the
+  // request cannot hold (a class for eighty, from a hand-made link) is left
+  // for the visitor to choose rather than quietly changed.
+  const scale = scales.find((s) => s.id === q.get("scale"));
+  const band = scale && (out.form === "lesson" ? scale.lessonGuests : scale.guests);
+  if (band && guestsFit(out.form, band)) out.guests = band;
+  return out;
+}
+
+/** Answers kept from an earlier visit, minus anything the questions no longer offer. */
+export function stillValid(a: Partial<Answers>): Partial<Answers> {
+  const out = { ...a };
+  if (out.guests && !guestsFit(out.form, out.guests)) delete out.guests;
   return out;
 }
