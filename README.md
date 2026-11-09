@@ -91,9 +91,14 @@ npm run media:guide   # regenerate docs/PHOTOGRAPHY_GUIDE.md after editing the m
 ```bash
 npm run check        # guard, type-check, lint, build
 npm run test:e2e     # Playwright: 162 checks
+npm run test:tasks   # the standalone task manager (task-manager/): unit + browser tests
 ```
 
 The end-to-end suite runs every route at **1440px, a phone, 320px and a 1024px tablet**: one `<h1>`, canonical and description, no horizontal overflow, no console errors, no production tooling or client traces in the HTML; **axe WCAG 2.2 AA** on every route (desktop and phone); every internal link resolves; security headers; noindex and sitemap rules; structured data never presenting the persona as a business; the planner's rules, shared links and keyboard; the lightbox's keyboard, Escape and focus return; menu tabs; the chef request (demo notice, yacht branch, class sizes, read-back, inbox preview, API validation); the website request (validation summary, delivery with reference, studio hand-off, server validation, duplicate protection, honeypot, rate limiting); invitations; the fork cursor (artwork sizes and hotspot calibration at 1x/2x/3x, rest/hover/press/system states, tine marks, reduced motion, the photo label's position, text selection, edge clicks, touch and high contrast). CI (`.github/workflows/ci.yml`) also audits production dependencies.
+
+## Task manager (`task-manager/`)
+
+A separate, self-contained task manager in plain HTML, CSS and JavaScript (no build step, no dependencies). It is not part of the chef site: Next.js does not serve or bundle that folder. Open `task-manager/index.html` in a browser. Details in [`task-manager/README.md`](task-manager/README.md).
 
 ## Run
 
